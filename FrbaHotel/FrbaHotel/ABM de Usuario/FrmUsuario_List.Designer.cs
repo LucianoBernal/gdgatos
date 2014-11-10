@@ -1,6 +1,6 @@
-﻿namespace FrbaHotel.ABM_de_Rol
+﻿namespace FrbaHotel.ABM_de_Usuario
 {
-    partial class Form1
+    partial class FrmUsuario_List
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.Text = "FrmUsuario_List";
         }
 
         #endregion

@@ -183,25 +183,14 @@ select m.Reserva_Codigo,m.Habitacion_Tipo_Codigo
 from gd_esquema.Maestra m
 group by m.Reserva_Codigo,m.Habitacion_Tipo_Codigo
 /*------------------------------------------------------------------------------*/
-/*migro clientesPorEstadia*/
 insert into SKYNET.ClientesPorEstadia(idCliente,idEstadia)
-select c.idCliente, m.Reserva_Codigo
-from	gd_esquema.Maestra m, SKYNET.Clientes c
-
-where m.Cliente_Pasaporte_Nro =.idCliente not in
-(select distinct s.idCliente from SKYNET.Clientes s 
-		where not exists(select 1 from gd_esquema.Maestra r 
-			where r.Estadia_Cant_Noches is not null and 
-				r.Cliente_Pasaporte_Nro = s.numDoc)) 
-	
-		
-select COUNT(*) as B,m.Cliente_Mail,m.Cliente_Pasaporte_Nro,m.Reserva_Codigo
+select   r.cliente,r.codigoReserva
+from SKYNET.Reservas r
+where r.estado=2
+/*------------------------------------------------------------------------------*/
+insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad)
+select m.Reserva_Codigo,m.Consumible_Codigo,sum(m.Item_Factura_Monto),
+		SUM(m.Item_Factura_Cantidad)
 from gd_esquema.Maestra m
-group by m.Reserva_Codigo,m.Cliente_Pasaporte_Nro,m.Cliente_Mail
-order by 4
-
-select distinct m.Cliente_Mail,m.Cliente_Pasaporte_Nro
-from gd_esquema.Maestra 
-
-
-select distinct s.idCliente from SKYNET.Clientes s where not exists(select 1 from gd_esquema.Maestra r where r.Estadia_Cant_Noches is not null and r.Cliente_Pasaporte_Nro = s.numDoc) order by idCliente
+where (m.Consumible_Codigo is not null)
+group by m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto

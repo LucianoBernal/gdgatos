@@ -17,7 +17,13 @@ namespace FrbaHotel.FuncionesGenerales
 
         public bool ExisteUsuario(string usuario)
         {
-            return ((int)new Query("SELECT COUNT(1) FROM TABLAAA WHERE usuario ='" + usuario + "'").ObtenerUnicoCampo() == 1);
+            return ((int)new Query("SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username ='" + usuario + "'").ObtenerUnicoCampo() == 1);
+        }
+
+
+        public bool puedeIngresarAlSistema(int idUsuario)
+        {
+            return ((int)new Query("SELECT count(1) FROM SKYNET.Usuarios WHERE idUser ='" + idUsuario + "' AND intentoFallido < 3").ObtenerUnicoCampo() != 0);
         }
 
         public string getSha256(string input)
@@ -33,15 +39,9 @@ namespace FrbaHotel.FuncionesGenerales
             //VER
             string nombreUsuario = getUsername(idUsuario);
 
-            int idRol = (int)new Query("SELECT ID_ROL FROM JJRD.ROL_USUARIO  " +
-                          " WHERE ID_USUARIO = " + idUsuario).ObtenerUnicoCampo();
+            int estadoRol = Convert.ToInt32(new Query("SELECT rol FROM SKYNET.UsuarioRolHotel WHERE usuario = " + idUsuario).ObtenerUnicoCampo());
 
-            int estadoRol = Convert.ToInt32(new Query("SELECT ROL_ESTADO FROM JJRD.ROLES WHERE ID_ROL = " + idRol).ObtenerUnicoCampo());
-
-            int estadoRolPorUsuario = Convert.ToInt32(new Query("select Habilitado from JJRD.ROL_USUARIO where ID_ROL =" + idRol + " and ID_USUARIO =" + idUsuario).ObtenerUnicoCampo());
-
-
-            if (estadoRol == estadoRolPorUsuario)
+            if (estadoRol != 0)
             {
 
                 MessageBox.Show("Bienvenido al Sistema" + Environment.NewLine +
@@ -54,7 +54,7 @@ namespace FrbaHotel.FuncionesGenerales
             }
             else
             {
-                MessageBox.Show("No puede ingresar al sistema. Su perfil se ha deshabilitado.", "Advertencia",
+                MessageBox.Show("No puede ingresar al sistema.", "Advertencia",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 FrmLogin login = new FrmLogin();
@@ -67,7 +67,7 @@ namespace FrbaHotel.FuncionesGenerales
         public string getUsername(int idUsuario)
         {
 
-            return new Query("SELECT USERNAME FROM TABLA_USUARIO WHERE idUsuario = " + idUsuario).ObtenerUnicoCampo().ToString();
+            return new Query("SELECT username FROM SKYNET.Usuarios WHERE idUser = " + idUsuario).ObtenerUnicoCampo().ToString();
 
         }
     }

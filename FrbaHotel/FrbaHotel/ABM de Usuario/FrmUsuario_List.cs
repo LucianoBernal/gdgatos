@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaHotel.ABM_de_Rol
+namespace FrbaHotel.ABM_de_Usuario
 {
-    public partial class Form1 : Form
+    public partial class FrmUsuario_List : Form
     {
-        public Form1()
+        public FrmUsuario_List()
         {
             InitializeComponent();
         }

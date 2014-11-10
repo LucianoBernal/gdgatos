@@ -28,7 +28,7 @@ namespace FrbaHotel {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2013-02-10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2014-10-10")]
         public global::System.DateTime FechaSistema
         {
             get
@@ -44,7 +44,7 @@ namespace FrbaHotel {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Password=gd2014;Persist Security Info=True;User ID=gd;Initial Catalog=GD1C2014;Da" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Password=gd2014;Persist Security Info=True;User ID=gd;Initial Catalog=GD2C2014;Da" +
             "ta Source=localhost\\SQLSERVER2008")]
         public string CadenaDeConexion
         {

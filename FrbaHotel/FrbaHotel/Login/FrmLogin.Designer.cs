@@ -67,8 +67,10 @@
             // 
             this.txtPassword.Location = new System.Drawing.Point(98, 110);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(167, 20);
             this.txtPassword.TabIndex = 9;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -88,7 +90,7 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Contraseña:";
             // 
-            // formLogin
+            // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -99,9 +101,8 @@
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.botonEntrar);
             this.Controls.Add(this.botonSalir);
-            this.Name = "formLogin";
+            this.Name = "FrmLogin";
             this.Text = "Login Sistema Hotel";
-            this.Load += new System.EventHandler(this.formLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

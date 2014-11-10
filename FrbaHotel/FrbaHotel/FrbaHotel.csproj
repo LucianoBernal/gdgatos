@@ -66,11 +66,35 @@
     <Compile Include="ABM de Regimen\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Rol\Form1.cs">
+    <Compile Include="ABM de Rol\FrmRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Rol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM de Rol\FrmRol.Designer.cs">
+      <DependentUpon>FrmRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Rol\FrmRol_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Rol\FrmRol_Alta.Designer.cs">
+      <DependentUpon>FrmRol_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Rol\FrmRol_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Rol\FrmRol_Baja.Designer.cs">
+      <DependentUpon>FrmRol_Baja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Rol\FrmRol_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Rol\FrmRol_List.Designer.cs">
+      <DependentUpon>FrmRol_List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Rol\FrmRol_Mod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Rol\FrmRol_Mod.Designer.cs">
+      <DependentUpon>FrmRol_Mod.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM de Usuario\Form1.cs">
       <SubType>Form</SubType>
@@ -115,6 +139,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ABM de Rol\FrmRol.resx">
+      <DependentUpon>FrmRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Rol\FrmRol_Alta.resx">
+      <DependentUpon>FrmRol_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Rol\FrmRol_Baja.resx">
+      <DependentUpon>FrmRol_Baja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Rol\FrmRol_List.resx">
+      <DependentUpon>FrmRol_List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Rol\FrmRol_Mod.resx">
+      <DependentUpon>FrmRol_Mod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>

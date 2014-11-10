@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox = new System.Windows.Forms.ComboBox();
-            this.btnIngresar = new System.Windows.Forms.Button();
+            this.botonIngresar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -50,21 +50,22 @@
             this.comboBox.Size = new System.Drawing.Size(221, 21);
             this.comboBox.TabIndex = 2;
             // 
-            // btnIngresar
+            // botonIngresar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(179, 124);
-            this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(75, 23);
-            this.btnIngresar.TabIndex = 3;
-            this.btnIngresar.Text = "Ingresar";
-            this.btnIngresar.UseVisualStyleBackColor = true;
+            this.botonIngresar.Location = new System.Drawing.Point(179, 124);
+            this.botonIngresar.Name = "botonIngresar";
+            this.botonIngresar.Size = new System.Drawing.Size(75, 23);
+            this.botonIngresar.TabIndex = 3;
+            this.botonIngresar.Text = "Ingresar";
+            this.botonIngresar.UseVisualStyleBackColor = true;
+            this.botonIngresar.Click += new System.EventHandler(this.botonIngresar_Click);
             // 
             // FrmRolesLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(273, 167);
-            this.Controls.Add(this.btnIngresar);
+            this.Controls.Add(this.botonIngresar);
             this.Controls.Add(this.comboBox);
             this.Controls.Add(this.label1);
             this.Name = "FrmRolesLogin";
@@ -79,6 +80,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox;
-        private System.Windows.Forms.Button btnIngresar;
+        private System.Windows.Forms.Button botonIngresar;
     }
 }

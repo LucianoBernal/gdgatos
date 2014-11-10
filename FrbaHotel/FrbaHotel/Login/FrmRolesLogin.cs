@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel.FuncionesGenerales;
+
 
 namespace FrbaHotel.Login
 {
@@ -14,7 +16,6 @@ namespace FrbaHotel.Login
 
 
         public int idUsuario;
-        // private int IdRolElegido;
 
 
         public FrmRolesLogin(int idUsr)
@@ -23,7 +24,7 @@ namespace FrbaHotel.Login
 
             idUsuario = idUsr;
 
-            btnIngresar.Enabled = false;
+            botonIngresar.Enabled = false;
         }
 
         private void FrmRolesLogin_Load(object sender, EventArgs e)
@@ -34,7 +35,7 @@ namespace FrbaHotel.Login
 
         public void cargarRoles()
         {
-            string sql = "SELECT r.ROL_NOMBRE rol FROM TABLA_ROLES r, TABLA_ROLES_USUARIO ur where ur.idRol = r.idRol and ur.idUsuario = " + idUsuario;
+            string sql = "SELECT r.nombre rol FROM SKYNET.Roles r,SKYNET.UsuarioRolHotel ur WHERE ur.rol = r.idRol AND r.baja=0 AND ur.usuario = " + idUsuario;
 
 
             Query qry = new Query(sql);
@@ -53,13 +54,32 @@ namespace FrbaHotel.Login
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (comboBox.Text != null)
+            {
+                botonIngresar.Enabled = true;
+            }
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
+
+        private void botonIngresar_Click(object sender, EventArgs e)
         {
+            int idRol = (int)new Query("SELECT ID_ROL FROM SKYNET.Roles  " +
+                                   " WHERE nombre = '" + comboBox.SelectedItem.ToString() + "'").ObtenerUnicoCampo();
+
+            Globales.idRolElegido = idRol;
+
+            Query qr = new Query("SELECT distinct(username) from SKYNET.Usuarios WHERE idUser = " + idUsuario);
+
+            qr.pTipoComando = CommandType.Text;
+            string nombreUsuario = qr.ObtenerUnicoCampo().ToString();
+
+            this.Visible = false;
+            Funciones fn = new Funciones();
+            fn.recibirUsuario(idUsuario);
 
         }
+
+
 
 
     }
