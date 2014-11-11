@@ -5,7 +5,16 @@ values('Cadena Migracion')
 /* agrego pais argentina*/
 Insert SKYNET.Paises(pais)
 values('Argentina')
-
+Insert SKYNET.Paises(pais)
+values('Brasil')
+Insert SKYNET.Paises(pais)
+values('Uruguay')
+Insert SKYNET.Paises(pais)
+values('Paraguay')
+Insert SKYNET.Paises(pais)
+values('Bolivia')
+Insert SKYNET.Paises(pais)
+values('Chile')
 /*migro hoteles*/
 INSERT INTO SKYNET.Hoteles (calle,numCalle,ciudad,cantidadEstrellas,cadena,pais)
 SELECT DISTINCT Hotel_Calle,Hotel_Nro_Calle,Hotel_Ciudad,Hotel_CantEstrella,1,1
@@ -35,6 +44,12 @@ SELECT DISTINCT Cliente_Nacionalidad FROM gd_esquema.Maestra
 /*migro clientes*/
 insert SKYNET.TiposDoc(nombre)
 values('Pasaporte')
+insert SKYNET.TiposDoc(nombre)
+values('DNI')
+insert SKYNET.TiposDoc(nombre)
+values('LE')
+insert SKYNET.TiposDoc(nombre)
+values('LC')
 
 insert into SKYNET.Roles (nombre)
 	values ('ADMINISTRADOR')
@@ -71,7 +86,7 @@ group by m.Consumible_Codigo,m.Consumible_Descripcion,m.Consumible_Precio
 order by m.Consumible_Codigo
 /*------------------------------------------------------------------------------*/
 /*migro regimenes*/
-insert into SKYNET.Regimenes(nombre,precioBase,habilitado)
+insert into SKYNET.Regimenes(descripcion,precioBase,habilitado)
 select distinct m.Regimen_Descripcion,m.Regimen_Precio,1
 from gd_esquema.Maestra m
 /*------------------------------------------------------------------------------*/
@@ -141,22 +156,34 @@ insert into SKYNET.EstadosReserva (nombre)
 values ('CORRECTA')
 
 insert into SKYNET.Reservas(codigoReserva, hotel, regimen, fechaDesde, cantNoches, estado, cliente)
-SELECT DISTINCT Reserva_Codigo, (SELECT idHotel FROM SKYNET.Hoteles S1 WHERE S1.calle = G1.Hotel_Calle AND S1.numCalle = G1.Hotel_Nro_Calle), (SELECT idRegimen FROM SKYNET.Regimenes R1 WHERE R1.Descripcion = G1.Regimen_Descripcion), Reserva_Fecha_Inicio, Reserva_Cant_Noches, 1/*CODIGO NO COMPLETADA*/, (SELECT idCliente FROM SKYNET.Clientes C1 WHERE C1.numDoc = G1.Cliente_Pasaporte_Nro AND C1.mail=G1.Cliente_Mail) FROM gd_esquema.Maestra G1
+SELECT DISTINCT Reserva_Codigo, (SELECT idHotel 
+FROM SKYNET.Hoteles S1 WHERE S1.calle = G1.Hotel_Calle AND S1.numCalle = G1.Hotel_Nro_Calle),
+(SELECT idRegimen FROM SKYNET.Regimenes R1 WHERE R1.Descripcion = G1.Regimen_Descripcion),
+ Reserva_Fecha_Inicio, Reserva_Cant_Noches, 1/*CODIGO NO COMPLETADA*/,
+ (SELECT idCliente FROM SKYNET.Clientes C1 WHERE C1.numDoc = G1.Cliente_Pasaporte_Nro AND C1.mail=G1.Cliente_Mail) FROM gd_esquema.Maestra G1
+ 
 /*LA IDEA SERIA HACER UN UPDATE AL ESTADO DE RESERVA AL ENCONTRAR ESTADIAS PARA ESA RESERVA*/
 /*YO DIRIA QUE ASUMAMOS NO-SHOW*/
 /*ME EXTRAÑA QUE HAYA TANTAS RESERVAS*/
 
-UPDATE R2 SET estado = 2 /*ESTADO CORRECTA*/
+UPDATE R2 SET estado = 2 /*ESTADO EFECTIVIZADA*/
 FROM SKYNET.Reservas R2
 WHERE EXISTS(SELECT 1 FROM gd_esquema.Maestra G1
 WHERE R2.codigoReserva=G1.Reserva_Codigo AND
 G1.Estadia_Cant_Noches is not NULL)
-/*SIN EMBARGO PARECE NO HABER ESTADIAS REGISTRADAS*/
+
 
 /*ACTUALIZO LAS CORRECTAS*/
 UPDATE R3 SET estado = 3
 FROM SKYNET.Reservas R3
 WHERE estado = 1 AND fechaDesde > SYSDATETIME()
+
+/*ACTUALIZO CANCELADAS POR NO-SHOW*/
+insert into SKYNET.Cancelaciones(reserva,motivo,fechaCancel)
+select r.codigoReserva,'NO-SHOW',r.fechaDesde
+from SKYNET.Reservas r
+where r.estado=1/*cancelada*/
+
 
 /*------------------------------------------------------------------------------*/
 /*migro estadias*/
@@ -170,6 +197,10 @@ group by m.Reserva_Codigo,m.Estadia_Cant_Noches
 /*migro tipoPago*/
 insert SKYNET.TiposPago(nombre)
 values('Efectivo')
+insert SKYNET.TiposPago(nombre)
+values('Tarjeta Debito')
+insert SKYNET.TiposPago(nombre)
+values('Tarjeta Credito')
 /*------------------------------------------------------------------------------*/
 /*migro facturas poner despues de las estadias*/
 insert into SKYNET.Facturas(facturaNumero,estadia,fechaPago,tipoPago,monto)
@@ -186,7 +217,7 @@ group by m.Reserva_Codigo,m.Habitacion_Tipo_Codigo
 insert into SKYNET.ClientesPorEstadia(idCliente,idEstadia)
 select   r.cliente,r.codigoReserva
 from SKYNET.Reservas r
-where r.estado=2
+where r.estado=2 /*estado efectivizado*/
 /*------------------------------------------------------------------------------*/
 insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad)
 select m.Reserva_Codigo,m.Consumible_Codigo,sum(m.Item_Factura_Monto),
@@ -194,3 +225,24 @@ select m.Reserva_Codigo,m.Consumible_Codigo,sum(m.Item_Factura_Monto),
 from gd_esquema.Maestra m
 where (m.Consumible_Codigo is not null)
 group by m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto
+
+/*------------------------------------------------------------------------------*/
+/*Migro estadiasPorHabitacion*/
+insert into SKYNET.EstadiaPorHabitacion(idHotel,idHabitacion,idEstadia)
+select distinct h.idHotel,m.Habitacion_Numero,m.Reserva_Codigo as idEstadia
+from gd_esquema.Maestra m,SKYNET.Hoteles h
+where m.Hotel_Calle=h.calle and
+	  m.Hotel_Nro_Calle=h.numCalle and
+	  m.Estadia_Cant_Noches is not null
+	  
+/*------------------------------------------------------------------------------*/
+/*Migro HotelesRegimenes*/
+insert into SKYNET.HotelesRegimenes(hotel,regimen)
+select distinct h.idHotel,r.idRegimen
+from gd_esquema.Maestra m,SKYNET.Hoteles h,SKYNET.Regimenes r
+where m.Hotel_Calle=h.calle and
+	  m.Hotel_Nro_Calle=h.numCalle and
+	  m.Regimen_Descripcion is not null and
+	  m.Regimen_Descripcion=r.descripcion
+
+  
