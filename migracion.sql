@@ -184,14 +184,15 @@ select r.codigoReserva,'NO-SHOW',r.fechaDesde
 from SKYNET.Reservas r
 where r.estado=1/*cancelada*/
 
-
 /*------------------------------------------------------------------------------*/
 /*migro estadias*/
-insert into SKYNET.Estadias (reserva,cantNoches)
-select m.Reserva_Codigo,m.Estadia_Cant_Noches
+insert into SKYNET.Estadias (reserva,cantNoches,precioEstadia)
+select distinct m.Reserva_Codigo,m.Estadia_Cant_Noches,
+		m.Regimen_Precio*m.Habitacion_Tipo_Porcentual*m.Estadia_Cant_Noches
+		/*AVERIGUAR ALGORITMO DE ESTADIA*/
 from gd_esquema.Maestra m
 where(m.Estadia_Cant_Noches is not null)
-group by m.Reserva_Codigo,m.Estadia_Cant_Noches
+/*group by m.Reserva_Codigo,m.Estadia_Cant_Noches*/
 
 /*------------------------------------------------------------------------------*/
 /*migro tipoPago*/
