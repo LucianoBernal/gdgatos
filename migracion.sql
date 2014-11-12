@@ -2,7 +2,7 @@
 Insert  SKYNET.Cadenas(cadena)
 values('Cadena Migracion')
 
-/* agrego pais argentina*/
+/* agrego paises*/
 Insert SKYNET.Paises(pais)
 values('Argentina')
 Insert SKYNET.Paises(pais)
@@ -35,13 +35,13 @@ select distinct h.idHotel,m.Habitacion_Numero,m.Habitacion_Piso,
 from gd_esquema.Maestra m,SKYNET.Hoteles h
 where m.Hotel_Calle=h.calle and m.Hotel_Nro_Calle=h.numCalle and 
 		m.Hotel_Ciudad=h.ciudad
-order by idHotel, Habitacion_Numero
+
 /*------------------------------------------------------------------------------*/
 /*migro nacionalidades*/
 insert into skynet.Nacionalidades(Nacionalidad)
 SELECT DISTINCT Cliente_Nacionalidad FROM gd_esquema.Maestra
 /*------------------------------------------------------------------------------*/
-/*migro clientes*/
+/*Inserto tipos Documento*/
 insert SKYNET.TiposDoc(nombre)
 values('Pasaporte')
 insert SKYNET.TiposDoc(nombre)
@@ -50,14 +50,14 @@ insert SKYNET.TiposDoc(nombre)
 values('LE')
 insert SKYNET.TiposDoc(nombre)
 values('LC')
-
+/*Inserto roles*/
 insert into SKYNET.Roles (nombre)
 	values ('ADMINISTRADOR')
 insert into SKYNET.Roles (nombre)
 	values ('RECEPCIONISTA')
 insert into SKYNET.Roles (nombre)
 	values ('GUEST')
-
+/*migro clientes*/
 insert into SKYNET.Clientes(apellido, nombre, tipoDoc, numDoc, mail, calle,
 			 piso, depto, nacionalidad, numCalle, fechaNac, baja, inconsistencia,rol)
 select Cliente_Apellido, Cliente_Nombre, 1, Cliente_Pasaporte_Nro, Cliente_Mail,
@@ -83,7 +83,7 @@ select m.Consumible_Codigo,m.Consumible_Descripcion,m.Consumible_Precio
 from gd_esquema.Maestra m
 where m.Consumible_Codigo is not null
 group by m.Consumible_Codigo,m.Consumible_Descripcion,m.Consumible_Precio
-order by m.Consumible_Codigo
+
 /*------------------------------------------------------------------------------*/
 /*migro regimenes*/
 insert into SKYNET.Regimenes(descripcion,precioBase,habilitado)
@@ -96,7 +96,7 @@ select m.Hotel_Recarga_Estrella
 from gd_esquema.Maestra m
 group by m.Hotel_Recarga_Estrella
 /*------------------------------------------------------------------------------*/
-
+/*Inserto funciones*/
 insert into SKYNET.Funciones (descripcion)
 	values ('ABM ROL')
 insert into SKYNET.Funciones (descripcion)
@@ -148,6 +148,7 @@ where f.descripcion = 'GENERAR O MODIFICAR RESERVA'
 OR f.descripcion = 'REGISTRAR ESTADIA'
 		
 /*------------------------------------------------------------------------------*/
+/*Migro Reservas*/
 insert into SKYNET.EstadosReserva (nombre)
 values('CANCELADA POR NO-SHOW')
 insert into SKYNET.EstadosReserva (nombre)
@@ -186,13 +187,16 @@ where r.estado=1/*cancelada*/
 
 /*------------------------------------------------------------------------------*/
 /*migro estadias*/
-insert into SKYNET.Estadias (reserva,cantNoches,precioEstadia)
-select distinct m.Reserva_Codigo,m.Estadia_Cant_Noches,
-		m.Regimen_Precio*m.Habitacion_Tipo_Porcentual*m.Estadia_Cant_Noches
-		/*AVERIGUAR ALGORITMO DE ESTADIA*/
+insert into SKYNET.Estadias (reserva,cantNoches,precioPorNocheEstadia)
+select distinct m.Reserva_Codigo,m.Estadia_Cant_Noches,(
+		select m2.Item_Factura_Monto 
+		from gd_esquema.Maestra m2
+		where m.Reserva_Codigo=m2.Reserva_Codigo and
+		m2.Item_Factura_Monto is not null and
+		m2.Consumible_Codigo is null)
 from gd_esquema.Maestra m
 where(m.Estadia_Cant_Noches is not null)
-/*group by m.Reserva_Codigo,m.Estadia_Cant_Noches*/
+
 
 /*------------------------------------------------------------------------------*/
 /*migro tipoPago*/
@@ -204,10 +208,12 @@ insert SKYNET.TiposPago(nombre)
 values('Tarjeta Credito')
 /*------------------------------------------------------------------------------*/
 /*migro facturas poner despues de las estadias*/
-insert into SKYNET.Facturas(facturaNumero,estadia,fechaPago,tipoPago,monto)
-select distinct m.Factura_Nro,m.Reserva_Codigo,m.Factura_Fecha,1,m.Factura_Total
+insert into SKYNET.Facturas(facturaNumero,estadia,fecha,tipoPago,monto,diferenciaInconsistencia)
+select m.Factura_Nro,m.Reserva_Codigo,m.Factura_Fecha,1,m.Factura_Total,m.Factura_Total-SUM(m.Item_Factura_Cantidad*m.Item_Factura_Monto)
 from gd_esquema.Maestra m
-where m.Factura_Nro is not null
+where m.Factura_Nro is not null and m.Item_Factura_Cantidad is not null and m.Item_Factura_Monto is not null
+group by m.Factura_Nro,m.Reserva_Codigo,m.Factura_Fecha,m.Factura_Total
+
 /*------------------------------------------------------------------------------*/
 /*migro reservasPorTipoHabitacion*/
 insert into SKYNET.ReservasPorTipoHabitacion(idReserva,idTipoHabitacion)
@@ -221,7 +227,7 @@ from SKYNET.Reservas r
 where r.estado=2 /*estado efectivizado*/
 /*------------------------------------------------------------------------------*/
 insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad)
-select m.Reserva_Codigo,m.Consumible_Codigo,sum(m.Item_Factura_Monto),
+select m.Reserva_Codigo,m.Consumible_Codigo,sum(m.Item_Factura_Monto*m.Item_Factura_Cantidad),
 		SUM(m.Item_Factura_Cantidad)
 from gd_esquema.Maestra m
 where (m.Consumible_Codigo is not null)
