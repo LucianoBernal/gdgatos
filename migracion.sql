@@ -120,8 +120,6 @@ insert into SKYNET.Funciones (descripcion)
 insert into SKYNET.Funciones (descripcion)
 	values ('FACTURAR')
 	
-/*FALTARIAN LAS FUNCIONES DE BAJA*/
-
 /*------------------------------------------------------------------------------*/
 /*migro RolFunciones*/
 insert into skynet.rolFunciones(rol,funcion)
@@ -181,9 +179,6 @@ FROM SKYNET.Hoteles S1 WHERE S1.calle = G1.Hotel_Calle AND S1.numCalle = G1.Hote
  Reserva_Fecha_Inicio, Reserva_Cant_Noches, 1/*CODIGO NO COMPLETADA*/,
  (SELECT idCliente FROM SKYNET.Clientes C1 WHERE C1.numDoc = G1.Cliente_Pasaporte_Nro AND C1.mail=G1.Cliente_Mail) FROM gd_esquema.Maestra G1
  
-/*LA IDEA SERIA HACER UN UPDATE AL ESTADO DE RESERVA AL ENCONTRAR ESTADIAS PARA ESA RESERVA*/
-/*YO DIRIA QUE ASUMAMOS NO-SHOW*/
-/*ME EXTRAÑA QUE HAYA TANTAS RESERVAS*/
 
 UPDATE R2 SET estado = 2 /*ESTADO EFECTIVIZADA*/
 FROM SKYNET.Reservas R2
