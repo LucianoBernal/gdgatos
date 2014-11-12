@@ -147,6 +147,17 @@ from SKYNET.Funciones f
 where f.descripcion = 'GENERAR O MODIFICAR RESERVA' 
 OR f.descripcion = 'REGISTRAR ESTADIA'
 		
+/*inserto usuario admin*/
+INSERT INTO SKYNET.Usuarios
+(username,pass,habilitado,fallasPassword)
+VALUES ('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,0)
+
+INSERT INTO SKYNET.UsuarioRolHotel
+(usuario ,rol, hotel)
+SELECT(select idUser from SKYNET.Usuarios where username='admin'), 
+(select idRol from SKYNET.Roles where nombre='ADMINISTRADOR'),
+h.idHotel FROM SKYNET.Hoteles h		
+		
 /*------------------------------------------------------------------------------*/
 /*Migro Reservas*/
 insert into SKYNET.EstadosReserva (nombre)
@@ -155,6 +166,13 @@ insert into SKYNET.EstadosReserva (nombre)
 values('EFECTIVIZADA')
 insert into SKYNET.EstadosReserva (nombre)
 values ('CORRECTA')
+insert into SKYNET.EstadosReserva (nombre)
+values('MODIFICADA')
+insert into SKYNET.EstadosReserva (nombre)
+values('CANCELADA POR RECEPCION')
+insert into SKYNET.EstadosReserva (nombre)
+values ('CANCELADA POR CLIENTE')
+
 
 insert into SKYNET.Reservas(codigoReserva, hotel, regimen, fechaDesde, cantNoches, estado, cliente)
 SELECT DISTINCT Reserva_Codigo, (SELECT idHotel 
