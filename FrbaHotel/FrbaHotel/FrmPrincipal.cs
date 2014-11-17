@@ -16,22 +16,47 @@ namespace FrbaHotel
         private int idUsuario;
         private string nombreUsuario;
         private int idRol;
+        private Button botonSistema;
+        private Button botonHuesped;
         Funciones fn = new Funciones();
 
         public FrmPrincipal()
         {
             InitializeComponent();
 
-            idUsuario = Globales.idUsuarioLogueado;
+            //idUsuario = Globales.idUsuarioLogueado;
         }
 
         private void InitializeComponent()
         {
+            this.botonSistema = new System.Windows.Forms.Button();
+            this.botonHuesped = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // botonSistema
+            // 
+            this.botonSistema.Location = new System.Drawing.Point(76, 104);
+            this.botonSistema.Name = "botonSistema";
+            this.botonSistema.Size = new System.Drawing.Size(133, 39);
+            this.botonSistema.TabIndex = 0;
+            this.botonSistema.Text = "Ingreso al Sistema";
+            this.botonSistema.UseVisualStyleBackColor = true;
+            this.botonSistema.Click += new System.EventHandler(this.botonSistema_Click);
+            // 
+            // botonHuesped
+            // 
+            this.botonHuesped.Location = new System.Drawing.Point(76, 175);
+            this.botonHuesped.Name = "botonHuesped";
+            this.botonHuesped.Size = new System.Drawing.Size(133, 39);
+            this.botonHuesped.TabIndex = 1;
+            this.botonHuesped.Text = "Ingreso Huesped";
+            this.botonHuesped.UseVisualStyleBackColor = true;
             // 
             // FrmPrincipal
             // 
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.botonHuesped);
+            this.Controls.Add(this.botonSistema);
             this.Name = "FrmPrincipal";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.ResumeLayout(false);
@@ -39,7 +64,7 @@ namespace FrbaHotel
         }
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            nombreUsuario = fn.getUsername(idUsuario);
+       /*     nombreUsuario = fn.getUsername(idUsuario);
 
 
             int IdRol = (int)new Query("SELECT count(*) FROM TABLA_ROL  " +
@@ -54,7 +79,7 @@ namespace FrbaHotel
                 idRol = Globales.idRolElegido;
             }
 
-            cargarFrmPrincipal();
+            cargarFrmPrincipal();*/
 
         }
 
@@ -62,6 +87,15 @@ namespace FrbaHotel
         {
             //ACA ADENTRO CARGAR TODO PARA EL FRMPRINCIPAL
         }
+
+        private void botonSistema_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            FrmLogin frm = new FrmLogin();
+            frm.ShowDialog();
+            this.Visible = true;
+        }
+
 
     }
 }

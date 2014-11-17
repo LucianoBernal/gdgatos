@@ -49,6 +49,7 @@
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(221, 21);
             this.comboBox.TabIndex = 2;
+            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // botonIngresar
             // 

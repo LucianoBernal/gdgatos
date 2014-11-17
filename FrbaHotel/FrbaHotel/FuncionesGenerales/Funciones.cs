@@ -23,7 +23,7 @@ namespace FrbaHotel.FuncionesGenerales
 
         public bool puedeIngresarAlSistema(int idUsuario)
         {
-            return ((int)new Query("SELECT count(1) FROM SKYNET.Usuarios WHERE idUser ='" + idUsuario + "' AND intentoFallido < 3").ObtenerUnicoCampo() != 0);
+            return ((int)new Query("SELECT count(1) FROM SKYNET.Usuarios WHERE idUser ='" + idUsuario + "' AND fallasPassword < 3").ObtenerUnicoCampo() != 0);
         }
 
         public string getSha256(string input)
@@ -66,8 +66,8 @@ namespace FrbaHotel.FuncionesGenerales
 
         public string getUsername(int idUsuario)
         {
-
-            return new Query("SELECT username FROM SKYNET.Usuarios WHERE idUser = " + idUsuario).ObtenerUnicoCampo().ToString();
+            string usuario = (string)new Query("SELECT username FROM SKYNET.Usuarios WHERE idUser = " + idUsuario).ObtenerUnicoCampo();
+            return usuario;
 
         }
     }

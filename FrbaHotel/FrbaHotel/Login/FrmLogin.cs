@@ -15,6 +15,7 @@ namespace FrbaHotel.Login
     {
         public int idUsuario;
         public string nombreUsuario;
+        public int fallos;
         Funciones fn = new Funciones();
 
         public FrmLogin()
@@ -35,9 +36,11 @@ namespace FrbaHotel.Login
 
                 if (fn.ExisteUsuario(txtUsuario.Text))
                 {
-                    Globales.idUsuarioLogueado = (int)new Query("SELECT idUser FROM SKYNET.Usuarios WHERE username='" + txtUsuario.Text + "' AND fallasPassword < 3 ").ObtenerUnicoCampo();
+                    Query qr = new Query("SELECT idUser FROM SKYNET.Usuarios WHERE username='" + txtUsuario.Text + "' AND habilitado = 1");
+                    Globales.idUsuarioLogueado = Convert.ToInt32(qr.ObtenerUnicoCampo()); //MOVER DE ACA
+                    //Globales.idUsuarioLogueado = (int)new Query("SELECT idUser FROM SKYNET.Usuarios WHERE username='" + txtUsuario.Text + "'").ObtenerUnicoCampo();
                     idUsuario = Globales.idUsuarioLogueado;
-                    resetearIntentosFallidos();
+                    
 
                     if (fn.puedeIngresarAlSistema(idUsuario))
                     {
@@ -83,11 +86,12 @@ namespace FrbaHotel.Login
 
         private void validar()
         {
-            int consValidar = (int)new Query("SELECT count(1) FROM SKYNET.Usuarios WHERE idUser ='" + idUsuario + "' AND pass ='" + txtPassword.Text + "'").ObtenerUnicoCampo();
+            int consValidar = (int)new Query("SELECT count(1) FROM SKYNET.Usuarios WHERE idUser ='" + idUsuario + "' AND pass ='" + fn.getSha256(txtPassword.Text) + "'").ObtenerUnicoCampo();
 
 
             if (consValidar == 1)
             {
+                resetearIntentosFallidos();
                 Globales.idRol = (int)new Query("SELECT count(*) FROM SKYNET.UsuarioRolHotel  " +
                                            " WHERE usuario = " + idUsuario).ObtenerUnicoCampo();
 
@@ -112,16 +116,20 @@ namespace FrbaHotel.Login
             }
             else
             {
-                int fallosRestantes = (int)new Query("SELECT fallasPassword FROM SKYNET.Usuarios  " +
-                                           " WHERE usuario = " + idUsuario).ObtenerUnicoCampo();
-                fallosRestantes = (fallosRestantes + 1) - 3;
-                if (fallosRestantes >= 0)
+                Query qr = new Query("SELECT fallasPassword FROM SKYNET.Usuarios u WHERE idUser = " + idUsuario);
+                fallos = Convert.ToInt32(qr.ObtenerUnicoCampo()); //MOVER DE ACA
+            
+                if (fallos > 2)
                 {
                     new Query("UPDATE SKYNET.Usuarios SET fallasPassword= 3, habilitado = 0 WHERE idUser = " + idUsuario).Ejecutar();
                 }else{
-                    new Query("UPDATE SKYNET.Usuarios SET fallasPassword= fallasPassword+1 WHERE idUser = " + idUsuario).Ejecutar();
+                   // new Query("UPDATE SKYNET.Usuarios SET fallasPassword= "+fallosRestantes+" WHERE idUser = " + idUsuario).Ejecutar();
+                    new Query("UPDATE SKYNET.Usuarios SET fallasPassword= "+ fallos+"+1 WHERE idUser = " + idUsuario).Ejecutar();
+
                 }
-                MessageBox.Show("La contraseña ingresada es incorrecta. Le quedan " + fallosRestantes + " intentos.", "Advertencia",
+
+                int fallosRestantes = 3 - Convert.ToInt32(qr.ObtenerUnicoCampo()); //MOVER DE ACA
+                MessageBox.Show("Te quedan " + fallosRestantes + " intentos.", "Advertencia",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 

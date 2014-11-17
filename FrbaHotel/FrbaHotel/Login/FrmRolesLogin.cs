@@ -63,7 +63,7 @@ namespace FrbaHotel.Login
 
         private void botonIngresar_Click(object sender, EventArgs e)
         {
-            int idRol = (int)new Query("SELECT ID_ROL FROM SKYNET.Roles  " +
+            int idRol = (int)new Query("SELECT idRol FROM SKYNET.Roles  " +
                                    " WHERE nombre = '" + comboBox.SelectedItem.ToString() + "'").ObtenerUnicoCampo();
 
             Globales.idRolElegido = idRol;
