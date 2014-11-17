@@ -35,35 +35,25 @@ namespace FrbaHotel.Login
 
         public void cargarRoles()
         {
-            string sql = "SELECT r.nombre rol FROM SKYNET.Roles r,SKYNET.UsuarioRolHotel ur WHERE ur.rol = r.idRol AND r.baja=0 AND ur.usuario = " + idUsuario;
+            string sql = "SELECT DISTINCT(r.nombre) FROM SKYNET.Roles r,SKYNET.UsuarioRolHotel ur WHERE ur.rol = r.idRol AND r.baja=0 AND ur.usuario = " + idUsuario;
 
 
             Query qry = new Query(sql);
-
 
             foreach (DataRow dataRow in qry.ObtenerDataTable().AsEnumerable())
             {
                 comboBox.Items.Add(dataRow[0]);
             }
 
-
             comboBox.DisplayMember = "Key";
             comboBox.ValueMember = "Value";
             comboBox.Text = null;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox.Text != null)
-            {
-                botonIngresar.Enabled = true;
-            }
-        }
-
 
         private void botonIngresar_Click(object sender, EventArgs e)
         {
-            int idRol = (int)new Query("SELECT idRol FROM SKYNET.Roles  " +
+            int idRol = (int)new Query("SELECT convert(int,idRol) FROM SKYNET.Roles  " +
                                    " WHERE nombre = '" + comboBox.SelectedItem.ToString() + "'").ObtenerUnicoCampo();
 
             Globales.idRolElegido = idRol;
@@ -77,6 +67,14 @@ namespace FrbaHotel.Login
             Funciones fn = new Funciones();
             fn.recibirUsuario(idUsuario);
 
+        }
+
+        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox.Text != null)
+            {
+                botonIngresar.Enabled = true;
+            }
         }
 
 

@@ -88,12 +88,11 @@ namespace FrbaHotel.Login
         {
             int consValidar = (int)new Query("SELECT count(1) FROM SKYNET.Usuarios WHERE idUser ='" + idUsuario + "' AND pass ='" + fn.getSha256(txtPassword.Text) + "'").ObtenerUnicoCampo();
 
-
             if (consValidar == 1)
             {
                 resetearIntentosFallidos();
-                Globales.idRol = (int)new Query("SELECT count(*) FROM SKYNET.UsuarioRolHotel  " +
-                                           " WHERE usuario = " + idUsuario).ObtenerUnicoCampo();
+                Globales.idRol = (int)new Query("SELECT count(DISTINCT(ur.rol)) FROM SKYNET.UsuarioRolHotel ur, SKYNET.Roles r  " +
+                                           " WHERE ur.rol = r.idRol AND r.baja=0 AND ur.usuario = " + idUsuario).ObtenerUnicoCampo();
 
                 switch (Globales.idRol)
                 {
@@ -102,6 +101,9 @@ namespace FrbaHotel.Login
                         break;
 
                     case 1: this.Visible = false;
+                        Query qr = new Query("SELECT DISTINCT(ur.rol) FROM SKYNET.UsuarioRolHotel ur, SKYNET.Roles r  " +
+                                           " WHERE ur.rol = r.idRol AND r.baja=0 AND ur.usuario = " + idUsuario);
+                        Globales.idRolElegido = Convert.ToInt32(qr.ObtenerUnicoCampo());
                         fn.recibirUsuario(idUsuario);
 
 
@@ -131,6 +133,7 @@ namespace FrbaHotel.Login
                 int fallosRestantes = 3 - Convert.ToInt32(qr.ObtenerUnicoCampo()); //MOVER DE ACA
                 MessageBox.Show("Te quedan " + fallosRestantes + " intentos.", "Advertencia",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
 
         }

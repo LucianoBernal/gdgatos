@@ -28,11 +28,17 @@ namespace FrbaHotel.FuncionesGenerales
 
         public string getSha256(string input)
         {
+            SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
+
             byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-            byte[] result;
-            SHA256 shaM = new SHA256Managed();
-            result = shaM.ComputeHash(inputBytes);
-            return BitConverter.ToString(result);
+            byte[] hashedBytes = provider.ComputeHash(inputBytes);
+
+            StringBuilder output = new StringBuilder();
+
+            for (int i = 0; i < hashedBytes.Length; i++)
+                output.Append(hashedBytes[i].ToString("x2").ToLower());
+
+            return output.ToString();
         }
         public void recibirUsuario(int idUsuario)
         {
@@ -48,8 +54,8 @@ namespace FrbaHotel.FuncionesGenerales
                 "Usted se ha registrado como usuario: " + nombreUsuario.ToUpper(), "Bienvenido!",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                FrmPrincipal frmPrincipal = new FrmPrincipal();
-                frmPrincipal.ShowDialog();
+                FrmMenu frmMenu = new FrmMenu();
+                frmMenu.ShowDialog();
 
             }
             else

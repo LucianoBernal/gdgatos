@@ -132,7 +132,7 @@ namespace FrbaHotel.ABM_de_Rol
             string consulta = "SELECT idRol FROM SKYNET.Roles WHERE nombre = '" + rol + "'";
             Query qr = new Query(consulta);
             qr.pComando = consulta;
-            int idRol = (int)qr.ObtenerUnicoCampo();
+            int idRol = Convert.ToInt32(qr.ObtenerUnicoCampo());
 
             for (int i = 0; i < Funcionalidades.Items.Count; i++)
             {
@@ -210,6 +210,14 @@ namespace FrbaHotel.ABM_de_Rol
             this.Hide();
             rol.ShowDialog();
             rol = (FrmRol)this.ActiveMdiChild;
+        }
+
+        private void comboRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboRol.Text.Trim() != "")
+            {
+                botonBuscar.Enabled = true;
+            }
         }
     }
 }
