@@ -33,3 +33,4 @@ C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHote
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\bin\Debug\FrbaHotel.exe
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\bin\Debug\FrbaHotel.pdb
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.FrmMenu.resources
+C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Usuario.FrmUsuario_Baja.resources

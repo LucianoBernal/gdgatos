@@ -166,6 +166,7 @@
             this.btnUsuario.TabIndex = 36;
             this.btnUsuario.Text = "ABM Usuario";
             this.btnUsuario.UseVisualStyleBackColor = true;
+            this.btnUsuario.Click += new System.EventHandler(this.btnUsuario_Click);
             // 
             // btnFacturar
             // 

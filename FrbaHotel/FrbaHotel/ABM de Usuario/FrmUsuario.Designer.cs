@@ -41,6 +41,7 @@
             this.botonVolver.TabIndex = 9;
             this.botonVolver.Text = "Volver";
             this.botonVolver.UseVisualStyleBackColor = true;
+            this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click_1);
             // 
             // botonAlta
             // 
@@ -50,6 +51,7 @@
             this.botonAlta.TabIndex = 6;
             this.botonAlta.Text = "Alta";
             this.botonAlta.UseVisualStyleBackColor = true;
+            this.botonAlta.Click += new System.EventHandler(this.botonAlta_Click_1);
             // 
             // botonListado
             // 
@@ -59,6 +61,7 @@
             this.botonListado.TabIndex = 5;
             this.botonListado.Text = "Listado";
             this.botonListado.UseVisualStyleBackColor = true;
+            this.botonListado.Click += new System.EventHandler(this.botonListado_Click);
             // 
             // FrmUsuario
             // 

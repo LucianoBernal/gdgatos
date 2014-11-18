@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FrbaHotel.FuncionesGenerales;
 using FrbaHotel.Login;
 using FrbaHotel.ABM_de_Rol;
+using FrbaHotel.ABM_de_Usuario;
 
 namespace FrbaHotel
 {
@@ -130,6 +131,13 @@ namespace FrbaHotel
             this.Hide();
             FrmRol rol = new FrmRol();
             rol.ShowDialog();
+        }
+
+        private void btnUsuario_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FrmUsuario usuario = new FrmUsuario();
+            usuario.ShowDialog();
         }
 
     }

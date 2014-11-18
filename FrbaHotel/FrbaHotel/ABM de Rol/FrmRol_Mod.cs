@@ -78,7 +78,8 @@ namespace FrbaHotel.ABM_de_Rol
             /* Para tildar la casilla de Rol habilitado*/
             string Habilitado = "SELECT baja FROM SKYNET.Roles where nombre = '" + rol + "'";
             qry.pComando = Habilitado;
-            chkHabilitado.Checked = (bool)qry.ObtenerUnicoCampo();
+            bool estado = (bool)qry.ObtenerUnicoCampo();
+            chkHabilitado.Checked = !estado;
 
             /* Para deshabilitar el chequeo del box si el rol está habilitado 
              * para dar de baja el rol está el form de baja */
@@ -144,7 +145,7 @@ namespace FrbaHotel.ABM_de_Rol
                     sql = " INSERT INTO SKYNET.RolFunciones (funcion, rol)" +
                             " SELECT DISTINCT " + Funcionalidad + ", " + idRol + 
                             " from SKYNET.Funciones" +
-                            " WHERE " + Funcionalidad + " NOT IN ( SELECT funcion FROM SKYNET.RolFunciones WJERE rol = " + idRol + ")";
+                            " WHERE " + Funcionalidad + " NOT IN ( SELECT funcion FROM SKYNET.RolFunciones WHERE rol = " + idRol + ")";
                 }
                 else
                 {
@@ -153,10 +154,15 @@ namespace FrbaHotel.ABM_de_Rol
                             " WHERE rol = " + idRol +
                             " AND funcion = " + Funcionalidad;
                 }
-
                 Query qry = new Query();
                 qry.pComando = sql;
                 qry.Ejecutar();
+            }
+            if (chkHabilitado.Checked == true)
+            {
+                new Query(" UPDATE SKYNET.Roles " +
+                                " SET baja= 0 " +
+                                " WHERE idRol = '" + idRol + "'").Ejecutar();
             }
         }
 
