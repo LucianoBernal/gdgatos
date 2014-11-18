@@ -51,6 +51,7 @@ namespace FrbaHotel
             this.botonHuesped.TabIndex = 1;
             this.botonHuesped.Text = "Ingreso Huesped";
             this.botonHuesped.UseVisualStyleBackColor = true;
+            this.botonHuesped.Click += new System.EventHandler(this.botonHuesped_Click);
             // 
             // FrmPrincipal
             // 
@@ -93,7 +94,13 @@ namespace FrbaHotel
             this.Visible = false;
             FrmLogin frm = new FrmLogin();
             frm.ShowDialog();
-            this.Visible = true;
+        }
+
+        private void botonHuesped_Click(object sender, EventArgs e)
+        {
+            fn.recibirHuesped();
+            FrmMenu frmMenu = new FrmMenu();
+            frmMenu.ShowDialog();
         }
 
 

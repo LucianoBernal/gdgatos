@@ -39,6 +39,8 @@ namespace FrbaHotel
             this.btnReserva.Visible = false;
             this.btnRoles.Visible = false;
             this.btnUsuario.Visible = false;
+            linkCambiarContraseña.Visible = false;
+            lblUsuarioLogueado.Visible = false;
         }
 
         private void FrmMenu_Load(object sender, EventArgs e)
@@ -55,9 +57,12 @@ namespace FrbaHotel
 
             //MUESTRA EL NOMBRE Y PERFIL DEL USUARIO LOGUEADO
             lblPerfil.Visible = true;
-            lblUsuarioLogueado.Text = " Usuario Conectado : " + nombreUsuario.ToUpper();
-            lblUsuarioLogueado.Visible = true;
-            lblUsuarioLogueado.ForeColor = System.Drawing.Color.Green;
+            if (idRol != 3)
+            {
+                lblUsuarioLogueado.Text = " Usuario Conectado : " + nombreUsuario.ToUpper();
+                lblUsuarioLogueado.Visible = true;
+                linkCambiarContraseña.Visible = true;
+            }
             lblPerfil.Text = " Perfil : " + nombreRol.ToUpper();
 
             //MUESTRA SOLO LAS FUNCIONALIDADES PERMITIDAS PARA EL ROL LOGUEADO

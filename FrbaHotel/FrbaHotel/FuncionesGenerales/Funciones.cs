@@ -69,6 +69,12 @@ namespace FrbaHotel.FuncionesGenerales
             }
 
         }
+        public void recibirHuesped()
+        {
+            Globales.idRolElegido = 3;
+            MessageBox.Show("Bienvenido al Sistema Hotelero FRBA", "Bienvenido!",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         public string getUsername(int idUsuario)
         {

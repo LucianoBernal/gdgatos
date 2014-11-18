@@ -21,7 +21,6 @@ namespace FrbaHotel.ABM_de_Usuario
             this.Visible = false;
             FrmUsuario_List frm = new FrmUsuario_List();
             frm.ShowDialog();
-            this.Visible = true;
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -37,7 +36,6 @@ namespace FrbaHotel.ABM_de_Usuario
             this.Visible = false;
             FrmUsuario_Alta frm = new FrmUsuario_Alta();
             frm.ShowDialog();
-            this.Visible = true;
         }
 
         private void botonListado_Click(object sender, EventArgs e)
@@ -45,7 +43,6 @@ namespace FrbaHotel.ABM_de_Usuario
             this.Visible = false;
             FrmUsuario_List frm = new FrmUsuario_List();
             frm.ShowDialog();
-            this.Visible = true;
         }
 
         private void botonAlta_Click_1(object sender, EventArgs e)
@@ -53,15 +50,14 @@ namespace FrbaHotel.ABM_de_Usuario
             this.Visible = false;
             FrmUsuario_Alta frm = new FrmUsuario_Alta();
             frm.ShowDialog();
-            this.Visible = true;
         }
 
         private void botonVolver_Click_1(object sender, EventArgs e)
         {
-            FrmPrincipal frmPrincipal = new FrmPrincipal();
+            FrmMenu menu = new FrmMenu();
             this.Hide();
-            frmPrincipal.ShowDialog();
-            frmPrincipal = (FrmPrincipal)this.ActiveMdiChild;
+            menu.ShowDialog();
+            menu = (FrmMenu)this.ActiveMdiChild;
         }
 
     }
