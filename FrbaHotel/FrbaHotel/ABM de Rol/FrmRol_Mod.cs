@@ -122,7 +122,7 @@ namespace FrbaHotel.ABM_de_Rol
 
             MessageBox.Show("Modificación realizada con éxito!");
 
-            this.Visible = false;
+            /* this.Visible = false; */ /*WHY MAN, WHY?*/
         }
 
         private void ActualizarFuncionalidades()
