@@ -208,6 +208,9 @@
     <EmbeddedResource Include="ABM de Usuario\FrmUsuario_Baja.resx">
       <DependentUpon>FrmUsuario_Baja.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Usuario\FrmUsuario_List.resx">
+      <DependentUpon>FrmUsuario_List.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
     </EmbeddedResource>

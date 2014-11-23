@@ -27,7 +27,6 @@ namespace FrbaHotel.ABM_de_Usuario
             txtPass.Clear();
             txtTelefono.Clear();
             txtUsername.Clear();
-            botonGuardar.Enabled = false;
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -43,8 +42,8 @@ namespace FrbaHotel.ABM_de_Usuario
             CargarRoles();
             CargarTipoDoc();
             CargarHotel();
-            botonGuardar.Enabled = false;
-            botonLimpiar.Enabled = false;
+            botonGuardar.Enabled = true;
+            botonLimpiar.Enabled = true;
             botonVolver.Enabled = true;
         }
         public void CargarRoles()
@@ -67,7 +66,7 @@ namespace FrbaHotel.ABM_de_Usuario
         }
         public void CargarHotel()
         {
-            string sql = "SELECT h.nombre rol FROM SKYNET.Hoteles h ";
+            string sql = "SELECT h.calle FROM SKYNET.Hoteles h ";
 
 
             Query qry = new Query(sql);

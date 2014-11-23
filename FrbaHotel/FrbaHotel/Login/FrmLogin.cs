@@ -91,7 +91,7 @@ namespace FrbaHotel.Login
             if (consValidar == 1)
             {
                 resetearIntentosFallidos();
-                Globales.idRol = (int)new Query("SELECT count(DISTINCT(ur.rol)) FROM SKYNET.UsuarioRolHotel ur, SKYNET.Roles r  " +
+                Globales.idRol = (int)new Query("SELECT count(ur.rol) FROM SKYNET.UsuarioRolHotel ur, SKYNET.Roles r  " +
                                            " WHERE ur.rol = r.idRol AND r.baja=0 AND ur.usuario = " + idUsuario).ObtenerUnicoCampo();
 
                 switch (Globales.idRol)

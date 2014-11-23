@@ -11,5 +11,6 @@ namespace FrbaHotel
         public static int idRol;
         public static int idRolElegido;
         public static string fechaSistema;
+        public static int idHotelElegido;
     }
 }
