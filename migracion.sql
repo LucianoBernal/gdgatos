@@ -240,11 +240,10 @@ from SKYNET.Reservas r
 where r.estado=2 /*estado efectivizado*/
 /*------------------------------------------------------------------------------*/
 insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad)
-select m.Reserva_Codigo,m.Consumible_Codigo,sum(m.Item_Factura_Monto*m.Item_Factura_Cantidad),
-		SUM(m.Item_Factura_Cantidad)
+select m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto*m.Item_Factura_Cantidad,
+		m.Item_Factura_Cantidad
 from gd_esquema.Maestra m
 where (m.Consumible_Codigo is not null)
-group by m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto
 
 /*------------------------------------------------------------------------------*/
 /*Migro estadiasPorHabitacion*/
