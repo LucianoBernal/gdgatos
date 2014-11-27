@@ -143,7 +143,7 @@ insert into skynet.rolFunciones(rol,funcion)
 select (select idRol from SKYNET.Roles where nombre='GUEST'), f.idFuncion
 from SKYNET.Funciones f		
 where f.descripcion = 'GENERAR O MODIFICAR RESERVA' 
-OR f.descripcion = 'REGISTRAR ESTADIA'
+
 		
 /*inserto usuario admin*/
 INSERT INTO SKYNET.Usuarios
