@@ -239,11 +239,19 @@ select   r.cliente,r.codigoReserva
 from SKYNET.Reservas r
 where r.estado=2 /*estado efectivizado*/
 /*------------------------------------------------------------------------------*/
-insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad)
+GO
+ALTER TABLE SKYNET.ConsumiblesEstadias
+NOCHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura; 
+GO
+insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad,numeroFactura,itemFactura)
 select m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto*m.Item_Factura_Cantidad,
-		m.Item_Factura_Cantidad
+		m.Item_Factura_Cantidad,m.Factura_Nro,convert(numeric(18,0),ROW_NUMBER() over(order by m.Factura_Nro,m.Consumible_Descripcion))
 from gd_esquema.Maestra m
 where (m.Consumible_Codigo is not null)
+GO
+ALTER TABLE SKYNET.ConsumiblesEstadias
+CHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura; 
+GO
 
 /*------------------------------------------------------------------------------*/
 /*Migro estadiasPorHabitacion*/
@@ -264,4 +272,15 @@ where m.Hotel_Calle=h.calle and
 	  m.Regimen_Descripcion is not null and
 	  m.Regimen_Descripcion=r.descripcion
 
-  
+/*------------------------------------------------------------------------------*/
+/*Migro ItemsFactura*/ 
+Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle)
+select f.facturaNumero,0,'Estadia'
+from SKYNET.Estadias e,SKYNET.Facturas f
+where e.reserva=f.estadia
+
+
+Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle)
+select ce.numeroFactura,convert(numeric(18,0),ROW_NUMBER() over(order by ce.numeroFactura,c.nombre)),c.nombre
+from SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
+where ce.consumible=c.codigo
