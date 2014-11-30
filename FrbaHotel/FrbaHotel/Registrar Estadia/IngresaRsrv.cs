@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaHotel.ABM_de_Cliente
+namespace FrbaHotel.Registrar_Estadia
 {
-    public partial class Form1 : Form
+    public partial class IngresaRsrv : Form
     {
-        public Form1()
+        public IngresaRsrv()
         {
             InitializeComponent();
         }

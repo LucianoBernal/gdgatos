@@ -43,12 +43,16 @@
             this.txtEstrellas = new System.Windows.Forms.NumericUpDown();
             this.txtCiudad = new System.Windows.Forms.TextBox();
             this.txtFecha = new System.Windows.Forms.DateTimePicker();
-            this.txtPais = new System.Windows.Forms.TextBox();
             this.Regimen = new System.Windows.Forms.CheckedListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonGuardar = new System.Windows.Forms.Button();
             this.botonVolver = new System.Windows.Forms.Button();
+            this.txtPais = new System.Windows.Forms.ComboBox();
+            this.txtNumCalle = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cadena = new System.Windows.Forms.Label();
+            this.txtCadena = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtEstrellas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,7 +86,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(344, 64);
+            this.label4.Location = new System.Drawing.Point(12, 104);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 3;
@@ -91,16 +95,16 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 101);
+            this.label5.Location = new System.Drawing.Point(344, 64);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(109, 13);
+            this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Cantidad de Estrellas:";
+            this.label5.Text = "Estrellas:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(344, 101);
+            this.label6.Location = new System.Drawing.Point(12, 144);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 5;
@@ -109,7 +113,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 142);
+            this.label7.Location = new System.Drawing.Point(12, 186);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 13);
             this.label7.TabIndex = 6;
@@ -118,7 +122,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(344, 142);
+            this.label8.Location = new System.Drawing.Point(344, 144);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(32, 13);
             this.label8.TabIndex = 7;
@@ -147,44 +151,37 @@
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(416, 61);
+            this.txtDireccion.Location = new System.Drawing.Point(128, 101);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(180, 20);
             this.txtDireccion.TabIndex = 11;
             // 
             // txtEstrellas
             // 
-            this.txtEstrellas.Location = new System.Drawing.Point(128, 99);
+            this.txtEstrellas.Location = new System.Drawing.Point(416, 61);
             this.txtEstrellas.Name = "txtEstrellas";
             this.txtEstrellas.Size = new System.Drawing.Size(120, 20);
             this.txtEstrellas.TabIndex = 12;
             // 
             // txtCiudad
             // 
-            this.txtCiudad.Location = new System.Drawing.Point(416, 98);
+            this.txtCiudad.Location = new System.Drawing.Point(128, 141);
             this.txtCiudad.Name = "txtCiudad";
             this.txtCiudad.Size = new System.Drawing.Size(180, 20);
             this.txtCiudad.TabIndex = 13;
             // 
             // txtFecha
             // 
-            this.txtFecha.Location = new System.Drawing.Point(128, 139);
+            this.txtFecha.Location = new System.Drawing.Point(128, 183);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(200, 20);
             this.txtFecha.TabIndex = 14;
-            // 
-            // txtPais
-            // 
-            this.txtPais.Location = new System.Drawing.Point(416, 139);
-            this.txtPais.Name = "txtPais";
-            this.txtPais.Size = new System.Drawing.Size(180, 20);
-            this.txtPais.TabIndex = 15;
             // 
             // Regimen
             // 
             this.Regimen.CheckOnClick = true;
             this.Regimen.FormattingEnabled = true;
-            this.Regimen.Location = new System.Drawing.Point(128, 182);
+            this.Regimen.Location = new System.Drawing.Point(128, 226);
             this.Regimen.Name = "Regimen";
             this.Regimen.Size = new System.Drawing.Size(219, 79);
             this.Regimen.TabIndex = 16;
@@ -192,7 +189,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 182);
+            this.label9.Location = new System.Drawing.Point(12, 226);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(91, 13);
             this.label9.TabIndex = 17;
@@ -200,7 +197,7 @@
             // 
             // botonLimpiar
             // 
-            this.botonLimpiar.Location = new System.Drawing.Point(260, 292);
+            this.botonLimpiar.Location = new System.Drawing.Point(260, 336);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(98, 30);
             this.botonLimpiar.TabIndex = 20;
@@ -210,7 +207,7 @@
             // 
             // botonGuardar
             // 
-            this.botonGuardar.Location = new System.Drawing.Point(488, 292);
+            this.botonGuardar.Location = new System.Drawing.Point(488, 336);
             this.botonGuardar.Name = "botonGuardar";
             this.botonGuardar.Size = new System.Drawing.Size(98, 30);
             this.botonGuardar.TabIndex = 19;
@@ -220,7 +217,7 @@
             // 
             // botonVolver
             // 
-            this.botonVolver.Location = new System.Drawing.Point(20, 292);
+            this.botonVolver.Location = new System.Drawing.Point(20, 336);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(98, 30);
             this.botonVolver.TabIndex = 18;
@@ -228,17 +225,62 @@
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
+            // txtPais
+            // 
+            this.txtPais.FormattingEnabled = true;
+            this.txtPais.Location = new System.Drawing.Point(416, 141);
+            this.txtPais.Name = "txtPais";
+            this.txtPais.Size = new System.Drawing.Size(180, 21);
+            this.txtPais.TabIndex = 21;
+            // 
+            // txtNumCalle
+            // 
+            this.txtNumCalle.Location = new System.Drawing.Point(416, 101);
+            this.txtNumCalle.Name = "txtNumCalle";
+            this.txtNumCalle.Size = new System.Drawing.Size(180, 20);
+            this.txtNumCalle.TabIndex = 23;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(344, 104);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Numero:";
+            // 
+            // cadena
+            // 
+            this.cadena.AutoSize = true;
+            this.cadena.Location = new System.Drawing.Point(344, 186);
+            this.cadena.Name = "cadena";
+            this.cadena.Size = new System.Drawing.Size(47, 13);
+            this.cadena.TabIndex = 24;
+            this.cadena.Text = "Cadena:";
+            // 
+            // txtCadena
+            // 
+            this.txtCadena.FormattingEnabled = true;
+            this.txtCadena.Location = new System.Drawing.Point(416, 183);
+            this.txtCadena.Name = "txtCadena";
+            this.txtCadena.Size = new System.Drawing.Size(180, 21);
+            this.txtCadena.TabIndex = 25;
+            // 
             // FrmHotel_Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 347);
+            this.ClientSize = new System.Drawing.Size(640, 385);
+            this.Controls.Add(this.txtCadena);
+            this.Controls.Add(this.cadena);
+            this.Controls.Add(this.txtNumCalle);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txtPais);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonGuardar);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.Regimen);
-            this.Controls.Add(this.txtPais);
             this.Controls.Add(this.txtFecha);
             this.Controls.Add(this.txtCiudad);
             this.Controls.Add(this.txtEstrellas);
@@ -280,11 +322,15 @@
         private System.Windows.Forms.NumericUpDown txtEstrellas;
         private System.Windows.Forms.TextBox txtCiudad;
         private System.Windows.Forms.DateTimePicker txtFecha;
-        private System.Windows.Forms.TextBox txtPais;
         private System.Windows.Forms.CheckedListBox Regimen;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Button botonGuardar;
         private System.Windows.Forms.Button botonVolver;
+        private System.Windows.Forms.ComboBox txtPais;
+        private System.Windows.Forms.TextBox txtNumCalle;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label cadena;
+        private System.Windows.Forms.ComboBox txtCadena;
     }
 }

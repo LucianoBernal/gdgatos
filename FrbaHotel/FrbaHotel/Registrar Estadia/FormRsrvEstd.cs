@@ -7,20 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaHotel.ABM_de_Hotel
+namespace FrbaHotel.Registrar_Estadia
 {
-    public partial class FrmHotel : Form
+    public partial class FormRsrvEstd : Form
     {
-        public FrmHotel()
+        public FormRsrvEstd()
         {
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void botonListado_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            FrmHotel_List frm = new FrmHotel_List();
-            frm.ShowDialog();
+
+        }
+
+        private void botonModificacion_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -31,12 +39,11 @@ namespace FrbaHotel.ABM_de_Hotel
             frmMenu = (FrmMenu)this.ActiveMdiChild;
         }
 
-        private void botonAlta_Click(object sender, EventArgs e)
+        private void botonCheckIn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            FrmHotel_Alta frm = new FrmHotel_Alta();
-            frm.ShowDialog();
-            this.Visible = true;
+            IngresaRsrv frmCheckIn = new IngresaRsrv();
+            frmCheckIn.ShowDialog();
         }
     }
 }

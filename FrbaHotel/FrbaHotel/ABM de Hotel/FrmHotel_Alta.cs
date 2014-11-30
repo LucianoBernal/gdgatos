@@ -38,7 +38,7 @@ namespace FrbaHotel.ABM_de_Hotel
         }
         private void CargarRegimenesEnLista()
         {
-            string sql = "SELECT descripcion, idRegimen FROM SKYNET.Regimen WHERE habilitado = 1";
+            string sql = "SELECT descripcion, idRegimen FROM SKYNET.Regimenes WHERE habilitado = 1";
             Query qry = new Query(sql);
             List<KeyValuePair<string, int>> datos = (from x in qry.ObtenerDataTable().AsEnumerable()
                                                      select new
@@ -48,11 +48,39 @@ namespace FrbaHotel.ABM_de_Hotel
             Regimen.DisplayMember = "Key";
             Regimen.ValueMember = "Value";
         }
+        public void CargarPaisesEnLista()
+        {
+            SqlConnection conexion = new SqlConnection();
+            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT pais FROM SKYNET.Paises", conexion);
+            da.Fill(ds, "SKYNET.Paises");
+
+            txtPais.DataSource = ds.Tables[0].DefaultView;
+            txtPais.ValueMember = "pais";
+            txtPais.SelectedItem = null;
+        }
+
+        public void CargarCadenasEnLista()
+        {
+            SqlConnection conexion = new SqlConnection();
+            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT cadena FROM SKYNET.Cadenas", conexion);
+            da.Fill(ds, "SKYNET.Cadenas");
+
+            txtCadena.DataSource = ds.Tables[0].DefaultView;
+            txtCadena.ValueMember = "cadena";
+            txtCadena.SelectedItem = null;
+        }
 
         private void FrmHotel_Alta_Load(object sender, EventArgs e)
         {
-            CargarRegimenesEnLista(); 
-            botonGuardar.Enabled = false;
+            CargarRegimenesEnLista();
+            CargarPaisesEnLista();
+            CargarCadenasEnLista();
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -63,48 +91,77 @@ namespace FrbaHotel.ABM_de_Hotel
             hotel = (FrmHotel)this.ActiveMdiChild;
         }
 
+        private bool faltaDatos()
+        {
+            if (txtCadena.Text != "" && txtCiudad.Text != "" && txtDireccion.Text != "" && txtEmail.Text != "" && txtNombre.Text != "" &&
+                txtNumCalle.Text != "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private void botonGuardar_Click(object sender, EventArgs e)
         {
-            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
-
-            if (txtNombre.Text.Trim() != "")
+            if (!faltaDatos())
             {
-                string Habilitado = "SELECT COUNT(1) FROM SKYNET.Hoteles where nombre = '" + txtNombre.Text + "'";
-                Query qry = new Query(Habilitado);
-                qry.pComando = Habilitado;
-                int existeHotel = (int)qry.ObtenerUnicoCampo();
+                conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
-                if (existeHotel == 1)
+                if (txtNombre.Text.Trim() != "")
                 {
-                    txtNombre.Text = null;
-                    MessageBox.Show("Nombre de hotel ya existente - Eliga un nuevo nombre"
-                        , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    string sql = "INSERT INTO SKYNET.Hoteles (nombre) VALUES ('" + txtNombre.Text + "')";//FALTA
-                    qry.pComando = sql;
-                    qry.Ejecutar();
+                    string Habilitado = "SELECT COUNT(1) FROM SKYNET.Hoteles where nombre = '" + txtNombre.Text + "'";
+                    Query qry = new Query(Habilitado);
+                    qry.pComando = Habilitado;
+                    int existeHotel = (int)qry.ObtenerUnicoCampo();
 
-                    string consulta = "SELECT idHotel FROM SKYNET.Hoteles WHERE nombre= '" + txtNombre.Text + "'";
-                    Query qr = new Query(consulta);
-                    qr.pComando = consulta;
-                    idHotel = (int)qr.ObtenerUnicoCampo();
-
-                    foreach (var checkedItem in Regimen.CheckedItems)
+                    if (existeHotel == 1)
                     {
-                        string sql2 = "insert into SKYNET.HotelesRegimenes (regimen, hotel) VALUES " +
-                                     "SELECT idRegimen, " + idHotel +
-                                     "from SKYNET.Regimenes where descripcion = '" + checkedItem.ToString().Replace('[', ' ').Substring(1, checkedItem.ToString().IndexOf(',') - 1).TrimStart() + "'";
-
-                        Query qry2 = new Query();
-                        qry2.pComando = sql2;
-                        qry2.Ejecutar();
+                        txtNombre.Text = null;
+                        MessageBox.Show("Nombre de hotel ya existente - Eliga un nuevo nombre"
+                            , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    else
+                    {
+                        string sql = "INSERT INTO SKYNET.Hoteles (nombre, ciudad, pais, mail, cantidadEstrellas, fechaCreacion, calle, numCalle, cadena) "
+                        + " VALUES ('" + txtNombre.Text + "', '" + txtCiudad.Text + "', (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), '" + txtEmail.Text + "', "
+                        + " '" + txtEstrellas.Value + "', '" + txtFecha.Value + "', '" + txtDireccion.Text + "', '" + txtNumCalle.Text + "', (SELECT idCadena FROM SKYNET.Cadenas WHERE cadena = '" + txtCadena.Text.ToString() + "') )";
 
-                    MessageBox.Show("El hotel ha sido dado de alta con exito!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Visible = false;
+                        qry.pComando = sql;
+                        qry.Ejecutar();
+
+
+                        string consulta = "SELECT convert(int, idHotel) FROM SKYNET.Hoteles WHERE nombre= '" + txtNombre.Text + "'";
+                        Query qr = new Query(consulta);
+                        qr.pComando = consulta;
+                        idHotel = (int)qr.ObtenerUnicoCampo();
+
+                        sql = "INSERT INTO SKYNET.UsuarioRolHotel (usuario, hotel, rol ) SELECT " + Globales.idUsuarioLogueado + ", " + idHotel + ", r.idRol FROM  SKYNET.Roles r where r.nombre='ADMINISTRADOR' ";
+
+                        qry.pComando = sql;
+                        qry.Ejecutar();
+
+                        foreach (var checkedItem in Regimen.CheckedItems)
+                        {
+                            string sql2 = "insert into SKYNET.HotelesRegimenes (regimen, hotel)  " +
+                                         "SELECT r.idRegimen, " + idHotel +
+                                         "from SKYNET.Regimenes r where r.descripcion = '" + checkedItem.ToString().Replace('[', ' ').Substring(1, checkedItem.ToString().IndexOf(',') - 1).TrimStart() + "'";
+
+                            Query qry2 = new Query();
+                            qry2.pComando = sql2;
+                            qry2.Ejecutar();
+                        }
+
+                        MessageBox.Show("El hotel ha sido dado de alta con exito!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Visible = false;
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Verifique los datos ingresados!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

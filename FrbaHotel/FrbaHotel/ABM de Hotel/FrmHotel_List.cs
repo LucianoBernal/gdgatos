@@ -27,7 +27,7 @@ namespace FrbaHotel.ABM_de_Hotel
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             string strQuery = "SELECT DISTINCT(idHotel), nombre, ciudad, pais, mail, cantidadEstrellas, fechaCreacion " +
-                " FROM SKYNET.Hotel h WHERE 1  ";
+                " FROM SKYNET.Hoteles h WHERE 1=1  ";
             if (txtCiudad.Text != "")
             {
                 strQuery = strQuery + " AND h.ciudad = '" + txtCiudad + "' ";
@@ -55,6 +55,11 @@ namespace FrbaHotel.ABM_de_Hotel
             btnDeshabilitar.Visible = true;
             btnHabilitar.Visible = true;
             btnModificar.Visible = true;
+        }
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -37,11 +37,11 @@ namespace FrbaHotel.ABM_de_Rol
                 new Query(qry).Ejecutar();
 
                 MessageBox.Show("Rol inhabilitado con exito!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Visible = false;
+                /*this.Visible = false;*//*LINEA QUE CIERRA EL PROG, CHAU*/
             }
             else
             {
-                MessageBox.Show("Seleccione el Rol ha dar de baja", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Seleccione el Rol a dar de baja", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

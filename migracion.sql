@@ -143,7 +143,7 @@ insert into skynet.rolFunciones(rol,funcion)
 select (select idRol from SKYNET.Roles where nombre='GUEST'), f.idFuncion
 from SKYNET.Funciones f		
 where f.descripcion = 'GENERAR O MODIFICAR RESERVA' 
-OR f.descripcion = 'REGISTRAR ESTADIA'
+
 		
 /*inserto usuario admin*/
 INSERT INTO SKYNET.Usuarios
@@ -239,12 +239,19 @@ select   r.cliente,r.codigoReserva
 from SKYNET.Reservas r
 where r.estado=2 /*estado efectivizado*/
 /*------------------------------------------------------------------------------*/
-insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad)
-select m.Reserva_Codigo,m.Consumible_Codigo,sum(m.Item_Factura_Monto*m.Item_Factura_Cantidad),
-		SUM(m.Item_Factura_Cantidad)
+GO
+ALTER TABLE SKYNET.ConsumiblesEstadias
+NOCHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura; 
+GO
+insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad,numeroFactura,itemFactura)
+select m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto*m.Item_Factura_Cantidad,
+		m.Item_Factura_Cantidad,m.Factura_Nro,convert(numeric(18,0),ROW_NUMBER() over(order by m.Factura_Nro,m.Consumible_Descripcion))
 from gd_esquema.Maestra m
 where (m.Consumible_Codigo is not null)
-group by m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto
+GO
+ALTER TABLE SKYNET.ConsumiblesEstadias
+CHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura; 
+GO
 
 /*------------------------------------------------------------------------------*/
 /*Migro estadiasPorHabitacion*/
@@ -265,4 +272,79 @@ where m.Hotel_Calle=h.calle and
 	  m.Regimen_Descripcion is not null and
 	  m.Regimen_Descripcion=r.descripcion
 
-  
+/*------------------------------------------------------------------------------*/
+/*Migro ItemsFactura*/ 
+Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle)
+select f.facturaNumero,0,'Estadia'
+from SKYNET.Estadias e,SKYNET.Facturas f
+where e.reserva=f.estadia
+
+
+Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle)
+select ce.numeroFactura,convert(numeric(18,0),ROW_NUMBER() over(order by ce.numeroFactura,c.nombre)),c.nombre
+from SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
+where ce.consumible=c.codigo
+
+
+/*Cargo Trigger en ItemsFactura*/
+
+GO
+create trigger tr_insert_itemFacturas on SKYNET.ItemsFactura
+instead of Insert
+as 
+Begin Transaction
+declare @numeroFacturaInsertada numeric(18,0),@detalleInsertado nvarchar(50),@item numeric(18,0)
+declare inserted_cursor cursor for
+		select numeroFactura,detalle from Inserted
+open inserted_cursor
+fetch next from inserted_cursor into @numeroFacturaInsertada,@detalleInsertado
+while @@fetch_status=0
+begin
+set @item=coalesce((select MAX(i.item)+1 from SKYNET.ItemsFactura i group by i.numeroFactura having i.numeroFactura=@numeroFacturaInsertada),1)
+insert SKYNET.ItemsFactura(numeroFactura,item,detalle) values(
+@numeroFacturaInsertada,@item,@detalleInsertado)
+if(@detalleInsertado='Estadia')
+	begin
+	if(exists(select 1 from SKYNET.Facturas f,SKYNET.Estadias e
+	where f.estadia=e.reserva and f.facturaNumero=@numeroFacturaInsertada and
+	e.numeroFactura is null and e.itemFactura is null
+	))
+		begin 
+		update e set numeroFactura=@numeroFacturaInsertada,itemFactura=@item
+		from SKYNET.Facturas f,SKYNET.Estadias e
+		where f.estadia=e.reserva and f.facturaNumero=@numeroFacturaInsertada
+		end
+		else
+		begin
+		delete from SKYNET.ItemsFactura where numeroFactura=@numeroFacturaInsertada
+		and item=@item 
+		end
+	end
+else
+begin
+	if(exists(select 1 from SKYNET.Facturas f,SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
+	where f.estadia=ce.estadia and f.facturaNumero=@numeroFacturaInsertada and
+	ce.itemFactura is null and ce.consumible=c.codigo and c.nombre=@detalleInsertado
+	))
+		begin 
+		update ce0 set numeroFactura=@numeroFacturaInsertada,itemFactura=@item
+		from SKYNET.ConsumiblesEstadias ce0
+		where ce0.idConsumibleEstadia=(select top 1 ce.idConsumibleEstadia
+		from SKYNET.Facturas f,SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
+		where f.estadia=ce.estadia and f.facturaNumero=@numeroFacturaInsertada and
+		ce.itemFactura is null and ce.consumible=c.codigo and c.nombre=@detalleInsertado)
+		end
+		else
+		begin
+		delete from SKYNET.ItemsFactura where numeroFactura=@numeroFacturaInsertada
+		and item=@item 
+		end
+end
+fetch next from inserted_cursor into @numeroFacturaInsertada,@detalleInsertado
+end
+close inserted_cursor
+deallocate inserted_cursor
+commit
+GO
+
+/*--------------------------- --------------------------*/

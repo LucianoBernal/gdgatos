@@ -202,9 +202,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ABM de Hotel\FrmHotel.resx">
-      <DependentUpon>FrmHotel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ABM de Hotel\FrmHotel_Alta.resx">
       <DependentUpon>FrmHotel_Alta.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,9 +235,6 @@
     <EmbeddedResource Include="ABM de Usuario\FrmUsuario_List.resx">
       <DependentUpon>FrmUsuario_List.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM de Usuario\FrmUsuario_Mod.resx">
-      <DependentUpon>FrmUsuario_Mod.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -257,6 +251,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registrar Estadia\FormRsrvEstd.resx">
+      <DependentUpon>FormRsrvEstd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registrar Estadia\IngresaRsrv.resx">
+      <DependentUpon>IngresaRsrv.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -282,11 +282,23 @@
     <Compile Include="Registrar Consumible\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registrar Estadia\Form1.cs">
+    <Compile Include="Registrar Estadia\FormCheckIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar Estadia\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registrar Estadia\FormCheckIn.Designer.cs">
+      <DependentUpon>FormCheckIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registrar Estadia\FormRsrvEstd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar Estadia\FormRsrvEstd.Designer.cs">
+      <DependentUpon>FormRsrvEstd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registrar Estadia\IngresaRsrv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar Estadia\IngresaRsrv.Designer.cs">
+      <DependentUpon>IngresaRsrv.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings1.Designer.cs">
       <AutoGen>True</AutoGen>

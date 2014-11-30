@@ -91,7 +91,7 @@ namespace FrbaHotel.Login
             if (consValidar == 1)
             {
                 resetearIntentosFallidos();
-                Globales.idRol = (int)new Query("SELECT count(DISTINCT(ur.rol)) FROM SKYNET.UsuarioRolHotel ur, SKYNET.Roles r  " +
+                Globales.idRol = (int)new Query("SELECT count(ur.rol) FROM SKYNET.UsuarioRolHotel ur, SKYNET.Roles r  " +
                                            " WHERE ur.rol = r.idRol AND r.baja=0 AND ur.usuario = " + idUsuario).ObtenerUnicoCampo();
 
                 switch (Globales.idRol)
@@ -124,6 +124,7 @@ namespace FrbaHotel.Login
                 if (fallos > 2)
                 {
                     new Query("UPDATE SKYNET.Usuarios SET fallasPassword= 3, habilitado = 0 WHERE idUser = " + idUsuario).Ejecutar();
+                    /*en el query de arriba no tendríamos que poner habilitado=1 ??*/
                 }else{
                    // new Query("UPDATE SKYNET.Usuarios SET fallasPassword= "+fallosRestantes+" WHERE idUser = " + idUsuario).Ejecutar();
                     new Query("UPDATE SKYNET.Usuarios SET fallasPassword= "+ fallos+"+1 WHERE idUser = " + idUsuario).Ejecutar();
