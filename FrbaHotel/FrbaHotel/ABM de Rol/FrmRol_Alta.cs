@@ -84,7 +84,7 @@ namespace FrbaHotel.ABM_de_Rol
                     string consulta = "SELECT idRol FROM SKYNET.Roles WHERE nombre= '" + txtNombre.Text + "'";
                     Query qr = new Query(consulta);
                     qr.pComando = consulta;
-                    idRol = (int)qr.ObtenerUnicoCampo();
+                    idRol = Convert.ToInt32(qr.ObtenerUnicoCampo());
 
                     foreach (var checkedItem in Funcionalidades.CheckedItems)
                     {

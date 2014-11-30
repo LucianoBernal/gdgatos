@@ -75,6 +75,24 @@
     <Compile Include="ABM de Habitacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel.Designer.cs">
+      <DependentUpon>FrmHotel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel_Alta.Designer.cs">
+      <DependentUpon>FrmHotel_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel_List.Designer.cs">
+      <DependentUpon>FrmHotel_List.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM de Regimen\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +202,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ABM de Hotel\FrmHotel.resx">
+      <DependentUpon>FrmHotel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Hotel\FrmHotel_Alta.resx">
+      <DependentUpon>FrmHotel_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Hotel\FrmHotel_List.resx">
+      <DependentUpon>FrmHotel_List.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM de Rol\FrmRol.resx">
       <DependentUpon>FrmRol.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +234,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM de Usuario\FrmUsuario_Baja.resx">
       <DependentUpon>FrmUsuario_Baja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Usuario\FrmUsuario_List.resx">
+      <DependentUpon>FrmUsuario_List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Usuario\FrmUsuario_Mod.resx">
+      <DependentUpon>FrmUsuario_Mod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>

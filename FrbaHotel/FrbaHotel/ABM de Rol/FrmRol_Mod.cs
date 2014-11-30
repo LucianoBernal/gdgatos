@@ -45,7 +45,6 @@ namespace FrbaHotel.ABM_de_Rol
         private void botonBuscar_Click(object sender, EventArgs e)
         {
             rol = comboRol.Text.ToString();
-            comboRol.Enabled = false;
             txtNombreRol.Enabled = true;
             chkHabilitado.Enabled = true;
             CargarDatosRol();

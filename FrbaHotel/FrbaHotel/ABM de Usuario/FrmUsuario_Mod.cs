@@ -11,9 +11,16 @@ namespace FrbaHotel.ABM_de_Usuario
 {
     public partial class FrmUsuario_Mod : Form
     {
-        public FrmUsuario_Mod()
+        private int idUsuario;
+        public FrmUsuario_Mod(int id)
         {
             InitializeComponent();
+            idUsuario = id;
+        }
+
+        private void FrmUsuario_Mod_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

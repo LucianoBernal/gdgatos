@@ -34,3 +34,8 @@ C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\bin\Debug\FrbaHote
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\bin\Debug\FrbaHotel.pdb
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.FrmMenu.resources
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Usuario.FrmUsuario_Baja.resources
+C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Usuario.FrmUsuario_List.resources
+C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Usuario.FrmUsuario_Mod.resources
+C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Hotel.FrmHotel.resources
+C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Hotel.FrmHotel_Alta.resources
+C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Hotel.FrmHotel_List.resources

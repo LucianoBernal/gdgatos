@@ -128,6 +128,7 @@
             this.btnHotel.TabIndex = 26;
             this.btnHotel.Text = "ABM Hotel";
             this.btnHotel.UseVisualStyleBackColor = true;
+            this.btnHotel.Click += new System.EventHandler(this.btnHotel_Click);
             // 
             // btnClientes
             // 
