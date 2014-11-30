@@ -60,5 +60,10 @@ namespace FrbaHotel.ABM_de_Usuario
             menu = (FrmMenu)this.ActiveMdiChild;
         }
 
+        private void FrmUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

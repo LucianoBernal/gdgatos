@@ -102,7 +102,5 @@ namespace FrbaHotel
             FrmMenu frmMenu = new FrmMenu();
             frmMenu.ShowDialog();
         }
-
-
     }
 }

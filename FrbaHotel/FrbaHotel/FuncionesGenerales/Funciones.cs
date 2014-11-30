@@ -12,7 +12,7 @@ using FrbaHotel.Login;
 
 namespace FrbaHotel.FuncionesGenerales
 {
-    class Funciones
+    public class Funciones
     {
 
         public bool ExisteUsuario(string usuario)

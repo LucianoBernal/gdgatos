@@ -73,6 +73,7 @@
             this.Controls.Add(this.botonListado);
             this.Name = "FrmUsuario";
             this.Text = "ABM de Usuarios";
+            this.Load += new System.EventHandler(this.FrmUsuario_Load);
             this.ResumeLayout(false);
 
         }

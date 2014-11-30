@@ -1,12 +1,17 @@
-﻿namespace FrbaHotel.ABM_de_Usuario
+﻿using System.Windows.Forms;
+using System.Collections;
+using System.Collections.Generic;
+using FrbaHotel;
+
+namespace FrbaHotel.ABM_de_Usuario
 {
     partial class FrmUsuario_Alta
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
+        /// 
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -29,6 +34,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtHotel = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.txtRol = new System.Windows.Forms.ComboBox();
             this.txtPass = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -57,8 +64,6 @@
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonGuardar = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
-            this.txtHotel = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -80,27 +85,46 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Login";
             // 
+            // txtHotel
+            // 
+            this.txtHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtHotel.FormattingEnabled = true;
+            this.txtHotel.Location = new System.Drawing.Point(397, 59);
+            this.txtHotel.Name = "txtHotel";
+            this.txtHotel.Size = new System.Drawing.Size(178, 21);
+            this.txtHotel.TabIndex = 4;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(300, 62);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 13);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "Hotel:";
+            // 
             // txtRol
             // 
+            this.txtRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtRol.FormattingEnabled = true;
             this.txtRol.Location = new System.Drawing.Point(113, 59);
             this.txtRol.Name = "txtRol";
             this.txtRol.Size = new System.Drawing.Size(178, 21);
-            this.txtRol.TabIndex = 5;
+            this.txtRol.TabIndex = 3;
             // 
             // txtPass
             // 
             this.txtPass.Location = new System.Drawing.Point(397, 25);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(178, 20);
-            this.txtPass.TabIndex = 4;
+            this.txtPass.TabIndex = 2;
             // 
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(113, 25);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(178, 20);
-            this.txtUsername.TabIndex = 3;
+            this.txtUsername.TabIndex = 1;
             // 
             // label3
             // 
@@ -155,6 +179,7 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos de la Persona";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // label12
             // 
@@ -178,14 +203,14 @@
             this.txtMail.Location = new System.Drawing.Point(113, 82);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(178, 20);
-            this.txtMail.TabIndex = 17;
+            this.txtMail.TabIndex = 9;
             // 
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(397, 82);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(178, 20);
-            this.txtTelefono.TabIndex = 16;
+            this.txtTelefono.TabIndex = 10;
             // 
             // label11
             // 
@@ -201,14 +226,14 @@
             this.txtNumCalle.Location = new System.Drawing.Point(397, 112);
             this.txtNumCalle.Name = "txtNumCalle";
             this.txtNumCalle.Size = new System.Drawing.Size(178, 20);
-            this.txtNumCalle.TabIndex = 14;
+            this.txtNumCalle.TabIndex = 12;
             // 
             // txtCalle
             // 
             this.txtCalle.Location = new System.Drawing.Point(113, 112);
             this.txtCalle.Name = "txtCalle";
             this.txtCalle.Size = new System.Drawing.Size(178, 20);
-            this.txtCalle.TabIndex = 6;
+            this.txtCalle.TabIndex = 11;
             // 
             // label10
             // 
@@ -239,11 +264,12 @@
             // 
             // txtTipoDoc
             // 
+            this.txtTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtTipoDoc.FormattingEnabled = true;
             this.txtTipoDoc.Location = new System.Drawing.Point(113, 53);
             this.txtTipoDoc.Name = "txtTipoDoc";
             this.txtTipoDoc.Size = new System.Drawing.Size(178, 21);
-            this.txtTipoDoc.TabIndex = 6;
+            this.txtTipoDoc.TabIndex = 7;
             // 
             // label7
             // 
@@ -259,21 +285,21 @@
             this.txtNumDoc.Location = new System.Drawing.Point(397, 53);
             this.txtNumDoc.Name = "txtNumDoc";
             this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
-            this.txtNumDoc.TabIndex = 9;
+            this.txtNumDoc.TabIndex = 8;
             // 
             // txtApellido
             // 
             this.txtApellido.Location = new System.Drawing.Point(397, 24);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(178, 20);
-            this.txtApellido.TabIndex = 8;
+            this.txtApellido.TabIndex = 6;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(113, 24);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(178, 20);
-            this.txtNombre.TabIndex = 6;
+            this.txtNombre.TabIndex = 5;
             // 
             // label6
             // 
@@ -331,23 +357,6 @@
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
             this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
-            // 
-            // txtHotel
-            // 
-            this.txtHotel.FormattingEnabled = true;
-            this.txtHotel.Location = new System.Drawing.Point(397, 59);
-            this.txtHotel.Name = "txtHotel";
-            this.txtHotel.Size = new System.Drawing.Size(178, 21);
-            this.txtHotel.TabIndex = 7;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(300, 62);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(35, 13);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Hotel:";
             // 
             // FrmUsuario_Alta
             // 

@@ -200,7 +200,8 @@
     <Compile Include="Login\FrmRolesLogin.Designer.cs">
       <DependentUpon>FrmRolesLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Program.cs">
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ABM de Hotel\FrmHotel_Alta.resx">
       <DependentUpon>FrmHotel_Alta.cs</DependentUpon>
