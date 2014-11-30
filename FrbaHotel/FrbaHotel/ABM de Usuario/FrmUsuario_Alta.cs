@@ -135,8 +135,8 @@ namespace FrbaHotel.ABM_de_Usuario
                     Query preqty = new Query("SELECT idTipoDoc FROM SKYNET.TiposDoc WHERE nombre='" + txtTipoDoc.Text + "'");
                     MessageBox.Show("La consulta enviada es SELECT idTipoDoc FROM SKYNET.TiposDoc WHERE nombre='" + txtTipoDoc.Text + "'");
                     int idTipoDoc = Convert.ToInt32(preqty.ObtenerUnicoCampo());
-                    string sql = "INSERT INTO SKYNET.Usuarios (username, pass, apellido, nombre, tipoDoc, numDoc, mail, telefono, calle, numCalle"/*, fechaNac*/+", habilitado) VALUES ("
-                        + txtUsername.Text + ", " + fn.getSha256(txtPass.Text) + ", " + txtApellido.Text + ", " + txtNombre.Text + ", "+ idTipoDoc.ToString() + ", " + txtNumDoc.Text + ", " + txtMail.Text + ", " + txtTelefono.Text + ", " + txtCalle.Text + ", " + txtNumCalle.Text + /*", " + txtFecha.Value + */", 0) ";
+                    string sql = "INSERT INTO SKYNET.Usuarios (username, pass, apellido, nombre, tipoDoc, numDoc, mail, telefono, calle, numCalle"+/*, fechaNac*/", habilitado) VALUES ('"
+                        + txtUsername.Text + "', '" + fn.getSha256(txtPass.Text) + "', '" + txtApellido.Text + "', '" + txtNombre.Text + "', " + idTipoDoc.ToString() + ", " + txtNumDoc.Text + ", '" + txtMail.Text + "', " + txtTelefono.Text + ", '" + txtCalle.Text + "', " + txtNumCalle.Text + ", " + /*txtFecha.Value.ToString()+*/  " 0) ";
                     MessageBox.Show("La consulta enviada es " + sql);
                     qry.pComando = sql;
                     qry.Ejecutar();
@@ -158,7 +158,7 @@ namespace FrbaHotel.ABM_de_Usuario
         }
 
         private bool validacionDatos()
-        {
+        {   //SUS PROFESORES DE PDEP SE AVERGUENZAN
             /*           if (txtApellido.Text.Length == 0)
                        {
                            MessageBox.Show("Verifique los datos ingresados.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
