@@ -200,16 +200,32 @@ where r.estado=1/*cancelada*/
 
 /*------------------------------------------------------------------------------*/
 /*migro estadias*/
-insert into SKYNET.Estadias (reserva,cantNoches,precioPorNocheEstadia)
+
+GO
+ALTER TABLE SKYNET.Estadias
+NOCHECK CONSTRAINT FK_Estadias_ItemsFactura; 
+GO
+
+
+insert into SKYNET.Estadias (reserva,cantNoches,precioPorNocheEstadia,numeroFactura,itemFactura)
 select distinct m.Reserva_Codigo,m.Estadia_Cant_Noches,(
 		select m2.Item_Factura_Monto 
 		from gd_esquema.Maestra m2
 		where m.Reserva_Codigo=m2.Reserva_Codigo and
 		m2.Item_Factura_Monto is not null and
-		m2.Consumible_Codigo is null)
-from gd_esquema.Maestra m
+		m2.Consumible_Codigo is null),(select m3.Factura_Nro
+from gd_esquema.Maestra m3
+where m3.Factura_Nro is not null and m3.Reserva_Codigo=m.Reserva_Codigo
+group by m3.Factura_Nro)
+,1
+		from gd_esquema.Maestra m
 where(m.Estadia_Cant_Noches is not null)
 
+
+GO
+ALTER TABLE SKYNET.Estadias
+CHECK CONSTRAINT FK_Estadias_ItemsFactura; 
+GO
 
 /*------------------------------------------------------------------------------*/
 /*migro tipoPago*/
@@ -243,16 +259,49 @@ GO
 ALTER TABLE SKYNET.ConsumiblesEstadias
 NOCHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura; 
 GO
-insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad,numeroFactura,itemFactura)
+insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad,numeroFactura)
 select m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto*m.Item_Factura_Cantidad,
-		m.Item_Factura_Cantidad,m.Factura_Nro,convert(numeric(18,0),ROW_NUMBER() over(order by m.Factura_Nro,m.Consumible_Descripcion))
+		m.Item_Factura_Cantidad,m.Factura_Nro
 from gd_esquema.Maestra m
 where (m.Consumible_Codigo is not null)
+
+
+
+go
+Create proc SKYNET.updatearConsumiblesMigrados 
+AS
+declare @numeroFactura numeric(18,0),@item numeric(18,0),@numeroFacturaAnt numeric(18,0),@idConsumibleEstadia numeric(18,0)
+declare cursor_consumibles cursor for
+		 select ce.numeroFactura,ce.idConsumibleEstadia
+		 from SKYNET.ConsumiblesEstadias ce
+		 order by ce.idConsumibleEstadia
+		 
+open cursor_consumibles
+fetch next from cursor_consumibles into @numeroFactura,@idConsumibleEstadia
+set @numeroFacturaAnt=-1
+while @@fetch_status=0
+begin
+if (@numeroFactura=@numeroFacturaAnt)
+set @item=@item+1
+else begin
+	set @item=2
+	set @numeroFacturaAnt=@numeroFactura
+	end
+update SKYNET.ConsumiblesEstadias set itemFactura=@item
+where idConsumibleEstadia=@idConsumibleEstadia
+fetch next from cursor_consumibles into @numeroFactura,@idConsumibleEstadia
+end
+close cursor_consumibles
+deallocate cursor_consumibles
+go
+
+
+exec SKYNET.updatearConsumiblesMigrados
+
 GO
 ALTER TABLE SKYNET.ConsumiblesEstadias
 CHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura; 
 GO
-
 /*------------------------------------------------------------------------------*/
 /*Migro estadiasPorHabitacion*/
 insert into SKYNET.EstadiaPorHabitacion(idHotel,idHabitacion,idEstadia)
@@ -275,76 +324,11 @@ where m.Hotel_Calle=h.calle and
 /*------------------------------------------------------------------------------*/
 /*Migro ItemsFactura*/ 
 Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle)
-select f.facturaNumero,0,'Estadia'
-from SKYNET.Estadias e,SKYNET.Facturas f
-where e.reserva=f.estadia
-
+select e.numeroFactura,e.itemFactura,'Estadia'
+from SKYNET.Estadias e
 
 Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle)
-select ce.numeroFactura,convert(numeric(18,0),ROW_NUMBER() over(order by ce.numeroFactura,c.nombre)),c.nombre
+select ce.numeroFactura,ce.itemFactura,c.nombre
 from SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
 where ce.consumible=c.codigo
 
-
-/*Cargo Trigger en ItemsFactura*/
-
-GO
-create trigger tr_insert_itemFacturas on SKYNET.ItemsFactura
-instead of Insert
-as 
-Begin Transaction
-declare @numeroFacturaInsertada numeric(18,0),@detalleInsertado nvarchar(50),@item numeric(18,0)
-declare inserted_cursor cursor for
-		select numeroFactura,detalle from Inserted
-open inserted_cursor
-fetch next from inserted_cursor into @numeroFacturaInsertada,@detalleInsertado
-while @@fetch_status=0
-begin
-set @item=coalesce((select MAX(i.item)+1 from SKYNET.ItemsFactura i group by i.numeroFactura having i.numeroFactura=@numeroFacturaInsertada),1)
-insert SKYNET.ItemsFactura(numeroFactura,item,detalle) values(
-@numeroFacturaInsertada,@item,@detalleInsertado)
-if(@detalleInsertado='Estadia')
-	begin
-	if(exists(select 1 from SKYNET.Facturas f,SKYNET.Estadias e
-	where f.estadia=e.reserva and f.facturaNumero=@numeroFacturaInsertada and
-	e.numeroFactura is null and e.itemFactura is null
-	))
-		begin 
-		update e set numeroFactura=@numeroFacturaInsertada,itemFactura=@item
-		from SKYNET.Facturas f,SKYNET.Estadias e
-		where f.estadia=e.reserva and f.facturaNumero=@numeroFacturaInsertada
-		end
-		else
-		begin
-		delete from SKYNET.ItemsFactura where numeroFactura=@numeroFacturaInsertada
-		and item=@item 
-		end
-	end
-else
-begin
-	if(exists(select 1 from SKYNET.Facturas f,SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
-	where f.estadia=ce.estadia and f.facturaNumero=@numeroFacturaInsertada and
-	ce.itemFactura is null and ce.consumible=c.codigo and c.nombre=@detalleInsertado
-	))
-		begin 
-		update ce0 set numeroFactura=@numeroFacturaInsertada,itemFactura=@item
-		from SKYNET.ConsumiblesEstadias ce0
-		where ce0.idConsumibleEstadia=(select top 1 ce.idConsumibleEstadia
-		from SKYNET.Facturas f,SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
-		where f.estadia=ce.estadia and f.facturaNumero=@numeroFacturaInsertada and
-		ce.itemFactura is null and ce.consumible=c.codigo and c.nombre=@detalleInsertado)
-		end
-		else
-		begin
-		delete from SKYNET.ItemsFactura where numeroFactura=@numeroFacturaInsertada
-		and item=@item 
-		end
-end
-fetch next from inserted_cursor into @numeroFacturaInsertada,@detalleInsertado
-end
-close inserted_cursor
-deallocate inserted_cursor
-commit
-GO
-
-/*--------------------------- --------------------------*/

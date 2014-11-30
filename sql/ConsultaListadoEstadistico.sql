@@ -80,11 +80,11 @@ go
 
 
 /* unit test(??????? */
-SELECT SKYNET.obtenerTrimestre(DATEADD(mm, -8, getdate()))
+SELECT SKYNET.obtenerTrimestre(DATEADD(mm, 2, getdate()))
 
 
 SELECT *
-from SKYNET.hotelesMayorCantidadDeReservasCanceladas(2014,5)
+from SKYNET.hotelesMayorCantidadDeReservasCanceladas(2014,4)
 
 
 SELECT *
