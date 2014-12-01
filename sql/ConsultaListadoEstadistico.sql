@@ -53,6 +53,32 @@ drop function SKYNET.hotelesMayorCantidadDeConsumiblesFacturados
 
 /*----- ---*/
 
+/* hoteles con mayor dias fuera de servicio*/
+go
+CREATE FUNCTION SKYNET.hotelesMayorCantidadDiasFueraDeServicio(@anio int,@trimestre smallint )
+RETURNS @retorno TABLE
+   (
+    Hotel     varchar(50),
+    CantidadDeDiasFueraDeServicio  numeric(18,0)
+    )
+AS
+BEGIN
+	Insert into @retorno 
+	select top 5 h.calle+' '+convert(nvarchar(20),h.numCalle),SUM(hist.duracion) as CantidadDeDiasFueraDeServicio
+	from SKYNET.Hoteles h,SKYNET.HistorialHoteles hist
+	where hist.hotel=h.idHotel and 
+	YEAR(DATEADD(DD, hist.duracion, hist.fechaBaja))=@anio and SKYNET.obtenerTrimestre(DATEADD(DD, hist.duracion, hist.fechaBaja))=@trimestre
+	group by h.idHotel,h.nombre,h.calle,h.numCalle
+	order by 2 DESC
+	return
+     
+END
+go
+
+/* --------- ---*/
+drop function SKYNET.hotelesMayorCantidadDiasFueraDeServicio
+
+/*----- ---*/
 
 
 	
@@ -89,5 +115,9 @@ from SKYNET.hotelesMayorCantidadDeReservasCanceladas(2014,4)
 
 SELECT *
 from SKYNET.hotelesMayorCantidadDeConsumiblesFacturados(2013,1)
+
+SELECT *
+from SKYNET.hotelesMayorCantidadDiasFueraDeServicio(2013,1)
+
 
 
