@@ -106,8 +106,8 @@ namespace FrbaHotel.ABM_de_Usuario
                 {
                     strQuery = strQuery + " AND ur.rol = (SELECT r.idRol FROM SKYNET.Roles r WHERE r.nombre = '" + txtRol.Text + "') ";
                 }*/
-            strQuery += listaTextos.GenerarWhere(false);
-            MessageBox.Show(listaTextos.GenerarWhere(false)+" CONTRA "+strQuery);//A ver que tal digo
+            strQuery += listaTextos.GenerarWhere(!cbExacta.Checked);
+//            MessageBox.Show(listaTextos.GenerarWhere(false)+" CONTRA "+strQuery);//A ver que tal digo
             mostrarResultado(strQuery); //Esta barbaro pero todavia no
         }
         private void mostrarResultado(string strQuery)
@@ -229,6 +229,53 @@ namespace FrbaHotel.ABM_de_Usuario
         private void cbHotel_CheckedChanged(object sender, EventArgs e)
         {
             txtHotel.Enabled = cbHotel.Checked;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+            if (cbDinamica.Checked)
+                btnBuscar_Click(this, e);
+        }
+        private void txtRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbDinamica.Checked)
+                btnBuscar_Click(this, e);
+        }
+        private void txtHotel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbDinamica.Checked)
+                btnBuscar_Click(this, e);
+        }
+        private void txtMail_TextChanged(object sender, EventArgs e)
+        {
+            if (cbDinamica.Checked)
+                btnBuscar_Click(this, e);
+        }
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            if (cbDinamica.Checked)
+                btnBuscar_Click(this, e);
+        }
+        private void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+            if (cbDinamica.Checked)
+                btnBuscar_Click(this, e);
+        }
+
+        private void txtHotel_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (cbDinamica.Checked)
+                btnBuscar_Click(this, e);
+        }
+
+        private void cbDinamica_CheckedChanged(object sender, EventArgs e)
+        {
+            btnBuscar.Enabled = !cbDinamica.Checked;
         }
     }
 

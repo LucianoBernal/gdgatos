@@ -33,8 +33,8 @@ namespace FrbaHotel
 
     public class TextosBusqueda : List<ControlConCheckBox>
     {
-        public string GenerarWhere(bool agregarAsteriscos)
-        {//Agregar asteriscos seria Hacer busquedas del estilo nombre=*+'juan'+*
+        public string GenerarWhere(bool agregarComodin)
+        {//Agregar asteriscos seria Hacer busquedas del estilo nombre like '%juan%'
          //Todavia no esta implementado
             string resultado = "";
             foreach (ControlConCheckBox elem in this)
@@ -42,7 +42,10 @@ namespace FrbaHotel
                 if (elem.checkBox.Checked)
                 {
                     string patitaonopatita = (elem.conApostrofe) ? "'" : "";
-                    resultado += "AND " + elem.campoAsociado + "=" + patitaonopatita + elem.control.Text + patitaonopatita + ((elem.esCombo)?")":""); 
+                    string asterisco = (agregarComodin && !elem.esCombo) ? "%" : ""; //Para el combo no tiene 
+                                                                                        //sentido porque siempre 
+                                                                                        //vas a tener valores exactos
+                    resultado += "AND " + elem.campoAsociado + ((agregarComodin && !elem.esCombo) ? " LIKE " : " = ") +patitaonopatita + asterisco + elem.control.Text + asterisco + patitaonopatita + ((elem.esCombo) ? ")" : ""); 
                 }
             }
             return /*(resultado != "") ? resultado.Substring(4, resultado.Length - 4) : ""*/resultado;
