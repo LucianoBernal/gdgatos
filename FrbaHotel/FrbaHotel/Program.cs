@@ -4,52 +4,60 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace FrbaHotel
-{/*
-    public class TextBoxConControl : TextBox
+{   
+    public class TextosIngresoList : List<Control>
     {
-        public void ChequearVacio()
+        public bool EstanTodosLlenos()
         {
-            if (this.Text.Trim()=="")
+            foreach(Control elem in this)
             {
-                MessageBox.Show("El textbox '" + this.Name + "' se encuentra vacio");
-            }
-        }
-    }*/
-    
-    public class TextList : List<TextBox>
-    {
-        public bool estanTodosLlenos()
-        {
-            foreach(TextBox elem in this)
-            {
-                if (elem.Text.Trim() == ""){
-                    MessageBox.Show("El TextBox '" + elem.Name + "' esta vacio");
-                    elem.Focus();
+                if (((Control)elem).Text.Trim() == ""){
+                    MessageBox.Show("El TextBox '" + ((Control)elem).Name + "' esta vacio");
+                    ((Control)elem).Focus();
                     return false;
                 }
             }
             return true;
         }
     }
-    public class ComboList : List<ComboBox>
+    public class ControlConCheckBox
     {
-        public bool estaTodosLlenos()
-        {
-            foreach (ComboBox elem in this)
-            {
-                if (elem.Text == "")
-                {
-                    MessageBox.Show("No ha seleccionado datos en el ComboBox '" + elem.Name + "'");
-                    elem.Focus();
-                    return false;
-                }
-            }
-            return true;
-        }
+        public CheckBox checkBox;
+        public bool conApostrofe{ get; set;} //Apostrofe significa si el dato que vamos a 
+                                             //ingresar es un texto, en la consulta sql
+                                             //deberiamos ingresar "'", cachais?
+        public string campoAsociado { get; set; } //Campo asociado es el que vamos a poner en la query
+        public Control control{ get; set; }
+        public bool esCombo { get; set; }
     }
-    //No se si tiene sentido consultar las fechas dado que desconozco si pueden tomar un valor en blanco
-    //De ultima que quede la fecha de hoy
 
+    public class TextosBusqueda : List<ControlConCheckBox>
+    {
+        public string GenerarWhere(bool agregarAsteriscos)
+        {//Agregar asteriscos seria Hacer busquedas del estilo nombre=*+'juan'+*
+         //Todavia no esta implementado
+            string resultado = "";
+            foreach (ControlConCheckBox elem in this)
+            {
+                if (elem.checkBox.Checked)
+                {
+                    string patitaonopatita = (elem.conApostrofe) ? "'" : "";
+                    resultado += "AND " + elem.campoAsociado + "=" + patitaonopatita + elem.control.Text + patitaonopatita + ((elem.esCombo)?")":""); 
+                }
+            }
+            return /*(resultado != "") ? resultado.Substring(4, resultado.Length - 4) : ""*/resultado;
+        }
+        public void AgregarControl(CheckBox cb, bool apostrofe, string campo, Control ctrl, bool combo)
+        {
+            ControlConCheckBox nuevo = new ControlConCheckBox();
+            nuevo.checkBox = cb;
+            nuevo.conApostrofe = apostrofe;
+            nuevo.campoAsociado = campo;
+            nuevo.control = ctrl;
+            nuevo.esCombo = combo;
+            this.Add(nuevo);
+        }
+    }
     static class Program
     {
         /// <summary>

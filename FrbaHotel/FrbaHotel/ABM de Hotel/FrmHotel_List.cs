@@ -61,5 +61,10 @@ namespace FrbaHotel.ABM_de_Hotel
         {
 
         }
+
+        private void FrmHotel_List_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -209,6 +209,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmHotel_List";
             this.Text = "Listado de Hoteles";
+            this.Load += new System.EventHandler(this.FrmHotel_List_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).EndInit();

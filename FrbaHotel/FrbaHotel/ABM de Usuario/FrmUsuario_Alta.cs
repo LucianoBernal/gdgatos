@@ -13,25 +13,24 @@ namespace FrbaHotel.ABM_de_Usuario
 {
     public partial class FrmUsuario_Alta : Form
     {
-        public TextList listaTextos = new TextList();
-        public ComboList listaCombos = new ComboList();
+        public TextosIngresoList listaTextos = new TextosIngresoList();
+//      public ComboList listaCombos = new ComboList();
         public Funciones fn = new Funciones();
 
         public void LlenarListasControl()
         {
-
         listaTextos.Add(txtUsername);
         listaTextos.Add(txtPass);
+        listaTextos.Add(txtRol);
+        listaTextos.Add(txtHotel);
         listaTextos.Add(txtNombre);
         listaTextos.Add(txtApellido);
+        listaTextos.Add(txtTipoDoc);
         listaTextos.Add(txtNumDoc);
         listaTextos.Add(txtMail);
         listaTextos.Add(txtTelefono);
         listaTextos.Add(txtCalle);
         listaTextos.Add(txtNumCalle);
-        listaCombos.Add(txtRol);
-        listaCombos.Add(txtHotel);
-        listaCombos.Add(txtTipoDoc);
         }
 
         public FrmUsuario_Alta()
@@ -135,18 +134,20 @@ namespace FrbaHotel.ABM_de_Usuario
                     Query preqty = new Query("SELECT idTipoDoc FROM SKYNET.TiposDoc WHERE nombre='" + txtTipoDoc.Text + "'");
                     MessageBox.Show("La consulta enviada es SELECT idTipoDoc FROM SKYNET.TiposDoc WHERE nombre='" + txtTipoDoc.Text + "'");
                     int idTipoDoc = Convert.ToInt32(preqty.ObtenerUnicoCampo());
-                    string sql = "INSERT INTO SKYNET.Usuarios (username, pass, apellido, nombre, tipoDoc, numDoc, mail, telefono, calle, numCalle"+/*, fechaNac*/", habilitado) VALUES ('"
-                        + txtUsername.Text + "', '" + fn.getSha256(txtPass.Text) + "', '" + txtApellido.Text + "', '" + txtNombre.Text + "', " + idTipoDoc.ToString() + ", " + txtNumDoc.Text + ", '" + txtMail.Text + "', " + txtTelefono.Text + ", '" + txtCalle.Text + "', " + txtNumCalle.Text + ", " + /*txtFecha.Value.ToString()+*/  " 0) ";
+                    string cadenaFecha = txtFecha.Value.ToString("dd-MM-yyyy"); //Odio los campos date.
+                    MessageBox.Show("Decime la diferencia entre '04-06-1994' y " + cadenaFecha);
+                    string sql = "INSERT INTO SKYNET.Usuarios (username, pass, apellido, nombre, tipoDoc, numDoc, mail, telefono, calle, numCalle, fechaNac, habilitado) VALUES ('"
+                        + txtUsername.Text + "', '" + fn.getSha256(txtPass.Text) + "', '" + txtApellido.Text + "', '" + txtNombre.Text + "', " + idTipoDoc.ToString() + ", " + txtNumDoc.Text + ", '" + txtMail.Text + "', " + txtTelefono.Text + ", '" + txtCalle.Text + "', " + txtNumCalle.Text + ", '" + cadenaFecha +  "', 0) ";
+                    MessageBox.Show("La consulta enviada es " + sql);
+                   qry.pComando = sql;
+                   qry.Ejecutar();
+
+                    MessageBox.Show("Meti el usuario");
+                    sql = "INSERT INTO SKYNET.UsuarioRolHotel (usuario, hotel, rol) VALUES ((SELECT idUser FROM SKYNET.Usuarios WHERE username = '"+ txtUsername.Text +
+                        "'), (SELECT idHotel FROM SKYNET.Hoteles WHERE nombre ='" + txtHotel.Text +"'), (SELECT idRol FROM SKYNET.Roles WHERE nombre ='" + txtRol.Text + "'))";
                     MessageBox.Show("La consulta enviada es " + sql);
                     qry.pComando = sql;
                     qry.Ejecutar();
-
-                    MessageBox.Show("Meti el usuario");
-                    sql = "INSERT INTO SKYNET.UsuarioRolHotel (usuario, hotel, rol) VALUES ((SELECT idUser FROM SKYNET.Usuario WHERE username = '"+ txtUsername.Text +
-                        "'), (SELECT idHotel FROM SKYNET.Hoteles WHERE nombre ='" + txtHotel.Text +"'), (SELECT idRol FROM SKYNET.Roles WHERE nombre ='" + txtRol.Text + "'))";
-                    MessageBox.Show("La consulta enviada es " + sql);
-//                    qry.pComando = sql;
-//                    qry.Ejecutar();
                     MessageBox.Show("Ya deberia haberlo metido todo");
                 }
                 else
@@ -210,7 +211,7 @@ namespace FrbaHotel.ABM_de_Usuario
                        return false;
              * */
 
-            return (listaTextos.estanTodosLlenos()&&listaCombos.estaTodosLlenos());
+            return (listaTextos.EstanTodosLlenos());
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)

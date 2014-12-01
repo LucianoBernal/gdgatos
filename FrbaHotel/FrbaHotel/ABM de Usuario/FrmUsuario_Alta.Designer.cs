@@ -192,6 +192,7 @@ namespace FrbaHotel.ABM_de_Usuario
             // 
             // txtFecha
             // 
+            this.txtFecha.CustomFormat = "\'yyyy-mm-dd hh:mm:ss.fff\'";
             this.txtFecha.Location = new System.Drawing.Point(113, 146);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(299, 20);
