@@ -84,3 +84,4 @@ F:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Reg
 F:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.IngresaRsrv.resources
 F:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
 F:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\bin\Debug\FrbaHotel.pdb
+F:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Usuario.FrmUsuario_Mod.resources

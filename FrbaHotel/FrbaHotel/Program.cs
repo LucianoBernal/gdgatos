@@ -5,20 +5,48 @@ using System.Windows.Forms;
 
 namespace FrbaHotel
 {   
-    public class TextosIngresoList : List<Control>
+    public class TextosIngresoList : List<ControlConCampo>
     {
+        public void agregarControl(Control ctrl, string campo, bool apostrofe, bool combo)
+        {
+            ControlConCampo nuevo = new ControlConCampo();
+            nuevo.control = ctrl;
+            nuevo.campoAsociado = campo;
+            nuevo.conApostrofe = apostrofe;
+            nuevo.esCombo = combo;
+            this.Add(nuevo);
+        }
         public bool EstanTodosLlenos()
         {
-            foreach(Control elem in this)
+            foreach(ControlConCampo elem in this)
             {
-                if (((Control)elem).Text.Trim() == ""){
-                    MessageBox.Show("El TextBox '" + ((Control)elem).Name + "' esta vacio");
-                    ((Control)elem).Focus();
+                if (((Control)elem.control).Text.Trim() == ""){
+                    MessageBox.Show("El TextBox '" + ((Control)elem.control).Name + "' esta vacio");
+                    ((Control)elem.control).Focus();
                     return false;
                 }
             }
             return true;
         }
+        public string GenerarUpdate()
+        {
+            string retorno = "";
+            foreach (ControlConCampo elem in this)
+            {
+                string apostrofe = (elem.conApostrofe)?"'":"";
+  //              string parenton = (elem.esCombo) ? "(" : "";
+                string parentoff = (elem.esCombo) ? ")": "";
+                retorno += elem.campoAsociado + " = " + apostrofe + elem.control.Text + apostrofe+ parentoff +", ";
+            }
+            return retorno.Substring(0, retorno.Length-2);
+        }//Para sacar el ultimo ", "
+    }
+    public class ControlConCampo
+    {
+        public Control control { get; set; }
+        public string campoAsociado { get; set; }
+        public bool conApostrofe { get; set; }
+        public bool esCombo { get; set; }
     }
     public class ControlConCheckBox
     {

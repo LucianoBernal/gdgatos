@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.txtFecha = new System.Windows.Forms.DateTimePicker();
             this.txtMail = new System.Windows.Forms.TextBox();
@@ -36,7 +37,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtNumCalle = new System.Windows.Forms.TextBox();
             this.txtCalle = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTipoDoc = new System.Windows.Forms.ComboBox();
@@ -52,6 +53,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnGuardar);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.txtFecha);
             this.groupBox2.Controls.Add(this.txtMail);
@@ -59,7 +61,7 @@
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.txtNumCalle);
             this.groupBox2.Controls.Add(this.txtCalle);
-            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label40);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txtTipoDoc);
@@ -72,15 +74,25 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(599, 191);
+            this.groupBox2.Size = new System.Drawing.Size(599, 224);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos de la Persona";
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(236, 186);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(198, 27);
+            this.btnGuardar.TabIndex = 40;
+            this.btnGuardar.Text = "guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 150);
+            this.label12.Location = new System.Drawing.Point(93, 150);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(111, 13);
             this.label12.TabIndex = 39;
@@ -88,10 +100,10 @@
             // 
             // txtFecha
             // 
-            this.txtFecha.Location = new System.Drawing.Point(113, 146);
+            this.txtFecha.Location = new System.Drawing.Point(235, 144);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(299, 20);
-            this.txtFecha.TabIndex = 38;
+            this.txtFecha.TabIndex = 7;
             this.txtFecha.Value = new System.DateTime(2014, 11, 10, 0, 0, 0, 0);
             // 
             // txtMail
@@ -99,14 +111,14 @@
             this.txtMail.Location = new System.Drawing.Point(113, 82);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(178, 20);
-            this.txtMail.TabIndex = 17;
+            this.txtMail.TabIndex = 5;
             // 
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(397, 82);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(178, 20);
-            this.txtTelefono.TabIndex = 16;
+            this.txtTelefono.TabIndex = 6;
             // 
             // label11
             // 
@@ -122,23 +134,23 @@
             this.txtNumCalle.Location = new System.Drawing.Point(397, 112);
             this.txtNumCalle.Name = "txtNumCalle";
             this.txtNumCalle.Size = new System.Drawing.Size(178, 20);
-            this.txtNumCalle.TabIndex = 14;
+            this.txtNumCalle.TabIndex = 8;
             // 
             // txtCalle
             // 
             this.txtCalle.Location = new System.Drawing.Point(113, 112);
             this.txtCalle.Name = "txtCalle";
             this.txtCalle.Size = new System.Drawing.Size(178, 20);
-            this.txtCalle.TabIndex = 6;
+            this.txtCalle.TabIndex = 7;
             // 
-            // label10
+            // label40
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 112);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(33, 13);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "Calle:";
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(6, 112);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(33, 13);
+            this.label40.TabIndex = 13;
+            this.label40.Text = "Calle:";
             // 
             // label9
             // 
@@ -164,7 +176,7 @@
             this.txtTipoDoc.Location = new System.Drawing.Point(113, 53);
             this.txtTipoDoc.Name = "txtTipoDoc";
             this.txtTipoDoc.Size = new System.Drawing.Size(178, 21);
-            this.txtTipoDoc.TabIndex = 6;
+            this.txtTipoDoc.TabIndex = 3;
             // 
             // label7
             // 
@@ -180,21 +192,21 @@
             this.txtNumDoc.Location = new System.Drawing.Point(397, 53);
             this.txtNumDoc.Name = "txtNumDoc";
             this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
-            this.txtNumDoc.TabIndex = 9;
+            this.txtNumDoc.TabIndex = 4;
             // 
             // txtApellido
             // 
             this.txtApellido.Location = new System.Drawing.Point(397, 24);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(178, 20);
-            this.txtApellido.TabIndex = 8;
+            this.txtApellido.TabIndex = 2;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(113, 24);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(178, 20);
-            this.txtNombre.TabIndex = 6;
+            this.txtNombre.TabIndex = 1;
             // 
             // label6
             // 
@@ -227,7 +239,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 370);
+            this.ClientSize = new System.Drawing.Size(627, 245);
             this.Controls.Add(this.groupBox2);
             this.Name = "FrmUsuario_Mod";
             this.Text = "Modificacion de Usuario";
@@ -248,7 +260,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtNumCalle;
         private System.Windows.Forms.TextBox txtCalle;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox txtTipoDoc;
@@ -259,5 +271,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnGuardar;
     }
 }

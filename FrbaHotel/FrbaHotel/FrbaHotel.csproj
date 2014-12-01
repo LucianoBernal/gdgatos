@@ -236,6 +236,9 @@
     <EmbeddedResource Include="ABM de Usuario\FrmUsuario_List.resx">
       <DependentUpon>FrmUsuario_List.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Usuario\FrmUsuario_Mod.resx">
+      <DependentUpon>FrmUsuario_Mod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
     </EmbeddedResource>

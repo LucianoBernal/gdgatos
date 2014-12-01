@@ -19,7 +19,7 @@ namespace FrbaHotel.ABM_de_Usuario
 
         public void LlenarListasControl()
         {
-        listaTextos.Add(txtUsername);
+/*        listaTextos.Add(txtUsername);
         listaTextos.Add(txtPass);
         listaTextos.Add(txtRol);
         listaTextos.Add(txtHotel);
@@ -31,6 +31,19 @@ namespace FrbaHotel.ABM_de_Usuario
         listaTextos.Add(txtTelefono);
         listaTextos.Add(txtCalle);
         listaTextos.Add(txtNumCalle);
+ */
+            listaTextos.agregarControl(txtUsername, null, false, false);
+            listaTextos.agregarControl(txtPass, null, false, false);
+            listaTextos.agregarControl(txtRol, null, false, true);
+            listaTextos.agregarControl(txtHotel, null, false, true);
+            listaTextos.agregarControl(txtNombre, null, false, false);
+            listaTextos.agregarControl(txtApellido, null, false, false);
+            listaTextos.agregarControl(txtTipoDoc, null, false, true);
+            listaTextos.agregarControl(txtNumDoc, null, false, false);
+            listaTextos.agregarControl(txtMail, null, false, false);
+            listaTextos.agregarControl(txtTelefono, null, false, false);
+            listaTextos.agregarControl(txtCalle, null, false, false);
+            listaTextos.agregarControl(txtNumCalle, null, false, false);
         }
 
         public FrmUsuario_Alta()

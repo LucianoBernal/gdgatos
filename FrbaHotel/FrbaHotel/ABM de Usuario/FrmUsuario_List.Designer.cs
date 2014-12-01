@@ -167,7 +167,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(113, 100);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 20;
+            this.btnBuscar.TabIndex = 7;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -178,7 +178,7 @@
             this.txtMail.Location = new System.Drawing.Point(371, 72);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(160, 20);
-            this.txtMail.TabIndex = 19;
+            this.txtMail.TabIndex = 6;
             // 
             // label8
             // 
@@ -195,7 +195,7 @@
             this.txtApellido.Location = new System.Drawing.Point(371, 45);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(160, 20);
-            this.txtApellido.TabIndex = 12;
+            this.txtApellido.TabIndex = 5;
             // 
             // txtHotel
             // 
@@ -204,7 +204,7 @@
             this.txtHotel.Location = new System.Drawing.Point(113, 73);
             this.txtHotel.Name = "txtHotel";
             this.txtHotel.Size = new System.Drawing.Size(161, 21);
-            this.txtHotel.TabIndex = 7;
+            this.txtHotel.TabIndex = 3;
             this.txtHotel.SelectedIndexChanged += new System.EventHandler(this.txtHotel_SelectedIndexChanged_1);
             // 
             // label6
@@ -222,7 +222,7 @@
             this.txtNombre.Location = new System.Drawing.Point(371, 19);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(160, 20);
-            this.txtNombre.TabIndex = 11;
+            this.txtNombre.TabIndex = 4;
             // 
             // label13
             // 
@@ -241,7 +241,7 @@
             this.txtRol.Location = new System.Drawing.Point(113, 45);
             this.txtRol.Name = "txtRol";
             this.txtRol.Size = new System.Drawing.Size(161, 21);
-            this.txtRol.TabIndex = 5;
+            this.txtRol.TabIndex = 2;
             this.txtRol.SelectedIndexChanged += new System.EventHandler(this.txtRol_SelectedIndexChanged);
             // 
             // label4
@@ -259,7 +259,7 @@
             this.txtUsername.Location = new System.Drawing.Point(113, 18);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(161, 20);
-            this.txtUsername.TabIndex = 3;
+            this.txtUsername.TabIndex = 1;
             this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
             // 
             // label3
