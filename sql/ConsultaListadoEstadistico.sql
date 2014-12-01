@@ -139,6 +139,46 @@ drop function SKYNET.habitacionesMayorCantidadDeVecesOcupada
 
 /*----- ---*/
 
+
+
+/* Clientes mayor cantidad de Puntos*/
+go
+CREATE FUNCTION SKYNET.clientesMayorCantidadDePuntos(@anio int,@trimestre smallint )
+RETURNS @retorno TABLE
+   (
+    idCliente numeric(18,0),
+    Nombre    varchar(255),
+    CantidadDePuntos  numeric(18,0)
+    )
+AS
+BEGIN
+	Insert into @retorno 
+	select top 5 c.idCliente,c.apellido+','+c.nombre as 'Apellido,nombre',floor(sum(e.precioPorNocheEstadia*r.cantNoches)/10)+ floor((select sum(ce.precioTotal)/5
+																	   from SKYNET.ConsumiblesEstadias ce,SKYNET.Estadias e2,SKYNET.Reservas r2
+																	   where ce.estadia=e2.reserva and
+																	   e2.reserva=r2.codigoReserva  and
+																	   YEAR(DATEADD(DD, e2.cantNoches, r2.fechaDesde))=@anio and SKYNET.obtenerTrimestre(DATEADD(DD, e2.cantNoches, r2.fechaDesde))=@trimestre 
+																	   and r2.cliente=c.idCliente and ce.numeroFactura is not null and ce.itemFactura is not null
+																	   ))as CantidadDePuntos
+	from SKYNET.Clientes c,SKYNET.Reservas r,SKYNET.Estadias e
+	where r.cliente=c.idCliente and e.reserva=r.codigoReserva and e.numeroFactura is not null and e.itemFactura is not null and
+	YEAR(DATEADD(DD, e.cantNoches, r.fechaDesde))=@anio and SKYNET.obtenerTrimestre(DATEADD(DD, e.cantNoches, r.fechaDesde))=@trimestre
+	group by c.idCliente,c.apellido,c.nombre
+	order by 3 DESC
+	return
+     
+END
+go
+
+/* --------- ---*/
+drop function SKYNET.clientesMayorCantidadDePuntos
+
+/*----- ---*/
+
+
+
+
+
 	
 
 
@@ -168,7 +208,7 @@ SELECT SKYNET.obtenerTrimestre(DATEADD(mm, 2, getdate()))
 
 
 SELECT *
-from SKYNET.hotelesMayorCantidadDeReservasCanceladas(2014,4)
+from SKYNET.hotelesMayorCantidadDeReservasCanceladas(2014,1)
 
 
 SELECT *
@@ -182,4 +222,7 @@ from SKYNET.habitacionesMayorCantidadDeDiasOcupada(2013,1)
 
 SELECT *
 from SKYNET.habitacionesMayorCantidadDeVecesOcupada(2013,1)
+
+SELECT *
+from SKYNET.clientesMayorCantidadDePuntos(2013,1)
 
