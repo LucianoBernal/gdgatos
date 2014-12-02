@@ -110,3 +110,5 @@ F:\Users\sa\Documents\GitHub - copia\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaH
 F:\Users\sa\Documents\GitHub - copia\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.FormRsrvEstd.resources
 F:\Users\sa\Documents\GitHub - copia\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.IngresaRsrv.resources
 F:\Users\sa\Documents\GitHub - copia\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Usuario.FrmUsuario_Mod.resources
+C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Hotel.FrmHotel_Mod.resources

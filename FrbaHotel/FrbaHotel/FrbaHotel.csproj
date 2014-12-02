@@ -93,6 +93,12 @@
     <Compile Include="ABM de Hotel\FrmHotel_List.Designer.cs">
       <DependentUpon>FrmHotel_List.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel_Mod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel_Mod.Designer.cs">
+      <DependentUpon>FrmHotel_Mod.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM de Regimen\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM de Hotel\FrmHotel_List.resx">
       <DependentUpon>FrmHotel_List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Hotel\FrmHotel_Mod.resx">
+      <DependentUpon>FrmHotel_Mod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM de Rol\FrmRol.resx">
       <DependentUpon>FrmRol.cs</DependentUpon>
