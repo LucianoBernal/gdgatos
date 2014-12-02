@@ -19,6 +19,7 @@ values('Chile')
 INSERT INTO SKYNET.Hoteles (calle,numCalle,ciudad,cantidadEstrellas,cadena,pais)
 SELECT DISTINCT Hotel_Calle,Hotel_Nro_Calle,Hotel_Ciudad,Hotel_CantEstrella,1,1
 FROM gd_esquema.Maestra
+UPDATE SKYNET.Hoteles SET nombre = calle
 /*------------------------------------------------------------------------------*/
 /*migro tiposhabitacion*/
 INSERT INTO SKYNET.TiposHabitacion (codigo,descripcion,porcentual)

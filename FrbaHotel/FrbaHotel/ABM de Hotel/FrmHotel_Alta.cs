@@ -12,6 +12,7 @@ namespace FrbaHotel.ABM_de_Hotel
 {
     public partial class FrmHotel_Alta : Form
     {
+        public ListaTextos listaTextos = new ListaTextos();
         SqlConnection conexion = new SqlConnection();
         int idHotel;
         public FrmHotel_Alta()
@@ -106,7 +107,7 @@ namespace FrbaHotel.ABM_de_Hotel
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
-            if (!faltaDatos())
+            if (listaTextos.EstanTodosLlenos())
             {
                 conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
@@ -125,8 +126,8 @@ namespace FrbaHotel.ABM_de_Hotel
                     }
                     else
                     {
-                        string sql = "INSERT INTO SKYNET.Hoteles (nombre, ciudad, pais, mail, cantidadEstrellas, fechaCreacion, calle, numCalle, cadena) "
-                        + " VALUES ('" + txtNombre.Text + "', '" + txtCiudad.Text + "', (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), '" + txtEmail.Text + "', "
+                        string sql = "INSERT INTO SKYNET.Hoteles (nombre, telefono, ciudad, pais, mail, cantidadEstrellas, fechaCreacion, calle, numCalle, cadena) "
+                        + " VALUES ('" + txtNombre.Text + "', '"+txtTelefono.Text+"','" + txtCiudad.Text + "', (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), '" + txtEmail.Text + "', "
                         + " '" + txtEstrellas.Value + "', '" + txtFecha.Value + "', '" + txtDireccion.Text + "', '" + txtNumCalle.Text + "', (SELECT idCadena FROM SKYNET.Cadenas WHERE cadena = '" + txtCadena.Text.ToString() + "') )";
 
                         qry.pComando = sql;

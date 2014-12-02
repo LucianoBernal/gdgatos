@@ -31,10 +31,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtPais = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtCiudad = new System.Windows.Forms.TextBox();
-            this.txtEstrellas = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -44,18 +42,21 @@
             this.btnDeshabilitar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.dataResultado = new System.Windows.Forms.DataGridView();
+            this.txtEstrellas = new System.Windows.Forms.NumericUpDown();
+            this.txtPais = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEstrellas)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtPais);
+            this.groupBox1.Controls.Add(this.txtEstrellas);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.txtPais);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtCiudad);
-            this.groupBox1.Controls.Add(this.txtEstrellas);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.label13);
@@ -75,6 +76,7 @@
             this.btnLimpiar.TabIndex = 21;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click_1);
             // 
             // btnBuscar
             // 
@@ -85,13 +87,6 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // txtPais
-            // 
-            this.txtPais.Location = new System.Drawing.Point(371, 48);
-            this.txtPais.Name = "txtPais";
-            this.txtPais.Size = new System.Drawing.Size(178, 20);
-            this.txtPais.TabIndex = 19;
             // 
             // label8
             // 
@@ -108,14 +103,6 @@
             this.txtCiudad.Name = "txtCiudad";
             this.txtCiudad.Size = new System.Drawing.Size(178, 20);
             this.txtCiudad.TabIndex = 12;
-            // 
-            // txtEstrellas
-            // 
-            this.txtEstrellas.FormattingEnabled = true;
-            this.txtEstrellas.Location = new System.Drawing.Point(113, 47);
-            this.txtEstrellas.Name = "txtEstrellas";
-            this.txtEstrellas.Size = new System.Drawing.Size(178, 21);
-            this.txtEstrellas.TabIndex = 7;
             // 
             // label6
             // 
@@ -159,6 +146,7 @@
             this.btnModificar.TabIndex = 28;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnHabilitar
             // 
@@ -186,6 +174,7 @@
             this.btnVolver.TabIndex = 25;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // dataResultado
             // 
@@ -195,6 +184,22 @@
             this.dataResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataResultado.Size = new System.Drawing.Size(543, 247);
             this.dataResultado.TabIndex = 29;
+            this.dataResultado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataResultado_CellContentClick);
+            // 
+            // txtEstrellas
+            // 
+            this.txtEstrellas.Location = new System.Drawing.Point(113, 49);
+            this.txtEstrellas.Name = "txtEstrellas";
+            this.txtEstrellas.Size = new System.Drawing.Size(120, 20);
+            this.txtEstrellas.TabIndex = 22;
+            // 
+            // txtPais
+            // 
+            this.txtPais.FormattingEnabled = true;
+            this.txtPais.Location = new System.Drawing.Point(371, 47);
+            this.txtPais.Name = "txtPais";
+            this.txtPais.Size = new System.Drawing.Size(178, 21);
+            this.txtPais.TabIndex = 23;
             // 
             // FrmHotel_List
             // 
@@ -207,12 +212,14 @@
             this.Controls.Add(this.btnDeshabilitar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmHotel_List";
             this.Text = "Listado de Hoteles";
             this.Load += new System.EventHandler(this.FrmHotel_List_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEstrellas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -222,10 +229,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.TextBox txtPais;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtCiudad;
-        private System.Windows.Forms.ComboBox txtEstrellas;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label13;
@@ -235,5 +240,7 @@
         private System.Windows.Forms.Button btnDeshabilitar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridView dataResultado;
+        private System.Windows.Forms.NumericUpDown txtEstrellas;
+        private System.Windows.Forms.ComboBox txtPais;
     }
 }
