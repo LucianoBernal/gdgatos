@@ -64,6 +64,11 @@ namespace FrbaHotel.ABM_de_Usuario
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonGuardar = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
+            this.txtOcultoTipoDoc = new System.Windows.Forms.TextBox();
+            this.txtOcultoRol = new System.Windows.Forms.TextBox();
+            this.txtOcultoHotel = new System.Windows.Forms.TextBox();
+            this.txtOcultoFecha = new System.Windows.Forms.TextBox();
+            this.txtOcultoPass = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -359,11 +364,57 @@ namespace FrbaHotel.ABM_de_Usuario
             this.botonLimpiar.UseVisualStyleBackColor = true;
             this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
             // 
+            // txtOcultoTipoDoc
+            // 
+            this.txtOcultoTipoDoc.Location = new System.Drawing.Point(154, 324);
+            this.txtOcultoTipoDoc.Name = "txtOcultoTipoDoc";
+            this.txtOcultoTipoDoc.Size = new System.Drawing.Size(70, 20);
+            this.txtOcultoTipoDoc.TabIndex = 5;
+            this.txtOcultoTipoDoc.Visible = false;
+            // 
+            // txtOcultoRol
+            // 
+            this.txtOcultoRol.Location = new System.Drawing.Point(155, 358);
+            this.txtOcultoRol.Name = "txtOcultoRol";
+            this.txtOcultoRol.Size = new System.Drawing.Size(68, 20);
+            this.txtOcultoRol.TabIndex = 6;
+            this.txtOcultoRol.Visible = false;
+            this.txtOcultoRol.TextChanged += new System.EventHandler(this.txtOcultoRol_TextChanged);
+            // 
+            // txtOcultoHotel
+            // 
+            this.txtOcultoHotel.Location = new System.Drawing.Point(409, 324);
+            this.txtOcultoHotel.Name = "txtOcultoHotel";
+            this.txtOcultoHotel.Size = new System.Drawing.Size(67, 20);
+            this.txtOcultoHotel.TabIndex = 7;
+            this.txtOcultoHotel.Visible = false;
+            // 
+            // txtOcultoFecha
+            // 
+            this.txtOcultoFecha.Location = new System.Drawing.Point(408, 346);
+            this.txtOcultoFecha.Name = "txtOcultoFecha";
+            this.txtOcultoFecha.Size = new System.Drawing.Size(68, 20);
+            this.txtOcultoFecha.TabIndex = 8;
+            this.txtOcultoFecha.Visible = false;
+            // 
+            // txtOcultoPass
+            // 
+            this.txtOcultoPass.Location = new System.Drawing.Point(408, 372);
+            this.txtOcultoPass.Name = "txtOcultoPass";
+            this.txtOcultoPass.Size = new System.Drawing.Size(65, 20);
+            this.txtOcultoPass.TabIndex = 9;
+            this.txtOcultoPass.Visible = false;
+            // 
             // FrmUsuario_Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 392);
+            this.Controls.Add(this.txtOcultoPass);
+            this.Controls.Add(this.txtOcultoFecha);
+            this.Controls.Add(this.txtOcultoHotel);
+            this.Controls.Add(this.txtOcultoRol);
+            this.Controls.Add(this.txtOcultoTipoDoc);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonGuardar);
             this.Controls.Add(this.botonVolver);
@@ -377,6 +428,7 @@ namespace FrbaHotel.ABM_de_Usuario
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -413,5 +465,10 @@ namespace FrbaHotel.ABM_de_Usuario
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.ComboBox txtHotel;
         private System.Windows.Forms.Label label13;
+        private TextBox txtOcultoTipoDoc;
+        private TextBox txtOcultoRol;
+        private TextBox txtOcultoHotel;
+        private TextBox txtOcultoFecha;
+        private TextBox txtOcultoPass;
     }
 }

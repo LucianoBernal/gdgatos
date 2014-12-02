@@ -48,11 +48,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.txtOcultoTipoDoc = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtOcultoTipoDoc);
             this.groupBox2.Controls.Add(this.btnGuardar);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.txtFecha);
@@ -78,6 +80,7 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos de la Persona";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // btnGuardar
             // 
@@ -235,6 +238,14 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Nombre:";
             // 
+            // txtOcultoTipoDoc
+            // 
+            this.txtOcultoTipoDoc.Location = new System.Drawing.Point(495, 175);
+            this.txtOcultoTipoDoc.Name = "txtOcultoTipoDoc";
+            this.txtOcultoTipoDoc.Size = new System.Drawing.Size(47, 20);
+            this.txtOcultoTipoDoc.TabIndex = 41;
+            this.txtOcultoTipoDoc.Visible = false;
+            // 
             // FrmUsuario_Mod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,5 +283,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.TextBox txtOcultoTipoDoc;
     }
 }

@@ -13,37 +13,28 @@ namespace FrbaHotel.ABM_de_Usuario
 {
     public partial class FrmUsuario_Alta : Form
     {
-        public TextosIngresoList listaTextos = new TextosIngresoList();
-//      public ComboList listaCombos = new ComboList();
+        public ListaTextos listaTextos = new ListaTextos();
         public Funciones fn = new Funciones();
+        public ListaConId ListaRoles = new ListaConId();
+        public ListaConId ListaDocumentos = new ListaConId();
+        public ListaConId ListaHoteles = new ListaConId();
+
 
         public void LlenarListasControl()
         {
-/*        listaTextos.Add(txtUsername);
-        listaTextos.Add(txtPass);
-        listaTextos.Add(txtRol);
-        listaTextos.Add(txtHotel);
-        listaTextos.Add(txtNombre);
-        listaTextos.Add(txtApellido);
-        listaTextos.Add(txtTipoDoc);
-        listaTextos.Add(txtNumDoc);
-        listaTextos.Add(txtMail);
-        listaTextos.Add(txtTelefono);
-        listaTextos.Add(txtCalle);
-        listaTextos.Add(txtNumCalle);
- */
-            listaTextos.agregarControl(txtUsername, null, false, false);
-            listaTextos.agregarControl(txtPass, null, false, false);
-            listaTextos.agregarControl(txtRol, null, false, true);
-            listaTextos.agregarControl(txtHotel, null, false, true);
-            listaTextos.agregarControl(txtNombre, null, false, false);
-            listaTextos.agregarControl(txtApellido, null, false, false);
-            listaTextos.agregarControl(txtTipoDoc, null, false, true);
-            listaTextos.agregarControl(txtNumDoc, null, false, false);
-            listaTextos.agregarControl(txtMail, null, false, false);
-            listaTextos.agregarControl(txtTelefono, null, false, false);
-            listaTextos.agregarControl(txtCalle, null, false, false);
-            listaTextos.agregarControl(txtNumCalle, null, false, false);
+            listaTextos.Agregar(txtUsername, true, "username");
+            listaTextos.Agregar(txtOcultoPass, true, "pass");
+            listaTextos.Agregar(txtRol, false, "rol");
+            listaTextos.Agregar(txtHotel, false, "hotel");
+            listaTextos.Agregar(txtNombre, true, "nombre");
+            listaTextos.Agregar(txtApellido, true, "apellido");
+            listaTextos.Agregar(txtTipoDoc, false, "tipoDoc");
+            listaTextos.Agregar(txtNumDoc, false, "numDoc");
+            listaTextos.Agregar(txtMail, true, "mail");
+            listaTextos.Agregar(txtTelefono, false, "telefono");
+            listaTextos.Agregar(txtCalle, true, "calle");
+            listaTextos.Agregar(txtNumCalle, false, "numCalle");
+            listaTextos.Agregar(txtOcultoFecha, true, "fechaNac");
         }
 
         public FrmUsuario_Alta()
@@ -74,13 +65,16 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void FrmUsuario_Alta_Load(object sender, EventArgs e)
         {
-            CargarRoles();
-            CargarTipoDoc();
-            CargarHotel();
+            ListaRoles.Lista = new List<DetalleConId>();
+            ListaHoteles.Lista = new List<DetalleConId>();
+            ListaDocumentos.Lista = new List<DetalleConId>();
+            ListaRoles.CargarDatos(txtRol, "SELECT idRol, nombre FROM SKYNET.Roles WHERE baja!=1");
+            ListaHoteles.CargarDatos(txtHotel, "SELECT idHotel, nombre FROM SKYNET.Hoteles");
+            ListaDocumentos.CargarDatos(txtTipoDoc, "SELECT idTipoDoc, nombre FROM SKYNET.TiposDoc");
             LlenarListasControl();
-            botonGuardar.Enabled = true;
-            botonLimpiar.Enabled = true;
-            botonVolver.Enabled = true;
+  //          botonGuardar.Enabled = true;
+  //          botonLimpiar.Enabled = true;
+  //          botonVolver.Enabled = true;
         }
         public void CargarRoles()
         {
@@ -136,32 +130,31 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
+            txtOcultoTipoDoc.Text = ListaDocumentos.ObtenerId(txtTipoDoc.Text).ToString();
+            txtOcultoHotel.Text = ListaHoteles.ObtenerId(txtHotel.Text).ToString();
+            txtOcultoRol.Text = ListaRoles.ObtenerId(txtRol.Text).ToString();
+            txtOcultoFecha.Text = txtFecha.Value.ToString("dd-MM-yyyy");
+            txtOcultoPass.Text = fn.getSha256(txtPass.Text);
            if (validacionDatos())
             {
+                listaTextos.Find(x => x.Control == txtTipoDoc).Control = txtOcultoTipoDoc;
+                listaTextos.Remove(listaTextos.Find(x => x.Control == txtRol));
+                listaTextos.Remove(listaTextos.Find(x => x.Control == txtHotel));
                 Query qry = new Query("SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text + "'");
                 MessageBox.Show("La consulta enviada es " + "SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text + "'");
                 int existeUser = Convert.ToInt32(qry.ObtenerUnicoCampo());
                 if (existeUser == 0)
                 {
-                    MessageBox.Show("Entre en el if");
-                    Query preqty = new Query("SELECT idTipoDoc FROM SKYNET.TiposDoc WHERE nombre='" + txtTipoDoc.Text + "'");
-                    MessageBox.Show("La consulta enviada es SELECT idTipoDoc FROM SKYNET.TiposDoc WHERE nombre='" + txtTipoDoc.Text + "'");
-                    int idTipoDoc = Convert.ToInt32(preqty.ObtenerUnicoCampo());
-                    string cadenaFecha = txtFecha.Value.ToString("dd-MM-yyyy"); //Odio los campos date.
-                    MessageBox.Show("Decime la diferencia entre '04-06-1994' y " + cadenaFecha);
-                    string sql = "INSERT INTO SKYNET.Usuarios (username, pass, apellido, nombre, tipoDoc, numDoc, mail, telefono, calle, numCalle, fechaNac, habilitado) VALUES ('"
-                        + txtUsername.Text + "', '" + fn.getSha256(txtPass.Text) + "', '" + txtApellido.Text + "', '" + txtNombre.Text + "', " + idTipoDoc.ToString() + ", " + txtNumDoc.Text + ", '" + txtMail.Text + "', " + txtTelefono.Text + ", '" + txtCalle.Text + "', " + txtNumCalle.Text + ", '" + cadenaFecha +  "', 0) ";
-                    MessageBox.Show("La consulta enviada es " + sql);
-                   qry.pComando = sql;
-                   qry.Ejecutar();
-
-                    MessageBox.Show("Meti el usuario");
-                    sql = "INSERT INTO SKYNET.UsuarioRolHotel (usuario, hotel, rol) VALUES ((SELECT idUser FROM SKYNET.Usuarios WHERE username = '"+ txtUsername.Text +
-                        "'), (SELECT idHotel FROM SKYNET.Hoteles WHERE nombre ='" + txtHotel.Text +"'), (SELECT idRol FROM SKYNET.Roles WHERE nombre ='" + txtRol.Text + "'))";
-                    MessageBox.Show("La consulta enviada es " + sql);
-                    qry.pComando = sql;
+                    string sql = "";
+                    MessageBox.Show("Decime que tal esta");
+                    qry.pComando = "INSERT INTO SKYNET.Usuarios " + listaTextos.GenerarInsert();
                     qry.Ejecutar();
-                    MessageBox.Show("Ya deberia haberlo metido todo");
+                    qry.pComando = "UPDATE SKYNET.Usuarios SET habilitado = 0 WHERE username = '" + txtUsername.Text + "'";
+//                    MessageBox.Show("INSERT INTO SKYNET.Usuarios " + listaTextos.GenerarInsert());
+                    sql = "INSERT INTO SKYNET.UsuarioRolHotel (usuario, hotel, rol) VALUES ((SELECT idUser FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text +
+                    "'), " + txtOcultoHotel.Text + ", " + txtOcultoRol.Text + ")";
+                    qry.pComando = sql;//Que paja hacer mas de una query
+                    qry.Ejecutar();
                 }
                 else
                 {
@@ -172,62 +165,16 @@ namespace FrbaHotel.ABM_de_Usuario
         }
 
         private bool validacionDatos()
-        {   //SUS PROFESORES DE PDEP SE AVERGUENZAN
-            /*           if (txtApellido.Text.Length == 0)
-                       {
-                           MessageBox.Show("Verifique los datos ingresados.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           txtApellido.Focus();
-                           return true;
-                       }
-                       if (txtCalle.Text.Length == 0)
-                       {
-                           MessageBox.Show("Verifique los datos ingresados.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           txtCalle.Focus();
-                           return true;
-                       }
-                       if (txtMail.Text.Length == 0)
-                       {
-                           MessageBox.Show("Verifique los datos ingresados.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           txtMail.Focus();
-                           return true;
-                       }
-                       if (txtNombre.Text.Length == 0)
-                       {
-                           MessageBox.Show("Verifique los datos ingresados.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           txtNombre.Focus();
-                           return true;
-                       }
-                       if (txtNumDoc.Text.Length == 0)
-                       {
-                           MessageBox.Show("Verifique los datos ingresados.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           txtNumDoc.Focus();
-                           return true;
-                       }
-                       if (txtPass.Text.Length == 0)
-                       {
-                           MessageBox.Show("Verifique los datos ingresados.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           txtPass.Focus();
-                           return true;
-                       }
-                       if (txtTelefono.Text.Length == 0)
-                       {
-                           MessageBox.Show("Verifique los datos ingresados.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           txtTelefono.Focus();
-                           return true;
-                       }
-                       if (txtUsername.Text.Length == 0)
-                       {
-                           MessageBox.Show("Verifique los datos ingresados.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           txtUsername.Focus();
-                           return true;
-                       }
-                       return false;
-             * */
-
+        {
             return (listaTextos.EstanTodosLlenos());
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtOcultoRol_TextChanged(object sender, EventArgs e)
         {
 
         }

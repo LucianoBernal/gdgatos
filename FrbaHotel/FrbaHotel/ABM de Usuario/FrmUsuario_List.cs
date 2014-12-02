@@ -12,7 +12,9 @@ namespace FrbaHotel.ABM_de_Usuario
     public partial class FrmUsuario_List : Form
     {
 
-        public TextosBusqueda listaTextos = new TextosBusqueda();
+        public ListaConId listaRoles = new ListaConId();
+        public ListaConId listaHoteles = new ListaConId();
+        public ListaTextos listaTextos = new ListaTextos();
         public FrmUsuario_List()
         {
             InitializeComponent();
@@ -22,42 +24,20 @@ namespace FrbaHotel.ABM_de_Usuario
         }
         public void AgregarTextos()
         {
-/*            ControlConCheckBox controlApellido = new ControlConCheckBox();
-            controlApellido.control = txtApellido;
-            controlApellido.conApostrofe = true;
-            controlApellido.campoAsociado = "apellido";
-            controlApellido.checkBox = cbApellido;
-            listaTextos.Add(new ControlConCheckBox());
-                            txtApellido.Text = null;
-            txtMail.Text = null;
-            txtNombre.Text = null;
-            txtUsername.Text = null;*/
-            listaTextos.AgregarControl(cbApellido, true, "u.apellido", txtApellido, false);
-            listaTextos.AgregarControl(cbMail, true, "u.mail", txtMail, false);
-            listaTextos.AgregarControl(cbNombre, true, "u.nombre", txtNombre, false);
-            listaTextos.AgregarControl(cbUsername, true, "u.username", txtUsername, false);
-            listaTextos.AgregarControl(cbHotel, true, "ur.hotel = (SELECT h.idHotel FROM SKYNET.Hoteles h WHERE h.nombre", txtHotel, true);
-            listaTextos.AgregarControl(cbRol, true, "ur.rol = (SELECT r.idRol FROM SKYNET.Roles r WHERE r.nombre", txtRol, true);
-        } //Por el momento no se me ocurre una manera mas copada de hacerlo :/
+            listaTextos.AgregarConCheck(txtApellido, true, "u.apellido", cbApellido);
+            listaTextos.AgregarConCheck(txtMail, true, "u.mail", cbMail);
+            listaTextos.AgregarConCheck(txtNombre, true, "u.nombre", cbNombre);
+            listaTextos.AgregarConCheck(txtUsername, true, "u.username", cbUsername);
+            listaTextos.AgregarConCheck(txtOcultoHoteles, false, "ur.hotel", cbHotel);
+            listaTextos.AgregarConCheck(txtOcultoRoles, false, "ur.rol", cbRol);
+        }
         private void FrmUsuario_List_Load(object sender, EventArgs e)
         {
-
-            //Busco los hoteles y los introduzco en el combo box
-            Query qry = new Query("SELECT nombre FROM SKYNET.Hoteles");
-
-            foreach (DataRow dataRow in qry.ObtenerDataTable().AsEnumerable())
-            {
-                txtHotel.Items.Add(dataRow[0]);
-            }
-
-            //Busco los roles y los introduzco en el combo box
-            qry = new Query("SELECT nombre FROM SKYNET.Roles WHERE nombre != 'GUEST'");
-
-            foreach (DataRow dataRow in qry.ObtenerDataTable().AsEnumerable())
-            {
-                txtRol.Items.Add(dataRow[0]);
-            }
-            this.AgregarTextos();
+            listaRoles.Lista = new List<DetalleConId>();
+            listaHoteles.Lista = new List<DetalleConId>();
+            listaRoles.CargarDatos(txtRol, "SELECT idRol, nombre FROM SKYNET.Roles WHERE nombre != 'GUEST'");
+            listaHoteles.CargarDatos(txtHotel, "SELECT idHotel, nombre FROM SKYNET.Hoteles");
+            AgregarTextos();            
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -79,35 +59,12 @@ namespace FrbaHotel.ABM_de_Usuario
         //Genero el Query con los datos ingresados en el buscador para traer los usuarios.
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            string strQuery ="SELECT DISTINCT(idUser), username, nombre, apellido, mail, (CASE WHEN habilitado =1 THEN 'SI' ELSE 'NO' END) AS estado, fallasPassword " +
-                " FROM SKYNET.Usuarios u, SKYNET.UsuarioRolHotel ur WHERE u.idUser = ur.usuario AND ur.hotel IN(SELECT hotel FROM SKYNET.UsuarioRolHotel ur2 WHERE ur2.usuario="+ Globales.idUsuarioLogueado +" ) ";
-    /*            if (txtNombre.Text != "")
-                {
-                    strQuery = strQuery + " AND u.nombre = '" + txtNombre + "' ";
-                }
-                if (txtApellido.Text != "")
-                {
-                    strQuery = strQuery + " AND u.apellido = '" + txtApellido + "' ";
-                }
-                if (txtMail.Text != "")
-                {
-                    strQuery = strQuery + " AND u.mail = '" + txtMail + "' ";
-                }
-                if (txtUsername.Text != "")
-                {
-                    strQuery = strQuery + " AND u.username = '" + txtUsername + "' ";
-                }
-                strQuery = strQuery + listaTextos.GenerarWhere(false);
-                if (txtHotel.Text != "")
-                {
-                    strQuery = strQuery + " AND ur.hotel = (SELECT h.idHotel FROM SKYNET.Hoteles h WHERE h.nombre = '" + txtHotel.Text + "') ";
-                }
-                if (txtRol.Text != "")
-                {
-                    strQuery = strQuery + " AND ur.rol = (SELECT r.idRol FROM SKYNET.Roles r WHERE r.nombre = '" + txtRol.Text + "') ";
-                }*/
-            strQuery += listaTextos.GenerarWhere(!cbExacta.Checked);
-//            MessageBox.Show(listaTextos.GenerarWhere(false)+" CONTRA "+strQuery);//A ver que tal digo
+            txtOcultoRoles.Text = listaRoles.ObtenerId(txtRol.Text).ToString();
+            txtOcultoHoteles.Text = listaHoteles.ObtenerId(txtHotel.Text).ToString();
+            string strQuery ="SELECT DISTINCT idUser, username, nombre, apellido, mail, (CASE WHEN habilitado =1 THEN 'SI' ELSE 'NO' END) AS estado, fallasPassword " +
+                " FROM SKYNET.Usuarios u, SKYNET.UsuarioRolHotel ur WHERE u.idUser = ur.usuario ";
+            strQuery += listaTextos.GenerarBusqueda(!cbExacta.Checked);
+//            MessageBox.Show(listaTextos.GenerarBusqueda(!cbExacta.Checked)+" CONTRA "+strQuery);//A ver que tal digo
             mostrarResultado(strQuery); //Esta barbaro pero todavia no
         }
         private void mostrarResultado(string strQuery)
@@ -195,12 +152,6 @@ namespace FrbaHotel.ABM_de_Usuario
         {
             txtUsername.Enabled = cbUsername.Checked;
         }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void cbNombre_CheckedChanged_1(object sender, EventArgs e)
         {
             txtNombre.Enabled = cbNombre.Checked;
@@ -251,7 +202,7 @@ namespace FrbaHotel.ABM_de_Usuario
             if (cbDinamica.Checked)
                 btnBuscar_Click(this, e);
         }
-        private void txtMail_TextChanged(object sender, EventArgs e)
+        private void txtMail_TextChanged_1(object sender, EventArgs e)
         {
             if (cbDinamica.Checked)
                 btnBuscar_Click(this, e);

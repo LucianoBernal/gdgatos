@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbDinamica = new System.Windows.Forms.CheckBox();
+            this.cbExacta = new System.Windows.Forms.CheckBox();
             this.cbMail = new System.Windows.Forms.CheckBox();
             this.cbApellido = new System.Windows.Forms.CheckBox();
             this.cbNombre = new System.Windows.Forms.CheckBox();
@@ -54,8 +56,8 @@
             this.btnDeshabilitar = new System.Windows.Forms.Button();
             this.btnHabilitar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
-            this.cbExacta = new System.Windows.Forms.CheckBox();
-            this.cbDinamica = new System.Windows.Forms.CheckBox();
+            this.txtOcultoRoles = new System.Windows.Forms.TextBox();
+            this.txtOcultoHoteles = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +92,30 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscador";
+            // 
+            // cbDinamica
+            // 
+            this.cbDinamica.AutoSize = true;
+            this.cbDinamica.Checked = true;
+            this.cbDinamica.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbDinamica.Location = new System.Drawing.Point(392, 104);
+            this.cbDinamica.Name = "cbDinamica";
+            this.cbDinamica.Size = new System.Drawing.Size(121, 17);
+            this.cbDinamica.TabIndex = 29;
+            this.cbDinamica.Text = "Búsqueda Dinámica";
+            this.cbDinamica.UseVisualStyleBackColor = true;
+            this.cbDinamica.CheckedChanged += new System.EventHandler(this.cbDinamica_CheckedChanged);
+            // 
+            // cbExacta
+            // 
+            this.cbExacta.AutoSize = true;
+            this.cbExacta.Location = new System.Drawing.Point(245, 104);
+            this.cbExacta.Name = "cbExacta";
+            this.cbExacta.Size = new System.Drawing.Size(110, 17);
+            this.cbExacta.TabIndex = 28;
+            this.cbExacta.Text = "Búsqueda Exacta";
+            this.cbExacta.UseVisualStyleBackColor = true;
+            this.cbExacta.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // cbMail
             // 
@@ -179,6 +205,7 @@
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(160, 20);
             this.txtMail.TabIndex = 6;
+            this.txtMail.TextChanged += new System.EventHandler(this.txtMail_TextChanged_1);
             // 
             // label8
             // 
@@ -196,6 +223,7 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(160, 20);
             this.txtApellido.TabIndex = 5;
+            this.txtApellido.TextChanged += new System.EventHandler(this.txtApellido_TextChanged);
             // 
             // txtHotel
             // 
@@ -223,6 +251,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(160, 20);
             this.txtNombre.TabIndex = 4;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // label13
             // 
@@ -329,35 +358,29 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // cbExacta
+            // txtOcultoRoles
             // 
-            this.cbExacta.AutoSize = true;
-            this.cbExacta.Location = new System.Drawing.Point(245, 104);
-            this.cbExacta.Name = "cbExacta";
-            this.cbExacta.Size = new System.Drawing.Size(110, 17);
-            this.cbExacta.TabIndex = 28;
-            this.cbExacta.Text = "Búsqueda Exacta";
-            this.cbExacta.UseVisualStyleBackColor = true;
-            this.cbExacta.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.txtOcultoRoles.Location = new System.Drawing.Point(636, 23);
+            this.txtOcultoRoles.Name = "txtOcultoRoles";
+            this.txtOcultoRoles.Size = new System.Drawing.Size(94, 20);
+            this.txtOcultoRoles.TabIndex = 25;
+            this.txtOcultoRoles.Visible = false;
             // 
-            // cbDinamica
+            // txtOcultoHoteles
             // 
-            this.cbDinamica.AutoSize = true;
-            this.cbDinamica.Checked = true;
-            this.cbDinamica.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbDinamica.Location = new System.Drawing.Point(392, 104);
-            this.cbDinamica.Name = "cbDinamica";
-            this.cbDinamica.Size = new System.Drawing.Size(121, 17);
-            this.cbDinamica.TabIndex = 29;
-            this.cbDinamica.Text = "Búsqueda Dinámica";
-            this.cbDinamica.UseVisualStyleBackColor = true;
-            this.cbDinamica.CheckedChanged += new System.EventHandler(this.cbDinamica_CheckedChanged);
+            this.txtOcultoHoteles.Location = new System.Drawing.Point(638, 53);
+            this.txtOcultoHoteles.Name = "txtOcultoHoteles";
+            this.txtOcultoHoteles.Size = new System.Drawing.Size(91, 20);
+            this.txtOcultoHoteles.TabIndex = 26;
+            this.txtOcultoHoteles.Visible = false;
             // 
             // FrmUsuario_List
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 343);
+            this.ClientSize = new System.Drawing.Size(588, 340);
+            this.Controls.Add(this.txtOcultoHoteles);
+            this.Controls.Add(this.txtOcultoRoles);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnHabilitar);
             this.Controls.Add(this.btnDeshabilitar);
@@ -371,6 +394,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -404,6 +428,8 @@
         private System.Windows.Forms.CheckBox cbUsername;
         private System.Windows.Forms.CheckBox cbExacta;
         private System.Windows.Forms.CheckBox cbDinamica;
+        private System.Windows.Forms.TextBox txtOcultoRoles;
+        private System.Windows.Forms.TextBox txtOcultoHoteles;
 
     }
 }
