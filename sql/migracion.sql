@@ -259,25 +259,22 @@ GO
 ALTER TABLE SKYNET.ConsumiblesEstadias
 NOCHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura; 
 GO
-insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad,numeroFactura)
-select m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto*m.Item_Factura_Cantidad,
-		m.Item_Factura_Cantidad,m.Factura_Nro
-from gd_esquema.Maestra m
-where (m.Consumible_Codigo is not null)
-
 
 
 go
-Create proc SKYNET.updatearConsumiblesMigrados 
+Create trigger SKYNET.triggerMigrarConsumiblesEstadias on SKYNET.ConsumiblesEstadias 
+instead of insert
 AS
-declare @numeroFactura numeric(18,0),@item numeric(18,0),@numeroFacturaAnt numeric(18,0),@idConsumibleEstadia numeric(18,0)
+begin transaction
+declare @numeroFactura numeric(18,0),@item numeric(18,0),@numeroFacturaAnt numeric(18,0)
+declare @estadia numeric(18,0),@consumible numeric(18,0),@precioTotal numeric(18,2),@cantidad numeric(18,0)
 declare cursor_consumibles cursor for
-		 select ce.numeroFactura,ce.idConsumibleEstadia
-		 from SKYNET.ConsumiblesEstadias ce
-		 order by ce.idConsumibleEstadia
+		 select estadia,consumible,precioTotal,cantidad,numeroFactura
+		 from inserted
+		 order by numeroFactura
 		 
 open cursor_consumibles
-fetch next from cursor_consumibles into @numeroFactura,@idConsumibleEstadia
+fetch next from cursor_consumibles into @estadia,@consumible,@precioTotal,@cantidad,@numeroFactura
 set @numeroFacturaAnt=-1
 while @@fetch_status=0
 begin
@@ -287,16 +284,22 @@ else begin
 	set @item=2
 	set @numeroFacturaAnt=@numeroFactura
 	end
-update SKYNET.ConsumiblesEstadias set itemFactura=@item
-where idConsumibleEstadia=@idConsumibleEstadia
-fetch next from cursor_consumibles into @numeroFactura,@idConsumibleEstadia
+insert SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad,numeroFactura,itemFactura) values(@estadia,@consumible,@precioTotal,@cantidad,@numeroFactura,@item)
+fetch next from cursor_consumibles into @estadia,@consumible,@precioTotal,@cantidad,@numeroFactura
 end
 close cursor_consumibles
 deallocate cursor_consumibles
+commit
 go
 
+insert into SKYNET.ConsumiblesEstadias(estadia,consumible,precioTotal,cantidad,numeroFactura)
+select m.Reserva_Codigo,m.Consumible_Codigo,m.Item_Factura_Monto*m.Item_Factura_Cantidad,
+		m.Item_Factura_Cantidad,m.Factura_Nro
+from gd_esquema.Maestra m
+where (m.Consumible_Codigo is not null)
 
-exec SKYNET.updatearConsumiblesMigrados
+
+drop trigger SKYNET.triggerMigrarConsumiblesEstadias
 
 GO
 ALTER TABLE SKYNET.ConsumiblesEstadias
