@@ -63,11 +63,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ABM de Cliente\Form1.cs">
+    <Compile Include="ABM de Cliente\FrmCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM de Cliente\FrmCliente.Designer.cs">
+      <DependentUpon>FrmCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Cliente\FrmCliente_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Cliente\FrmCliente_Alta.Designer.cs">
+      <DependentUpon>FrmCliente_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Cliente\FrmCliente_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Cliente\FrmCliente_List.Designer.cs">
+      <DependentUpon>FrmCliente_List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Cliente\FrmCliente_Mod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Cliente\FrmCliente_Mod.Designer.cs">
+      <DependentUpon>FrmCliente_Mod.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM de Habitacion\Form1.cs">
       <SubType>Form</SubType>
@@ -209,6 +227,18 @@
     <Compile Include="Program.cs">
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ABM de Cliente\FrmCliente.resx">
+      <DependentUpon>FrmCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Cliente\FrmCliente_Alta.resx">
+      <DependentUpon>FrmCliente_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Cliente\FrmCliente_List.resx">
+      <DependentUpon>FrmCliente_List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Cliente\FrmCliente_Mod.resx">
+      <DependentUpon>FrmCliente_Mod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM de Hotel\FrmHotel_Alta.resx">
       <DependentUpon>FrmHotel_Alta.cs</DependentUpon>
     </EmbeddedResource>

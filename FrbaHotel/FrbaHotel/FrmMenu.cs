@@ -11,6 +11,7 @@ using FrbaHotel.Login;
 using FrbaHotel.ABM_de_Rol;
 using FrbaHotel.ABM_de_Usuario;
 using FrbaHotel.ABM_de_Hotel;
+using FrbaHotel.ABM_de_Cliente;
 
 namespace FrbaHotel
 {
@@ -151,6 +152,13 @@ namespace FrbaHotel
             this.Hide();
             FrmHotel hotel = new FrmHotel();
             hotel.ShowDialog();
+        }
+
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FrmCliente cliente = new FrmCliente();
+            cliente.ShowDialog();
         }
 
     }
