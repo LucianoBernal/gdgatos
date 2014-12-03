@@ -336,3 +336,212 @@ select ce.numeroFactura,ce.itemFactura,c.nombre
 from SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
 where ce.consumible=c.codigo
 
+
+/*obtener disponibles*/
+
+go
+create function SKYNET.obtenerDisponibilidad(@fechaInicio datetime,@cantNoches numeric(18,0), 
+											 @hotel numeric(18,0), @tipoHabitacion numeric(18,0))
+returns int
+begin  
+declare @capacidadTotal int
+set @capacidadTotal= (select COUNT(*)
+					from SKYNET.Habitaciones h
+					where h.hotel=@hotel and
+					 h.tipo=@tipoHabitacion)
+declare @i int, @corte int, @result int
+set @i = 0
+set @corte = 1
+while (@i <= @cantNoches and @corte = 1)
+begin	 
+set @result = 
+(				 
+(select COUNT(*) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh
+where rh.idReserva=r.codigoReserva and
+	  rh.idTipoHabitacion=@tipoHabitacion and
+	  r.hotel = @hotel and
+	  r.estado between 3 and 4 and
+	  DATEADD(dd,@i,@fechaInicio) between r.fechaDesde and DATEADD(dd,r.cantNoches,r.fechaDesde)
+)
++	  
+(select COUNT(*) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh, SKYNET.Estadias e
+where rh.idReserva=r.codigoReserva and e.reserva= r.codigoReserva and
+	  rh.idTipoHabitacion=@tipoHabitacion and
+	  r.hotel = @hotel
+	  and
+	  r.estado = 2 and
+	  DATEADD(dd,@i,@fechaInicio) between r.fechaDesde and DATEADD(dd,e.cantNoches,r.fechaDesde)
+)
+)
+	if(@result >= @capacidadTotal)
+	begin
+		set @corte = 0
+	end
+	set @i = @i+1
+end
+  
+return @corte
+
+end
+go
+
+
+/*Mayor cantidad reservas canceladas*/
+go
+CREATE FUNCTION SKYNET.Hotelesconmayorcantidaddereservascanceladas(@anio int,@trimestre smallint )
+RETURNS @retorno TABLE
+   (
+    Hotel     varchar(50),
+    CantidadDeReservasCanceladas   numeric(18,0)
+    )
+AS
+BEGIN
+	Insert into @retorno 
+	select top 5 h.calle+' '+convert(nvarchar(20),h.numCalle),COUNT(*) as CantidadCancelaciones
+	from SKYNET.Hoteles h,SKYNET.Reservas r,SKYNET.Cancelaciones c
+	where r.hotel=h.idHotel and c.reserva=r.codigoReserva and c.reserva is not null and
+	YEAR(c.fechaCancel)=@anio and SKYNET.obtenerTrimestre(c.fechaCancel)=@trimestre
+	group by h.idHotel,h.nombre,h.calle,h.numCalle
+	order by 2 DESC
+	return
+     
+END
+go
+
+/* hoteles con mayor consumibles facturados*/
+go
+CREATE FUNCTION SKYNET.Hotelesconmayorcantidaddeconsumiblesfacturados(@anio int,@trimestre smallint )
+RETURNS @retorno TABLE
+   (
+    Hotel     varchar(50),
+    CantidadDeConsumiblesFacturados   numeric(18,0)
+    )
+AS
+BEGIN
+	Insert into @retorno 
+	select top 5 h.calle+' '+convert(nvarchar(20),h.numCalle),SUM(ce.cantidad) as CantidadConsumibles
+	from SKYNET.Hoteles h,SKYNET.Reservas r,SKYNET.Estadias e,SKYNET.ConsumiblesEstadias ce
+	where r.hotel=h.idHotel and e.reserva=r.codigoReserva and ce.estadia=e.reserva and e.cantNoches is not null and
+	YEAR(DATEADD(DD, e.cantNoches, r.fechaDesde))=@anio and SKYNET.obtenerTrimestre(DATEADD(DD, e.cantNoches, r.fechaDesde))=@trimestre
+	and ce.itemFactura is not null
+	group by h.idHotel,h.nombre,h.calle,h.numCalle
+	order by 2 DESC
+	return
+     
+END
+go
+
+/* hoteles con mayor dias fuera de servicio*/
+go
+CREATE FUNCTION SKYNET.Hotelesconmayorcantidaddediasfueradeservicio(@anio int,@trimestre smallint )
+RETURNS @retorno TABLE
+   (
+    Hotel     varchar(50),
+    CantidadDeDiasFueraDeServicio  numeric(18,0)
+    )
+AS
+BEGIN
+	Insert into @retorno 
+	select top 5 h.calle+' '+convert(nvarchar(20),h.numCalle),SUM(hist.duracion) as CantidadDeDiasFueraDeServicio
+	from SKYNET.Hoteles h,SKYNET.HistorialHoteles hist
+	where hist.hotel=h.idHotel and 
+	YEAR(DATEADD(DD, hist.duracion, hist.fechaBaja))=@anio and SKYNET.obtenerTrimestre(DATEADD(DD, hist.duracion, hist.fechaBaja))=@trimestre
+	group by h.idHotel,h.nombre,h.calle,h.numCalle
+	order by 2 DESC
+	return
+     
+END
+go
+
+
+/* Habitaciones mayor cantidad de dias ocupadas*/
+go
+CREATE FUNCTION SKYNET.Habitacionesconmayorcantidaddediasocupados(@anio int,@trimestre smallint )
+RETURNS @retorno TABLE
+   (
+    Hotel     varchar(50),
+    Habitacion numeric(18,0),
+    CantidadDeDiasOcupada  numeric(18,0)
+    )
+AS
+BEGIN
+	Insert into @retorno 
+	select top 5 h.calle+' '+convert(nvarchar(20),h.numCalle),eh.idHabitacion,SUM(e.cantNoches) as CantidadDeDiasOcupada
+	from SKYNET.Hoteles h,SKYNET.EstadiaPorHabitacion eh,SKYNET.Estadias e, SKYNET.Reservas r
+	where eh.idHotel =h.idHotel and eh.idEstadia=e.reserva and e.reserva=r.codigoReserva and
+	YEAR(DATEADD(DD, e.cantNoches, r.fechaDesde))=@anio and SKYNET.obtenerTrimestre(DATEADD(DD, e.cantNoches, r.fechaDesde))=@trimestre
+	group by h.idHotel,h.nombre,h.calle,h.numCalle,eh.idHabitacion
+	order by 3 DESC
+	return
+     
+END
+go
+
+
+/* Habitaciones mayor cantidad de veces ocupada*/
+go
+CREATE FUNCTION SKYNET.Habitacionesconmayorcantidaddevecesocupadas(@anio int,@trimestre smallint )
+RETURNS @retorno TABLE
+   (
+    Hotel     varchar(50),
+    Habitacion numeric(18,0),
+    CantidadDeVecesOcupada  numeric(18,0)
+    )
+AS
+BEGIN
+	Insert into @retorno 
+	select top 5 h.calle+' '+convert(nvarchar(20),h.numCalle),eh.idHabitacion,count(eh.idEstadia) as CantidadDeVecesOcupada
+	from SKYNET.Hoteles h,SKYNET.EstadiaPorHabitacion eh,SKYNET.Estadias e, SKYNET.Reservas r
+	where eh.idHotel =h.idHotel and eh.idEstadia=e.reserva and e.reserva=r.codigoReserva and
+	YEAR(DATEADD(DD, e.cantNoches, r.fechaDesde))=@anio and SKYNET.obtenerTrimestre(DATEADD(DD, e.cantNoches, r.fechaDesde))=@trimestre
+	group by h.idHotel,h.nombre,h.calle,h.numCalle,eh.idHabitacion
+	order by 3 DESC
+	return
+     
+END
+go
+
+
+/* Clientes mayor cantidad de Puntos*/
+go
+CREATE FUNCTION SKYNET.Clientesconmayorcantidaddepuntos(@anio int,@trimestre smallint )
+RETURNS @retorno TABLE
+   (
+    idCliente numeric(18,0),
+    Nombre    varchar(255),
+    CantidadDePuntos  numeric(18,0)
+    )
+AS
+BEGIN
+	Insert into @retorno 
+	select top 5 c.idCliente,c.apellido+','+c.nombre as 'Apellido,nombre',floor(sum(e.precioPorNocheEstadia*r.cantNoches)/10)+ floor((select sum(ce.precioTotal)/5
+																	   from SKYNET.ConsumiblesEstadias ce,SKYNET.Estadias e2,SKYNET.Reservas r2
+																	   where ce.estadia=e2.reserva and
+																	   e2.reserva=r2.codigoReserva  and
+																	   YEAR(DATEADD(DD, e2.cantNoches, r2.fechaDesde))=@anio and SKYNET.obtenerTrimestre(DATEADD(DD, e2.cantNoches, r2.fechaDesde))=@trimestre 
+																	   and r2.cliente=c.idCliente and ce.numeroFactura is not null and ce.itemFactura is not null
+																	   ))as CantidadDePuntos
+	from SKYNET.Clientes c,SKYNET.Reservas r,SKYNET.Estadias e
+	where r.cliente=c.idCliente and e.reserva=r.codigoReserva and e.numeroFactura is not null and e.itemFactura is not null and
+	YEAR(DATEADD(DD, e.cantNoches, r.fechaDesde))=@anio and SKYNET.obtenerTrimestre(DATEADD(DD, e.cantNoches, r.fechaDesde))=@trimestre
+	group by c.idCliente,c.apellido,c.nombre
+	order by 3 DESC
+	return
+     
+END
+go
+
+
+/* ------ funciones auxiliares-----*/
+GO
+CREATE FUNCTION SKYNET.obtenerTrimestre(@fecha datetime)
+returns smallint
+begin
+return (select case when month(@fecha)<=3 then 1
+				   when month(@fecha)<=6 then 2
+				   when month(@fecha)<=9 then 3
+				   when month(@fecha)<=12 then 4
+				   end)
+end
+go
+
