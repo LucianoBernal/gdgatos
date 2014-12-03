@@ -1,6 +1,6 @@
 /*Mayor cantidad reservas canceladas*/
 go
-CREATE FUNCTION SKYNET.hotelesMayorCantidadDeReservasCanceladas(@anio int,@trimestre smallint )
+CREATE FUNCTION SKYNET.Hotelesconmayorcantidaddereservascanceladas(@anio int,@trimestre smallint )
 RETURNS @retorno TABLE
    (
     Hotel     varchar(50),
@@ -21,13 +21,13 @@ END
 go
 
 /* --------- ---*/
-drop function SKYNET.hotelesMayorCantidadDeReservasCanceladas
+drop function SKYNET.Hotelesconmayorcantidaddereservascanceladas
 
 /*----- ---*/
 
 /* hoteles con mayor consumibles facturados*/
 go
-CREATE FUNCTION SKYNET.hotelesMayorCantidadDeConsumiblesFacturados(@anio int,@trimestre smallint )
+CREATE FUNCTION SKYNET.Hotelesconmayorcantidaddeconsumiblesfacturados(@anio int,@trimestre smallint )
 RETURNS @retorno TABLE
    (
     Hotel     varchar(50),
@@ -49,13 +49,13 @@ END
 go
 
 /* --------- ---*/
-drop function SKYNET.hotelesMayorCantidadDeConsumiblesFacturados
+drop function SKYNET.Hotelesconmayorcantidaddeconsumiblesfacturados
 
 /*----- ---*/
 
 /* hoteles con mayor dias fuera de servicio*/
 go
-CREATE FUNCTION SKYNET.hotelesMayorCantidadDiasFueraDeServicio(@anio int,@trimestre smallint )
+CREATE FUNCTION SKYNET.Hotelesconmayorcantidaddediasfueradeservicio(@anio int,@trimestre smallint )
 RETURNS @retorno TABLE
    (
     Hotel     varchar(50),
@@ -76,7 +76,7 @@ END
 go
 
 /* --------- ---*/
-drop function SKYNET.hotelesMayorCantidadDiasFueraDeServicio
+drop function SKYNET.Hotelesconmayorcantidaddediasfueradeservicio
 
 /*----- ---*/
 
@@ -84,7 +84,7 @@ drop function SKYNET.hotelesMayorCantidadDiasFueraDeServicio
 
 /* Habitaciones mayor cantidad de dias ocupadas*/
 go
-CREATE FUNCTION SKYNET.habitacionesMayorCantidadDeDiasOcupada(@anio int,@trimestre smallint )
+CREATE FUNCTION SKYNET.Habitacionesconmayorcantidaddediasocupados(@anio int,@trimestre smallint )
 RETURNS @retorno TABLE
    (
     Hotel     varchar(50),
@@ -106,14 +106,14 @@ END
 go
 
 /* --------- ---*/
-drop function SKYNET.habitacionesMayorCantidadDeDiasOcupada
+drop function SKYNET.Habitacionesconmayorcantidaddediasocupados
 
 /*----- ---*/
 
 
 /* Habitaciones mayor cantidad de veces ocupada*/
 go
-CREATE FUNCTION SKYNET.habitacionesMayorCantidadDeVecesOcupada(@anio int,@trimestre smallint )
+CREATE FUNCTION SKYNET.Habitacionesconmayorcantidaddevecesocupadas(@anio int,@trimestre smallint )
 RETURNS @retorno TABLE
    (
     Hotel     varchar(50),
@@ -135,7 +135,7 @@ END
 go
 
 /* --------- ---*/
-drop function SKYNET.habitacionesMayorCantidadDeVecesOcupada
+drop function SKYNET.Habitacionesconmayorcantidaddevecesocupadas
 
 /*----- ---*/
 
@@ -143,7 +143,7 @@ drop function SKYNET.habitacionesMayorCantidadDeVecesOcupada
 
 /* Clientes mayor cantidad de Puntos*/
 go
-CREATE FUNCTION SKYNET.clientesMayorCantidadDePuntos(@anio int,@trimestre smallint )
+CREATE FUNCTION SKYNET.Clientesconmayorcantidaddepuntos(@anio int,@trimestre smallint )
 RETURNS @retorno TABLE
    (
     idCliente numeric(18,0),
@@ -171,7 +171,7 @@ END
 go
 
 /* --------- ---*/
-drop function SKYNET.clientesMayorCantidadDePuntos
+drop function SKYNET.Clientesconmayorcantidaddepuntos
 
 /*----- ---*/
 
@@ -208,21 +208,21 @@ SELECT SKYNET.obtenerTrimestre(DATEADD(mm, 2, getdate()))
 
 
 SELECT *
-from SKYNET.hotelesMayorCantidadDeReservasCanceladas(2014,1)
+from SKYNET.Hotelesconmayorcantidaddereservascanceladas(2014,1)
 
 
 SELECT *
-from SKYNET.hotelesMayorCantidadDeConsumiblesFacturados(2013,1)
+from SKYNET.Hotelesconmayorcantidaddeconsumiblesfacturados(2013,1)
 
 SELECT *
-from SKYNET.hotelesMayorCantidadDiasFueraDeServicio(2013,1)
+from SKYNET.Hotelesconmayorcantidaddediasfueradeservicio(2013,1)
 
 SELECT *
-from SKYNET.habitacionesMayorCantidadDeDiasOcupada(2013,1)
+from SKYNET.Habitacionesconmayorcantidaddediasocupados(2013,1)
 
 SELECT *
-from SKYNET.habitacionesMayorCantidadDeVecesOcupada(2013,1)
+from SKYNET.Habitacionesconmayorcantidaddevecesocupadas(2013,1)
 
 SELECT *
-from SKYNET.clientesMayorCantidadDePuntos(2013,1)
+from SKYNET.Clientesconmayorcantidaddepuntos(2013,1)
 
