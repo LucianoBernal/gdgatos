@@ -11,6 +11,7 @@ using FrbaHotel.Login;
 using FrbaHotel.ABM_de_Rol;
 using FrbaHotel.ABM_de_Usuario;
 using FrbaHotel.ABM_de_Hotel;
+using FrbaHotel.Generar_Modificar_Reserva;
 using FrbaHotel.ABM_de_Cliente;
 
 namespace FrbaHotel
@@ -21,7 +22,16 @@ namespace FrbaHotel
         private string nombreUsuario;
         private int idRol;
         Funciones fn = new Funciones();
+        public void RespuestaDialog(string respuesta, int tipoResp)
+        {
+            if (tipoResp == 1 && respuesta != null)
+            {
+                FrmReserva nuevo = new FrmReserva(Convert.ToUInt32(respuesta), this);
+                this.Hide();
+                nuevo.Show();
+            }
 
+        }
         public FrmMenu()
         {
             InitializeComponent();
@@ -38,7 +48,7 @@ namespace FrbaHotel
             this.btnRegimenEstadia.Visible = false;
             this.btnRegistrarConsumible.Visible = false;
             this.btnRegistrarEstadia.Visible = false;
-            this.btnReserva.Visible = false;
+            this.btnReserva.Visible = true;
             this.btnRoles.Visible = false;
             this.btnUsuario.Visible = false;
             linkCambiarContraseña.Visible = false;
@@ -154,12 +164,36 @@ namespace FrbaHotel
             hotel.ShowDialog();
         }
 
-        private void btnClientes_Click(object sender, EventArgs e)
+        private void btnRegimenEstadia_Click(object sender, EventArgs e)
+        {
+            
+//            MessageBox.Show("Ingrese el numero de reserva, si desea crear una nueva, ingrese 0", 
+            this.Hide();
+            FrmHotel hotel = new FrmHotel();
+            hotel.ShowDialog();
+        }
+
+        private void btnReserva_Click(object sender, EventArgs e)
+        {
+            FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva, de lo contrario ingrese 0");
+            this.Hide();
+            dialog.Show();
+
+        }
+
+	private void btnClientes_Click(object sender, EventArgs e)
         {
             this.Hide();
             FrmCliente cliente = new FrmCliente();
-            cliente.ShowDialog();
+            cliente.Show();
         }
+
+    private void btnClientes_Click_1(object sender, EventArgs e)
+    {
+        this.Hide();
+        FrmCliente cliente = new FrmCliente();
+        cliente.Show();
+    }
 
     }
 }

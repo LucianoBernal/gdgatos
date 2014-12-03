@@ -38,5 +38,10 @@ namespace FrbaHotel.ABM_de_Cliente
             frmMenu.ShowDialog();
             frmMenu = (FrmMenu)this.ActiveMdiChild;
         }
+
+        private void FrmCliente_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

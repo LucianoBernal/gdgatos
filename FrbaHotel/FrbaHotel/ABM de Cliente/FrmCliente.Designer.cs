@@ -73,6 +73,7 @@
             this.Controls.Add(this.botonListado);
             this.Name = "FrmCliente";
             this.Text = "ABM de Clientes";
+            this.Load += new System.EventHandler(this.FrmCliente_Load);
             this.ResumeLayout(false);
 
         }

@@ -110,6 +110,7 @@
             this.btnRegimenEstadia.TabIndex = 31;
             this.btnRegimenEstadia.Text = "ABM Regimen/Estadia";
             this.btnRegimenEstadia.UseVisualStyleBackColor = true;
+            this.btnRegimenEstadia.Click += new System.EventHandler(this.btnRegimenEstadia_Click);
             // 
             // btnReserva
             // 
@@ -119,6 +120,7 @@
             this.btnReserva.TabIndex = 27;
             this.btnReserva.Text = "Generar o Modificar Reserva";
             this.btnReserva.UseVisualStyleBackColor = true;
+            this.btnReserva.Click += new System.EventHandler(this.btnReserva_Click);
             // 
             // btnHotel
             // 
@@ -138,7 +140,7 @@
             this.btnClientes.TabIndex = 25;
             this.btnClientes.Text = "ABM Clientes";
             this.btnClientes.UseVisualStyleBackColor = true;
-            this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click);
+            this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click_1);
             // 
             // btnSalir
             // 
