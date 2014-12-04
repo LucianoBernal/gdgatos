@@ -66,9 +66,11 @@ end
 
 insert SKYNET.Reservas(hotel,cliente)values(1,(select top 1 c.idCliente from SKYNET.Clientes c))
 insert SKYNET.Estadias(reserva,cantNoches) values((select MAX(r.codigoReserva) from SKYNET.Reservas r),5)
-insert SKYNET.ConsumiblesEstadias(estadia,consumible) values(110746,2324)
-insert SKYNET.ConsumiblesEstadias(estadia,consumible) values(110746,2325)
+insert SKYNET.ConsumiblesEstadias(estadia,consumible) values((select MAX(r.codigoReserva) from SKYNET.Reservas r),2324)
+insert SKYNET.ConsumiblesEstadias(estadia,consumible) values((select MAX(r.codigoReserva) from SKYNET.Reservas r),2325)
 
-exec SKYNET.facturarUnaEstadia @estadia=110746 , @fecha=null
+(select MAX(r.codigoReserva) from SKYNET.Reservas r)
+
+exec SKYNET.facturarUnaEstadia @estadia=110743, @fecha=null
 								,@nombreTipoPago='Tarjeta Credito',	
 								@numTarjeta=123456,@datosTarjeta='pepe'
