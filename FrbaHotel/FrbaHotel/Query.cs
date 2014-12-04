@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace FrbaHotel
 {
@@ -25,6 +26,7 @@ namespace FrbaHotel
 
         public Query(string _Comando)
         {
+//            MessageBox.Show(_Comando);
             this.pComando = _Comando;
         }
 

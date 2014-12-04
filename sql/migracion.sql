@@ -344,9 +344,7 @@ select ce.numeroFactura,ce.itemFactura,c.nombre
 from SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
 where ce.consumible=c.codigo
 
-
 /*obtener disponibles*/
-
 go
 create function SKYNET.obtenerDisponibilidad(@fechaInicio datetime,@cantNoches numeric(18,0), 
 											 @hotel numeric(18,0), @tipoHabitacion numeric(18,0))
@@ -364,7 +362,7 @@ while (@i <= @cantNoches and @corte = 1)
 begin	 
 set @result = 
 (				 
-(select COUNT(*) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh
+(select COALESCE(SUM(rh.cantidad),0) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh
 where rh.idReserva=r.codigoReserva and
 	  rh.idTipoHabitacion=@tipoHabitacion and
 	  r.hotel = @hotel and
@@ -372,7 +370,7 @@ where rh.idReserva=r.codigoReserva and
 	  DATEADD(dd,@i,@fechaInicio) between r.fechaDesde and DATEADD(dd,r.cantNoches,r.fechaDesde)
 )
 +	  
-(select COUNT(*) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh, SKYNET.Estadias e
+(select COALESCE(SUM(rh.cantidad),0) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh, SKYNET.Estadias e
 where rh.idReserva=r.codigoReserva and e.reserva= r.codigoReserva and
 	  rh.idTipoHabitacion=@tipoHabitacion and
 	  r.hotel = @hotel

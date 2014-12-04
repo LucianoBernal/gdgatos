@@ -58,6 +58,8 @@
             this.txtOcultoCantNoches = new System.Windows.Forms.TextBox();
             this.txtOcultoHotel = new System.Windows.Forms.TextBox();
             this.txtOcultoCliente = new System.Windows.Forms.TextBox();
+            this.txtDisponibilidad = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -179,6 +181,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.txtDisponibilidad);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.dtpFechaHasta);
@@ -198,7 +202,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(83, 124);
+            this.label7.Location = new System.Drawing.Point(14, 118);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 13);
             this.label7.TabIndex = 10;
@@ -207,7 +211,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(83, 98);
+            this.label4.Location = new System.Drawing.Point(14, 92);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 13);
             this.label4.TabIndex = 9;
@@ -215,23 +219,26 @@
             // 
             // dtpFechaHasta
             // 
-            this.dtpFechaHasta.Location = new System.Drawing.Point(200, 118);
+            this.dtpFechaHasta.Location = new System.Drawing.Point(131, 112);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
             this.dtpFechaHasta.Size = new System.Drawing.Size(195, 20);
             this.dtpFechaHasta.TabIndex = 8;
+            this.dtpFechaHasta.ValueChanged += new System.EventHandler(this.dtpFechaHasta_ValueChanged);
             // 
             // dtpFechaDesde
             // 
-            this.dtpFechaDesde.Location = new System.Drawing.Point(200, 92);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(131, 86);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(195, 20);
             this.dtpFechaDesde.TabIndex = 7;
+            this.dtpFechaDesde.ValueChanged += new System.EventHandler(this.dtpFechaDesde_ValueChanged);
             // 
             // btnRunBaby
             // 
-            this.btnRunBaby.Location = new System.Drawing.Point(86, 164);
+            this.btnRunBaby.Enabled = false;
+            this.btnRunBaby.Location = new System.Drawing.Point(219, 169);
             this.btnRunBaby.Name = "btnRunBaby";
-            this.btnRunBaby.Size = new System.Drawing.Size(290, 25);
+            this.btnRunBaby.Size = new System.Drawing.Size(107, 25);
             this.btnRunBaby.TabIndex = 6;
             this.btnRunBaby.Text = "btnPiolin";
             this.btnRunBaby.UseVisualStyleBackColor = true;
@@ -240,22 +247,24 @@
             // txtRegimenIns
             // 
             this.txtRegimenIns.FormattingEnabled = true;
-            this.txtRegimenIns.Location = new System.Drawing.Point(254, 65);
+            this.txtRegimenIns.Location = new System.Drawing.Point(185, 59);
             this.txtRegimenIns.Name = "txtRegimenIns";
             this.txtRegimenIns.Size = new System.Drawing.Size(125, 21);
             this.txtRegimenIns.TabIndex = 4;
+            this.txtRegimenIns.SelectedIndexChanged += new System.EventHandler(this.txtRegimenIns_SelectedIndexChanged);
             // 
             // txtCantHuespedes
             // 
-            this.txtCantHuespedes.Location = new System.Drawing.Point(254, 37);
+            this.txtCantHuespedes.Location = new System.Drawing.Point(185, 31);
             this.txtCantHuespedes.Name = "txtCantHuespedes";
             this.txtCantHuespedes.Size = new System.Drawing.Size(125, 20);
             this.txtCantHuespedes.TabIndex = 3;
+            this.txtCantHuespedes.TextChanged += new System.EventHandler(this.txtCantHuespedes_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(83, 68);
+            this.label6.Location = new System.Drawing.Point(14, 62);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 13);
             this.label6.TabIndex = 1;
@@ -264,7 +273,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(83, 40);
+            this.label5.Location = new System.Drawing.Point(14, 34);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(119, 13);
             this.label5.TabIndex = 0;
@@ -333,6 +342,23 @@
             this.txtOcultoCliente.TabIndex = 9;
             this.txtOcultoCliente.Visible = false;
             // 
+            // txtDisponibilidad
+            // 
+            this.txtDisponibilidad.Enabled = false;
+            this.txtDisponibilidad.Location = new System.Drawing.Point(23, 169);
+            this.txtDisponibilidad.Name = "txtDisponibilidad";
+            this.txtDisponibilidad.Size = new System.Drawing.Size(148, 20);
+            this.txtDisponibilidad.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(28, 147);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Disponibilidad";
+            // 
             // FrmReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -393,5 +419,7 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtOcultoHotel;
         private System.Windows.Forms.TextBox txtOcultoCliente;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtDisponibilidad;
     }
 }
