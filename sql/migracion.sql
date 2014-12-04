@@ -202,11 +202,6 @@ where r.estado=1/*cancelada*/
 /*------------------------------------------------------------------------------*/
 /*migro estadias*/
 
-GO
-ALTER TABLE SKYNET.Estadias
-NOCHECK CONSTRAINT FK_Estadias_ItemsFactura; 
-GO
-
 
 insert into SKYNET.Estadias (reserva,cantNoches,precioPorNocheEstadia,numeroFactura,itemFactura)
 select distinct m.Reserva_Codigo,m.Estadia_Cant_Noches,(
@@ -222,11 +217,6 @@ group by m3.Factura_Nro)
 		from gd_esquema.Maestra m
 where(m.Estadia_Cant_Noches is not null)
 
-
-GO
-ALTER TABLE SKYNET.Estadias
-CHECK CONSTRAINT FK_Estadias_ItemsFactura; 
-GO
 
 /*------------------------------------------------------------------------------*/
 /*migro tipoPago*/
@@ -256,11 +246,6 @@ select   r.cliente,r.codigoReserva
 from SKYNET.Reservas r
 where r.estado=2 /*estado efectivizado*/
 /*------------------------------------------------------------------------------*/
-GO
-ALTER TABLE SKYNET.ConsumiblesEstadias
-NOCHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura; 
-GO
-
 
 go
 Create trigger SKYNET.triggerMigrarConsumiblesEstadias on SKYNET.ConsumiblesEstadias 
@@ -302,10 +287,6 @@ where (m.Consumible_Codigo is not null)
 
 drop trigger SKYNET.triggerMigrarConsumiblesEstadias
 
-GO
-ALTER TABLE SKYNET.ConsumiblesEstadias
-CHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura; 
-GO
 /*------------------------------------------------------------------------------*/
 /*Migro estadiasPorHabitacion*/
 insert into SKYNET.EstadiaPorHabitacion(idHotel,idHabitacion,idEstadia)
@@ -545,3 +526,97 @@ return (select case when month(@fecha)<=3 then 1
 end
 go
 
+
+
+
+
+/* agrego Identitys*/
+/*Facturas*/
+GO
+CREATE TABLE [SKYNET].[Facturas2](
+	[facturaNumero] [numeric](18, 0) IDENTITY(2486348,1) NOT NULL,
+	[fecha] [datetime] NOT NULL,
+	[tipoPago] [numeric](18, 0) NOT NULL,
+	[monto] [numeric](18, 2) NOT NULL,
+	[estadia] [numeric](18, 0) NOT NULL,
+	[diferenciaInconsistencia] [numeric](18, 0) NULL,
+ CONSTRAINT [PK_Factura2] PRIMARY KEY CLUSTERED 
+(
+	[facturaNumero] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ ALTER TABLE SKYNET.Facturas SWITCH TO SKYNET.Facturas2;
+
+ DROP TABLE SKYNET.Facturas;
+
+ EXEC sp_rename 'SKYNET.Facturas2','Facturas';
+
+/*  [TiposHabitacion] */
+
+GO
+CREATE TABLE [SKYNET].[TiposHabitacion2](
+	[codigo] [numeric](18, 0) IDENTITY(1006,1) NOT NULL,
+	[descripcion] [nvarchar](255) NULL,
+	[porcentual] [numeric](18, 2) NOT NULL,
+ CONSTRAINT [PK_TipoHabitacion2] PRIMARY KEY CLUSTERED 
+(
+	[codigo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ ALTER TABLE SKYNET.[TiposHabitacion] SWITCH TO SKYNET.[TiposHabitacion2];
+
+ DROP TABLE SKYNET.[TiposHabitacion];
+
+ EXEC sp_rename 'SKYNET.TiposHabitacion2','TiposHabitacion';
+ 
+ 
+ /* [Consumibles] */
+ GO
+CREATE TABLE [SKYNET].[Consumibles2](
+	[codigo] [numeric](18, 0)  IDENTITY(2328,1) NOT NULL,
+	[nombre] [nvarchar](255) NULL,
+	[precio] [numeric](18, 2) NOT NULL,
+ CONSTRAINT [PK_Consumible2] PRIMARY KEY CLUSTERED 
+(
+	[codigo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ 
+ ALTER TABLE SKYNET.Consumibles SWITCH TO SKYNET.Consumibles2;
+
+ DROP TABLE SKYNET.Consumibles;
+
+ EXEC sp_rename 'SKYNET.Consumibles2','Consumibles';
+ 
+ 
+ /* [Reservas] */
+
+ GO
+CREATE TABLE [SKYNET].[Reservas2](
+	[codigoReserva] [numeric](18, 0) IDENTITY(110741,1) NOT NULL,
+	[hotel] [numeric](18, 0) NULL,
+	[regimen] [numeric](18, 0) NULL,
+	[fechaReserva] [datetime] NULL,
+	[fechaDesde] [datetime] NULL,
+	[cantNoches] [numeric](18, 0) NULL,
+	[estado] [numeric](18, 0) NULL,
+	[cliente] [numeric](18, 0) NULL,
+ CONSTRAINT [PK_Reserva2] PRIMARY KEY CLUSTERED 
+(
+	[codigoReserva] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ ALTER TABLE SKYNET.Reservas SWITCH TO SKYNET.Reservas2;
+
+ DROP TABLE SKYNET.Reservas;
+
+ EXEC sp_rename 'SKYNET.Reservas2','Reservas';
