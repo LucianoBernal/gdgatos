@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel.ABM_de_Cliente;
 
 namespace FrbaHotel.Generar_Modificar_Reserva
 {
@@ -37,6 +38,50 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             AgregarTextos();
             if (nroReserva>0) CargarDatos(nroReserva);
         }
+        public void ObtenerCliente() {
+            FrmCliente_List nuevo = new FrmCliente_List(this);
+            this.Hide();
+            nuevo.Show();
+        }
+        public void ReciboElIdCliente(int idCliente)
+        {
+            if ((dtpFechaHasta.Value - dtpFechaDesde.Value).Days > 0)
+            {
+                DataGridViewRow idHotel = dataResultado.SelectedRows[0];
+                txtOcultoCliente.Text = idCliente.ToString();
+                txtOcultoHotel.Text = idHotel.Cells["idHotel"].Value.ToString();
+                txtOcultoRegimenIns.Text = listaRegimenIns.ObtenerId(txtRegimenIns.Text).ToString();
+                txtOcultoFechaDesde.Text = dtpFechaDesde.Value.ToString("dd-MM-yyyy");
+                txtOcultoCantNoches.Text = ((dtpFechaHasta.Value - dtpFechaDesde.Value).Days).ToString();
+                Query qry =
+                this.EsGenerar ?
+                new Query("INSERT INTO SKYNET.Reservas " + listaTextosInsert.GenerarInsert()) : new Query("UPDATE SKYNET.Reservas SET " + listaTextosInsert.GenerarUpdate() + ", estado = 4 WHERE codigoReserva = " + IdReserva.ToString());
+                MessageBox.Show(qry.pComando);
+                qry.Ejecutar();
+                if (!EsGenerar)
+                    new Query("DELETE FROM SKYNET.ReservasPorTipoHabitacion WHERE idReserva = " + IdReserva.ToString()).Ejecutar();
+                else
+                    IdReserva = Convert.ToInt32(new Query("SELECT IDENT_CURRENT('SKYNET.Reservas')").ObtenerUnicoCampo());
+                int cantHuespedes = Convert.ToInt32(txtCantHuespedes.Text);
+                if (cantHuespedes>5)
+                    new Query("INSERT INTO SKYNET.ReservasPorTipoHabitacion (idReserva, idTipoHabitacion, cantidad) VALUES (" + IdReserva.ToString() + ", " + 1005.ToString() + ", " + (cantHuespedes/5).ToString() + ")").Ejecutar();
+                new Query("INSERT INTO SKYNET.ReservasPorTipoHabitacion (idReserva, idTipoHabitacion, cantidad) VALUES (" + IdReserva.ToString() + ", " + (1000 + (cantHuespedes % 5)).ToString() +", "+ cantHuespedes.ToString()+ ")").Ejecutar();
+                this.Hide();
+                MessageBox.Show("Su numero de reserva es " + IdReserva.ToString());
+                this.Padre.Show();
+            }
+            else
+            {
+                MessageBox.Show("Revisa las Fechas hijo");
+            }
+//            MessageBox.Show("El idCliente Recibido es: " + idCliente.ToString());
+        }
+        public void FallaElObtenerCliente()
+        {
+            MessageBox.Show("Dado que no ha ingresado un cliente, no es posible realizar la reserva");
+            this.Hide();
+            this.Padre.Show();
+        }
         public void CargarDatos(uint nroReserva){
             Query query = new Query("SELECT hotel, fechaDesde, cantNoches, regimen FROM SKYNET.Reservas WHERE codigoReserva = " + IdReserva.ToString());
             foreach (DataRow elem in query.ObtenerDataTable().AsEnumerable())
@@ -60,42 +105,13 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             listaTextosInsert.Agregar(txtOcultoRegimenIns, false, "regimen");
             listaTextosInsert.Agregar(txtOcultoFechaDesde, true, "fechaDesde");
             listaTextosInsert.Agregar(txtOcultoCantNoches, false, "cantNoches");
+            listaTextosInsert.Agregar(txtOcultoCliente, false, "cliente");
         }
 
 
         private void btnRunBaby_Click(object sender, EventArgs e)
         {
-            if ((dtpFechaHasta.Value - dtpFechaDesde.Value).Days > 0)
-            {
-                DataGridViewRow idHotel = dataResultado.SelectedRows[0];
-                txtOcultoHotel.Text = idHotel.Cells["idHotel"].Value.ToString();
-                txtOcultoRegimenIns.Text = listaRegimenIns.ObtenerId(txtRegimenIns.Text).ToString();
-                txtOcultoFechaDesde.Text = dtpFechaDesde.Value.ToString("dd-MM-yyyy");
-                txtOcultoCantNoches.Text = ((dtpFechaHasta.Value - dtpFechaDesde.Value).Days).ToString();
-                if (EsGenerar)
-                    new Query("DELETE FROM SKYNET.ReservasPorTipoHabitacion WHERE idReserva = " + IdReserva.ToString()).Ejecutar();
-                else
-                    IdReserva = Convert.ToInt32(new Query("SELECT MAX(codigoReserva) FROM SKYNET.Reservas").ObtenerUnicoCampo()) + 1;
-                Query qry =
-                this.EsGenerar ?
-                new Query("INSERT INTO SKYNET.Reservas " + listaTextosInsert.GenerarInsert()) : new Query("UPDATE SKYNET.Reservas SET " + listaTextosInsert.GenerarUpdate() + ", estado = 4 WHERE codigoReserva = " + IdReserva.ToString());
-                MessageBox.Show(qry.pComando);
-                qry.Ejecutar();
-                int cantHuespedes = Convert.ToInt32(txtCantHuespedes.Text);
-                for (int i = 0; i < cantHuespedes / 5; i++)
-                {
-                    new Query("INSERT INTO SKYNET.ReservasPorTipoHabitacion (idReserva, idTipoHabitacion) VALUES (" + IdReserva.ToString() + ", " + 1005.ToString() + ")").Ejecutar();
-                }
-                new Query("INSERT INTO SKYNET.ReservasPorTipoHabitacion (idReserva, idTipoHabitacion) VALUES (" + IdReserva.ToString() + ", " + (1000+(cantHuespedes%5)).ToString() + ")").Ejecutar();
-                this.Hide();
-                MessageBox.Show("Su numero de reserva es " + IdReserva.ToString());
-                this.Padre.Show();
-            }
-            else 
-            {
-                MessageBox.Show("Revisa las Fechas hijo");
-            }
-
+            ObtenerCliente();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

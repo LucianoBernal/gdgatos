@@ -15,6 +15,7 @@ using FrbaHotel.Generar_Modificar_Reserva;
 using FrbaHotel.ABM_de_Cliente;
 using FrbaHotel.Cancelar_Reserva;
 using FrbaHotel.Registrar_Consumible;
+using FrbaHotel.Listado_Estadistico;
 
 namespace FrbaHotel
 {
@@ -134,7 +135,7 @@ namespace FrbaHotel
             this.btnFacturar.Visible = false;
             this.btnHabitacion.Visible = false;
             this.btnHotel.Visible = false;
-            this.btnListadoEstadistico.Visible = false;
+//            this.btnListadoEstadistico.Visible = false;
             this.btnRegimenEstadia.Visible = false;
  //           this.btnRegistrarConsumible.Visible = false;
             this.btnRegistrarEstadia.Visible = false;
@@ -297,6 +298,13 @@ namespace FrbaHotel
         this.Hide();
         FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva asociado a la estadia", 3);
         dialog.Show();
+    }
+
+    private void btnListadoEstadistico_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        FrmListadoEstadistico nuevo = new FrmListadoEstadistico();
+        nuevo.Show();
     }
 
     }

@@ -93,6 +93,7 @@
             this.btnListadoEstadistico.TabIndex = 33;
             this.btnListadoEstadistico.Text = "Listado Estadístico";
             this.btnListadoEstadistico.UseVisualStyleBackColor = true;
+            this.btnListadoEstadistico.Click += new System.EventHandler(this.btnListadoEstadistico_Click);
             // 
             // btnHabitacion
             // 

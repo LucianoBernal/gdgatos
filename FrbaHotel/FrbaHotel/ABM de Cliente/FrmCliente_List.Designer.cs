@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtOcultoTipo = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.cbDinamica = new System.Windows.Forms.CheckBox();
             this.cbExacta = new System.Windows.Forms.CheckBox();
@@ -48,12 +49,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtOcultoTipo = new System.Windows.Forms.TextBox();
             this.dataResultado = new System.Windows.Forms.DataGridView();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnHabilitar = new System.Windows.Forms.Button();
             this.btnDeshabilitar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.SuspendLayout();
@@ -86,6 +87,14 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscador";
+            // 
+            // txtOcultoTipo
+            // 
+            this.txtOcultoTipo.Location = new System.Drawing.Point(332, 72);
+            this.txtOcultoTipo.Name = "txtOcultoTipo";
+            this.txtOcultoTipo.Size = new System.Drawing.Size(100, 20);
+            this.txtOcultoTipo.TabIndex = 31;
+            this.txtOcultoTipo.Visible = false;
             // 
             // txtApellido
             // 
@@ -161,6 +170,8 @@
             // cbApellido
             // 
             this.cbApellido.AutoSize = true;
+            this.cbApellido.Checked = true;
+            this.cbApellido.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbApellido.Location = new System.Drawing.Point(282, 21);
             this.cbApellido.Name = "cbApellido";
             this.cbApellido.Size = new System.Drawing.Size(15, 14);
@@ -272,14 +283,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Apellido:";
             // 
-            // txtOcultoTipo
-            // 
-            this.txtOcultoTipo.Location = new System.Drawing.Point(332, 72);
-            this.txtOcultoTipo.Name = "txtOcultoTipo";
-            this.txtOcultoTipo.Size = new System.Drawing.Size(100, 20);
-            this.txtOcultoTipo.TabIndex = 31;
-            this.txtOcultoTipo.Visible = false;
-            // 
             // dataResultado
             // 
             this.dataResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -329,11 +332,22 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // btnSeleccionar
+            // 
+            this.btnSeleccionar.Location = new System.Drawing.Point(235, 308);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(102, 29);
+            this.btnSeleccionar.TabIndex = 29;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
+            // 
             // FrmCliente_List
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 342);
+            this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnHabilitar);
             this.Controls.Add(this.btnDeshabilitar);
@@ -378,5 +392,6 @@
         private System.Windows.Forms.Button btnHabilitar;
         private System.Windows.Forms.Button btnDeshabilitar;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button btnSeleccionar;
     }
 }

@@ -6,16 +6,31 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel.Generar_Modificar_Reserva;
 
 namespace FrbaHotel.ABM_de_Cliente
 {
+
     public partial class FrmCliente_List : Form
     {
+        public FrmReserva Padre;
         public ListaTextos listaTextos = new ListaTextos();
         public ListaConId listaTipo = new ListaConId();
         public FrmCliente_List()
         {
             InitializeComponent();
+            btnSeleccionar.Visible = false;
+//            btnModificar.Visible = false;
+//            btnHabilitar.Visible = false;
+//            btnDeshabilitar.Visible = false;
+        }
+        public FrmCliente_List(FrmReserva padre)
+        {
+            this.Padre = padre;
+            InitializeComponent();
+            btnSeleccionar.Visible = true;
+            btnVolver.Visible = true;
+            btnVolver.Text = "Crear nuevo usuario";
             btnModificar.Visible = false;
             btnHabilitar.Visible = false;
             btnDeshabilitar.Visible = false;
@@ -38,7 +53,7 @@ namespace FrbaHotel.ABM_de_Cliente
             listaTextos.AgregarConCheck(txtMail, true, "c.mail", cbMail);
             listaTextos.AgregarConCheck(txtNombre, true, "c.nombre", cbNombre);
             listaTextos.AgregarConCheck(txtNumDoc, true, "c.numDoc", cbNumDoc);
-            listaTextos.AgregarConCheck(txtOcultoTipo, false, "t.nombre", cbTipo);
+            listaTextos.AgregarConCheck(txtOcultoTipo, false, "c.tipoDoc", cbTipo);
         }
         private void FrmCliente_List_Load(object sender, EventArgs e)
         {
@@ -51,10 +66,14 @@ namespace FrbaHotel.ABM_de_Cliente
         {
             txtOcultoTipo.Text = listaTipo.ObtenerId(txtTipo.Text).ToString();
             string strQuery = "SELECT DISTINCT c.idCliente, c.nombre, c.apellido, c.mail, (CASE WHEN baja =0 THEN 'SI' ELSE 'NO' END) AS habilitado " +
-                " FROM SKYNET.Clientes c, SKYNET.TiposDoc t WHERE t.idTipoDoc = c.tipoDoc ";
-            strQuery += listaTextos.GenerarBusqueda(!cbExacta.Checked);
-            //            MessageBox.Show(listaTextos.GenerarBusqueda(!cbExacta.Checked)+" CONTRA "+strQuery);//A ver que tal digo
-            mostrarResultado(strQuery); //Esta barbaro pero todavia no
+                " FROM SKYNET.Clientes c WHERE";
+            string aux = listaTextos.GenerarBusqueda(!cbExacta.Checked);
+            if (aux.Length > 4)
+            {
+                strQuery += aux.Substring(4, aux.Length-4); //Para sacar el primer and
+                //            MessageBox.Show(listaTextos.GenerarBusqueda(!cbExacta.Checked)+" CONTRA "+strQuery);//A ver que tal digo
+                mostrarResultado(strQuery); //Esta barbaro pero todavia no
+            }
         }
         private void mostrarResultado(string strQuery)
         {
@@ -62,17 +81,25 @@ namespace FrbaHotel.ABM_de_Cliente
             dataResultado.DataSource = resultado.ObtenerDataTable();
             dataResultado.Columns["idCliente"].Visible = false;  //oculto esta columna
             dataResultado.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            btnDeshabilitar.Visible = true;
-            btnHabilitar.Visible = true;
-            btnModificar.Visible = true;
+//            btnDeshabilitar.Visible = true;
+//            btnHabilitar.Visible = true;
+//            btnModificar.Visible = true;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            FrmCliente cliente = new FrmCliente();
-            this.Hide();
-            cliente.ShowDialog();
-            cliente = (FrmCliente)this.ActiveMdiChild;
+            if (btnVolver.Text == "Volver")
+            {
+                FrmCliente cliente = new FrmCliente();
+                this.Hide();
+                cliente.ShowDialog();
+                cliente = (FrmCliente)this.ActiveMdiChild;
+            }
+            else {
+                FrmCliente_Alta cliente = new FrmCliente_Alta(this.Padre);
+                this.Hide();
+                cliente.Show();
+            }
         }
 
         //Mando al formulario de modificar el cliente Seleccionado
@@ -192,6 +219,13 @@ namespace FrbaHotel.ABM_de_Cliente
         private void cbDinamica_CheckedChanged(object sender, EventArgs e)
         {
             btnBuscar.Enabled = !cbDinamica.Checked;
+        }
+
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Padre.Show();
+            this.Padre.ReciboElIdCliente(idClienteSeleccionado());
         }
     }
 }

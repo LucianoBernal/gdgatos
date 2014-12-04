@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.dataResultado = new System.Windows.Forms.DataGridView();
             this.cbRegimen = new System.Windows.Forms.CheckBox();
             this.cbCiudad = new System.Windows.Forms.CheckBox();
@@ -55,8 +56,8 @@
             this.txtOcultoTipoHabIns = new System.Windows.Forms.TextBox();
             this.txtOcultoFechaDesde = new System.Windows.Forms.TextBox();
             this.txtOcultoCantNoches = new System.Windows.Forms.TextBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtOcultoHotel = new System.Windows.Forms.TextBox();
+            this.txtOcultoCliente = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -81,6 +82,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Seleccionar Hotel";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(69, 136);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 8;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // dataResultado
             // 
@@ -307,16 +318,6 @@
             this.txtOcultoCantNoches.TabIndex = 7;
             this.txtOcultoCantNoches.Visible = false;
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(69, 136);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 8;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // txtOcultoHotel
             // 
             this.txtOcultoHotel.Location = new System.Drawing.Point(553, 272);
@@ -324,11 +325,20 @@
             this.txtOcultoHotel.Size = new System.Drawing.Size(61, 20);
             this.txtOcultoHotel.TabIndex = 8;
             // 
+            // txtOcultoCliente
+            // 
+            this.txtOcultoCliente.Location = new System.Drawing.Point(550, 302);
+            this.txtOcultoCliente.Name = "txtOcultoCliente";
+            this.txtOcultoCliente.Size = new System.Drawing.Size(65, 20);
+            this.txtOcultoCliente.TabIndex = 9;
+            this.txtOcultoCliente.Visible = false;
+            // 
             // FrmReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(643, 424);
+            this.Controls.Add(this.txtOcultoCliente);
             this.Controls.Add(this.txtOcultoHotel);
             this.Controls.Add(this.txtOcultoCantNoches);
             this.Controls.Add(this.txtOcultoFechaDesde);
@@ -382,5 +392,6 @@
         private System.Windows.Forms.TextBox txtOcultoCantNoches;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtOcultoHotel;
+        private System.Windows.Forms.TextBox txtOcultoCliente;
     }
 }

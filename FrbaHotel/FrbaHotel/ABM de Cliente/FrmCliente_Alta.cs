@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel.Generar_Modificar_Reserva;
 
 namespace FrbaHotel.ABM_de_Cliente
 {
@@ -15,8 +16,15 @@ namespace FrbaHotel.ABM_de_Cliente
         public ListaConId listaTipoDoc = new ListaConId();
         public ListaConId listaNacionalidad = new ListaConId();
         public ListaConId listaPaisDeOrigen = new ListaConId();
+        public FrmReserva Padre;
         public FrmCliente_Alta()
         {
+            InitializeComponent();
+            AgregarTextos();
+        }
+        public FrmCliente_Alta(FrmReserva padre)
+        {
+            this.Padre = padre;
             InitializeComponent();
             AgregarTextos();
         }
@@ -51,10 +59,16 @@ namespace FrbaHotel.ABM_de_Cliente
 
         private void botonVolver_Click(object sender, EventArgs e)
         {
-            FrmCliente cliente = new FrmCliente();
-            this.Hide();
-            cliente.ShowDialog();
-            cliente = (FrmCliente)this.ActiveMdiChild;
+            if (Padre != null) {
+                this.Padre.Show();
+                this.Padre.FallaElObtenerCliente();
+            }else
+            {
+                FrmCliente cliente = new FrmCliente();
+                this.Hide();
+                cliente.ShowDialog();
+                cliente = (FrmCliente)this.ActiveMdiChild;
+            }
         }
 
         private void botonGuardar_Click(object sender, EventArgs e)
@@ -82,10 +96,10 @@ namespace FrbaHotel.ABM_de_Cliente
                 if (txtDepto.Text != "")
                 {   
                     strquery = strquery +", depto";
-                }
+                }//Hardcoders
                 strquery = strquery +") VALUES ('" + txtNombre.Text + "', '" + txtApellido.Text + "', " + txtOcultoTipoDoc.Text + ", " + txtNumDoc.Text + ", " +
                 " '" + txtMail.Text + "', " + txtTelefono.Text + ", '" + txtCalle.Text + "', " + txtOcultoNacionalidad.Text + ", " +
-                " " + txtNumCalle.Text + ", '" + txtFecha.Value + "', " + baja + ", " + txtRol.Text + ", " + txtOcultoPaisDeOrigen.Text ;
+                " " + txtNumCalle.Text + ", '" + txtFecha.Value.ToString("dd-MM-yyyy") + "', " + baja + ", " + txtRol.Text + ", " + txtOcultoPaisDeOrigen.Text ;
                 if (txtPiso.Text != "")
                 {   
                 strquery = strquery +", " + txtPiso.Text +" ";
@@ -99,6 +113,12 @@ namespace FrbaHotel.ABM_de_Cliente
                 new Query(strquery).Ejecutar();
                 MessageBox.Show("Ya esta");
                 this.Visible = false;
+                if (Padre != null) 
+                {
+                    int idCliente = Convert.ToInt32(new Query("SELECT IDENT_CURRENT('SKYNET.Clientes')").ObtenerUnicoCampo());
+                    this.Padre.Show();
+                    this.Padre.ReciboElIdCliente(idCliente);
+                }
             }
         }
     }
