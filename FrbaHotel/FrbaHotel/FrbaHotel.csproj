@@ -183,11 +183,11 @@
     <Compile Include="ABM de Usuario\FrmUsuario_Mod.Designer.cs">
       <DependentUpon>FrmUsuario_Mod.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cancelar Reserva\Form1.cs">
+    <Compile Include="Cancelar Reserva\FrmCancelarReserva.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cancelar Reserva\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Cancelar Reserva\FrmCancelarReserva.Designer.cs">
+      <DependentUpon>FrmCancelarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmDialogBox.cs">
       <SubType>Form</SubType>
@@ -215,11 +215,11 @@
       <DependentUpon>FrmReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Globales.cs" />
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\FrmListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\FrmListadoEstadistico.Designer.cs">
+      <DependentUpon>FrmListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\FrmLogin.cs">
       <SubType>Form</SubType>
@@ -287,6 +287,9 @@
     <EmbeddedResource Include="ABM de Usuario\FrmUsuario_Mod.resx">
       <DependentUpon>FrmUsuario_Mod.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Reserva\FrmCancelarReserva.resx">
+      <DependentUpon>FrmCancelarReserva.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmDialogBox.resx">
       <DependentUpon>FrmDialogBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -299,6 +302,9 @@
     <EmbeddedResource Include="Generar Modificar Reserva\FrmReserva.resx">
       <DependentUpon>FrmReserva.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\FrmListadoEstadistico.resx">
+      <DependentUpon>FrmListadoEstadistico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -309,6 +315,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registrar Consumible\FrmRegistrarConsumibles.resx">
+      <DependentUpon>FrmRegistrarConsumibles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registrar Estadia\FormRsrvEstd.resx">
       <DependentUpon>FormRsrvEstd.cs</DependentUpon>
@@ -334,11 +343,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Query.cs" />
-    <Compile Include="Registrar Consumible\Form1.cs">
+    <Compile Include="Registrar Consumible\FrmRegistrarConsumibles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar Consumible\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registrar Consumible\FrmRegistrarConsumibles.Designer.cs">
+      <DependentUpon>FrmRegistrarConsumibles.cs</DependentUpon>
     </Compile>
     <Compile Include="Registrar Estadia\FormCheckIn.cs">
       <SubType>Form</SubType>

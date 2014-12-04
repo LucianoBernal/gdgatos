@@ -13,11 +13,13 @@ namespace FrbaHotel
         private Button btnGuardar;
         private Button btnCancelar;
         public Form FormPadre;
+        public int Razon;
     
-        public FrmDialogBox(Form sender, string textoPregunta)
+        public FrmDialogBox(Form sender, string textoPregunta, int proposito)
         {
             InitializeComponent();
             labelTexto.Text = textoPregunta;
+            this.Razon = proposito;
             this.FormPadre = sender;
         }
 
@@ -80,12 +82,12 @@ namespace FrbaHotel
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //this.FormPadre.Show();
-            ((FrmMenu)this.FormPadre).RespuestaDialog(txtRespuesta.Text, 1);
+            ((FrmMenu)this.FormPadre).RespuestaDialog(txtRespuesta.Text, this.Razon);
             this.Hide();
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            ((FrmMenu)this.FormPadre).RespuestaDialog(null, 1);
+            ((FrmMenu)this.FormPadre).RespuestaDialog(null, this.Razon);
             this.Hide();
             this.FormPadre.Show();
         }

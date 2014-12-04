@@ -22,7 +22,7 @@ namespace FrbaHotel
             Query query = new Query(sql);
             foreach (DataRow dataRow in query.ObtenerDataTable().AsEnumerable())
             {
-                this.Agregar((int)Convert.ToInt32(dataRow[0]), (string)dataRow[1]);
+                this.Agregar((int)Convert.ToInt32(dataRow[0]), (string)dataRow[1].ToString());
                 combo.Items.Add(dataRow[1]);
             }
             combo.DisplayMember = "Key";

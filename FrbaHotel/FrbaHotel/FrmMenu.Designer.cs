@@ -74,6 +74,7 @@
             this.btnCancelarEstadia.TabIndex = 35;
             this.btnCancelarEstadia.Text = "Cancelar Estadia";
             this.btnCancelarEstadia.UseVisualStyleBackColor = true;
+            this.btnCancelarEstadia.Click += new System.EventHandler(this.btnCancelarEstadia_Click);
             // 
             // btnRegistrarEstadia
             // 
@@ -198,6 +199,7 @@
             this.btnRegistrarConsumible.TabIndex = 39;
             this.btnRegistrarConsumible.Text = "Registrar Consumible";
             this.btnRegistrarConsumible.UseVisualStyleBackColor = true;
+            this.btnRegistrarConsumible.Click += new System.EventHandler(this.btnRegistrarConsumible_Click);
             // 
             // FrmMenu
             // 
