@@ -23,9 +23,9 @@ UPDATE SKYNET.Hoteles SET nombre = calle
 /*------------------------------------------------------------------------------*/
 /*migro tiposhabitacion*/
 set identity_insert [SKYNET].[TiposHabitacion] ON
-INSERT INTO SKYNET.TiposHabitacion (codigo,descripcion,porcentual)
+INSERT INTO SKYNET.TiposHabitacion (codigo,descripcion,porcentual,capacidad)
 SELECT m.Habitacion_Tipo_Codigo,m.Habitacion_Tipo_Descripcion,
-	   m.Habitacion_Tipo_Porcentual
+	   m.Habitacion_Tipo_Porcentual,m.Habitacion_Tipo_Codigo-1000
 FROM gd_esquema.Maestra m
 GROUP BY m.Habitacion_Tipo_Codigo,m.Habitacion_Tipo_Descripcion,
 	   m.Habitacion_Tipo_Porcentual
@@ -580,3 +580,24 @@ end
 close cancelaciones_nuevas
 deallocate cancelaciones_nuevas
 commit 
+
+/* trigger verifica que no se supere maximos de huespedes para una reserva*/
+
+create trigger tr_clientesEstadias on SKYNET.ClientesPorEstadia
+for Insert,Update
+as
+begin transaction
+if(exists(select 1
+		  from Inserted i,SKYNET.ClientesPorEstadia ce
+		  where i.idEstadia=ce.idEstadia
+		  group by i.idEstadia
+		  having count(*)>(select sum(h.cantidad*th.capacidad)
+						   from SKYNET.ReservasPorTipoHabitacion h,SKYNET.TiposHabitacion th
+						   where h.idReserva=i.idEstadia and 
+						   h.idTipoHabitacion=th.codigo)))
+						   begin
+						   RAISERROR('Se ingresaron más huespedes que los posibles de albergar',14,1)
+						   rollback
+						   end
+else	
+commit
