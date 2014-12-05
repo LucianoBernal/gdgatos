@@ -552,6 +552,7 @@ end
 go
 
 
+
 /* Trigger al insertar cancelaciones cambia estado de la reserva*/
 create trigger tr_cancelaciones_ins on SKYNET.Cancelaciones
 for Insert
