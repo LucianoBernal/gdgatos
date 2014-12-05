@@ -627,7 +627,6 @@ close cursor_reservasACambiar
 deallocate cursor_reservasACambiar
 begin transaction
 commit
-<<<<<<< HEAD
 
 
 /* Trigger calcular PrecioTotal en ConsumiblesEstadias para insert y update*/
@@ -656,5 +655,4 @@ close cursor_consumiblesEstadias
 deallocate cursor_consumiblesEstadias
 end
 commit
-=======
->>>>>>> 45f5090e3e3ae60e2314be67e5115b1e6baf77a7
+
