@@ -346,48 +346,52 @@ where ce.consumible=c.codigo
 
 /*obtener disponibles*/
 go
-create function SKYNET.obtenerDisponibilidad(@fechaInicio datetime,@cantNoches numeric(18,0), 
-											 @hotel numeric(18,0), @tipoHabitacion numeric(18,0))
+
+create function SKYNET.habitacionesOcupadas(@fecha datetime, @tipoHabitacion numeric(18, 0), @hotel numeric(18, 0))
 returns int
-begin  
-declare @capacidadTotal int
-set @capacidadTotal= (select COUNT(*)
-					from SKYNET.Habitaciones h
-					where h.hotel=@hotel and
-					 h.tipo=@tipoHabitacion)
-declare @i int, @corte int, @result int
-set @i = 0
-set @corte = 1
-while (@i <= @cantNoches and @corte = 1)
-begin	 
-set @result = 
-(				 
-(select COALESCE(SUM(rh.cantidad),0) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh
+begin
+declare @ocupadas int
+set @ocupadas = 
+((select COALESCE(SUM(COALESCE(rh.cantidad, 0)),0) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh
 where rh.idReserva=r.codigoReserva and
 	  rh.idTipoHabitacion=@tipoHabitacion and
 	  r.hotel = @hotel and
 	  r.estado between 3 and 4 and
-	  DATEADD(dd,@i,@fechaInicio) between r.fechaDesde and DATEADD(dd,r.cantNoches,r.fechaDesde)
-)
-+	  
-(select COALESCE(SUM(rh.cantidad),0) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh, SKYNET.Estadias e
+	  @fecha between r.fechaDesde and DATEADD(dd,r.cantNoches-1,r.fechaDesde))+
+(select COALESCE(SUM(COALESCE(rh.cantidad,0)), 0) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh, SKYNET.Estadias e
 where rh.idReserva=r.codigoReserva and e.reserva= r.codigoReserva and
 	  rh.idTipoHabitacion=@tipoHabitacion and
 	  r.hotel = @hotel
 	  and
 	  r.estado = 2 and
-	  DATEADD(dd,@i,@fechaInicio) between r.fechaDesde and DATEADD(dd,e.cantNoches,r.fechaDesde)
-)
-)
-	if(@result >= @capacidadTotal)
-	begin
-		set @corte = 0
-	end
-	set @i = @i+1
+	  @fecha between r.fechaDesde and DATEADD(dd,e.cantNoches-1,r.fechaDesde)))
+return @ocupadas
 end
-  
-return @corte
-
+go
+create function SKYNET.habitacionesTotales(@hotel numeric(18, 0), @tipoHabitacion numeric(18,0))
+returns int
+begin
+declare @retorno int
+set @retorno = (SELECT COUNT(*) FROM SKYNET.Habitaciones WHERE @hotel = hotel AND @tipoHabitacion = tipo)
+return @retorno
+end
+go
+create function SKYNET.habitacionesDisponibles(@fecha datetime, @hotel numeric(18, 0), @tipoHabitacion numeric(18, 0), @cantNoches int)
+returns int
+begin
+declare @i int, @max int, @aux int
+set @i = 0
+set @max = 0
+while (@i<@cantNoches)
+begin
+set @aux =(SELECT SKYNET.habitacionesOcupadas(DATEADD(dd, @i, @fecha), @tipoHabitacion, @hotel))
+if(@max<@aux)
+begin
+	set @max = @aux
+end
+set @i = @i + 1
+end
+return ((SELECT SKYNET.habitacionesTotales(@hotel, @tipoHabitacion)) - @max)
 end
 go
 
@@ -623,6 +627,7 @@ close cursor_reservasACambiar
 deallocate cursor_reservasACambiar
 begin transaction
 commit
+<<<<<<< HEAD
 
 
 /* Trigger calcular PrecioTotal en ConsumiblesEstadias para insert y update*/
@@ -651,3 +656,5 @@ close cursor_consumiblesEstadias
 deallocate cursor_consumiblesEstadias
 end
 commit
+=======
+>>>>>>> 45f5090e3e3ae60e2314be67e5115b1e6baf77a7

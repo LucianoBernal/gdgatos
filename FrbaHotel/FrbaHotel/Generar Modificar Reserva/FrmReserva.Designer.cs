@@ -41,6 +41,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtDisponibilidad = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
@@ -58,8 +60,7 @@
             this.txtOcultoCantNoches = new System.Windows.Forms.TextBox();
             this.txtOcultoHotel = new System.Windows.Forms.TextBox();
             this.txtOcultoCliente = new System.Windows.Forms.TextBox();
-            this.txtDisponibilidad = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.txtValorEstado = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -199,10 +200,27 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Reserva";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(84, 145);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Disponibilidad";
+            // 
+            // txtDisponibilidad
+            // 
+            this.txtDisponibilidad.Enabled = false;
+            this.txtDisponibilidad.Location = new System.Drawing.Point(79, 167);
+            this.txtDisponibilidad.Name = "txtDisponibilidad";
+            this.txtDisponibilidad.Size = new System.Drawing.Size(148, 20);
+            this.txtDisponibilidad.TabIndex = 11;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(14, 118);
+            this.label7.Location = new System.Drawing.Point(70, 116);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 13);
             this.label7.TabIndex = 10;
@@ -211,7 +229,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 92);
+            this.label4.Location = new System.Drawing.Point(70, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 13);
             this.label4.TabIndex = 9;
@@ -219,7 +237,7 @@
             // 
             // dtpFechaHasta
             // 
-            this.dtpFechaHasta.Location = new System.Drawing.Point(131, 112);
+            this.dtpFechaHasta.Location = new System.Drawing.Point(187, 110);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
             this.dtpFechaHasta.Size = new System.Drawing.Size(195, 20);
             this.dtpFechaHasta.TabIndex = 8;
@@ -227,7 +245,7 @@
             // 
             // dtpFechaDesde
             // 
-            this.dtpFechaDesde.Location = new System.Drawing.Point(131, 86);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(187, 84);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(195, 20);
             this.dtpFechaDesde.TabIndex = 7;
@@ -236,7 +254,7 @@
             // btnRunBaby
             // 
             this.btnRunBaby.Enabled = false;
-            this.btnRunBaby.Location = new System.Drawing.Point(219, 169);
+            this.btnRunBaby.Location = new System.Drawing.Point(275, 167);
             this.btnRunBaby.Name = "btnRunBaby";
             this.btnRunBaby.Size = new System.Drawing.Size(107, 25);
             this.btnRunBaby.TabIndex = 6;
@@ -247,7 +265,7 @@
             // txtRegimenIns
             // 
             this.txtRegimenIns.FormattingEnabled = true;
-            this.txtRegimenIns.Location = new System.Drawing.Point(185, 59);
+            this.txtRegimenIns.Location = new System.Drawing.Point(241, 57);
             this.txtRegimenIns.Name = "txtRegimenIns";
             this.txtRegimenIns.Size = new System.Drawing.Size(125, 21);
             this.txtRegimenIns.TabIndex = 4;
@@ -255,7 +273,7 @@
             // 
             // txtCantHuespedes
             // 
-            this.txtCantHuespedes.Location = new System.Drawing.Point(185, 31);
+            this.txtCantHuespedes.Location = new System.Drawing.Point(241, 29);
             this.txtCantHuespedes.Name = "txtCantHuespedes";
             this.txtCantHuespedes.Size = new System.Drawing.Size(125, 20);
             this.txtCantHuespedes.TabIndex = 3;
@@ -264,7 +282,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 62);
+            this.label6.Location = new System.Drawing.Point(70, 60);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 13);
             this.label6.TabIndex = 1;
@@ -273,7 +291,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 34);
+            this.label5.Location = new System.Drawing.Point(70, 32);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(119, 13);
             this.label5.TabIndex = 0;
@@ -342,28 +360,21 @@
             this.txtOcultoCliente.TabIndex = 9;
             this.txtOcultoCliente.Visible = false;
             // 
-            // txtDisponibilidad
+            // txtValorEstado
             // 
-            this.txtDisponibilidad.Enabled = false;
-            this.txtDisponibilidad.Location = new System.Drawing.Point(23, 169);
-            this.txtDisponibilidad.Name = "txtDisponibilidad";
-            this.txtDisponibilidad.Size = new System.Drawing.Size(148, 20);
-            this.txtDisponibilidad.TabIndex = 11;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 147);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Disponibilidad";
+            this.txtValorEstado.Location = new System.Drawing.Point(541, 341);
+            this.txtValorEstado.Name = "txtValorEstado";
+            this.txtValorEstado.Size = new System.Drawing.Size(83, 20);
+            this.txtValorEstado.TabIndex = 10;
+            this.txtValorEstado.Text = "3";
+            this.txtValorEstado.Visible = false;
             // 
             // FrmReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(643, 424);
+            this.ClientSize = new System.Drawing.Size(483, 424);
+            this.Controls.Add(this.txtValorEstado);
             this.Controls.Add(this.txtOcultoCliente);
             this.Controls.Add(this.txtOcultoHotel);
             this.Controls.Add(this.txtOcultoCantNoches);
@@ -376,7 +387,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmReserva";
             this.Text = "frmReserva";
-            this.Load += new System.EventHandler(this.FrmReserva_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).EndInit();
@@ -421,5 +431,6 @@
         private System.Windows.Forms.TextBox txtOcultoCliente;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtDisponibilidad;
+        private System.Windows.Forms.TextBox txtValorEstado;
     }
 }

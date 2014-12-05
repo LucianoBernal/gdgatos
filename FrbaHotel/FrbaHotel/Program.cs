@@ -10,6 +10,13 @@ namespace FrbaHotel
     {
         public string Detalle { get; set; }
         public int Id { get; set; }
+        public DetalleConId()
+        { }
+        public DetalleConId(int id, string detalle)
+        {
+            this.Detalle = detalle;
+            this.Id = id;
+        }
     }
     public class ListaConId
     {
