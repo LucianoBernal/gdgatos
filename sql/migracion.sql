@@ -664,13 +664,16 @@ go
 
 /* Trigger calcular PrecioPorNoche en EstadiaPorHabitacion*/
 go
-create trigger insert_EstadiaPorHabitacion_CalculoPrecioPorNoche on SKYNET.EstadiaPorHabitacion
-for insert
+create trigger estadiaPorHabitacion_CalculoPrecioPorNoche on SKYNET.EstadiaPorHabitacion
+for insert,update,delete
 as
 begin transaction
 declare cursor_ids_Estadias cursor for
 			select distinct idEstadia
 			from Inserted
+			union 
+			select distinct idEstadia
+			from Deleted
 declare @idEstadia numeric(18,0),@precioPorNoche numeric(18,2),@recargaEstrella numeric(18,2)
 set @recargaEstrella=(select top 1 recarga from SKYNET.RecargaEstrellas)
 open cursor_ids_Estadias

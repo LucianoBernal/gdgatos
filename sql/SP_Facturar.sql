@@ -10,56 +10,67 @@ return
 end
 else
 begin
-if (@numTarjeta is null)
+if (exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))
 	begin
-	insert SKYNET.Facturas(diferenciaInconsistencia,estadia,fecha,monto,tipoPago) 
-	values(0,@estadia,coalesce(@fecha,sysdatetime()),0,1)
-	set @numeroFactura=(select f.facturaNumero
-		   from SKYNET.Facturas f
-		   where f.estadia=@estadia)
+	raiserror('Ya se facturo dicha estadia',14,1)
+	return
 	end
 	else
 	begin
-	insert SKYNET.Facturas(diferenciaInconsistencia,estadia,fecha,monto,tipoPago) 
-	values(0,@estadia,coalesce(@fecha,sysdatetime()),0,(select top 1 t.idTipoPago
-														from SKYNET.TiposPago t
-														where t.nombre=@nombreTipoPago))
-	set @numeroFactura=(select f.facturaNumero
-		   from SKYNET.Facturas f
-		   where f.estadia=@estadia)
-	insert SKYNET.DatosTarjeta(nroFactura,numTarjeta,datosTarjeta)
-	values(@numeroFactura,@numTarjeta,@datosTarjeta) 
+	if (@numTarjeta is null)
+		begin
+		insert SKYNET.Facturas(diferenciaInconsistencia,estadia,fecha,monto,tipoPago) 
+		values(0,@estadia,coalesce(@fecha,sysdatetime()),0,1)
+		set @numeroFactura=(select f.facturaNumero
+			   from SKYNET.Facturas f
+			   where f.estadia=@estadia)
+		end
+		else
+		begin
+		insert SKYNET.Facturas(diferenciaInconsistencia,estadia,fecha,monto,tipoPago) 
+		values(0,@estadia,coalesce(@fecha,sysdatetime()),0,(select top 1 t.idTipoPago
+															from SKYNET.TiposPago t
+															where t.nombre=@nombreTipoPago))
+		set @numeroFactura=(select f.facturaNumero
+			   from SKYNET.Facturas f
+			   where f.estadia=@estadia)
+		insert SKYNET.DatosTarjeta(nroFactura,numTarjeta,datosTarjeta)
+		values(@numeroFactura,@numTarjeta,@datosTarjeta) 
+		end
+	insert SKYNET.ItemsFactura(numeroFactura,item,detalle) values(@numeroFactura,1,'Estadia')
+	update SKYNET.Estadias set numeroFactura=@numeroFactura,itemFactura=1
+	where reserva=@estadia
+	create table #consumiblesDeLaEstadia(
+				idTemporal numeric(18,0) identity(0,1),
+				idConsumibleEstadia numeric(18,0),
+				nombreConsumible nvarchar(255))
+	insert into #consumiblesDeLaEstadia(idConsumibleEstadia,nombreConsumible)
+	(select ce.idConsumibleEstadia,(select c.nombre from Consumibles c
+								 where c.codigo=ce.consumible)
+	from SKYNET.ConsumiblesEstadias ce
+	where ce.estadia=@estadia)
+	declare @contador int,@cantFilas int,@item int,@idConsumibleEstadia numeric(18,0),@nombreConsumible nvarchar(255)
+	set @contador=0
+	set @cantFilas= (select COUNT(*) from #consumiblesDeLaEstadia)
+	set @item=2
+	ALTER TABLE SKYNET.ConsumiblesEstadias
+	NOCHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura
+	while @contador<@cantFilas
+	begin
+	select @idConsumibleEstadia=idConsumibleEstadia,@nombreConsumible=nombreConsumible
+	from #consumiblesDeLaEstadia
+	where idTemporal=@contador
+	update SKYNET.ConsumiblesEstadias set numeroFactura=@numeroFactura,itemFactura=@item
+	where idConsumibleEstadia= @idConsumibleEstadia
+	insert SKYNET.ItemsFactura(numeroFactura,item,detalle)
+	values (@numeroFactura,@item,@nombreConsumible)
+	set @item=@item+1
+	set @contador=@contador+1
 	end
-insert SKYNET.ItemsFactura(numeroFactura,item,detalle) values(@numeroFactura,1,'Estadia')
-update SKYNET.Estadias set numeroFactura=@numeroFactura,itemFactura=1
-where reserva=@estadia
-create table #consumiblesDeLaEstadia(
-		    idTemporal numeric(18,0) identity(0,1),
-			idConsumibleEstadia numeric(18,0),
-			nombreConsumible nvarchar(255))
-insert into #consumiblesDeLaEstadia(idConsumibleEstadia,nombreConsumible)
-(select ce.idConsumibleEstadia,(select c.nombre from Consumibles c
-							 where c.codigo=ce.consumible)
-from SKYNET.ConsumiblesEstadias ce
-where ce.estadia=@estadia)
-declare @contador int,@cantFilas int,@item int,@idConsumibleEstadia numeric(18,0),@nombreConsumible nvarchar(255)
-set @contador=0
-set @cantFilas= (select COUNT(*) from #consumiblesDeLaEstadia)
-set @item=2
-while @contador<@cantFilas
-begin
-select @idConsumibleEstadia=idConsumibleEstadia,@nombreConsumible=nombreConsumible
-from #consumiblesDeLaEstadia
-where idTemporal=@contador
-insert SKYNET.ItemsFactura(numeroFactura,item,detalle)
-values (@numeroFactura,@item,@nombreConsumible)
-update SKYNET.ConsumiblesEstadias set numeroFactura=@numeroFactura,itemFactura=@item
-where idConsumibleEstadia= @idConsumibleEstadia
-set @item=@item+1
-set @contador=@contador+1
+	ALTER TABLE SKYNET.ConsumiblesEstadias
+	CHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura
+	end
 end
-end
-
 /* Emitir factura*/
 go
 create function SKYNET.emitirFactura(@estadia numeric(18,0))
@@ -98,6 +109,7 @@ end
 go
 
 drop function SKYNET.emitirFactura
+drop proc SKYNET.facturarUnaEstadia
 
 select *
 from SKYNET.emitirFactura(10002)
@@ -113,6 +125,6 @@ insert SKYNET.ConsumiblesEstadias(estadia,consumible) values((select MAX(r.codig
 
 (select MAX(r.codigoReserva) from SKYNET.Reservas r)
 
-exec SKYNET.facturarUnaEstadia @estadia=110743, @fecha=null
+exec SKYNET.facturarUnaEstadia @estadia=110746, @fecha=null
 								,@nombreTipoPago='Tarjeta Credito',	
 								@numTarjeta=123456,@datosTarjeta='pepe'
