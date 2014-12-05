@@ -656,3 +656,42 @@ deallocate cursor_consumiblesEstadias
 end
 commit
 
+
+/* Trigger calcular PrecioPorNoche en EstadiaPorHabitacion*/
+create trigger insert_EstadiaPorHabitacion_CalculoPrecioPorNoche on SKYNET.EstadiaPorHabitacion
+for insert
+as
+begin transaction
+declare cursor_ids_Estadias cursor for
+			select distinct idEstadia
+			from Inserted
+declare @idEstadia numeric(18,0),@precioPorNoche numeric(18,2),@recargaEstrella numeric(18,2)
+set @recargaEstrella=(select top 1 recarga from SKYNET.RecargaEstrellas)
+open cursor_ids_Estadias
+fetch next from cursor_ids_Estadias into @idEstadia
+while @@fetch_status=0
+begin
+set @precioPorNoche = (select sum(hot.cantidadEstrellas*@recargaEstrella
+													+reg.precioBase*th.porcentual)
+												  from SKYNET.EstadiaPorHabitacion eh,
+													   SKYNET.Habitaciones h,
+													   SKYNET.TiposHabitacion th,
+													   SKYNET.Hoteles hot, SKYNET.Reservas r,
+													   SKYNET.Regimenes reg
+												  where eh.idEstadia=@idEstadia and
+												  eh.idHabitacion=h.numero and
+												  eh.idHotel=h.hotel and
+												  h.tipo=th.codigo and
+												  hot.idHotel=h.hotel and
+												  eh.idEstadia=r.codigoReserva and 
+												  r.regimen=reg.idRegimen)		
+update SKYNET.Estadias set precioPorNocheEstadia=@precioPorNoche										  
+where reserva=@idEstadia
+fetch next from cursor_ids_Estadias into @idEstadia
+end
+close cursor_ids_Estadias
+deallocate cursor_ids_Estadias
+commit
+
+
+
