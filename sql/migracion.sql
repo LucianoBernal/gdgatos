@@ -623,3 +623,31 @@ close cursor_reservasACambiar
 deallocate cursor_reservasACambiar
 begin transaction
 commit
+
+
+/* Trigger calcular PrecioTotal en ConsumiblesEstadias para insert y update*/
+create trigger calcultar_precioTotal_ConsumiblesEstadias on SKYNET.ConsumiblesEstadias
+for Insert,Update
+as
+begin transaction
+if(update(consumible) or update(cantidad))
+begin
+declare cursor_consumiblesEstadias cursor for
+			select distinct idConsumibleEstadia
+			from Inserted
+declare @idConsumibleEstadia numeric(18,0)
+open cursor_consumiblesEstadias
+fetch next from cursor_consumiblesEstadias into @idConsumibleEstadia
+while @@fetch_status=0
+begin
+update SKYNET.ConsumiblesEstadias set precioTotal=(select c.precio*ce.cantidad
+												   from SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
+												   where ce.idConsumibleEstadia=@idConsumibleEstadia and
+												   ce.consumible=c.codigo)
+where idConsumibleEstadia=@idConsumibleEstadia
+fetch next from cursor_consumiblesEstadias into @idConsumibleEstadia
+end
+close cursor_consumiblesEstadias
+deallocate cursor_consumiblesEstadias
+end
+commit
