@@ -558,6 +558,7 @@ go
 
 
 /* Trigger al insertar cancelaciones cambia estado de la reserva*/
+go
 create trigger tr_cancelaciones_ins on SKYNET.Cancelaciones
 for Insert
 as
@@ -584,9 +585,10 @@ end
 close cancelaciones_nuevas
 deallocate cancelaciones_nuevas
 commit 
+go
 
 /* trigger verifica que no se supere maximos de huespedes para una reserva*/
-
+go
 create trigger tr_clientesEstadias on SKYNET.ClientesPorEstadia
 for Insert,Update
 as
@@ -605,9 +607,10 @@ if(exists(select 1
 						   end
 else	
 commit
-
+go
 
 /* Trigger al insertar estadia cambia estado de la reserva a efectivizada*/
+go
 create trigger insert_estadias_cambiarEstadoReserva on SKYNET.Estadias
 for Insert
 as
@@ -627,9 +630,10 @@ close cursor_reservasACambiar
 deallocate cursor_reservasACambiar
 begin transaction
 commit
-
+go
 
 /* Trigger calcular PrecioTotal en ConsumiblesEstadias para insert y update*/
+go
 create trigger calcultar_precioTotal_ConsumiblesEstadias on SKYNET.ConsumiblesEstadias
 for Insert,Update
 as
@@ -655,9 +659,11 @@ close cursor_consumiblesEstadias
 deallocate cursor_consumiblesEstadias
 end
 commit
+go
 
 
 /* Trigger calcular PrecioPorNoche en EstadiaPorHabitacion*/
+go
 create trigger insert_EstadiaPorHabitacion_CalculoPrecioPorNoche on SKYNET.EstadiaPorHabitacion
 for insert
 as
@@ -692,6 +698,7 @@ end
 close cursor_ids_Estadias
 deallocate cursor_ids_Estadias
 commit
+go
 
 
 
