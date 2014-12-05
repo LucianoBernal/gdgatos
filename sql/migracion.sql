@@ -605,3 +605,25 @@ if(exists(select 1
 						   end
 else	
 commit
+
+
+/* Trigger al insertar estadia cambia estado de la reserva a efectivizada*/
+create trigger insert_estadias_cambiarEstadoReserva on SKYNET.Estadias
+for Insert
+as
+declare cursor_reservasACambiar cursor for
+		select reserva
+		from Inserted
+declare @reserva numeric(18,0)
+open cursor_reservasACambiar
+fetch next from cursor_reservasACambiar into @reserva
+while @@fetch_status=0
+begin
+update SKYNET.Reservas set estado=2
+where codigoReserva=@reserva
+fetch next from cursor_reservasACambiar into @reserva
+end
+close cursor_reservasACambiar
+deallocate cursor_reservasACambiar
+begin transaction
+commit
