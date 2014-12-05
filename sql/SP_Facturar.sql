@@ -60,6 +60,48 @@ set @contador=@contador+1
 end
 end
 
+/* Emitir factura*/
+go
+create function SKYNET.emitirFactura(@estadia numeric(18,0))
+returns @retorno table (
+		NumeroDeFactura nvarchar(18),
+		Item			nvarchar(18),
+		Detalle		    nvarchar(255),
+		Cantidad	    nvarchar(18),
+		PrecioUnitario  nvarchar(18),
+		SubTotal	    numeric(18,2)
+		)
+as
+begin
+declare @cantidad numeric(18,0)
+insert into @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal)
+       (select e.numeroFactura,e.itemFactura,'Estadia efectiva de '+convert(nvarchar(4),e.cantNoches)+case when(e.cantNoches=1)then' dia' else ' dias'end,r.cantNoches,e.precioPorNocheEstadia,(e.precioPorNocheEstadia *  r.cantNoches)
+        from Skynet.Estadias e,Skynet.Reservas r
+        where e.reserva=r.codigoReserva
+        and e.reserva=@estadia)
+        union
+        (select f.facturaNumero,itf.item,itf.detalle,(select ce.cantidad from 
+														 Skynet.ConsumiblesEstadias ce where ce.estadia=@estadia 
+														 and ce.itemFactura=itf.item),(select c.precio from 
+														 Skynet.ConsumiblesEstadias ce, SKYNET.Consumibles c where ce.estadia=@estadia 
+														 and ce.itemFactura=itf.item and ce.consumible=c.codigo),(select ce.precioTotal from 
+														 Skynet.ConsumiblesEstadias ce where ce.estadia=@estadia 
+														 and ce.itemFactura=itf.item)
+		from Skynet.Facturas f,SKYNET.ItemsFactura itf
+         where itf.detalle!='Estadia' and f.estadia=@estadia
+         and itf.numeroFactura=f.facturaNumero)
+         order by 2
+insert @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal) 
+	   values('','','Total','','',(select sum(SubTotal)from @retorno))
+return
+end
+go
+
+drop function SKYNET.emitirFactura
+
+select *
+from SKYNET.emitirFactura(10002)
+
 
 
 /* ------ unit test------*/
