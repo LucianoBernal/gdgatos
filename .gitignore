@@ -1,10 +1,6 @@
-FrbaHotel/FrbaHotel.suo
-FrbaHotel/FrbaHotel/obj/Release/FrbaHotel.exe
-*.Cache
-*.exe
-*.pdb
-*.exe
-FrbaHotel/FrbaHotel/bin/Debug/FrbaHotel.vshost.exe.manifest
-FrbaHotel/FrbaHotel/obj/Release/FrbaHotel.exe
-FrbaHotel/FrbaHotel/obj/Release/FrbaHotel.csproj.GenerateResource.Cache
-*.suo
+$ cat .gitignore
+
+# checkeo
+FrbaHotel/FrbaHotel/obj/Debug/**
+FrbaHotel/FrbaHotel.suo/**
+FrbaHotel/FrbaHotel/bin/Debug/**
