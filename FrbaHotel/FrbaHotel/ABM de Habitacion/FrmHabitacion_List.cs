@@ -113,18 +113,19 @@ namespace FrbaHotel.ABM_de_Habitacion
 
             if (estaHabilitado(idHotel, idNumero))
             {
-                if (!estaOcupada(idHotel, idNumero))
-                {
+                //if (!estaOcupada(idHotel, idNumero))
+                //{
                     new Query("UPDATE SKYNET.Habitaciones SET baja = 1 WHERE numero = " + idNumero + " AND hotel = " + idHotel).Ejecutar();
                     MessageBox.Show("La habitacion ha sido Deshabilitado.", "Aviso",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataResultado.SelectedRows[0].Cells["habilitado"].Value = "NO";
+               /*creo que no va 
                 }
                 else
                 {
                     MessageBox.Show("La Habitacion no puede ser Deshabilitada ya que se encuentra Ocupada.", "Advertencia",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                }*/
             }
             else
             {
@@ -156,11 +157,12 @@ namespace FrbaHotel.ABM_de_Habitacion
         {
             return Convert.ToInt32(new Query("SELECT baja FROM SKYNET.Habitaciones WHERE hotel = " + idHotel + " AND numero = " + idNumero).ObtenerUnicoCampo()) == 0;
         }
+        /*creo que no va
         //Verifico si la habitacion esta libre
         private bool estaOcupada(int idHotel, int idNumero)
         {
             return Convert.ToInt32(new Query("SELECT COUNT(1) FROM SKYNET.EstadiaPorHabitacion eh, SKYNET.Estadias e WHERE eh.idEstadia = e.reserva AND eh.idHotel = " + idHotel + " AND eh.idHabitacion = " + idNumero).ObtenerUnicoCampo()) == 1;
-        }
+        }*/
 
     }
 }
