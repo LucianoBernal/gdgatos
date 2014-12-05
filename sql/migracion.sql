@@ -552,3 +552,30 @@ end
 go
 
 
+/* Trigger al insertar cancelaciones cambia estado de la reserva*/
+create trigger tr_cancelaciones_ins on SKYNET.Cancelaciones
+for Insert
+as
+begin transaction
+declare @reserva numeric(18,0),@motivo nvarchar(50)
+declare cancelaciones_nuevas cursor for 
+		select reserva,motivo
+		from Inserted
+open cancelaciones_nuevas
+fetch next from cancelaciones_nuevas into @reserva,@motivo
+while @@fetch_status=0
+begin
+if(coalesce((select r.estado
+   from SKYNET.Reservas r
+   where r.codigoReserva=@reserva),3)between 2 and 4 )
+   begin
+   update SKYNET.Reservas set estado=( select case  when @motivo like '%cliente%' then 6
+												 when @motivo like '%recepcion%' then  5
+										    	 else 1 end	)
+   where codigoReserva=@reserva
+   end
+fetch next from cancelaciones_nuevas into @reserva,@motivo
+end	
+close cancelaciones_nuevas
+deallocate cancelaciones_nuevas
+commit 
