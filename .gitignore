@@ -1,6 +1,6 @@
 $ cat .gitignore
 
-# Ignoro todo lo que está en obj/ bin/ y .suo/
+# checkeo
 FrbaHotel/FrbaHotel/obj/Debug/**
 FrbaHotel/FrbaHotel.suo/**
 FrbaHotel/FrbaHotel/bin/Debug/**
