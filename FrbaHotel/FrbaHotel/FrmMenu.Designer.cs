@@ -84,6 +84,7 @@
             this.btnRegistrarEstadia.TabIndex = 34;
             this.btnRegistrarEstadia.Text = "Registrar Estadia";
             this.btnRegistrarEstadia.UseVisualStyleBackColor = true;
+            this.btnRegistrarEstadia.Click += new System.EventHandler(this.btnRegistrarEstadia_Click);
             // 
             // btnListadoEstadistico
             // 

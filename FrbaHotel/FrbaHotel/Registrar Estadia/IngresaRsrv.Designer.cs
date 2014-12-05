@@ -30,7 +30,7 @@
         {
             this.botonIngresar = new System.Windows.Forms.Button();
             this.labelRsrv = new System.Windows.Forms.Label();
-            this.textBoxRsrv = new System.Windows.Forms.TextBox();
+            this.txtReserva = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // botonIngresar
@@ -41,6 +41,7 @@
             this.botonIngresar.TabIndex = 0;
             this.botonIngresar.Text = "Ingresar";
             this.botonIngresar.UseVisualStyleBackColor = true;
+            this.botonIngresar.Click += new System.EventHandler(this.botonIngresar_Click);
             // 
             // labelRsrv
             // 
@@ -51,19 +52,19 @@
             this.labelRsrv.TabIndex = 1;
             this.labelRsrv.Text = "Ingrese número de reserva:";
             // 
-            // textBoxRsrv
+            // txtReserva
             // 
-            this.textBoxRsrv.Location = new System.Drawing.Point(63, 74);
-            this.textBoxRsrv.Name = "textBoxRsrv";
-            this.textBoxRsrv.Size = new System.Drawing.Size(133, 20);
-            this.textBoxRsrv.TabIndex = 2;
+            this.txtReserva.Location = new System.Drawing.Point(63, 74);
+            this.txtReserva.Name = "txtReserva";
+            this.txtReserva.Size = new System.Drawing.Size(133, 20);
+            this.txtReserva.TabIndex = 2;
             // 
             // IngresaRsrv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(265, 266);
-            this.Controls.Add(this.textBoxRsrv);
+            this.Controls.Add(this.txtReserva);
             this.Controls.Add(this.labelRsrv);
             this.Controls.Add(this.botonIngresar);
             this.Name = "IngresaRsrv";
@@ -77,6 +78,6 @@
 
         private System.Windows.Forms.Button botonIngresar;
         private System.Windows.Forms.Label labelRsrv;
-        private System.Windows.Forms.TextBox textBoxRsrv;
+        private System.Windows.Forms.TextBox txtReserva;
     }
 }

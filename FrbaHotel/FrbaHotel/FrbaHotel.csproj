@@ -352,6 +352,12 @@
     <EmbeddedResource Include="Registrar Consumible\FrmRegistrarConsumibles.resx">
       <DependentUpon>FrmRegistrarConsumibles.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registrar Estadia\FormCheckIn.resx">
+      <DependentUpon>FormCheckIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registrar Estadia\FormMagic.resx">
+      <DependentUpon>FormMagic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registrar Estadia\FormRsrvEstd.resx">
       <DependentUpon>FormRsrvEstd.cs</DependentUpon>
     </EmbeddedResource>
@@ -387,6 +393,12 @@
     </Compile>
     <Compile Include="Registrar Estadia\FormCheckIn.Designer.cs">
       <DependentUpon>FormCheckIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registrar Estadia\FormMagic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar Estadia\FormMagic.Designer.cs">
+      <DependentUpon>FormMagic.cs</DependentUpon>
     </Compile>
     <Compile Include="Registrar Estadia\FormRsrvEstd.cs">
       <SubType>Form</SubType>

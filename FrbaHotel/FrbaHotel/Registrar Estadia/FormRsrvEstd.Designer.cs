@@ -71,7 +71,7 @@
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonCheckIn);
             this.Name = "FormRsrvEstd";
-            this.Text = "Form1";
+            this.Text = "Reservar Estadia";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

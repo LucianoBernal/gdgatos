@@ -186,3 +186,13 @@ F:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Gen
 F:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Listado_Estadistico.FrmListadoEstadistico.resources
 F:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Consumible.FrmRegistrarConsumibles.resources
 F:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Generar_Modificar_Reserva.FrmElegirHabitaciones.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Habitacion.FrmHabitacion.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Habitacion.FrmHabitacion_Alta.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Habitacion.FrmHabitacion_List.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Habitacion.FrmHabitacion_Mod.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Cancelar_Reserva.FrmCancelarReserva.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Generar_Modificar_Reserva.FrmElegirHabitaciones.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Listado_Estadistico.FrmListadoEstadistico.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Consumible.FrmRegistrarConsumibles.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.FormMagic.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.FormCheckIn.resources
