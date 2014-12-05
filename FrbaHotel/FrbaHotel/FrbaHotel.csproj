@@ -87,11 +87,29 @@
     <Compile Include="ABM de Cliente\FrmCliente_Mod.Designer.cs">
       <DependentUpon>FrmCliente_Mod.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Habitacion\Form1.cs">
+    <Compile Include="ABM de Habitacion\FrmHabitacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Habitacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM de Habitacion\FrmHabitacion.Designer.cs">
+      <DependentUpon>FrmHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Habitacion\FrmHabitacion_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Habitacion\FrmHabitacion_Alta.Designer.cs">
+      <DependentUpon>FrmHabitacion_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Habitacion\FrmHabitacion_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Habitacion\FrmHabitacion_List.Designer.cs">
+      <DependentUpon>FrmHabitacion_List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Habitacion\FrmHabitacion_Mod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Habitacion\FrmHabitacion_Mod.Designer.cs">
+      <DependentUpon>FrmHabitacion_Mod.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM de Hotel\FrmHotel.cs">
       <SubType>Form</SubType>
@@ -247,6 +265,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM de Cliente\FrmCliente_Mod.resx">
       <DependentUpon>FrmCliente_Mod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Habitacion\FrmHabitacion.resx">
+      <DependentUpon>FrmHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Habitacion\FrmHabitacion_Alta.resx">
+      <DependentUpon>FrmHabitacion_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Habitacion\FrmHabitacion_List.resx">
+      <DependentUpon>FrmHabitacion_List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Habitacion\FrmHabitacion_Mod.resx">
+      <DependentUpon>FrmHabitacion_Mod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM de Hotel\FrmHotel_Alta.resx">
       <DependentUpon>FrmHotel_Alta.cs</DependentUpon>

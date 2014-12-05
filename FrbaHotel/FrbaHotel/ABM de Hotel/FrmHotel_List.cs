@@ -46,6 +46,7 @@ namespace FrbaHotel.ABM_de_Hotel
             {
                 strQuery = strQuery + " AND h.pais = (SELECT idPais FROM SKYNET.Paises WHERE pais = '" + txtPais.Text + "') ";
             }
+
             mostrarResultado(strQuery);
         }
         private void mostrarResultado(string strQuery)

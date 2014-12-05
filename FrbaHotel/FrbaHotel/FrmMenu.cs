@@ -16,6 +16,7 @@ using FrbaHotel.ABM_de_Cliente;
 using FrbaHotel.Cancelar_Reserva;
 using FrbaHotel.Registrar_Consumible;
 using FrbaHotel.Listado_Estadistico;
+using FrbaHotel.ABM_de_Habitacion;
 
 namespace FrbaHotel
 {
@@ -305,6 +306,13 @@ namespace FrbaHotel
         this.Hide();
         FrmListadoEstadistico nuevo = new FrmListadoEstadistico();
         nuevo.Show();
+    }
+
+    private void btnHabitacion_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        FrmHabitacion habitacion = new FrmHabitacion();
+        habitacion.Show();
     }
 
     }

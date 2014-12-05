@@ -103,6 +103,7 @@
             this.btnHabitacion.TabIndex = 32;
             this.btnHabitacion.Text = "ABM Habitación";
             this.btnHabitacion.UseVisualStyleBackColor = true;
+            this.btnHabitacion.Click += new System.EventHandler(this.btnHabitacion_Click);
             // 
             // btnRegimenEstadia
             // 
