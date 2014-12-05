@@ -366,14 +366,14 @@
             this.txtValorEstado.Name = "txtValorEstado";
             this.txtValorEstado.Size = new System.Drawing.Size(83, 20);
             this.txtValorEstado.TabIndex = 10;
-            this.txtValorEstado.Text = "2";
+            this.txtValorEstado.Text = "3";
             this.txtValorEstado.Visible = false;
             // 
             // FrmReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 424);
+            this.ClientSize = new System.Drawing.Size(483, 424);
             this.Controls.Add(this.txtValorEstado);
             this.Controls.Add(this.txtOcultoCliente);
             this.Controls.Add(this.txtOcultoHotel);

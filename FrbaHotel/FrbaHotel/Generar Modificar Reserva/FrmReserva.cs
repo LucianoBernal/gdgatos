@@ -57,9 +57,10 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 txtOcultoRegimenIns.Text = listaRegimenIns.ObtenerId(txtRegimenIns.Text).ToString();
                 txtOcultoFechaDesde.Text = dtpFechaDesde.Value.ToString("dd-MM-yyyy");
                 txtOcultoCantNoches.Text = (((dtpFechaHasta.Value - dtpFechaDesde.Value).Days)).ToString();
+                txtValorEstado.Text = EsGenerar?"3":"4";
                 Query qry =
                 this.EsGenerar ?
-                new Query("INSERT INTO SKYNET.Reservas " + listaTextosInsert.GenerarInsert()) : new Query("UPDATE SKYNET.Reservas SET " + listaTextosInsert.GenerarUpdate() + ", estado = 4 WHERE codigoReserva = " + IdReserva.ToString());
+                new Query("INSERT INTO SKYNET.Reservas " + listaTextosInsert.GenerarInsert()) : new Query("UPDATE SKYNET.Reservas SET " + listaTextosInsert.GenerarUpdate() + " WHERE codigoReserva = " + IdReserva.ToString());
 //                MessageBox.Show(qry.pComando);
                 qry.Ejecutar();
                 if (!EsGenerar)
