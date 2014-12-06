@@ -10,12 +10,12 @@ return
 end
 else
 begin
-if (exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))
-	begin
+if (not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))/*
+	begin ME ROMPE EL PROGRAMITA
 	raiserror('Ya se facturo dicha estadia',14,1)
 	return
 	end
-	else
+	else*/
 	begin
 	if (@numTarjeta is null)
 		begin

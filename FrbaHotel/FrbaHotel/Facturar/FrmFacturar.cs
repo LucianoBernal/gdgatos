@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace FrbaHotel.Facturar
@@ -34,7 +35,23 @@ namespace FrbaHotel.Facturar
 
         private void btnFacturar_Click(object sender, EventArgs e)
         {
-            new Query("exec SKYNET.facturarUnaEstadia @estadia=" + this.Reserva.ToString() + ", @fecha='" + System.DateTime.Today.ToString() + "', @nombreTipoPago='" + txtTipoPago.Text + "', @numTarjeta=" + (txtNumeroTarjeta.Text==""?"0":txtNumeroTarjeta.Text) + ", @datosTarjeta='" + txtDatosTarjeta.Text+"'").Ejecutar();
+            using (SqlConnection con = new SqlConnection(Settings.Default.CadenaDeConexion))
+            {
+                using (SqlCommand cmd = new SqlCommand("SKYNET.facturarUnaEstadia", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@estadia", SqlDbType.Int).Value = this.Reserva;
+                    cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = System.DateTime.Today;
+                    cmd.Parameters.Add("@nombreTipoPago", SqlDbType.VarChar).Value = txtTipoPago.Text;
+                    cmd.Parameters.Add("@numTarjeta", SqlDbType.Int).Value = Convert.ToInt32(txtNumeroTarjeta.Text);
+                    cmd.Parameters.Add("@datosTarjeta", SqlDbType.VarChar).Value = txtDatosTarjeta.Text;
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }//i like hardcodin'
+//            new Query("exec SKYNET.facturarUnaEstadia @estadia=" + this.Reserva.ToString() + ", @fecha='" + System.DateTime.Today.ToString() + "', @nombreTipoPago='" + txtTipoPago.Text + "', @numTarjeta=" + (txtNumeroTarjeta.Text==""?"0":txtNumeroTarjeta.Text) + ", @datosTarjeta='" + txtDatosTarjeta.Text+"'").Ejecutar();
             //Ponele que ya deberia haber facturado
             string strquery = "SELECT * FROM SKYNET.emitirFactura(" + this.Reserva.ToString() + ")";
             mostrarResultado(strquery);
