@@ -108,8 +108,16 @@ if(not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))
 			 where itf.detalle!='Estadia' and f.estadia=@estadia
 			 and itf.numeroFactura=f.facturaNumero)
 			 order by 2
-	insert @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal) 
-		   values('','','Total','','',(select sum(SubTotal)from @retorno))
+	 declare @inconsistencia numeric (18,2),@monto numeric(18,2)
+	 select @monto=f.monto,@inconsistencia=f.diferenciaInconsistencia from SKYNET.Facturas f where f.estadia=@estadia
+	 insert @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal) 
+		   values('','','Total','','',@monto)
+	 if(@inconsistencia!=0)
+		begin
+		insert @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal) 
+		   values('','','Diferencia Inconsistencia de la migracion','','',@inconsistencia)
+		end
+    
 	end
 return
 end

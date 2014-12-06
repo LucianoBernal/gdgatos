@@ -704,4 +704,40 @@ commit
 go
 
 
+/* trigger mantener actualizado el monto en Factura*/
+
+
+create trigger calculo_monto_factura on SKYNET.ItemsFactura
+for insert,update,delete
+as
+begin transaction
+declare cursor_ids_Facturas cursor for
+			select distinct numeroFactura
+			from Inserted
+			union 
+			select distinct numeroFactura
+			from Deleted
+declare @numeroFactura numeric(18,0),@monto numeric(18,2)
+open cursor_ids_Facturas
+fetch next from cursor_ids_Facturas into @numeroFactura
+while @@fetch_status=0
+begin
+set @monto = (select e.precioPorNocheEstadia*r.cantNoches from SKYNET.Estadias e,SKYNET.Reservas r 
+			 where e.reserva=r.codigoReserva and 
+			 e.reserva=(select f.estadia from SKYNET.Facturas f
+			 where f.facturaNumero=@numeroFactura))
+set @monto=@monto+(coalesce((select sum(ce.precioTotal)
+				   from SKYNET.ItemsFactura itf,SKYNET.ConsumiblesEstadias ce
+				   where itf.numeroFactura=@numeroFactura and
+				   (itf.detalle is null or itf.detalle not like '%Estadia%') and
+				   ce.numeroFactura=itf.numeroFactura and ce.itemFactura=itf.item),0))
+				   
+update SKYNET.Facturas set monto=@monto										  
+where facturaNumero=@numeroFactura
+fetch next from cursor_ids_Facturas into @numeroFactura
+end
+close cursor_ids_Facturas
+deallocate cursor_ids_Facturas
+commit
+
 
