@@ -159,6 +159,37 @@ namespace FrbaHotel
                         this.Show();
                     }
                 }
+            } if (tipoResp == 5 && respuesta != null)
+            {
+                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta).ObtenerUnicoCampo();
+                if (query == null)
+                {
+                    MessageBox.Show("Ha ingresado un numero de reserva no valido");
+                    this.Show();
+                }
+                else
+                {
+                    if (Convert.ToInt32(query) == 1 || Convert.ToInt32(query) == 5 || Convert.ToInt32(query) == 6)
+                    {
+                        MessageBox.Show("La reserva ingresada se encuentra cancelada");
+                        this.Show();
+                        //TerminarMetodo
+                    }
+                    else {
+                        object query2 = new Query("SELECT cantNoches FROM SKYNET.Estadias WHERE reserva =" + respuesta).ObtenerUnicoCampo();
+                        if (query2 is DBNull)
+                        {
+                            FormRsrvEstd form = new FormRsrvEstd(this, Convert.ToInt32(respuesta), Convert.ToInt32(query));
+                            this.Visible = false;
+                            form.ShowDialog();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ya se ha registrado un checkout para la estadia ingresada");
+                            this.Show();
+                        }
+                    }
+                }
             }
         }
         public FrmMenu()
@@ -176,7 +207,7 @@ namespace FrbaHotel
 //            this.btnListadoEstadistico.Visible = false;
             this.btnRegimenEstadia.Visible = false;
  //           this.btnRegistrarConsumible.Visible = false;
-            this.btnRegistrarEstadia.Visible = false;
+ //           this.btnRegistrarEstadia.Visible = false;
             this.btnReserva.Visible = true;
             this.btnRoles.Visible = false;
             this.btnUsuario.Visible = false;
@@ -353,10 +384,13 @@ namespace FrbaHotel
     }
 
     private void btnRegistrarEstadia_Click(object sender, EventArgs e)
-    {
+    {/*
         FormRsrvEstd form = new FormRsrvEstd();
         this.Visible = false;
-        form.ShowDialog();
+        form.ShowDialog();*/
+        this.Hide();
+        FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva asociado a la estadia", 5);
+        dialog.Show();
     }
 
     private void btnFacturar_Click(object sender, EventArgs e)

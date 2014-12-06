@@ -42,23 +42,24 @@ namespace FrbaHotel
             // 
             // txtRespuesta
             // 
-            this.txtRespuesta.Location = new System.Drawing.Point(220, 17);
+            this.txtRespuesta.Location = new System.Drawing.Point(388, 17);
             this.txtRespuesta.Name = "txtRespuesta";
             this.txtRespuesta.Size = new System.Drawing.Size(99, 20);
             this.txtRespuesta.TabIndex = 1;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(32, 46);
+            this.btnCancelar.Location = new System.Drawing.Point(78, 46);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(130, 21);
             this.btnCancelar.TabIndex = 2;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(189, 46);
+            this.btnGuardar.Location = new System.Drawing.Point(302, 46);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(130, 21);
             this.btnGuardar.TabIndex = 3;
@@ -68,7 +69,7 @@ namespace FrbaHotel
             // 
             // FrmDialogBox
             // 
-            this.ClientSize = new System.Drawing.Size(340, 79);
+            this.ClientSize = new System.Drawing.Size(518, 79);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.txtRespuesta);
@@ -88,6 +89,12 @@ namespace FrbaHotel
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             ((FrmMenu)this.FormPadre).RespuestaDialog(null, this.Razon);
+            this.Hide();
+            this.FormPadre.Show();
+        }
+
+        private void btnCancelar_Click_1(object sender, EventArgs e){
+                    ((FrmMenu)this.FormPadre).RespuestaDialog(null, this.Razon);
             this.Hide();
             this.FormPadre.Show();
         }

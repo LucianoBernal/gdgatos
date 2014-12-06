@@ -45,6 +45,7 @@
             // 
             // botonCheckIn
             // 
+            this.botonCheckIn.Enabled = false;
             this.botonCheckIn.Location = new System.Drawing.Point(58, 30);
             this.botonCheckIn.Name = "botonCheckIn";
             this.botonCheckIn.Size = new System.Drawing.Size(100, 31);
@@ -55,12 +56,14 @@
             // 
             // botonCheckOut
             // 
+            this.botonCheckOut.Enabled = false;
             this.botonCheckOut.Location = new System.Drawing.Point(58, 67);
             this.botonCheckOut.Name = "botonCheckOut";
             this.botonCheckOut.Size = new System.Drawing.Size(100, 31);
             this.botonCheckOut.TabIndex = 9;
             this.botonCheckOut.Text = "Check-out";
             this.botonCheckOut.UseVisualStyleBackColor = true;
+            this.botonCheckOut.Click += new System.EventHandler(this.botonCheckOut_Click);
             // 
             // FormRsrvEstd
             // 
