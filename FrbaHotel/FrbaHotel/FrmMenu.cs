@@ -18,7 +18,7 @@ using FrbaHotel.Registrar_Consumible;
 using FrbaHotel.Listado_Estadistico;
 using FrbaHotel.ABM_de_Habitacion;
 using FrbaHotel.Registrar_Estadia;
-
+using FrbaHotel.Facturar;
 namespace FrbaHotel
 {
     public partial class FrmMenu : Form
@@ -124,6 +124,42 @@ namespace FrbaHotel
                     }
                 }
             }
+            if (tipoResp == 4 && respuesta != null)
+            {
+                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta).ObtenerUnicoCampo();
+                if (query == null)
+                {
+                        MessageBox.Show("Ha ingresado un numero de reserva no valido");
+                        this.Show();
+                }
+                else
+                {
+                    if (Convert.ToInt32(query) == 1 || Convert.ToInt32(query) == 5 || Convert.ToInt32(query) == 6)
+                    {
+                        MessageBox.Show("La reserva ingresada se encuentra cancelada");
+                        this.Show();
+                        //TerminarMetodo
+                    }
+                    if (Convert.ToInt32(query) == 2)
+                    {
+                        if ((new Query("SELECT cantNoches FROM SKYNET.Estadias WHERE reserva =" + respuesta).ObtenerUnicoCampo()) != null)
+                        {
+                            FrmFacturar nuevo = new FrmFacturar(this, Convert.ToInt32(respuesta));
+                            nuevo.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encuentra registrado el checkout de la estadia");
+                            this.Show();
+                        }//TerminarMetodo
+                    }
+                    if (Convert.ToInt32(query) == 3 || Convert.ToInt32(query) == 4)
+                    {
+                        MessageBox.Show("La reserva no tiene una estadia asociada, por lo cual no puede facturarse");
+                        this.Show();
+                    }
+                }
+            }
         }
         public FrmMenu()
         {
@@ -134,7 +170,7 @@ namespace FrbaHotel
 
 //            this.btnCancelarEstadia.Visible = false;
             this.btnClientes.Visible = false;
-            this.btnFacturar.Visible = false;
+//            this.btnFacturar.Visible = false;
             this.btnHabitacion.Visible = false;
             this.btnHotel.Visible = false;
 //            this.btnListadoEstadistico.Visible = false;
@@ -321,6 +357,13 @@ namespace FrbaHotel
         FormRsrvEstd form = new FormRsrvEstd();
         this.Visible = false;
         form.ShowDialog();
+    }
+
+    private void btnFacturar_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva asociado a la estadia a facturar", 4);
+        dialog.Show();
     }
 
     }

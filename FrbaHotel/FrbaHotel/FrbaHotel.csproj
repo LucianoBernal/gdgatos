@@ -207,6 +207,12 @@
     <Compile Include="Cancelar Reserva\FrmCancelarReserva.Designer.cs">
       <DependentUpon>FrmCancelarReserva.cs</DependentUpon>
     </Compile>
+    <Compile Include="Facturar\FrmFacturar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Facturar\FrmFacturar.Designer.cs">
+      <DependentUpon>FrmFacturar.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmDialogBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cancelar Reserva\FrmCancelarReserva.resx">
       <DependentUpon>FrmCancelarReserva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturar\FrmFacturar.resx">
+      <DependentUpon>FrmFacturar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDialogBox.resx">
       <DependentUpon>FrmDialogBox.cs</DependentUpon>

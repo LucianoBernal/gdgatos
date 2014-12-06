@@ -184,6 +184,7 @@
             this.btnFacturar.TabIndex = 37;
             this.btnFacturar.Text = "Facturar";
             this.btnFacturar.UseVisualStyleBackColor = true;
+            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
             // 
             // lblPerfil
             // 
