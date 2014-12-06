@@ -247,7 +247,8 @@ values('Tarjeta Credito')
 /*migro facturas poner despues de las estadias*/
 set identity_insert [SKYNET].[Facturas] ON
 insert into SKYNET.Facturas(facturaNumero,estadia,fecha,tipoPago,monto,diferenciaInconsistencia)
-select m.Factura_Nro,m.Reserva_Codigo,m.Factura_Fecha,1,m.Factura_Total,m.Factura_Total-SUM(m.Item_Factura_Cantidad*m.Item_Factura_Monto)
+select m.Factura_Nro,m.Reserva_Codigo,m.Factura_Fecha,1,m.Factura_Total,m.Factura_Total-SUM(case when m.Consumible_Codigo is not null then  m.Item_Factura_Cantidad*m.Item_Factura_Monto
+																							else m.Item_Factura_Monto*m.Reserva_Cant_Noches end)
 from gd_esquema.Maestra m
 where m.Factura_Nro is not null and m.Item_Factura_Cantidad is not null and m.Item_Factura_Monto is not null
 group by m.Factura_Nro,m.Reserva_Codigo,m.Factura_Fecha,m.Factura_Total
