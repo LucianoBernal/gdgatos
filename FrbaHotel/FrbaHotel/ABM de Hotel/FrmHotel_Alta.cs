@@ -126,37 +126,46 @@ namespace FrbaHotel.ABM_de_Hotel
                     }
                     else
                     {
-                        string sql = "INSERT INTO SKYNET.Hoteles (nombre, telefono, ciudad, pais, mail, cantidadEstrellas, fechaCreacion, calle, numCalle, cadena) "
-                        + " VALUES ('" + txtNombre.Text + "', '"+txtTelefono.Text+"','" + txtCiudad.Text + "', (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), '" + txtEmail.Text + "', "
-                        + " '" + txtEstrellas.Value + "', '" + txtFecha.Value + "', '" + txtDireccion.Text + "', '" + txtNumCalle.Text + "', (SELECT idCadena FROM SKYNET.Cadenas WHERE cadena = '" + txtCadena.Text.ToString() + "') )";
-
-                        qry.pComando = sql;
-                        qry.Ejecutar();
-
-
-                        string consulta = "SELECT convert(int, idHotel) FROM SKYNET.Hoteles WHERE nombre= '" + txtNombre.Text + "'";
-                        Query qr = new Query(consulta);
-                        qr.pComando = consulta;
-                        idHotel = (int)qr.ObtenerUnicoCampo();
-
-                        sql = "INSERT INTO SKYNET.UsuarioRolHotel (usuario, hotel, rol ) SELECT " + Globales.idUsuarioLogueado + ", " + idHotel + ", r.idRol FROM  SKYNET.Roles r where r.nombre='ADMINISTRADOR' ";
-
-                        qry.pComando = sql;
-                        qry.Ejecutar();
-
-                        foreach (var checkedItem in Regimen.CheckedItems)
+                        int numero;
+                        bool okNumero = int.TryParse(txtNumCalle.Text, out numero);
+                        if (okNumero)
                         {
-                            string sql2 = "insert into SKYNET.HotelesRegimenes (regimen, hotel)  " +
-                                         "SELECT r.idRegimen, " + idHotel +
-                                         "from SKYNET.Regimenes r where r.descripcion = '" + checkedItem.ToString().Replace('[', ' ').Substring(1, checkedItem.ToString().IndexOf(',') - 1).TrimStart() + "'";
+                            string sql = "INSERT INTO SKYNET.Hoteles (nombre, telefono, ciudad, pais, mail, cantidadEstrellas, fechaCreacion, calle, numCalle, cadena) "
+                            + " VALUES ('" + txtNombre.Text + "', '" + txtTelefono.Text + "','" + txtCiudad.Text + "', (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), '" + txtEmail.Text + "', "
+                            + " '" + txtEstrellas.Value + "', '" + txtFecha.Value + "', '" + txtDireccion.Text + "', '" + txtNumCalle.Text + "', (SELECT idCadena FROM SKYNET.Cadenas WHERE cadena = '" + txtCadena.Text.ToString() + "') )";
 
-                            Query qry2 = new Query();
-                            qry2.pComando = sql2;
-                            qry2.Ejecutar();
+                            qry.pComando = sql;
+                            qry.Ejecutar();
+
+
+                            string consulta = "SELECT convert(int, idHotel) FROM SKYNET.Hoteles WHERE nombre= '" + txtNombre.Text + "'";
+                            Query qr = new Query(consulta);
+                            qr.pComando = consulta;
+                            idHotel = (int)qr.ObtenerUnicoCampo();
+
+                            sql = "INSERT INTO SKYNET.UsuarioRolHotel (usuario, hotel, rol ) SELECT " + Globales.idUsuarioLogueado + ", " + idHotel + ", r.idRol FROM  SKYNET.Roles r where r.nombre='ADMINISTRADOR' ";
+
+                            qry.pComando = sql;
+                            qry.Ejecutar();
+
+                            foreach (var checkedItem in Regimen.CheckedItems)
+                            {
+                                string sql2 = "insert into SKYNET.HotelesRegimenes (regimen, hotel)  " +
+                                             "SELECT r.idRegimen, " + idHotel +
+                                             "from SKYNET.Regimenes r where r.descripcion = '" + checkedItem.ToString().Replace('[', ' ').Substring(1, checkedItem.ToString().IndexOf(',') - 1).TrimStart() + "'";
+
+                                Query qry2 = new Query();
+                                qry2.pComando = sql2;
+                                qry2.Ejecutar();
+                            }
+
+                            MessageBox.Show("El hotel ha sido dado de alta con exito!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Visible = false;
                         }
-
-                        MessageBox.Show("El hotel ha sido dado de alta con exito!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Visible = false;
+                        else
+                        {
+                            MessageBox.Show("El numero de la calle tiene letras. Verifiquelo.");
+                        }
                     }
                 }
             }

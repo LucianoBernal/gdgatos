@@ -39,13 +39,22 @@ namespace FrbaHotel.ABM_de_Hotel
         {
             if (listaTextos.EstanTodosLlenos())
             {
-                //            MessageBox.Show("UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString());
-                new Query("UPDATE SKYNET.Hoteles SET mail = '" + txtEmail.Text + "', telefono = '" + txtTelefono.Text + "', cantidadEstrellas = '" + txtEstrellas.Value + "', "+
-                    " calle = '" + txtDireccion.Text + "', numCalle = " + txtNumCalle.Text + ", ciudad = '" + txtCiudad.Text + "', fechaCreacion = '" + txtFecha.Value + "', " +
-                    " pais = (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), cadena = (SELECT idCadena FROM SKYNET.Cadenas WHERE cadena = '" + txtCadena.Text.ToString() + "') "+ 
-                    " WHERE idHotel = " + idHotel.ToString()).Ejecutar();
-                ActualizarRegimen();
-                MessageBox.Show("Ya esta");
+                int numero;
+                bool okNumero = int.TryParse(txtNumCalle.Text, out numero);
+                if (okNumero)
+                {
+                    //            MessageBox.Show("UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString());
+                    new Query("UPDATE SKYNET.Hoteles SET mail = '" + txtEmail.Text + "', telefono = '" + txtTelefono.Text + "', cantidadEstrellas = '" + txtEstrellas.Value + "', " +
+                        " calle = '" + txtDireccion.Text + "', numCalle = " + txtNumCalle.Text + ", ciudad = '" + txtCiudad.Text + "', fechaCreacion = '" + txtFecha.Value + "', " +
+                        " pais = (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), cadena = (SELECT idCadena FROM SKYNET.Cadenas WHERE cadena = '" + txtCadena.Text.ToString() + "') " +
+                        " WHERE idHotel = " + idHotel.ToString()).Ejecutar();
+                    ActualizarRegimen();
+                    MessageBox.Show("Ya esta");
+                }
+                else
+                {
+                    MessageBox.Show("El numero de la calle tiene letras. Verifiquelo.");
+                }
             }
         }
         private void ActualizarRegimen()
