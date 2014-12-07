@@ -97,6 +97,20 @@ insert into SKYNET.Regimenes(descripcion,precioBase,habilitado)
 select distinct m.Regimen_Descripcion,m.Regimen_Precio,1
 from gd_esquema.Maestra m
 /*------------------------------------------------------------------------------*/
+/*Inserto ConsumiblesPorRegimenes*/
+insert into SKYNET.ConsumiblesPorRegimenes(idRegimen,idConsumible)
+select r.idRegimen,c.codigo
+from SKYNET.Consumibles c, SKYNET.Regimenes r
+where r.descripcion like 'All Inclusive' 
+union 
+select r.idRegimen,c.codigo
+from SKYNET.Consumibles c, SKYNET.Regimenes r
+where r.descripcion like 'All Inclusive moderado' and(
+c.nombre like 'Agua Mineral' or c.nombre like 'Coca Cola')
+
+
+/*------------------------------------------------------------------------------*/
+
 /*migro recargaEstrellas*/
 insert into SKYNET.RecargaEstrellas (recarga)
 select m.Hotel_Recarga_Estrella
@@ -707,7 +721,7 @@ go
 
 /* trigger mantener actualizado el monto en Factura*/
 
-
+go
 create trigger calculo_monto_factura on SKYNET.ItemsFactura
 for insert,update,delete
 as
@@ -728,10 +742,14 @@ set @monto = (select e.precioPorNocheEstadia*r.cantNoches from SKYNET.Estadias e
 			 e.reserva=(select f.estadia from SKYNET.Facturas f
 			 where f.facturaNumero=@numeroFactura))
 set @monto=@monto+(coalesce((select sum(ce.precioTotal)
-				   from SKYNET.ItemsFactura itf,SKYNET.ConsumiblesEstadias ce
+				   from SKYNET.ItemsFactura itf,SKYNET.ConsumiblesEstadias ce,SKYNET.Reservas r
 				   where itf.numeroFactura=@numeroFactura and
 				   (itf.detalle is null or itf.detalle not like '%Estadia%') and
-				   ce.numeroFactura=itf.numeroFactura and ce.itemFactura=itf.item),0))
+				   ce.numeroFactura=itf.numeroFactura and ce.itemFactura=itf.item and
+				   r.codigoReserva=ce.estadia and not exists(
+				   select 1 from SKYNET.ConsumiblesPorRegimenes cr where
+				   cr.idRegimen=r.regimen and cr.idConsumible=ce.consumible)
+				   ),0))
 				   
 update SKYNET.Facturas set monto=@monto										  
 where facturaNumero=@numeroFactura
@@ -740,5 +758,19 @@ end
 close cursor_ids_Facturas
 deallocate cursor_ids_Facturas
 commit
+go
+
+
+/* trigger agregar nuevos consumibles a all inclusive*/
+go
+create trigger agregar_consumibles_nuevos_a_AllInclusive on SKYNET.Consumibles
+for insert
+as
+begin transaction
+insert into SKYNET.ConsumiblesPorRegimenes(idRegimen,idConsumible)
+(select r.idRegimen,i.codigo from SKYNET.Regimenes r,Inserted i
+ where r.descripcion like 'All inclusive') 
+commit
+go
 
 

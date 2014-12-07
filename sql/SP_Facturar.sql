@@ -117,7 +117,14 @@ if(not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))
 			 order by 2
 	 declare @inconsistencia numeric (18,2),@monto numeric(18,2)
 	 select @monto=f.monto,@inconsistencia=f.diferenciaInconsistencia from SKYNET.Facturas f where f.estadia=@estadia
-	 insert @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal) 
+	if(@inconsistencia=0)
+	begin
+	insert @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal) 
+		   values('','','Descuento por regimen '+(select reg.descripcion from SKYNET.Reservas r,SKYNET.Regimenes reg
+												  where r.codigoReserva=@estadia
+												  and r.regimen=reg.idRegimen),'','',@monto-(select sum(SubTotal) from @retorno))
+	end
+	insert @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal) 
 		   values('','','Total','','',@monto)
 	 if(@inconsistencia!=0)
 		begin
@@ -140,13 +147,19 @@ from SKYNET.emitirFactura(10002)
 
 /* ------ unit test------*/
 
-insert SKYNET.Reservas(hotel,cliente)values(1,(select top 1 c.idCliente from SKYNET.Clientes c))
+insert SKYNET.Reservas(hotel,cliente,regimen,cantNoches)values(1,(select top 1 c.idCliente from SKYNET.Clientes c),1,5)
 insert SKYNET.Estadias(reserva,cantNoches) values((select MAX(r.codigoReserva) from SKYNET.Reservas r),5)
 insert SKYNET.ConsumiblesEstadias(estadia,consumible) values((select MAX(r.codigoReserva) from SKYNET.Reservas r),2324)
 insert SKYNET.ConsumiblesEstadias(estadia,consumible) values((select MAX(r.codigoReserva) from SKYNET.Reservas r),2325)
+insert SKYNET.EstadiaPorHabitacion(idEstadia,idHabitacion,idHotel) values ((select MAX(r.codigoReserva) from SKYNET.Reservas r),2,9)
 
 (select MAX(r.codigoReserva) from SKYNET.Reservas r)
 
-exec SKYNET.facturarUnaEstadia @estadia=110746, @fecha=null
+exec SKYNET.facturarUnaEstadia @estadia=110747, @fecha=null
 								,@nombreTipoPago='Tarjeta Credito',	
 								@numTarjeta=123456,@datosTarjeta='pepe'
+
+
+select *
+from SKYNET.emitirFactura(110747)
+
