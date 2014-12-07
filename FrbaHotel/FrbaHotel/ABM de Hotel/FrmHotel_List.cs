@@ -56,7 +56,6 @@ namespace FrbaHotel.ABM_de_Hotel
             dataResultado.Columns["idHotel"].Visible = false;  //oculto esta columna
             dataResultado.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             btnDeshabilitar.Visible = true;
-            btnHabilitar.Visible = true;
             btnModificar.Visible = true;
         }
 
@@ -98,18 +97,27 @@ namespace FrbaHotel.ABM_de_Hotel
         private void btnModificar_Click(object sender, EventArgs e)
         {
             int idHotel = idHotelSeleccionado();
-
-            FrmHotel_Mod modificar = new FrmHotel_Mod(idHotel);
-            this.Hide();
-            modificar.ShowDialog();
-            modificar = (FrmHotel_Mod)this.ActiveMdiChild;
+            if (idHotel!=0)
+            {
+                FrmHotel_Mod modificar = new FrmHotel_Mod(idHotel);
+                this.Hide();
+                modificar.ShowDialog();
+                modificar = (FrmHotel_Mod)this.ActiveMdiChild;
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione antes el hotel que quiere dar de baja.");
+            }
         }
         private int idHotelSeleccionado()
         {
-            DataGridViewRow fila = dataResultado.SelectedRows[0];
-
-
-            return Convert.ToInt32(fila.Cells["idHotel"].Value.ToString());
+            if (dataResultado.RowCount > 0)
+            {
+                DataGridViewRow fila = dataResultado.SelectedRows[0];
+                    return Convert.ToInt32(fila.Cells["idHotel"].Value.ToString());
+            }else{
+                return(0);
+            }
 
         }
 
@@ -119,6 +127,21 @@ namespace FrbaHotel.ABM_de_Hotel
             txtEstrellas.Value = 0;
             txtNombre.Text = null;
             txtPais.SelectedItem = null;
+        }
+
+        private void btnDeshabilitar_Click(object sender, EventArgs e)
+        {
+            int idHotel = idHotelSeleccionado();
+            if (idHotel!=0)
+            {
+                FrmHotel_Baja hotel = new FrmHotel_Baja(idHotel);
+                hotel.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione antes el hotel que quiere dar de baja.");
+            }
+
         }
     }
 }

@@ -44,7 +44,7 @@ namespace FrbaHotel {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Password=gd2014;Persist Security Info=True;User ID=gd;Initial Catalog=GD2C2014;Da" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Password=gd20142c;Persist Security Info=True;User ID=gd;Initial Catalog=GD2C2014;Da" +
             "ta Source=localhost\\SQLSERVER2008")]
         public string CadenaDeConexion
         {

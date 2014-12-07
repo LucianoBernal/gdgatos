@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPais = new System.Windows.Forms.ComboBox();
+            this.txtEstrellas = new System.Windows.Forms.NumericUpDown();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -38,15 +40,12 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnModificar = new System.Windows.Forms.Button();
-            this.btnHabilitar = new System.Windows.Forms.Button();
             this.btnDeshabilitar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.dataResultado = new System.Windows.Forms.DataGridView();
-            this.txtEstrellas = new System.Windows.Forms.NumericUpDown();
-            this.txtPais = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEstrellas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -67,6 +66,21 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscador";
+            // 
+            // txtPais
+            // 
+            this.txtPais.FormattingEnabled = true;
+            this.txtPais.Location = new System.Drawing.Point(371, 47);
+            this.txtPais.Name = "txtPais";
+            this.txtPais.Size = new System.Drawing.Size(178, 21);
+            this.txtPais.TabIndex = 23;
+            // 
+            // txtEstrellas
+            // 
+            this.txtEstrellas.Location = new System.Drawing.Point(113, 49);
+            this.txtEstrellas.Name = "txtEstrellas";
+            this.txtEstrellas.Size = new System.Drawing.Size(120, 20);
+            this.txtEstrellas.TabIndex = 22;
             // 
             // btnLimpiar
             // 
@@ -148,23 +162,15 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // btnHabilitar
-            // 
-            this.btnHabilitar.Location = new System.Drawing.Point(352, 387);
-            this.btnHabilitar.Name = "btnHabilitar";
-            this.btnHabilitar.Size = new System.Drawing.Size(98, 30);
-            this.btnHabilitar.TabIndex = 27;
-            this.btnHabilitar.Text = "Habilitar";
-            this.btnHabilitar.UseVisualStyleBackColor = true;
-            // 
             // btnDeshabilitar
             // 
-            this.btnDeshabilitar.Location = new System.Drawing.Point(130, 387);
+            this.btnDeshabilitar.Location = new System.Drawing.Point(230, 387);
             this.btnDeshabilitar.Name = "btnDeshabilitar";
             this.btnDeshabilitar.Size = new System.Drawing.Size(98, 30);
             this.btnDeshabilitar.TabIndex = 26;
             this.btnDeshabilitar.Text = "Deshabilitar";
             this.btnDeshabilitar.UseVisualStyleBackColor = true;
+            this.btnDeshabilitar.Click += new System.EventHandler(this.btnDeshabilitar_Click);
             // 
             // btnVolver
             // 
@@ -186,21 +192,6 @@
             this.dataResultado.TabIndex = 29;
             this.dataResultado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataResultado_CellContentClick);
             // 
-            // txtEstrellas
-            // 
-            this.txtEstrellas.Location = new System.Drawing.Point(113, 49);
-            this.txtEstrellas.Name = "txtEstrellas";
-            this.txtEstrellas.Size = new System.Drawing.Size(120, 20);
-            this.txtEstrellas.TabIndex = 22;
-            // 
-            // txtPais
-            // 
-            this.txtPais.FormattingEnabled = true;
-            this.txtPais.Location = new System.Drawing.Point(371, 47);
-            this.txtPais.Name = "txtPais";
-            this.txtPais.Size = new System.Drawing.Size(178, 21);
-            this.txtPais.TabIndex = 23;
-            // 
             // FrmHotel_List
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,7 +199,6 @@
             this.ClientSize = new System.Drawing.Size(593, 429);
             this.Controls.Add(this.dataResultado);
             this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.btnHabilitar);
             this.Controls.Add(this.btnDeshabilitar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.groupBox1);
@@ -218,8 +208,8 @@
             this.Load += new System.EventHandler(this.FrmHotel_List_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEstrellas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -236,7 +226,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnHabilitar;
         private System.Windows.Forms.Button btnDeshabilitar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridView dataResultado;

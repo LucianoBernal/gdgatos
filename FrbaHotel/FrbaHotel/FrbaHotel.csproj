@@ -123,6 +123,12 @@
     <Compile Include="ABM de Hotel\FrmHotel_Alta.Designer.cs">
       <DependentUpon>FrmHotel_Alta.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel_Baja.Designer.cs">
+      <DependentUpon>FrmHotel_Baja.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM de Hotel\FrmHotel_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,9 @@
     <EmbeddedResource Include="ABM de Hotel\FrmHotel_Alta.resx">
       <DependentUpon>FrmHotel_Alta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Hotel\FrmHotel_Baja.resx">
+      <DependentUpon>FrmHotel_Baja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM de Hotel\FrmHotel_List.resx">
       <DependentUpon>FrmHotel_List.cs</DependentUpon>
     </EmbeddedResource>
@@ -370,9 +379,6 @@
     <EmbeddedResource Include="Registrar Estadia\FormRsrvEstd.resx">
       <DependentUpon>FormRsrvEstd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registrar Estadia\IngresaRsrv.resx">
-      <DependentUpon>IngresaRsrv.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -414,12 +420,6 @@
     </Compile>
     <Compile Include="Registrar Estadia\FormRsrvEstd.Designer.cs">
       <DependentUpon>FormRsrvEstd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registrar Estadia\IngresaRsrv.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registrar Estadia\IngresaRsrv.Designer.cs">
-      <DependentUpon>IngresaRsrv.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
