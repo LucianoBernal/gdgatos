@@ -155,11 +155,11 @@ insert SKYNET.EstadiaPorHabitacion(idEstadia,idHabitacion,idHotel) values ((sele
 
 (select MAX(r.codigoReserva) from SKYNET.Reservas r)
 
-exec SKYNET.facturarUnaEstadia @estadia=110747, @fecha=null
+exec SKYNET.facturarUnaEstadia @estadia=110742, @fecha=null
 								,@nombreTipoPago='Tarjeta Credito',	
 								@numTarjeta=123456,@datosTarjeta='pepe'
 
 
 select *
-from SKYNET.emitirFactura(110747)
+from SKYNET.emitirFactura(110742)
 
