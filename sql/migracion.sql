@@ -97,6 +97,20 @@ insert into SKYNET.Regimenes(descripcion,precioBase,habilitado)
 select distinct m.Regimen_Descripcion,m.Regimen_Precio,1
 from gd_esquema.Maestra m
 /*------------------------------------------------------------------------------*/
+/*Inserto ConsumiblesPorRegimenes*/
+insert into SKYNET.ConsumiblesPorRegimenes(idRegimen,idConsumible)
+select r.idRegimen,c.codigo
+from SKYNET.Consumibles c, SKYNET.Regimenes r
+where r.descripcion like 'All Inclusive' 
+union 
+select r.idRegimen,c.codigo
+from SKYNET.Consumibles c, SKYNET.Regimenes r
+where r.descripcion like 'All Inclusive moderado' and(
+c.nombre like 'Agua Mineral' or c.nombre like 'Coca Cola')
+
+
+/*------------------------------------------------------------------------------*/
+
 /*migro recargaEstrellas*/
 insert into SKYNET.RecargaEstrellas (recarga)
 select m.Hotel_Recarga_Estrella
@@ -707,7 +721,7 @@ go
 
 /* trigger mantener actualizado el monto en Factura*/
 
-
+go
 create trigger calculo_monto_factura on SKYNET.ItemsFactura
 for insert,update,delete
 as
@@ -740,5 +754,18 @@ end
 close cursor_ids_Facturas
 deallocate cursor_ids_Facturas
 commit
+go
+
+/* trigger agregar nuevos consumibles a all inclusive*/
+go
+create trigger agregar_consumibles_nuevos_a_AllInclusive on SKYNET.Consumibles
+for insert
+as
+begin transaction
+insert into SKYNET.ConsumiblesPorRegimenes(idRegimen,idConsumible)
+(select r.idRegimen,i.codigo from SKYNET.Regimenes r,Inserted i
+ where r.descripcion like 'All inclusive') 
+commit
+go
 
 
