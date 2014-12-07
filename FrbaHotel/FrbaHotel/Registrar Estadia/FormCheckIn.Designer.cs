@@ -47,6 +47,7 @@
             this.btnHuesped = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.btnRegistrarHuesped = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnRegistrarHuesped);
             this.groupBox1.Controls.Add(this.txtOcultoTipo);
             this.groupBox1.Controls.Add(this.cbExacta);
             this.groupBox1.Controls.Add(this.cbMail);
@@ -245,6 +247,16 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // btnRegistrarHuesped
+            // 
+            this.btnRegistrarHuesped.Location = new System.Drawing.Point(431, 58);
+            this.btnRegistrarHuesped.Name = "btnRegistrarHuesped";
+            this.btnRegistrarHuesped.Size = new System.Drawing.Size(110, 33);
+            this.btnRegistrarHuesped.TabIndex = 28;
+            this.btnRegistrarHuesped.Text = "Registrar Huesped";
+            this.btnRegistrarHuesped.UseVisualStyleBackColor = true;
+            this.btnRegistrarHuesped.Click += new System.EventHandler(this.btnRegistrarHuesped_Click);
+            // 
             // FormCheckIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,5 +299,6 @@
         private System.Windows.Forms.Button btnHuesped;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button btnRegistrarHuesped;
     }
 }

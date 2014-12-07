@@ -102,6 +102,7 @@ namespace FrbaHotel.Registrar_Estadia
                 this.Visible = false;
                 frm.ShowDialog();
             }
+            else { MessageBox.Show("no anda"); }
         }
 
         private void darDeBaja()

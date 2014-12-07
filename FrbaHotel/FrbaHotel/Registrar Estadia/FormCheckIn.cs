@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel.ABM_de_Cliente;
 
 namespace FrbaHotel.Registrar_Estadia
 {
@@ -145,6 +146,12 @@ namespace FrbaHotel.Registrar_Estadia
            this.Visible = false;
            frm.ShowDialog();
 
+       }
+
+       private void btnRegistrarHuesped_Click(object sender, EventArgs e)
+       {
+           FrmCliente_Alta frm = new FrmCliente_Alta();
+           frm.ShowDialog();
        }
     }
 }
