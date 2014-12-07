@@ -14,13 +14,16 @@ namespace FrbaHotel.Registrar_Estadia
         public ListaTextos listaTextos = new ListaTextos();
         public ListaConId listaTipo = new ListaConId();
         int idReserva;
+        int estadoReserva;
         /*int[] clientes;
         clientes = new int[15];*/
 
-        public FormCheckIn(int id)
+        public FormCheckIn(int id, int estado)
         {
             InitializeComponent();
             idReserva = id;
+            estadoReserva = estado;
+
         }
         public void AgregarTextos()
         {
@@ -39,6 +42,16 @@ namespace FrbaHotel.Registrar_Estadia
         private void button1_Click(object sender, EventArgs e)
         {
             int idCliente = idClienteSeleccionado();
+           
+            if (!existeUsuarioIngresoEnEstadia(this.idReserva))
+            {
+                new Query("update SKYNET.Estadias set usuarioIngreso = " + idCliente + " where reserva = " + this.idReserva + " ").Ejecutar();
+                new Query("insert into SKYNET.ClientesPorEstadia (idCliente,idEstadia) values ( " + idCliente + ", " + this.idReserva + " )").Ejecutar();
+            }
+            else 
+            {
+                MessageBox.Show("El cliente ya ha sido registrado.");
+            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -90,5 +103,48 @@ namespace FrbaHotel.Registrar_Estadia
         {
             txtNumDoc.Enabled = cbNumDoc.Checked;
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private bool existeUsuarioIngresoEnEstadia(int id)
+        {
+            int existe = (int)new Query("select COUNT(*) from SKYNET.Estadias where usuarioIngreso is not null and reserva =  " + id + " ").ObtenerUnicoCampo();
+            if (existe == 1) { return true;}
+            else { return false; }
+        }
+
+        private void btnHuesped_Click(object sender, EventArgs e)
+        {
+            if (hayCapacidad())
+            {
+                int idHuesped = idClienteSeleccionado();
+                new Query("insert into SKYNET.ClientesPorEstadia (idCliente,idEstadia) values ( " + idHuesped + " , " + this.idReserva + " )").Ejecutar();
+            }
+            else
+            {
+                MessageBox.Show("No hay más capacidad para huéspedes");
+            }
+        }
+
+       private bool hayCapacidad()
+       {
+           int capacidad = (int)new Query("select capacidad from SKYNET.TiposHabitacion where codigo = (select idTipoHabitacion from SKYNET.ReservasPorTipoHabitacion where idReserva = "+ this.idReserva +" )").ObtenerUnicoCampo();
+           int cantHuespedes = (int)new Query("select COUNT(*) from SKYNET.ClientesPorEstadia where idEstadia = "+ this.idReserva +" ").ObtenerUnicoCampo();
+           if (cantHuespedes == capacidad) return false;
+           else return true;            
+       }
+
+       private void btnGuardar_Click(object sender, EventArgs e)
+       {
+           new Query("update SKYNET.Reservas set estado = 2 where codigoReserva = " + this.idReserva + " ").Ejecutar();
+           MessageBox.Show("CheckIn realizado con éxito!");
+           FrmMenu frm = new FrmMenu();
+           this.Visible = false;
+           frm.ShowDialog();
+
+       }
     }
 }

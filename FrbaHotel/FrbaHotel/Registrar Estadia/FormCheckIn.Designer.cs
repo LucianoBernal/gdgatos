@@ -223,6 +223,7 @@
             this.btnHuesped.TabIndex = 25;
             this.btnHuesped.Text = "Agregar Huesped";
             this.btnHuesped.UseVisualStyleBackColor = true;
+            this.btnHuesped.Click += new System.EventHandler(this.btnHuesped_Click);
             // 
             // btnGuardar
             // 
@@ -232,6 +233,7 @@
             this.btnGuardar.TabIndex = 26;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnVolver
             // 
@@ -241,6 +243,7 @@
             this.btnVolver.TabIndex = 27;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // FormCheckIn
             // 

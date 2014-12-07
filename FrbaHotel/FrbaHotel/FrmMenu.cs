@@ -177,7 +177,7 @@ namespace FrbaHotel
                     }
                     else {
                         object query2 = new Query("SELECT cantNoches FROM SKYNET.Estadias WHERE reserva =" + respuesta).ObtenerUnicoCampo();
-                        if (query2 is DBNull)
+                        if (!(query2 is DBNull))
                         {
                             FormRsrvEstd form = new FormRsrvEstd(this, Convert.ToInt32(respuesta), Convert.ToInt32(query));
                             this.Visible = false;
@@ -388,9 +388,10 @@ namespace FrbaHotel
         FormRsrvEstd form = new FormRsrvEstd();
         this.Visible = false;
         form.ShowDialog();*/
-        this.Hide();
+        /*this.Hide();*/
         FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva asociado a la estadia", 5);
-        dialog.Show();
+        this.Visible = false;
+        dialog.ShowDialog();
     }
 
     private void btnFacturar_Click(object sender, EventArgs e)

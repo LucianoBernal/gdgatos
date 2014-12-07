@@ -57,11 +57,9 @@ namespace FrbaHotel.Registrar_Estadia
         }
 
         private void botonCheckIn_Click(object sender, EventArgs e)
-        {//Te recomiendo reconsiderar esto, ahora al momento de este form ya tenes el numero de
-            //Estadia y el estado de la misma en variables de este form
-            this.Visible = false;
-            IngresaRsrv frmCheckIn = new IngresaRsrv();
-            frmCheckIn.ShowDialog();
+        {
+            validarFechaReserva();
+            
         }
 
         private void botonCheckOut_Click(object sender, EventArgs e)
@@ -80,6 +78,36 @@ namespace FrbaHotel.Registrar_Estadia
             MessageBox.Show("El checkOut se registro efectivamente");
             this.botonCheckOut.Enabled = false;
             //Deberia registrar en la bd la cantidad de noches, y creo que solo eso
+        }
+
+        private void validarFechaReserva()
+        {
+            string strQuery = "SELECT DATEDIFF(day,fechaDesde,SYSDATETIME()) AS dif FROM SKYNET.Reservas WHERE codigoReserva = " + this.Reserva + " ";
+            int diferencia = (int) new Query(strQuery).ObtenerUnicoCampo();
+            if (diferencia == 0)
+            {
+                new Query("INSERT INTO SKYNET.Estadias (reserva) VALUES ( " + this.Reserva + " )" ).Ejecutar();
+                FormCheckIn frm = new FormCheckIn(this.Reserva,this.EstadoReserva);
+                this.Visible = false;
+                frm.ShowDialog();
+            }
+            else if (diferencia < 0)//llegó tempranito
+            {
+                MessageBox.Show("Todavía no puede realizar el checkIn, no está en fecha."); 
+            }
+            else if (diferencia > 0)//llegó tarde
+            {
+                darDeBaja();
+                FormMagic frm = new FormMagic();
+                this.Visible = false;
+                frm.ShowDialog();
+            }
+        }
+
+        private void darDeBaja()
+        {
+            new Query("UPDATE SKYNET.Reservas SET estado = 1 WHERE codigoReserva = " + this.Reserva + " ").Ejecutar();
+
         }
     }
 }
