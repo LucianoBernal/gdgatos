@@ -81,24 +81,23 @@ namespace FrbaHotel.ABM_de_Rol
                     qry.pComando = sql;
                     qry.Ejecutar();
 
-                    string consulta = "SELECT idRol FROM SKYNET.Roles WHERE nombre= '" + txtNombre.Text + "'";
-                    Query qr = new Query(consulta);
-                    qr.pComando = consulta;
-                    idRol = (int)qr.ObtenerUnicoCampo();
-
+                    string consulta = "SELECT convert(int, idRol) FROM SKYNET.Roles WHERE nombre= '" + txtNombre.Text + "'";
+                    idRol = (int) new Query(consulta).ObtenerUnicoCampo();
                     foreach (var checkedItem in Funcionalidades.CheckedItems)
                     {
-                        string sql2 = "insert into SKYNET.RolFunciones (funcion, rol) VALUES " +
-                                     "SELECT idFuncion, " + idRol + 
-                                     "from SKYNET.Funciones where descripcion = '" + checkedItem.ToString().Replace('[', ' ').Substring(1, checkedItem.ToString().IndexOf(',') - 1).TrimStart() + "'";
-
+                        string sql2 = "INSERT INTO SKYNET.RolFunciones (funcion, rol) " +
+                                     "SELECT f.idFuncion, " + idRol + 
+                                     " FROM SKYNET.Funciones f WHERE descripcion = '" + checkedItem.ToString().Replace('[', ' ').Substring(1, checkedItem.ToString().IndexOf(',') - 1).TrimStart() + "'";
                         Query qry2 = new Query();
                         qry2.pComando = sql2;
                         qry2.Ejecutar();
                     }
 
                     MessageBox.Show("Rol dado de alta con exito!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Visible = false;
+                    FrmRol rol = new FrmRol();
+                    this.Hide();
+                    rol.ShowDialog();
+                    rol = (FrmRol)this.ActiveMdiChild;
                 }
             }
         }
