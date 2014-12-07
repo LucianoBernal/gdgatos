@@ -107,7 +107,11 @@ namespace FrbaHotel.Registrar_Estadia
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-
+            new Query("delete from SKYNET.ClientesPorEstadia where idEstadia = " + idReserva + " ").Ejecutar();
+            new Query("delete from SKYNET.Estadias where reserva = " + idReserva + " ").Ejecutar();
+            FrmMenu frm = new FrmMenu();
+            this.Visible = false;
+            frm.ShowDialog();
         }
 
         private bool existeUsuarioIngresoEnEstadia(int id)
