@@ -742,10 +742,14 @@ set @monto = (select e.precioPorNocheEstadia*r.cantNoches from SKYNET.Estadias e
 			 e.reserva=(select f.estadia from SKYNET.Facturas f
 			 where f.facturaNumero=@numeroFactura))
 set @monto=@monto+(coalesce((select sum(ce.precioTotal)
-				   from SKYNET.ItemsFactura itf,SKYNET.ConsumiblesEstadias ce
+				   from SKYNET.ItemsFactura itf,SKYNET.ConsumiblesEstadias ce,SKYNET.Reservas r
 				   where itf.numeroFactura=@numeroFactura and
 				   (itf.detalle is null or itf.detalle not like '%Estadia%') and
-				   ce.numeroFactura=itf.numeroFactura and ce.itemFactura=itf.item),0))
+				   ce.numeroFactura=itf.numeroFactura and ce.itemFactura=itf.item and
+				   r.codigoReserva=ce.estadia and not exists(
+				   select 1 from SKYNET.ConsumiblesPorRegimenes cr where
+				   cr.idRegimen=r.regimen and cr.idConsumible=ce.consumible)
+				   ),0))
 				   
 update SKYNET.Facturas set monto=@monto										  
 where facturaNumero=@numeroFactura
@@ -755,6 +759,7 @@ close cursor_ids_Facturas
 deallocate cursor_ids_Facturas
 commit
 go
+
 
 /* trigger agregar nuevos consumibles a all inclusive*/
 go
