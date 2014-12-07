@@ -78,48 +78,88 @@ namespace FrbaHotel.ABM_de_Cliente
             txtOcultoPaisDeOrigen.Text = listaPaisDeOrigen.ObtenerId(txtPaisDeOrigen.Text).ToString();
             if (listaTextos.EstanTodosLlenos())
             {
-                int baja;
-                if (txtBaja.Checked == true)
+                int numDoc, numCalle, telefono;
+                bool okNumDoc = int.TryParse(txtNumDoc.Text, out numDoc);
+                if (okNumDoc == false)
                 {
-                    baja = 1;
+                    MessageBox.Show("El numero de Documento no es un Numero.");
                 }
-                else
+                bool okNumCalle = int.TryParse(txtNumCalle.Text, out numCalle);
+                if (okNumCalle == false)
                 {
-                    baja = 0;
+                    MessageBox.Show("El numero de Calle no es un Numero.");
                 }
-                
-                string strquery = "INSERT INTO SKYNET.Clientes (nombre, apellido, tipoDoc, numDoc, mail, telefono, calle, nacionalidad, numCalle, fechaNac, baja, rol, paisDeOrigen ";
-                if (txtPiso.Text != "")
-                {   
-                    strquery = strquery +", piso ";
+                bool okTelefono = int.TryParse(txtTelefono.Text, out telefono);
+                if (okTelefono == false)
+                {
+                    MessageBox.Show("El telefono debe ser solo numeros.");
                 }
-                if (txtDepto.Text != "")
-                {   
-                    strquery = strquery +", depto";
-                }//Hardcoders
-                strquery = strquery +") VALUES ('" + txtNombre.Text + "', '" + txtApellido.Text + "', " + txtOcultoTipoDoc.Text + ", " + txtNumDoc.Text + ", " +
-                " '" + txtMail.Text + "', " + txtTelefono.Text + ", '" + txtCalle.Text + "', " + txtOcultoNacionalidad.Text + ", " +
-                " " + txtNumCalle.Text + ", '" + txtFecha.Value.ToString("dd-MM-yyyy") + "', " + baja + ", " + txtRol.Text + ", " + txtOcultoPaisDeOrigen.Text ;
-                if (txtPiso.Text != "")
-                {   
-                strquery = strquery +", " + txtPiso.Text +" ";
-                }
-                if (txtDepto.Text != "")
-                {   
-                strquery = strquery +", '" + txtDepto.Text + "'";
-                }
-                strquery = strquery + " ) ";
+                if (okTelefono == true && okNumCalle == true && okNumDoc == true)
+                {
+                    if ((!existeMail(txtMail.Text)) && (!existeCliente(txtOcultoTipoDoc.Text, numDoc)))
+                    {
+                        int baja;
+                        if (txtBaja.Checked == true)
+                        {
+                            baja = 1;
+                        }
+                        else
+                        {
+                            baja = 0;
+                        }
 
-                new Query(strquery).Ejecutar();
-                MessageBox.Show("Ya esta");
-                this.Visible = false;
-                if (Padre != null) 
-                {
-                    int idCliente = Convert.ToInt32(new Query("SELECT IDENT_CURRENT('SKYNET.Clientes')").ObtenerUnicoCampo());
-                    this.Padre.Show();
-                    this.Padre.ReciboElIdCliente(idCliente);
+                        string strquery = "INSERT INTO SKYNET.Clientes (nombre, apellido, tipoDoc, numDoc, mail, telefono, calle, nacionalidad, numCalle, fechaNac, baja, rol, paisDeOrigen ";
+                        if (txtPiso.Text != "")
+                        {
+                            strquery = strquery + ", piso ";
+                        }
+                        if (txtDepto.Text != "")
+                        {
+                            strquery = strquery + ", depto";
+                        }//Hardcoders
+                        strquery = strquery + ") VALUES ('" + txtNombre.Text + "', '" + txtApellido.Text + "', " + txtOcultoTipoDoc.Text + ", " + txtNumDoc.Text + ", " +
+                        " '" + txtMail.Text + "', " + txtTelefono.Text + ", '" + txtCalle.Text + "', " + txtOcultoNacionalidad.Text + ", " +
+                        " " + txtNumCalle.Text + ", '" + txtFecha.Value.ToString("dd-MM-yyyy") + "', " + baja + ", " + txtRol.Text + ", " + txtOcultoPaisDeOrigen.Text;
+                        if (txtPiso.Text != "")
+                        {
+                            strquery = strquery + ", " + txtPiso.Text + " ";
+                        }
+                        if (txtDepto.Text != "")
+                        {
+                            strquery = strquery + ", '" + txtDepto.Text + "'";
+                        }
+                        strquery = strquery + " ) ";
+
+                        new Query(strquery).Ejecutar();
+                        MessageBox.Show("Ya esta");
+                        this.Visible = false;
+                        if (Padre != null)
+                        {
+                            int idCliente = Convert.ToInt32(new Query("SELECT IDENT_CURRENT('SKYNET.Clientes')").ObtenerUnicoCampo());
+                            this.Padre.Show();
+                            this.Padre.ReciboElIdCliente(idCliente);
+                        }
+                    }
                 }
             }
+        }
+        private bool existeCliente(string tipoDoc, int numero)
+        {
+            int retornar = (int)new Query("SELECT COUNT(1) FROM SKYNET.Clientes WHERE tipoDoc = " + tipoDoc + " AND numDoc = "+numero+" ").ObtenerUnicoCampo();
+            if (retornar == 1)
+            {
+                MessageBox.Show("Ya existe el cliente. Por favor verifique el tipo y numero de documento ingresado.");
+            }
+            return (retornar == 1);
+        }
+        private bool existeMail(string mail)
+        {
+            int retornar = (int)new Query("SELECT COUNT(1) FROM SKYNET.Clientes WHERE mail ='" + mail + "' ").ObtenerUnicoCampo();
+            if (retornar == 1)
+            {
+                MessageBox.Show("Ya existe el mail ingresado. Por favor verifiquelo.");
+            }
+            return (retornar == 1);
         }
     }
 }

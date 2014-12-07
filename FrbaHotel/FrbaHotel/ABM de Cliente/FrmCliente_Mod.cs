@@ -16,6 +16,7 @@ namespace FrbaHotel.ABM_de_Cliente
         public ListaConId listaNacionalidad = new ListaConId();
         public ListaConId listaPaisDeOrigen = new ListaConId();
         int idCliente;
+        string mailAnterior, tipoDocAnterior, numDocAnterior;
         public FrmCliente_Mod(int id)
         {
             InitializeComponent();
@@ -52,11 +53,14 @@ namespace FrbaHotel.ABM_de_Cliente
                 txtCalle.Text = datos[1].ToString();
                 txtFecha.Text = datos[2].ToString();
                 txtMail.Text = datos[3].ToString();
+                mailAnterior = datos[3].ToString();
                 txtNombre.Text = datos[4].ToString();
                 txtNumCalle.Text = (datos[5].ToString().Length > 3) ? datos[5].ToString().Substring(0, datos[5].ToString().Length - 3) : datos[5].ToString();
                 txtNumDoc.Text = (datos[6].ToString().Length > 3) ? datos[6].ToString().Substring(0, datos[6].ToString().Length - 3) : datos[6].ToString();
+                numDocAnterior = (datos[6].ToString().Length > 3) ? datos[6].ToString().Substring(0, datos[6].ToString().Length - 3) : datos[6].ToString();
                 txtTelefono.Text = (datos[7].ToString().Length > 3) ? datos[7].ToString().Substring(0, datos[7].ToString().Length - 3) : datos[7].ToString();
                 txtTipoDoc.Text = (datos[8].ToString() != "") ? (listaTipoDoc.ObtenerDetalle(Convert.ToInt32(datos[8]))) : (listaTipoDoc.ObtenerDetalle(1));
+                tipoDocAnterior = (datos[8].ToString() != "") ? (listaTipoDoc.ObtenerDetalle(Convert.ToInt32(datos[8]))) : (listaTipoDoc.ObtenerDetalle(1));
                 txtPiso.Text = datos[9].ToString();
                 txtDepto.Text = datos[10].ToString();
                 txtNacionalidad.Text = (datos[11].ToString() != "") ? (listaNacionalidad.ObtenerDetalle(Convert.ToInt32(datos[11]))) : (listaNacionalidad.ObtenerDetalle(1));
@@ -89,34 +93,90 @@ namespace FrbaHotel.ABM_de_Cliente
             txtOcultoPaisDeOrigen.Text = listaPaisDeOrigen.ObtenerId(txtPaisDeOrigen.Text).ToString();
             if (listaTextos.EstanTodosLlenos())
             {
-                int incons;
-                int baja;
-                if (txtBaja.Checked == true)
+                int numDoc, numCalle, telefono;
+                bool okNumDoc = int.TryParse(txtNumDoc.Text, out numDoc);
+                if (okNumDoc == false)
                 {
-                    baja = 1;
-                }else{
-                    baja = 0;
+                    MessageBox.Show("El numero de Documento no es un Numero.");
                 }
-                if (txtInconsistencia.Checked == true)
+                bool okNumCalle = int.TryParse(txtNumCalle.Text, out numCalle);
+                if (okNumCalle == false)
                 {
-                    incons = 1;
-                }else{
-                    incons = 0;
+                    MessageBox.Show("El numero de Calle no es un Numero.");
                 }
-                string strquery = "UPDATE SKYNET.Clientes SET nombre = '"+txtNombre.Text+"', apellido = '"+txtApellido.Text+"', tipoDoc = "+txtOcultoTipoDoc.Text+", numDoc = "+txtNumDoc.Text+", "+
-                    " mail = '"+txtMail.Text+"', telefono = "+txtTelefono.Text+", calle ='"+txtCalle.Text+"', nacionalidad = "+txtOcultoNacionalidad.Text+", "+
-                    " numCalle = " + txtNumCalle.Text + ", fechaNac = '" + txtFecha.Value + "', baja = " + baja + ", rol = " + txtRol.Text + ", paisDeOrigen = " + txtOcultoPaisDeOrigen.Text + ", inconsistencia = " + incons + " ";
-                if (txtPiso.Text != "")
-                {   
-                    strquery = strquery+", piso = "+txtPiso.Text+"";
-                }
-                if (txtDepto.Text != "")
+                bool okTelefono = int.TryParse(txtTelefono.Text, out telefono);
+                if (okTelefono == false)
                 {
-                    strquery = strquery + ", depto = '" + txtDepto.Text + "' ";
+                    MessageBox.Show("El telefono debe ser solo numeros.");
                 }
-                strquery = strquery + "WHERE idCliente = " + idCliente.ToString();
-                new Query().Ejecutar();
-                MessageBox.Show("Ya esta");
+                if (okTelefono == true && okNumCalle == true && okNumDoc == true)
+                {
+                    if ((!existeMail(txtMail.Text)) && (!existeCliente(txtOcultoTipoDoc.Text, txtNumDoc.Text)))
+                    {
+                        int incons;
+                        int baja;
+                        if (txtBaja.Checked == true)
+                        {
+                            baja = 1;
+                        }
+                        else
+                        {
+                            baja = 0;
+                        }
+                        if (txtInconsistencia.Checked == true)
+                        {
+                            incons = 1;
+                        }
+                        else
+                        {
+                            incons = 0;
+                        }
+                        string strquery = "UPDATE SKYNET.Clientes SET nombre = '" + txtNombre.Text + "', apellido = '" + txtApellido.Text + "', tipoDoc = " + txtOcultoTipoDoc.Text + ", numDoc = " + txtNumDoc.Text + ", " +
+                            " mail = '" + txtMail.Text + "', telefono = " + txtTelefono.Text + ", calle ='" + txtCalle.Text + "', nacionalidad = " + txtOcultoNacionalidad.Text + ", " +
+                            " numCalle = " + txtNumCalle.Text + ", fechaNac = '" + txtFecha.Value + "', baja = " + baja + ", rol = " + txtRol.Text + ", paisDeOrigen = " + txtOcultoPaisDeOrigen.Text + ", inconsistencia = " + incons + " ";
+                        if (txtPiso.Text != "")
+                        {
+                            strquery = strquery + ", piso = " + txtPiso.Text + "";
+                        }
+                        if (txtDepto.Text != "")
+                        {
+                            strquery = strquery + ", depto = '" + txtDepto.Text + "' ";
+                        }
+                        strquery = strquery + "WHERE idCliente = " + idCliente.ToString();
+                        new Query().Ejecutar();
+                        MessageBox.Show("Ya esta");
+                    }
+                }
+            }
+        }
+        private bool existeCliente(string tipoDoc, string numero)
+        {
+            if (tipoDocAnterior == tipoDoc && numero == numDocAnterior)
+            {
+                return (false);
+            }else{
+                int retornar = (int)new Query("SELECT COUNT(1) FROM SKYNET.Clientes WHERE tipoDoc = " + tipoDoc + " AND numDoc = " + numero + " ").ObtenerUnicoCampo();
+                if (retornar == 1)
+                {
+                    MessageBox.Show("Ya existe el cliente. Por favor verifique el tipo y numero de documento ingresado.");
+                }
+                return (retornar == 1);
+            }
+        }
+        private bool existeMail(string mail)
+        {
+            if (mailAnterior == mail)
+            {
+                return (false);
+            }
+            else
+            {
+                int retornar = (int)new Query("SELECT COUNT(1) FROM SKYNET.Clientes WHERE mail ='" + mail + "' ").ObtenerUnicoCampo();
+                if (retornar == 1)
+                {
+                    MessageBox.Show("Ya existe el mail ingresado. Por favor verifiquelo.");
+                }
+                return (retornar == 1);
             }
         }
     }
