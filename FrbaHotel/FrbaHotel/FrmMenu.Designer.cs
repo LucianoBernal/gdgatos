@@ -72,7 +72,7 @@
             this.btnCancelarEstadia.Name = "btnCancelarEstadia";
             this.btnCancelarEstadia.Size = new System.Drawing.Size(139, 45);
             this.btnCancelarEstadia.TabIndex = 35;
-            this.btnCancelarEstadia.Text = "Cancelar Estadia";
+            this.btnCancelarEstadia.Text = "Cancelar Reserva";
             this.btnCancelarEstadia.UseVisualStyleBackColor = true;
             this.btnCancelarEstadia.Click += new System.EventHandler(this.btnCancelarEstadia_Click);
             // 

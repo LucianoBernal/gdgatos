@@ -199,18 +199,18 @@ namespace FrbaHotel
             idUsuario = Globales.idUsuarioLogueado;
             Globales.fechaSistema = Settings.Default.FechaSistema.ToShortDateString();
 
-//            this.btnCancelarEstadia.Visible = false;
+            this.btnCancelarEstadia.Visible = false;
             this.btnClientes.Visible = false;
-//            this.btnFacturar.Visible = false;
+            this.btnFacturar.Visible = false;
             this.btnHabitacion.Visible = false;
             this.btnHotel.Visible = false;
-//            this.btnListadoEstadistico.Visible = false;
+            this.btnListadoEstadistico.Visible = false;
             this.btnRegimenEstadia.Visible = false;
- //           this.btnRegistrarConsumible.Visible = false;
- //           this.btnRegistrarEstadia.Visible = false;
-            this.btnReserva.Visible = true;
+            this.btnRegistrarConsumible.Visible = false;
+            this.btnRegistrarEstadia.Visible = false;
             this.btnRoles.Visible = false;
             this.btnUsuario.Visible = false;
+            this.btnListadoEstadistico.Visible = false;
             linkCambiarContraseña.Visible = false;
             lblUsuarioLogueado.Visible = false;
         }
