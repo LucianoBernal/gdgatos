@@ -186,5 +186,10 @@ namespace FrbaHotel.ABM_de_Cliente
             }
             return (retornar == 1);
         }
+
+        private void txtNumDoc_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

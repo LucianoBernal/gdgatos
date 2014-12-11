@@ -141,11 +141,29 @@
     <Compile Include="ABM de Hotel\FrmHotel_Mod.Designer.cs">
       <DependentUpon>FrmHotel_Mod.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Regimen\Form1.cs">
+    <Compile Include="ABM de Regimen\FrmRegimen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Regimen\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM de Regimen\FrmRegimen.Designer.cs">
+      <DependentUpon>FrmRegimen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Regimen\FrmRegimen_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Regimen\FrmRegimen_Alta.Designer.cs">
+      <DependentUpon>FrmRegimen_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Regimen\FrmRegimen_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Regimen\FrmRegimen_Baja.Designer.cs">
+      <DependentUpon>FrmRegimen_Baja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Regimen\FrmRegimen_Mod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Regimen\FrmRegimen_Mod.Designer.cs">
+      <DependentUpon>FrmRegimen_Mod.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM de Rol\FrmRol.cs">
       <SubType>Form</SubType>
@@ -218,6 +236,12 @@
     </Compile>
     <Compile Include="Facturar\FrmFacturar.Designer.cs">
       <DependentUpon>FrmFacturar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmChangePass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangePass.Designer.cs">
+      <DependentUpon>FrmChangePass.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmDialogBox.cs">
       <SubType>Form</SubType>
@@ -302,6 +326,15 @@
     <EmbeddedResource Include="ABM de Hotel\FrmHotel_Mod.resx">
       <DependentUpon>FrmHotel_Mod.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Regimen\FrmRegimen.resx">
+      <DependentUpon>FrmRegimen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Regimen\FrmRegimen_Alta.resx">
+      <DependentUpon>FrmRegimen_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Regimen\FrmRegimen_Baja.resx">
+      <DependentUpon>FrmRegimen_Baja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM de Rol\FrmRol.resx">
       <DependentUpon>FrmRol.cs</DependentUpon>
     </EmbeddedResource>
@@ -338,6 +371,9 @@
     <EmbeddedResource Include="Facturar\FrmFacturar.resx">
       <DependentUpon>FrmFacturar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmChangePass.resx">
+      <DependentUpon>FrmChangePass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmDialogBox.resx">
       <DependentUpon>FrmDialogBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -373,6 +409,9 @@
     <EmbeddedResource Include="Registrar Estadia\FormCheckIn.resx">
       <DependentUpon>FormCheckIn.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registrar Estadia\FormCheckInPosta.resx">
+      <DependentUpon>FormCheckInPosta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registrar Estadia\FormMagic.resx">
       <DependentUpon>FormMagic.cs</DependentUpon>
     </EmbeddedResource>
@@ -383,6 +422,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App.ini" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -408,6 +448,12 @@
     </Compile>
     <Compile Include="Registrar Estadia\FormCheckIn.Designer.cs">
       <DependentUpon>FormCheckIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registrar Estadia\FormCheckInPosta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar Estadia\FormCheckInPosta.Designer.cs">
+      <DependentUpon>FormCheckInPosta.cs</DependentUpon>
     </Compile>
     <Compile Include="Registrar Estadia\FormMagic.cs">
       <SubType>Form</SubType>

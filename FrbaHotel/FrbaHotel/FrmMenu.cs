@@ -18,7 +18,10 @@ using FrbaHotel.Registrar_Consumible;
 using FrbaHotel.Listado_Estadistico;
 using FrbaHotel.ABM_de_Habitacion;
 using FrbaHotel.Registrar_Estadia;
+using FrbaHotel.ABM_de_Regimen;
 using FrbaHotel.Facturar;
+
+
 namespace FrbaHotel
 {
     public partial class FrmMenu : Form
@@ -199,14 +202,15 @@ namespace FrbaHotel
             InitializeComponent();
 
             idUsuario = Globales.idUsuarioLogueado;
-            Globales.fechaSistema = Settings.Default.FechaSistema.ToShortDateString();
+//            Globales.fechaSistema = Settings.Default.FechaSistema.ToShortDateString();
 
             this.btnCancelarEstadia.Visible = false;
             this.btnClientes.Visible = false;
-//            this.btnFacturar.Visible = false;
+            this.btnFacturar.Visible = false;
             this.btnHabitacion.Visible = false;
             this.btnHotel.Visible = false;
             this.btnListadoEstadistico.Visible = false;
+            this.btnReserva.Visible = false;
             this.btnRegimenEstadia.Visible = false;
             this.btnRegistrarConsumible.Visible = false;
             this.btnRegistrarEstadia.Visible = false;
@@ -222,6 +226,14 @@ namespace FrbaHotel
             nombreUsuario = fn.getUsername(idUsuario);
             idRol = Globales.idRolElegido;
             cargarMenu();
+            cargarConfig();
+        }
+        public void cargarConfig() {
+
+            string text = System.IO.File.ReadAllText( Application.StartupPath.Substring(0, Application.StartupPath.Length-9) + "App.ini");
+            Globales.fechaSistema = Convert.ToDateTime(text);
+          //  new Query("UPDATE SKYNET.Config SET fechaSistema=" + Globales.fechaSistema.ToString("dd-MM-yyyy")).Ejecutar();
+
         }
         public void cargarMenu()
         {
@@ -328,11 +340,10 @@ namespace FrbaHotel
 
         private void btnRegimenEstadia_Click(object sender, EventArgs e)
         {
-            
-//            MessageBox.Show("Ingrese el numero de reserva, si desea crear una nueva, ingrese 0", 
-            this.Hide();
-            FrmHotel hotel = new FrmHotel();
-            hotel.ShowDialog();
+            MessageBox.Show("Holis");
+            /*this.Hide();
+            FrmRegimenes reg = new FrmRegimenes();
+            reg.ShowDialog();*/
         }
 
         private void btnReserva_Click(object sender, EventArgs e)
@@ -401,6 +412,18 @@ namespace FrbaHotel
         this.Hide();
         FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva asociado a la estadia a facturar", 4);
         dialog.Show();
+    }
+
+    private void label1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void linkCambiarContraseña_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+        FrmChangePass frm = new FrmChangePass();
+        this.Hide();
+        frm.ShowDialog();
     }
 
     }

@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace FrbaHotel {
-
+    
 
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "9.0.0.0")]

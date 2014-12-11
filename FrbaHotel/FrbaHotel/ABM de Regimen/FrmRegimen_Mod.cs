@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.ABM_de_Regimen
 {
-    public partial class Form1 : Form
+    public partial class FrmRegimen_Mod : Form
     {
-        public Form1()
+        public FrmRegimen_Mod()
         {
             InitializeComponent();
         }

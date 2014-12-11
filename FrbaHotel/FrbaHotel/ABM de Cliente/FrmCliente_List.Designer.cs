@@ -107,14 +107,13 @@
             // cbDinamica
             // 
             this.cbDinamica.AutoSize = true;
-            this.cbDinamica.Checked = true;
-            this.cbDinamica.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbDinamica.Location = new System.Drawing.Point(392, 104);
             this.cbDinamica.Name = "cbDinamica";
             this.cbDinamica.Size = new System.Drawing.Size(121, 17);
             this.cbDinamica.TabIndex = 29;
             this.cbDinamica.Text = "Búsqueda Dinámica";
             this.cbDinamica.UseVisualStyleBackColor = true;
+            this.cbDinamica.Visible = false;
             this.cbDinamica.CheckedChanged += new System.EventHandler(this.cbDinamica_CheckedChanged);
             // 
             // cbExacta
@@ -191,7 +190,6 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Enabled = false;
             this.btnBuscar.Location = new System.Drawing.Point(113, 100);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);

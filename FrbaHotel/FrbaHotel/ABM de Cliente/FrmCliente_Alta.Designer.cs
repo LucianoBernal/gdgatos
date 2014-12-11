@@ -338,6 +338,7 @@
             this.txtNumDoc.Name = "txtNumDoc";
             this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
             this.txtNumDoc.TabIndex = 46;
+            this.txtNumDoc.TextChanged += new System.EventHandler(this.txtNumDoc_TextChanged);
             // 
             // txtApellido
             // 
