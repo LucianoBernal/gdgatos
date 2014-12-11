@@ -412,6 +412,9 @@
     <EmbeddedResource Include="Registrar Estadia\FormCheckInPosta.resx">
       <DependentUpon>FormCheckInPosta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registrar Estadia\FormGridHabitaciones.resx">
+      <DependentUpon>FormGridHabitaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registrar Estadia\FormMagic.resx">
       <DependentUpon>FormMagic.cs</DependentUpon>
     </EmbeddedResource>
@@ -454,6 +457,12 @@
     </Compile>
     <Compile Include="Registrar Estadia\FormCheckInPosta.Designer.cs">
       <DependentUpon>FormCheckInPosta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registrar Estadia\FormGridHabitaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar Estadia\FormGridHabitaciones.Designer.cs">
+      <DependentUpon>FormGridHabitaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Registrar Estadia\FormMagic.cs">
       <SubType>Form</SubType>

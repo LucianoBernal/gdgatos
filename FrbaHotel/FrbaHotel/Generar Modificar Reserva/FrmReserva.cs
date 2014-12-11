@@ -31,8 +31,8 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             InitializeComponent();
             listaRegimenBusq.Lista = new List<DetalleConId>();
             listaRegimenIns.Lista = new List<DetalleConId>();
-            listaRegimenBusq.CargarDatos(txtRegimenBusq, "SELECT idRegimen, descripcion FROM SKYNET.Regimenes");
-            listaRegimenIns.CargarDatos(txtRegimenIns, "SELECT idRegimen, descripcion FROM SKYNET.Regimenes");
+            listaRegimenBusq.CargarDatos(txtRegimenBusq, "SELECT idRegimen, descripcion FROM SKYNET.Regimenes WHERE habilitado = 1");
+            listaRegimenIns.CargarDatos(txtRegimenIns, "SELECT idRegimen, descripcion FROM SKYNET.Regimenes WHERE habilitado = 1");
             //            listaTipoHabBusq.CargarDatos(txtTipoHabBusq, "SELECT codigo, descripcion FROM SKYNET.TiposHabitacion");
             //            listaTipoHabIns.CargarDatos(txtTipoHabIns, "SELECT codigo, descripcion FROM SKYNET.TiposHabitacion"); 
             this.EsGenerar = (nroReserva == 0);
@@ -120,7 +120,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         private void btnRunBaby_Click(object sender, EventArgs e)
         {
             ElegirHabitaciones();
-//            ObtenerCliente();
+//            ObtenerCliente();a
         }
         private void ElegirHabitaciones()
         {

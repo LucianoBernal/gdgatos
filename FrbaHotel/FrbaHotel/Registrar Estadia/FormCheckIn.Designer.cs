@@ -30,6 +30,7 @@
         {
             this.dataResultado = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnRegistrarHuesped = new System.Windows.Forms.Button();
             this.txtOcultoTipo = new System.Windows.Forms.TextBox();
             this.cbExacta = new System.Windows.Forms.CheckBox();
             this.cbMail = new System.Windows.Forms.CheckBox();
@@ -47,7 +48,6 @@
             this.btnHuesped = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.btnRegistrarHuesped = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +83,16 @@
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscador";
+            // 
+            // btnRegistrarHuesped
+            // 
+            this.btnRegistrarHuesped.Location = new System.Drawing.Point(431, 58);
+            this.btnRegistrarHuesped.Name = "btnRegistrarHuesped";
+            this.btnRegistrarHuesped.Size = new System.Drawing.Size(110, 33);
+            this.btnRegistrarHuesped.TabIndex = 28;
+            this.btnRegistrarHuesped.Text = "Registrar Huesped";
+            this.btnRegistrarHuesped.UseVisualStyleBackColor = true;
+            this.btnRegistrarHuesped.Click += new System.EventHandler(this.btnRegistrarHuesped_Click);
             // 
             // txtOcultoTipo
             // 
@@ -239,23 +249,13 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(383, 281);
+            this.btnVolver.Location = new System.Drawing.Point(384, 281);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(110, 33);
             this.btnVolver.TabIndex = 27;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
-            // 
-            // btnRegistrarHuesped
-            // 
-            this.btnRegistrarHuesped.Location = new System.Drawing.Point(431, 58);
-            this.btnRegistrarHuesped.Name = "btnRegistrarHuesped";
-            this.btnRegistrarHuesped.Size = new System.Drawing.Size(110, 33);
-            this.btnRegistrarHuesped.TabIndex = 28;
-            this.btnRegistrarHuesped.Text = "Registrar Huesped";
-            this.btnRegistrarHuesped.UseVisualStyleBackColor = true;
-            this.btnRegistrarHuesped.Click += new System.EventHandler(this.btnRegistrarHuesped_Click);
             // 
             // FormCheckIn
             // 

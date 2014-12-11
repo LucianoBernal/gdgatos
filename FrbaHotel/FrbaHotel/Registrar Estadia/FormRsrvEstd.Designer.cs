@@ -35,7 +35,7 @@
             // 
             // botonVolver
             // 
-            this.botonVolver.Location = new System.Drawing.Point(58, 176);
+            this.botonVolver.Location = new System.Drawing.Point(58, 138);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(100, 31);
             this.botonVolver.TabIndex = 8;
@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(217, 267);
+            this.ClientSize = new System.Drawing.Size(217, 196);
             this.Controls.Add(this.botonCheckOut);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonCheckIn);

@@ -69,7 +69,7 @@
             this.comboBoxHotel.Location = new System.Drawing.Point(28, 74);
             this.comboBoxHotel.Name = "comboBoxHotel";
             this.comboBoxHotel.Size = new System.Drawing.Size(221, 21);
-            this.comboBoxHotel.TabIndex = 5;
+            this.comboBoxHotel.TabIndex = 1;
             this.comboBoxHotel.SelectedIndexChanged += new System.EventHandler(this.comboBoxHotel_SelectedIndexChanged);
             // 
             // label2
@@ -85,14 +85,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(278, 387);
+            this.ClientSize = new System.Drawing.Size(278, 276);
             this.Controls.Add(this.comboBoxHotel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.botonIngresar);
             this.Controls.Add(this.comboBox);
             this.Controls.Add(this.label1);
             this.Name = "FrmRolesLogin";
-            this.Text = "FrmRolesLogin";
+            this.Text = "Eliga el Rol y Hotel";
             this.Load += new System.EventHandler(this.FrmRolesLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

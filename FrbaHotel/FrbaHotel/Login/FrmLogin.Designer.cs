@@ -38,10 +38,10 @@
             // 
             // botonSalir
             // 
-            this.botonSalir.Location = new System.Drawing.Point(12, 200);
+            this.botonSalir.Location = new System.Drawing.Point(13, 200);
             this.botonSalir.Name = "botonSalir";
             this.botonSalir.Size = new System.Drawing.Size(75, 23);
-            this.botonSalir.TabIndex = 0;
+            this.botonSalir.TabIndex = 4;
             this.botonSalir.Text = "Salir";
             this.botonSalir.UseVisualStyleBackColor = true;
             this.botonSalir.Click += new System.EventHandler(this.botonSalir_Click);
@@ -51,7 +51,7 @@
             this.botonEntrar.Location = new System.Drawing.Point(192, 200);
             this.botonEntrar.Name = "botonEntrar";
             this.botonEntrar.Size = new System.Drawing.Size(75, 23);
-            this.botonEntrar.TabIndex = 1;
+            this.botonEntrar.TabIndex = 3;
             this.botonEntrar.Text = "Entrar";
             this.botonEntrar.UseVisualStyleBackColor = true;
             this.botonEntrar.Click += new System.EventHandler(this.botonEntrar_Click);
@@ -61,7 +61,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(98, 68);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(167, 20);
-            this.txtUsuario.TabIndex = 8;
+            this.txtUsuario.TabIndex = 1;
             this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
             // 
             // txtPassword
@@ -70,7 +70,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(167, 20);
-            this.txtPassword.TabIndex = 9;
+            this.txtPassword.TabIndex = 2;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label1

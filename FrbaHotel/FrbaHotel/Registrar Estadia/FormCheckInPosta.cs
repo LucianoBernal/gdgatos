@@ -8,6 +8,7 @@ using System.Text;
 using FrbaHotel.ABM_de_Cliente;
 using System.Windows.Forms;
 using FrbaHotel.Generar_Modificar_Reserva;
+using System.Data.SqlClient;
 
 namespace FrbaHotel.Registrar_Estadia
 {
@@ -70,6 +71,23 @@ namespace FrbaHotel.Registrar_Estadia
                 new Query("insert into SKYNET.ClientesPorEstadia (idCliente,idEstadia) values ( " + VectorUsuarios[i] + " , " + this.Reserva + ")").Ejecutar();
             }
             flagg = 1;
+            //empiezo
+            using (SqlConnection con = new SqlConnection(Settings.Default.CadenaDeConexion))
+            {
+                using (SqlCommand cmd = new SqlCommand("SKYNET.asignarHabitaciones", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@estadia", SqlDbType.Int).Value = this.Reserva;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            FormGridHabitaciones grid = new FormGridHabitaciones(this.Reserva);
+            grid.ShowDialog();
+            MessageBox.Show("El checkIn se registro efectivamente");
+                                    
+            //termino
             button2.Enabled = false;
             }
         }
