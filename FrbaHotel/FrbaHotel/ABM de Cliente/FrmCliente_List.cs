@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel.Registrar_Estadia;
 using FrbaHotel.Generar_Modificar_Reserva;
 
 namespace FrbaHotel.ABM_de_Cliente
@@ -13,7 +14,8 @@ namespace FrbaHotel.ABM_de_Cliente
 
     public partial class FrmCliente_List : Form
     {
-        public FrmReserva Padre;
+        public FrmReserva Padre=null;
+        public FormCheckInPosta PadrePosta=null;
         public ListaTextos listaTextos = new ListaTextos();
         public ListaConId listaTipo = new ListaConId();
         public FrmCliente_List()
@@ -27,6 +29,17 @@ namespace FrbaHotel.ABM_de_Cliente
         public FrmCliente_List(FrmReserva padre)
         {
             this.Padre = padre;
+            InitializeComponent();
+            btnSeleccionar.Visible = true;
+            btnVolver.Visible = true;
+            btnVolver.Text = "Crear nuevo usuario";
+            btnModificar.Visible = false;
+            btnHabilitar.Visible = false;
+            btnDeshabilitar.Visible = false;
+        }
+        public FrmCliente_List(FormCheckInPosta padre)
+        {
+            this.PadrePosta = padre;
             InitializeComponent();
             btnSeleccionar.Visible = true;
             btnVolver.Visible = true;
@@ -96,9 +109,18 @@ namespace FrbaHotel.ABM_de_Cliente
                 cliente = (FrmCliente)this.ActiveMdiChild;
             }
             else {
-                FrmCliente_Alta cliente = new FrmCliente_Alta(this.Padre);
-                this.Hide();
-                cliente.Show();
+                if (this.Padre != null)
+                {
+                    FrmCliente_Alta cliente = new FrmCliente_Alta(this.Padre);
+                    this.Hide();
+                    cliente.Show();
+                }
+                else
+                {
+                    FrmCliente_Alta cliente = new FrmCliente_Alta(this.PadrePosta);
+                    this.Hide();
+                    cliente.Show();
+                }
             }
         }
 
@@ -224,8 +246,16 @@ namespace FrbaHotel.ABM_de_Cliente
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            this.Padre.Show();
-            this.Padre.ReciboElIdCliente(idClienteSeleccionado());
+            if (this.Padre != null)
+            {
+                this.Padre.Show();
+                this.Padre.ReciboElIdCliente(idClienteSeleccionado());
+            }
+            else
+            {
+                this.PadrePosta.Show();
+                this.PadrePosta.ReciboElIdCliente(idClienteSeleccionado());
+            }
         }
     }
 }

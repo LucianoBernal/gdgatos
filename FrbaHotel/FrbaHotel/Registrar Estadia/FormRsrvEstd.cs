@@ -86,8 +86,8 @@ namespace FrbaHotel.Registrar_Estadia
             int diferencia = (int) new Query(strQuery).ObtenerUnicoCampo();
             if (diferencia == 0)
             {
-                new Query("INSERT INTO SKYNET.Estadias (reserva) VALUES ( " + this.Reserva + " )" ).Ejecutar();
-                FormCheckIn frm = new FormCheckIn(this.Reserva,this.EstadoReserva);
+                //new Query("INSERT INTO SKYNET.Estadias (reserva) VALUES ( " + this.Reserva + " )" ).Ejecutar();
+                FormCheckInPosta frm = new FormCheckInPosta(this.Reserva,this.EstadoReserva);
                 this.Visible = false;
                 frm.ShowDialog();
             }
