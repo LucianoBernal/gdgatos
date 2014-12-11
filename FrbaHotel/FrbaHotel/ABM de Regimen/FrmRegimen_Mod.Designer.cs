@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.ABM_de_Regimen
 {
-    partial class Form1
+    partial class FrmRegimen_Mod
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.Text = "FrmRegimen_Mod";
         }
 
         #endregion

@@ -115,7 +115,6 @@ C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHote
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Cliente.FrmCliente_Mod.resources
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Cliente.FrmCliente.resources
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Cliente.FrmCliente_Alta.resources
-C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Cliente.FrmCliente.resources
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Cliente.FrmCliente_Alta.resources
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Cliente.FrmCliente_List.resources
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Cliente.FrmCliente_Mod.resources
@@ -123,7 +122,6 @@ C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.A
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Hotel.FrmHotel_List.resources
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Hotel.FrmHotel_Mod.resources
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Usuario.FrmUsuario_Mod.resources
-C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.IngresaRsrv.resources
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.FrmDialogBox.resources
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Generar_Modificar_Reserva.FrmReserva.resources
 C:\Users\sa\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.exe
@@ -203,3 +201,11 @@ C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHote
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Generar_Modificar_Reserva.FrmElegirHabitaciones.resources
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.FormCheckIn.resources
 C:\Users\Gonzalo\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.FormMagic.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Hotel.FrmHotel_Baja.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Facturar.FrmFacturar.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.FormCheckInPosta.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Regimen.FrmRegimen_Alta.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Regimen.FrmRegimen_Baja.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Cliente.FrmCliente.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Regimen.FrmRegimenes.resources
+C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.FrmChangePass.resources

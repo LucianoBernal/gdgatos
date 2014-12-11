@@ -44,6 +44,7 @@
             this.btnFacturar = new System.Windows.Forms.Button();
             this.lblPerfil = new System.Windows.Forms.Label();
             this.btnRegistrarConsumible = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // linkCambiarContraseña
@@ -55,6 +56,7 @@
             this.linkCambiarContraseña.TabIndex = 22;
             this.linkCambiarContraseña.TabStop = true;
             this.linkCambiarContraseña.Text = "Cambiar contraseña";
+            this.linkCambiarContraseña.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCambiarContraseña_LinkClicked);
             // 
             // lblUsuarioLogueado
             // 
@@ -205,11 +207,22 @@
             this.btnRegistrarConsumible.UseVisualStyleBackColor = true;
             this.btnRegistrarConsumible.Click += new System.EventHandler(this.btnRegistrarConsumible_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(271, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // FrmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 406);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRegistrarConsumible);
             this.Controls.Add(this.lblPerfil);
             this.Controls.Add(this.btnFacturar);
@@ -252,5 +265,6 @@
         private System.Windows.Forms.Button btnFacturar;
         private System.Windows.Forms.Label lblPerfil;
         private System.Windows.Forms.Button btnRegistrarConsumible;
+        private System.Windows.Forms.Label label1;
     }
 }
