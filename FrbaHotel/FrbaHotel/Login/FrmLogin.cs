@@ -104,11 +104,10 @@ namespace FrbaHotel.Login
                         Query qr = new Query("SELECT DISTINCT(ur.rol) FROM SKYNET.UsuarioRolHotel ur, SKYNET.Roles r  " +
                                            " WHERE ur.rol = r.idRol AND r.baja=0 AND ur.usuario = " + idUsuario);
                         Globales.idRolElegido = Convert.ToInt32(qr.ObtenerUnicoCampo());
+                        Globales.idHotelElegido = (int) new Query("SELECT convert(int, ur.hotel) FROM SKYNET.UsuarioRolHotel ur WHERE ur.usuario ="+idUsuario).ObtenerUnicoCampo();
                         fn.recibirUsuario(idUsuario);
 
-
-
-                        break;
+                    break;
 
                     default: seleccionarRol();
                         break;

@@ -133,7 +133,7 @@ namespace FrbaHotel.ABM_de_Usuario
             txtOcultoTipoDoc.Text = ListaDocumentos.ObtenerId(txtTipoDoc.Text).ToString();
             txtOcultoHotel.Text = ListaHoteles.ObtenerId(txtHotel.Text).ToString();
             txtOcultoRol.Text = ListaRoles.ObtenerId(txtRol.Text).ToString();
-            txtOcultoFecha.Text = txtFecha.Value.ToString("dd-MM-yyyy");
+            txtOcultoFecha.Text = txtFecha.Value.ToString("yyyy-dd-MM HH:mm:ss");
             txtOcultoPass.Text = fn.getSha256(txtPass.Text);
            if (validacionDatos())
             {

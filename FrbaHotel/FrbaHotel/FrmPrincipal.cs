@@ -98,9 +98,12 @@ namespace FrbaHotel
 
         private void botonHuesped_Click(object sender, EventArgs e)
         {
-            fn.recibirHuesped();
-            FrmMenu frmMenu = new FrmMenu();
-            frmMenu.ShowDialog();
+            FrmElegirHotel frm = new FrmElegirHotel();
+            this.Visible = false;
+            frm.ShowDialog();
+            //fn.recibirHuesped();
+            //FrmMenu frmMenu = new FrmMenu();
+            //frmMenu.ShowDialog();
         }
     }
 }

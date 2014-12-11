@@ -33,6 +33,7 @@ namespace FrbaHotel.Registrar_Estadia
             Query resultado = new Query("select * from SKYNET.mostrarHabitaciones("+id+")");
             dataResultado.DataSource = resultado.ObtenerDataTable();
             dataResultado.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            button2.Enabled = true;
         }
 
         private void button2_Click(object sender, EventArgs e)

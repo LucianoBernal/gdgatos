@@ -31,10 +31,10 @@ namespace FrbaHotel.ABM_de_Hotel
                 bool okDuracion = int.TryParse(txtDuracion.Text, out duracion);
                 if (okDuracion == true)
                 {
-                    if (hotelPuedeDarseDeBaja(idHotel, txtFechaBaja.Value.ToString("dd-MM-yyyy"), duracion))
+                    if (hotelPuedeDarseDeBaja(idHotel, txtFechaBaja.Value.ToString("yyyy-dd-MM HH:mm:ss"), duracion))
                     {
                         new Query("INSERT INTO SKYNET.HistorialHoteles (hotel, fechaBaja, duracion, motivo) VALUES " +
-                            " (" + idHotel + ", '" + txtFechaBaja.Value.ToString("dd-MM-yyyy") + "', " + duracion + ", '" + txtMotivo.Text + "')").Ejecutar();
+                            " (" + idHotel + ", '" + txtFechaBaja.Value.ToString("yyyy-dd-MM HH:mm:ss") + "', " + duracion + ", '" + txtMotivo.Text + "')").Ejecutar();
                         MessageBox.Show("Se ha dado de baja el hotel en el rango.");
                         this.Hide();
                     }

@@ -164,7 +164,8 @@ namespace FrbaHotel
                 }
             } if (tipoResp == 5 && respuesta != null)
             {
-                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta).ObtenerUnicoCampo();
+                MessageBox.Show("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta+" AND hotel= "+ Globales.idHotelElegido +" ");
+                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta+" AND hotel= "+ Globales.idHotelElegido +" ").ObtenerUnicoCampo();
                 if (query == null)
                 {
                     MessageBox.Show("Ha ingresado un numero de reserva no valido");
@@ -232,8 +233,8 @@ namespace FrbaHotel
 
             string text = System.IO.File.ReadAllText( Application.StartupPath.Substring(0, Application.StartupPath.Length-9) + "App.ini");
             Globales.fechaSistema = Convert.ToDateTime(text);
-          //  new Query("UPDATE SKYNET.Config SET fechaSistema=" + Globales.fechaSistema.ToString("dd-MM-yyyy")).Ejecutar();
-
+            new Query("UPDATE SKYNET.Config SET fecha='" + Globales.fechaSistema.ToString("yyyy-dd-MM")+"'").Ejecutar();
+            label1.Text = Globales.fechaSistema.Day.ToString() +"/"+ Globales.fechaSistema.Month.ToString() +"/"+ Globales.fechaSistema.Year.ToString()+"=="+Globales.fechaSistema.ToString("yyyy-MM-dd");
         }
         public void cargarMenu()
         {
@@ -340,7 +341,7 @@ namespace FrbaHotel
 
         private void btnRegimenEstadia_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Holis");
+            MessageBox.Show("Esto no se encuentra en el dominio del trabajo practico.");
             /*this.Hide();
             FrmRegimenes reg = new FrmRegimenes();
             reg.ShowDialog();*/
@@ -348,7 +349,7 @@ namespace FrbaHotel
 
         private void btnReserva_Click(object sender, EventArgs e)
         {
-            FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva, de lo contrario ingrese 0", 1);
+            FrmDialogBox dialog = new FrmDialogBox(this, "Si tiene su numero de reserva, ingresela. Si quiere crear una, ingrese 0", 1);
             this.Hide();
             dialog.Show();
 

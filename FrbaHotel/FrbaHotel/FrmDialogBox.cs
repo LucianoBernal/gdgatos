@@ -75,6 +75,7 @@ namespace FrbaHotel
             this.Controls.Add(this.txtRespuesta);
             this.Controls.Add(this.labelTexto);
             this.Name = "FrmDialogBox";
+            this.Load += new System.EventHandler(this.FrmDialogBox_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,6 +98,11 @@ namespace FrbaHotel
                     ((FrmMenu)this.FormPadre).RespuestaDialog(null, this.Razon);
             this.Hide();
             this.FormPadre.Show();
+        }
+
+        private void FrmDialogBox_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

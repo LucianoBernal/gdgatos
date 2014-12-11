@@ -26,9 +26,9 @@ namespace FrbaHotel.Registrar_Estadia
 
         private void btnSi_Click(object sender, EventArgs e)
         {
-            /*FrmReserva frm = new FrmReserva(0,new FrmMenu());*/
-            FrmMenu frm = new FrmMenu();
-            frm.RespuestaDialog("0", 1);
+            FrmReserva frm = new FrmReserva(0,new FrmMenu());
+           // FrmMenu frm = new FrmMenu();
+           // frm.RespuestaDialog("0", 1);
             this.Visible = false;
             frm.ShowDialog();
         }

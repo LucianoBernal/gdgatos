@@ -60,8 +60,10 @@ namespace FrbaHotel.Registrar_Estadia
 
         private void button2_Click(object sender, EventArgs e)
         {
+
             if (flagg == 0)
             {
+                btnRegHuesped.Enabled = false;
                 new Query("INSERT INTO SKYNET.Estadias (reserva,usuarioIngreso) VALUES ( " + this.Reserva + ", " + Globales.idUsuarioLogueado + " )").Ejecutar();
                 new Query("update SKYNET.Reservas set estado = 2 where codigoReserva = " + this.Reserva + " ").Ejecutar();
                 

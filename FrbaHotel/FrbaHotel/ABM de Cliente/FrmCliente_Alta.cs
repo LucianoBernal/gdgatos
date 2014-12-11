@@ -135,7 +135,7 @@ namespace FrbaHotel.ABM_de_Cliente
                         }//Hardcoders
                         strquery = strquery + ") VALUES ('" + txtNombre.Text + "', '" + txtApellido.Text + "', " + txtOcultoTipoDoc.Text + ", " + txtNumDoc.Text + ", " +
                         " '" + txtMail.Text + "', " + txtTelefono.Text + ", '" + txtCalle.Text + "', " + txtOcultoNacionalidad.Text + ", " +
-                        " " + txtNumCalle.Text + ", '" + txtFecha.Value.ToString("dd-MM-yyyy") + "', " + baja + ", " + txtRol.Text + ", " + txtOcultoPaisDeOrigen.Text;
+                        " " + txtNumCalle.Text + ", '" + txtFecha.Value.ToString("yyyy-dd-MM HH:mm:ss") + "', " + baja + ", " + txtRol.Text + ", " + txtOcultoPaisDeOrigen.Text;
                         if (txtPiso.Text != "")
                         {
                             strquery = strquery + ", " + txtPiso.Text + " ";
