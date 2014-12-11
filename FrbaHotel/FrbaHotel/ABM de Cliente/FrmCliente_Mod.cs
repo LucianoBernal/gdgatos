@@ -45,7 +45,11 @@ namespace FrbaHotel.ABM_de_Cliente
             listaNacionalidad.CargarDatos(txtNacionalidad, "SELECT idNacionalidad, nacionalidad FROM SKYNET.Nacionalidades");
             listaPaisDeOrigen.Lista = new List<DetalleConId>();
             listaPaisDeOrigen.CargarDatos(txtPaisDeOrigen, "SELECT idPais, pais FROM SKYNET.Paises");
-            Query qry = new Query("SELECT apellido, calle, fechaNac, mail, nombre, numCalle, numDoc, telefono, tipoDoc, piso, depto, nacionalidad, "+
+            cargarDatos();
+        }
+        private void cargarDatos()
+        {
+            Query qry = new Query("SELECT apellido, calle, fechaNac, mail, nombre, numCalle, numDoc, telefono, tipoDoc, piso, depto, nacionalidad, " +
                         " baja, rol, paisDeOrigen, inconsistencia FROM SKYNET.Clientes WHERE idCliente = " + idCliente.ToString());
             foreach (DataRow datos in qry.ObtenerDataTable().AsEnumerable())
             {
@@ -56,8 +60,8 @@ namespace FrbaHotel.ABM_de_Cliente
                 mailAnterior = datos[3].ToString();
                 txtNombre.Text = datos[4].ToString();
                 txtNumCalle.Text = (datos[5].ToString().Length > 3) ? datos[5].ToString().Substring(0, datos[5].ToString().Length - 3) : datos[5].ToString();
-                txtNumDoc.Text = (datos[6].ToString().Length > 3) ? datos[6].ToString().Substring(0, datos[6].ToString().Length - 3) : datos[6].ToString();
-                numDocAnterior = (datos[6].ToString().Length > 3) ? datos[6].ToString().Substring(0, datos[6].ToString().Length - 3) : datos[6].ToString();
+                txtNumDoc.Text = datos[6].ToString();
+                numDocAnterior = datos[6].ToString();
                 txtTelefono.Text = (datos[7].ToString().Length > 3) ? datos[7].ToString().Substring(0, datos[7].ToString().Length - 3) : datos[7].ToString();
                 txtTipoDoc.Text = (datos[8].ToString() != "") ? (listaTipoDoc.ObtenerDetalle(Convert.ToInt32(datos[8]))) : (listaTipoDoc.ObtenerDetalle(1));
                 tipoDocAnterior = (datos[8].ToString() != "") ? (listaTipoDoc.ObtenerDetalle(Convert.ToInt32(datos[8]))) : (listaTipoDoc.ObtenerDetalle(1));
@@ -111,7 +115,7 @@ namespace FrbaHotel.ABM_de_Cliente
                 }
                 if (okTelefono == true && okNumCalle == true && okNumDoc == true)
                 {
-                    if ((!existeMail(txtMail.Text)) && (!existeCliente(txtOcultoTipoDoc.Text, txtNumDoc.Text)))
+                    if ((!existeMail(txtMail.Text)) && (!existeCliente(txtTipoDoc.Text, txtNumDoc.Text, txtOcultoTipoDoc.Text)))
                     {
                         int incons;
                         int baja;
@@ -134,6 +138,7 @@ namespace FrbaHotel.ABM_de_Cliente
                         string strquery = "UPDATE SKYNET.Clientes SET nombre = '" + txtNombre.Text + "', apellido = '" + txtApellido.Text + "', tipoDoc = " + txtOcultoTipoDoc.Text + ", numDoc = " + txtNumDoc.Text + ", " +
                             " mail = '" + txtMail.Text + "', telefono = " + txtTelefono.Text + ", calle ='" + txtCalle.Text + "', nacionalidad = " + txtOcultoNacionalidad.Text + ", " +
                             " numCalle = " + txtNumCalle.Text + ", fechaNac = '" + txtFecha.Value + "', baja = " + baja + ", rol = " + txtRol.Text + ", paisDeOrigen = " + txtOcultoPaisDeOrigen.Text + ", inconsistencia = " + incons + " ";
+                       
                         if (txtPiso.Text != "")
                         {
                             strquery = strquery + ", piso = " + txtPiso.Text + "";
@@ -143,19 +148,23 @@ namespace FrbaHotel.ABM_de_Cliente
                             strquery = strquery + ", depto = '" + txtDepto.Text + "' ";
                         }
                         strquery = strquery + "WHERE idCliente = " + idCliente.ToString();
-                        new Query().Ejecutar();
+                        new Query(strquery).Ejecutar();
                         MessageBox.Show("Ya esta");
+                        FrmCliente_List cliente = new FrmCliente_List();
+                        this.Hide();
+                        cliente.ShowDialog();
+                        cliente = (FrmCliente_List)this.ActiveMdiChild;
                     }
                 }
             }
         }
-        private bool existeCliente(string tipoDoc, string numero)
+        private bool existeCliente(string tipoDoc, string numero, string tipoDocOculto)
         {
             if (tipoDocAnterior == tipoDoc && numero == numDocAnterior)
             {
                 return (false);
             }else{
-                int retornar = (int)new Query("SELECT COUNT(1) FROM SKYNET.Clientes WHERE tipoDoc = " + tipoDoc + " AND numDoc = " + numero + " ").ObtenerUnicoCampo();
+                int retornar = (int)new Query("SELECT COUNT(1) FROM SKYNET.Clientes WHERE tipoDoc = " + tipoDocOculto + " AND numDoc = " + numero + " ").ObtenerUnicoCampo();
                 if (retornar == 1)
                 {
                     MessageBox.Show("Ya existe el cliente. Por favor verifique el tipo y numero de documento ingresado.");
@@ -178,6 +187,11 @@ namespace FrbaHotel.ABM_de_Cliente
                 }
                 return (retornar == 1);
             }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            cargarDatos();
         }
     }
 }
