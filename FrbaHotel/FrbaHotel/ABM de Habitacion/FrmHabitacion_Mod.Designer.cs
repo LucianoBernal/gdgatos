@@ -139,6 +139,7 @@
             // txtHotel
             // 
             this.txtHotel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtHotel.Enabled = false;
             this.txtHotel.FormattingEnabled = true;
             this.txtHotel.Location = new System.Drawing.Point(73, 53);
             this.txtHotel.Name = "txtHotel";

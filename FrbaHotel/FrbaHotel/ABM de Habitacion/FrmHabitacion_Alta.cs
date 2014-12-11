@@ -60,6 +60,7 @@ namespace FrbaHotel.ABM_de_Habitacion
             listaTipo.CargarDatos(txtTipo, "SELECT codigo, descripcion FROM SKYNET.TiposHabitacion");
             listaHotel.Lista = new List<DetalleConId>();
             listaHotel.CargarDatos(txtHotel, "SELECT idHotel, nombre FROM SKYNET.Hoteles");
+            txtHotel.Text = listaHotel.ObtenerDetalle(Globales.idHotelElegido);
         }
 
         private void botonGuardar_Click(object sender, EventArgs e)

@@ -37,11 +37,8 @@
             this.txtOcultoTipo = new System.Windows.Forms.TextBox();
             this.txtTipo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtOcultoHotel = new System.Windows.Forms.TextBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtHotel = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -100,11 +97,8 @@
             this.groupBox1.Controls.Add(this.txtOcultoTipo);
             this.groupBox1.Controls.Add(this.txtTipo);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtOcultoHotel);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.txtHotel);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(4, 13);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(565, 102);
@@ -114,7 +108,7 @@
             // 
             // txtOcultoTipo
             // 
-            this.txtOcultoTipo.Location = new System.Drawing.Point(434, 51);
+            this.txtOcultoTipo.Location = new System.Drawing.Point(298, 25);
             this.txtOcultoTipo.Name = "txtOcultoTipo";
             this.txtOcultoTipo.Size = new System.Drawing.Size(100, 20);
             this.txtOcultoTipo.TabIndex = 34;
@@ -124,7 +118,7 @@
             // 
             this.txtTipo.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtTipo.FormattingEnabled = true;
-            this.txtTipo.Location = new System.Drawing.Point(373, 24);
+            this.txtTipo.Location = new System.Drawing.Point(107, 22);
             this.txtTipo.Name = "txtTipo";
             this.txtTipo.Size = new System.Drawing.Size(161, 21);
             this.txtTipo.TabIndex = 33;
@@ -132,19 +126,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(274, 27);
+            this.label1.Location = new System.Drawing.Point(8, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 13);
             this.label1.TabIndex = 32;
             this.label1.Text = "Tipo de Habitación: ";
-            // 
-            // txtOcultoHotel
-            // 
-            this.txtOcultoHotel.Location = new System.Drawing.Point(258, 51);
-            this.txtOcultoHotel.Name = "txtOcultoHotel";
-            this.txtOcultoHotel.Size = new System.Drawing.Size(100, 20);
-            this.txtOcultoHotel.TabIndex = 31;
-            this.txtOcultoHotel.Visible = false;
             // 
             // btnLimpiar
             // 
@@ -165,24 +151,6 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // txtHotel
-            // 
-            this.txtHotel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtHotel.FormattingEnabled = true;
-            this.txtHotel.Location = new System.Drawing.Point(75, 24);
-            this.txtHotel.Name = "txtHotel";
-            this.txtHotel.Size = new System.Drawing.Size(161, 21);
-            this.txtHotel.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 27);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Hotel:";
             // 
             // FrmHabitacion_List
             // 
@@ -213,11 +181,8 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridView dataResultado;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtOcultoHotel;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.ComboBox txtHotel;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtOcultoTipo;
         private System.Windows.Forms.ComboBox txtTipo;
         private System.Windows.Forms.Label label1;

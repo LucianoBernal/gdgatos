@@ -13,7 +13,6 @@ namespace FrbaHotel.ABM_de_Habitacion
     {
         public ListaTextos listaTextos = new ListaTextos();
         public ListaConId listaTipo = new ListaConId();
-        public ListaConId listaHotel = new ListaConId();
         public FrmHabitacion_List()
         {
             InitializeComponent();
@@ -23,8 +22,6 @@ namespace FrbaHotel.ABM_de_Habitacion
         {
             listaTipo.Lista = new List<DetalleConId>();
             listaTipo.CargarDatos(txtTipo, "SELECT codigo, descripcion FROM SKYNET.TiposHabitacion");
-            listaHotel.Lista = new List<DetalleConId>();
-            listaHotel.CargarDatos(txtHotel, "SELECT idHotel, nombre FROM SKYNET.Hoteles");
             btnDeshabilitar.Enabled = false;
             btnHabilitar.Enabled = false;
             btnModificar.Enabled = false;
@@ -36,26 +33,17 @@ namespace FrbaHotel.ABM_de_Habitacion
             {
                 txtTipo.SelectedItem = null;
             }
-            if (txtHotel.Enabled == true)
-            {
-                txtHotel.SelectedItem = null;
-            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             txtOcultoTipo.Text = listaTipo.ObtenerId(txtTipo.Text).ToString();
-            txtOcultoTipo.Text = listaTipo.ObtenerId(txtHotel.Text).ToString();
             string strQuery = "SELECT DISTINCT ha.hotel idHotel, ho.nombre hotel, ha.numero numero, ha.piso, th.descripcion tipoHabitacion, (CASE WHEN baja =0 THEN 'SI' ELSE 'NO' END) AS habilitado " +
-                " FROM SKYNET.Habitaciones ha, SKYNET.Hoteles ho, SKYNET.TiposHabitacion th WHERE ha.hotel = ho.idHotel AND ha.tipo = th.codigo ";
+                " FROM SKYNET.Habitaciones ha, SKYNET.Hoteles ho, SKYNET.TiposHabitacion th WHERE ha.hotel = ho.idHotel AND ha.hotel = "+Globales.idHotelElegido+" AND ha.tipo = th.codigo ";
 
             if (txtTipo.Text != "")
             {
                 strQuery = strQuery + " AND th.descripcion = '" + txtTipo.Text + "' ";
-            }
-            if (txtHotel.Text != "")
-            {
-                strQuery = strQuery + " AND ho.nombre = '" + txtHotel.Text + "' ";
             }
             strQuery = strQuery + " ORDER BY ho.nombre, th.descripcion ASC";
             mostrarResultado(strQuery);
