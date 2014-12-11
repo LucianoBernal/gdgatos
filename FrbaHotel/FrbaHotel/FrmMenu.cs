@@ -230,11 +230,13 @@ namespace FrbaHotel
             cargarConfig();
         }
         public void cargarConfig() {
-
+            Funciones fn = new Funciones();
             string text = System.IO.File.ReadAllText( Application.StartupPath.Substring(0, Application.StartupPath.Length-9) + "App.ini");
-            Globales.fechaSistema = Convert.ToDateTime(text);
-            new Query("UPDATE SKYNET.Config SET fecha='" + Globales.fechaSistema.ToString("yyyy-dd-MM")+"'").Ejecutar();
-            label1.Text = Globales.fechaSistema.Day.ToString() +"/"+ Globales.fechaSistema.Month.ToString() +"/"+ Globales.fechaSistema.Year.ToString()+"=="+Globales.fechaSistema.ToString("yyyy-MM-dd");
+            Globales.fechaSistema = fn.TransformarABD(text);
+  //          new Query("UPDATE SKYNET.Config SET fecha='" + Globales.fechaSistema+"'").Ejecutar();
+            new Query("UPDATE SKYNET.Config SET fecha=(SELECT convert(datetime, '"+Globales.fechaSistema+"', 121))").Ejecutar();
+            
+            label1.Text = Globales.fechaSistema;
         }
         public void cargarMenu()
         {

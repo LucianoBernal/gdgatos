@@ -55,7 +55,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 txtOcultoCliente.Text = idCliente.ToString();
                 txtOcultoHotel.Text = idHotel.Cells["idHotel"].Value.ToString();
                 txtOcultoRegimenIns.Text = listaRegimenIns.ObtenerId(txtRegimenIns.Text).ToString();
-                txtOcultoFechaDesde.Text = dtpFechaDesde.Value.ToString("yyyy-dd-MM HH:mm:ss");
+                txtOcultoFechaDesde.Text = dtpFechaDesde.Value.ToString("yyyy-MM-dd");
                 txtOcultoCantNoches.Text = (((dtpFechaHasta.Value - dtpFechaDesde.Value).Days)).ToString();
                 txtValorEstado.Text = EsGenerar?"3":"4";
                 Query qry =
@@ -161,7 +161,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 int cantHuespedes = Convert.ToInt32(txtCantHuespedes.Text);
                 for (int i = 0; i < 5; i++)
                 {
-                    disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles('" + dtpFechaDesde.Value.ToString("yyyy-dd-MM") + "', " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value - dtpFechaDesde.Value).Days) + 1).ToString() + ")").ObtenerUnicoCampo());
+                    disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles('" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value - dtpFechaDesde.Value).Days) + 1).ToString() + ")").ObtenerUnicoCampo());
                    // MessageBox.Show("disponibles["+i.ToString()+"] vale = "+disponibles[i].ToString());
                 }
                 int aux = 0;

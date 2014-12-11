@@ -14,7 +14,14 @@ namespace FrbaHotel.FuncionesGenerales
 {
     public class Funciones
     {
-
+        public string TransformarABD(string fechaCSh) 
+        {
+            string ret = "";
+            ret += fechaCSh.Substring(6, 4)+"-";
+            ret += fechaCSh.Substring(3, 2) + "-";
+            ret += fechaCSh.Substring(0, 2);
+            return ret;
+        }
         public bool ExisteUsuario(string usuario)
         {
             return ((int)new Query("SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username ='" + usuario + "'").ObtenerUnicoCampo() == 1);

@@ -10,7 +10,7 @@ namespace FrbaHotel
         public static int idUsuarioLogueado;
         public static int idRol;
         public static int idRolElegido;
-        public static DateTime fechaSistema;
+        public static string fechaSistema;
         public static int idHotelElegido;
     }
 }
