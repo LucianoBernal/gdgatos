@@ -20,7 +20,7 @@ if (not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))/*
 	if (@numTarjeta is null)
 		begin
 		insert SKYNET.Facturas(diferenciaInconsistencia,estadia,fecha,monto,tipoPago) 
-		values(0,@estadia,coalesce(@fecha,sysdatetime()),0,1)
+		values(0,@estadia,coalesce(@fecha,(select top 1 fecha from SKYNET.Config)),0,1)
 		set @numeroFactura=(select f.facturaNumero
 			   from SKYNET.Facturas f
 			   where f.estadia=@estadia)
@@ -28,7 +28,7 @@ if (not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))/*
 		else
 		begin
 		insert SKYNET.Facturas(diferenciaInconsistencia,estadia,fecha,monto,tipoPago) 
-		values(0,@estadia,coalesce(@fecha,sysdatetime()),0,(select top 1 t.idTipoPago
+		values(0,@estadia,coalesce(@fecha,(select top 1 fecha from SKYNET.Config)),0,(select top 1 t.idTipoPago
 															from SKYNET.TiposPago t
 															where t.nombre=@nombreTipoPago))
 		set @numeroFactura=(select f.facturaNumero
@@ -76,7 +76,7 @@ go
 create procedure SKYNET.registrarCheckOut(@estadia numeric(18,0))
 as
 begin
-update SKYNET.Estadias set cantNoches = DATEDIFF(day, (SELECT fechaDesde FROM SKYNET.Reservas WHERE codigoReserva = @estadia), SYSDATETIME()) WHERE reserva = @estadia
+update SKYNET.Estadias set cantNoches = DATEDIFF(day, (SELECT fechaDesde FROM SKYNET.Reservas WHERE codigoReserva = @estadia), (select top 1 fecha from SKYNET.Config)) WHERE reserva = @estadia
 end
 go
 create function SKYNET.emitirFactura(@estadia numeric(18,0))
