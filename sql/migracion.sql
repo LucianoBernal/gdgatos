@@ -1,3 +1,7 @@
+/*Inserto fecha migracion */
+Insert into SKYNET.Config(fecha)(select MAX(Factura_Fecha) from gd_esquema.Maestra
+								where Factura_Fecha is not null)
+
 /*agrego cadena migracion*/
 Insert  SKYNET.Cadenas(cadena)
 values('Cadena Migracion')
@@ -214,7 +218,7 @@ G1.Estadia_Cant_Noches is not NULL)
 /*ACTUALIZO LAS CORRECTAS*/
 UPDATE R3 SET estado = 3
 FROM SKYNET.Reservas R3
-WHERE estado = 1 AND fechaDesde > SYSDATETIME()
+WHERE estado = 1 AND fechaDesde > (select top 1 fecha from SKYNET.Config)
 
 /*ACTUALIZO CANCELADAS POR NO-SHOW*/
 insert into SKYNET.Cancelaciones(reserva,motivo,fechaCancel)
