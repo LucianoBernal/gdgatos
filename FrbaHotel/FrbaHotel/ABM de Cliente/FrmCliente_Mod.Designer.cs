@@ -63,6 +63,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.botonGuardar = new System.Windows.Forms.Button();
             this.botonVolver = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -392,11 +393,22 @@
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(267, 254);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(98, 30);
+            this.btnLimpiar.TabIndex = 84;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // FrmCliente_Mod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 295);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.botonGuardar);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.groupBox1);
@@ -446,5 +458,6 @@
         private System.Windows.Forms.TextBox txtRol;
         private System.Windows.Forms.TextBox txtOcultoTipoDoc;
         private System.Windows.Forms.TextBox txtOcultoNacionalidad;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaHotel.Generar_Modificar_Reserva;
+using FrbaHotel.Registrar_Estadia;
 
 namespace FrbaHotel.ABM_de_Cliente
 {
@@ -16,7 +17,8 @@ namespace FrbaHotel.ABM_de_Cliente
         public ListaConId listaTipoDoc = new ListaConId();
         public ListaConId listaNacionalidad = new ListaConId();
         public ListaConId listaPaisDeOrigen = new ListaConId();
-        public FrmReserva Padre;
+        public FrmReserva Padre=null;
+        public FormCheckInPosta PadrePosta = null;
         public FrmCliente_Alta()
         {
             InitializeComponent();
@@ -25,6 +27,12 @@ namespace FrbaHotel.ABM_de_Cliente
         public FrmCliente_Alta(FrmReserva padre)
         {
             this.Padre = padre;
+            InitializeComponent();
+            AgregarTextos();
+        }
+        public FrmCliente_Alta(FormCheckInPosta padre)
+        {
+            this.PadrePosta = padre; 
             InitializeComponent();
             AgregarTextos();
         }
@@ -59,9 +67,17 @@ namespace FrbaHotel.ABM_de_Cliente
 
         private void botonVolver_Click(object sender, EventArgs e)
         {
-            if (Padre != null) {
-                this.Padre.Show();
-                this.Padre.FallaElObtenerCliente();
+            if (Padre != null || PadrePosta != null) {
+                if (Padre != null)
+                {
+                    this.Padre.Show();
+                    this.Padre.FallaElObtenerCliente();
+                }
+                else
+                {
+                    this.PadrePosta.Show();
+                    this.PadrePosta.FallaElObtenerCliente();
+                }
             }else
             {
                 FrmCliente cliente = new FrmCliente();
@@ -133,11 +149,20 @@ namespace FrbaHotel.ABM_de_Cliente
                         new Query(strquery).Ejecutar();
                         MessageBox.Show("Ya esta");
                         this.Visible = false;
-                        if (Padre != null)
+                        if (Padre != null || PadrePosta != null)
                         {
-                            int idCliente = Convert.ToInt32(new Query("SELECT IDENT_CURRENT('SKYNET.Clientes')").ObtenerUnicoCampo());
-                            this.Padre.Show();
-                            this.Padre.ReciboElIdCliente(idCliente);
+                            if (Padre != null)
+                            {
+                                int idCliente = Convert.ToInt32(new Query("SELECT IDENT_CURRENT('SKYNET.Clientes')").ObtenerUnicoCampo());
+                                this.Padre.Show();
+                                this.Padre.ReciboElIdCliente(idCliente);
+                            }
+                            else
+                            {
+                                int idCliente = Convert.ToInt32(new Query("SELECT IDENT_CURRENT('SKYNET.Clientes')").ObtenerUnicoCampo());
+                                this.PadrePosta.Show();
+                                this.PadrePosta.ReciboElIdCliente(idCliente);
+                            }
                         }
                     }
                 }

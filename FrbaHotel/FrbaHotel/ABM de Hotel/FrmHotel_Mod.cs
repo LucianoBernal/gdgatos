@@ -14,6 +14,7 @@ namespace FrbaHotel.ABM_de_Hotel
     {
         public ListaTextos listaTextos = new ListaTextos();
         private int idHotel;
+        string nombreHotel;
 
         public FrmHotel_Mod(int id)
         {
@@ -43,17 +44,43 @@ namespace FrbaHotel.ABM_de_Hotel
                 bool okNumero = int.TryParse(txtNumCalle.Text, out numero);
                 if (okNumero)
                 {
-                    //            MessageBox.Show("UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString());
-                    new Query("UPDATE SKYNET.Hoteles SET mail = '" + txtEmail.Text + "', telefono = '" + txtTelefono.Text + "', cantidadEstrellas = '" + txtEstrellas.Value + "', " +
-                        " calle = '" + txtDireccion.Text + "', numCalle = " + txtNumCalle.Text + ", ciudad = '" + txtCiudad.Text + "', fechaCreacion = '" + txtFecha.Value + "', " +
-                        " pais = (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), cadena = (SELECT idCadena FROM SKYNET.Cadenas WHERE cadena = '" + txtCadena.Text.ToString() + "') " +
-                        " WHERE idHotel = " + idHotel.ToString()).Ejecutar();
-                    ActualizarRegimen();
-                    MessageBox.Show("Ya esta");
+                    if (nombreDesocupado(txtNombre.Text, nombreHotel) == true)
+                    {
+                        //            MessageBox.Show("UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString());
+                        new Query("UPDATE SKYNET.Hoteles SET mail = '" + txtEmail.Text + "', telefono = '" + txtTelefono.Text + "', cantidadEstrellas = '" + txtEstrellas.Value + "', " +
+                            " calle = '" + txtDireccion.Text + "', numCalle = " + txtNumCalle.Text + ", ciudad = '" + txtCiudad.Text + "', fechaCreacion = '" + txtFecha.Value + "', " +
+                            " pais = (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), cadena = (SELECT idCadena FROM SKYNET.Cadenas WHERE cadena = '" + txtCadena.Text.ToString() + "') " +
+                            " WHERE idHotel = " + idHotel.ToString()).Ejecutar();
+                        ActualizarRegimen();
+                        MessageBox.Show("Ya esta");
+                    }
+                    else
+                    {
+                        MessageBox.Show("El nombre del hotel ya esta usado, eliga otro");
+                    }
                 }
                 else
                 {
                     MessageBox.Show("El numero de la calle tiene letras. Verifiquelo.");
+                }
+            }
+        }
+        private bool nombreDesocupado(string nombreNuevo, string nombreViejo)
+        {
+            if (nombreNuevo == nombreViejo)
+            {
+                return true;
+            }
+            else
+            {
+                int res = (int)new Query("SELECT COUNT(1) FROM SKYNET.Hoteles WHERE nombre ='" + nombreNuevo + "'  ").ObtenerUnicoCampo();
+                if (res == 1)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
                 }
             }
         }
@@ -92,6 +119,10 @@ namespace FrbaHotel.ABM_de_Hotel
             CargarRegimenesEnLista();
             CargarPaisesEnLista();
             CargarCadenasEnLista();
+            cargarDatos();
+        }
+        private void cargarDatos()
+        {
             Query qry = new Query("SELECT c.cadena, h.ciudad, h.mail, h.cantidadEstrellas, h.fechaCreacion, h.nombre, h.numCalle, h.calle, " +
                 " p.pais, h.telefono FROM SKYNET.Hoteles h, SKYNET.Cadenas c, SKYNET.Paises p " +
                 " WHERE c.idCadena = h.cadena AND p.idPais = h.pais AND h.idHotel = " + idHotel);
@@ -103,6 +134,7 @@ namespace FrbaHotel.ABM_de_Hotel
                 txtEstrellas.Text = datos[3].ToString();
                 txtFecha.Text = datos[4].ToString();
                 txtNombre.Text = datos[5].ToString();
+                nombreHotel = datos[5].ToString(); ;
                 txtNumCalle.Text = (datos[6].ToString().Length > 3) ? datos[6].ToString().Substring(0, datos[6].ToString().Length - 3) : datos[6].ToString();
                 txtDireccion.Text = datos[7].ToString();
                 txtPais.SelectedItem = datos[8].ToString();
@@ -110,7 +142,7 @@ namespace FrbaHotel.ABM_de_Hotel
             }
 
             string ConsultarRegimenesHotel = " SELECT r.descripcion Regimen  FROM SKYNET.Regimenes r, SKYNET.HotelesRegimenes hr" +
-                                                "  WHERE hr.hotel = "+idHotel+" AND r.idRegimen = hr.regimen";
+                                                "  WHERE hr.hotel = " + idHotel + " AND r.idRegimen = hr.regimen";
 
             qry = new Query(ConsultarRegimenesHotel);
             DataTable regimenesSeleccionados = qry.ObtenerDataTable();
@@ -166,6 +198,11 @@ namespace FrbaHotel.ABM_de_Hotel
             this.Hide();
             hotel.ShowDialog();
             hotel = (FrmHotel_List)this.ActiveMdiChild;
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            cargarDatos();
         }
 
     }
