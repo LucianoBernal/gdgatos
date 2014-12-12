@@ -147,8 +147,18 @@ namespace FrbaHotel
                     {
                         if ((new Query("SELECT cantNoches FROM SKYNET.Estadias WHERE reserva =" + respuesta).ObtenerUnicoCampo()) != null)
                         {
-                            FrmFacturar nuevo = new FrmFacturar(this, Convert.ToInt32(respuesta));
-                            nuevo.Show();
+
+                            int hotel = Convert.ToInt32(new Query("SELECT hotel FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta).ObtenerUnicoCampo());
+                            if (hotel == Globales.idHotelElegido)
+                            {
+                                FrmFacturar nuevo = new FrmFacturar(this, Convert.ToInt32(respuesta));
+                                nuevo.Show();
+                            }
+                            else{
+                                MessageBox.Show("La reserva ingresada no se corresponde con el hotel logueado");
+                                this.Show();
+                            }
+                            
                         }
                         else
                         {
