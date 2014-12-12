@@ -211,3 +211,5 @@ C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.A
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.FrmChangePass.resources
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Registrar_Estadia.FormGridHabitaciones.resources
 C:\Users\User\Documents\GitHub\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.FrmElegirHotel.resources
+C:\Users\Lean\git\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.exe
+C:\Users\Lean\git\gdgatos\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.pdb

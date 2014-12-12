@@ -69,6 +69,7 @@
             // 
             // txtPais
             // 
+            this.txtPais.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtPais.FormattingEnabled = true;
             this.txtPais.Location = new System.Drawing.Point(371, 47);
             this.txtPais.Name = "txtPais";

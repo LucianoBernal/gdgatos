@@ -117,6 +117,7 @@
             // 
             // comboBoxConsultas
             // 
+            this.comboBoxConsultas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxConsultas.FormattingEnabled = true;
             this.comboBoxConsultas.Items.AddRange(new object[] {
             "Hoteles con mayor cantidad de reservas canceladas",

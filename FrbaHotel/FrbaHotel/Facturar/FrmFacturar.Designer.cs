@@ -70,6 +70,7 @@
             // 
             // txtTipoPago
             // 
+            this.txtTipoPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtTipoPago.FormattingEnabled = true;
             this.txtTipoPago.Location = new System.Drawing.Point(347, 52);
             this.txtTipoPago.Name = "txtTipoPago";

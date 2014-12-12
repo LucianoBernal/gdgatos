@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.comboRol = new System.Windows.Forms.ComboBox();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonBuscar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gridDatos = new System.Windows.Forms.DataGridView();
             this.botonVolver = new System.Windows.Forms.Button();
@@ -54,8 +54,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Seleccione un rol:";
+            // 
             // comboRol
             // 
+            this.comboRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboRol.FormattingEnabled = true;
             this.comboRol.Location = new System.Drawing.Point(107, 14);
             this.comboRol.Name = "comboRol";
@@ -82,15 +92,6 @@
             this.botonBuscar.Text = "Buscar";
             this.botonBuscar.UseVisualStyleBackColor = true;
             this.botonBuscar.Click += new System.EventHandler(this.botonBuscar_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Seleccione un rol:";
             // 
             // groupBox2
             // 

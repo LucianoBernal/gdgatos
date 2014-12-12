@@ -59,13 +59,19 @@ namespace FrbaHotel.ABM_de_Cliente
                 txtMail.Text = datos[3].ToString();
                 mailAnterior = datos[3].ToString();
                 txtNombre.Text = datos[4].ToString();
-                txtNumCalle.Text = (datos[5].ToString().Length > 3) ? datos[5].ToString().Substring(0, datos[5].ToString().Length - 3) : datos[5].ToString();
-                txtNumDoc.Text = datos[6].ToString();
+                //txtNumCalle.Text = (datos[5].ToString().Length > 3) ? datos[5].ToString().Substring(0, datos[5].ToString().Length - 3) : datos[5].ToString();
+                //txtNumDoc.Text = datos[6].ToString();
+                numericUpDown1.Value = Convert.ToInt32(datos[5].ToString());//Revisar
+                numericUpDown2.Value = Convert.ToInt32(datos[9].ToString());
+//                numericUpDown3.Value = Convert.ToInt32(datos[10].ToString());
+                numericUpDown4.Value = Convert.ToInt32(datos[6].ToString());
+//                numericUpDown5.Value = Convert.ToInt32(datos[7].ToString());
                 numDocAnterior = datos[6].ToString();
                 txtTelefono.Text = (datos[7].ToString().Length > 3) ? datos[7].ToString().Substring(0, datos[7].ToString().Length - 3) : datos[7].ToString();
+                numericUpDown5.Value = Convert.ToInt32((txtTelefono.Text=="")?"0":txtTelefono.Text);
                 txtTipoDoc.Text = (datos[8].ToString() != "") ? (listaTipoDoc.ObtenerDetalle(Convert.ToInt32(datos[8]))) : (listaTipoDoc.ObtenerDetalle(1));
                 tipoDocAnterior = (datos[8].ToString() != "") ? (listaTipoDoc.ObtenerDetalle(Convert.ToInt32(datos[8]))) : (listaTipoDoc.ObtenerDetalle(1));
-                txtPiso.Text = datos[9].ToString();
+                //txtPiso.Text = datos[9].ToString();
                 txtDepto.Text = datos[10].ToString();
                 txtNacionalidad.Text = (datos[11].ToString() != "") ? (listaNacionalidad.ObtenerDetalle(Convert.ToInt32(datos[11]))) : (listaNacionalidad.ObtenerDetalle(1));
 
@@ -92,6 +98,11 @@ namespace FrbaHotel.ABM_de_Cliente
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
+            txtNumDoc.Text = numericUpDown4.Value.ToString();
+            txtTelefono.Text = numericUpDown5.Value.ToString();
+            txtNumCalle.Text = numericUpDown1.Value.ToString();
+            txtPiso.Text = numericUpDown2.Value.ToString();
+//            txtDepto.Text = numericUpDown3.Value.ToString();
             txtOcultoTipoDoc.Text = listaTipoDoc.ObtenerId(txtTipoDoc.Text).ToString();
             txtOcultoNacionalidad.Text = listaNacionalidad.ObtenerId(txtNacionalidad.Text).ToString();
             txtOcultoPaisDeOrigen.Text = listaPaisDeOrigen.ObtenerId(txtPaisDeOrigen.Text).ToString();
@@ -137,7 +148,7 @@ namespace FrbaHotel.ABM_de_Cliente
                         }
                         string strquery = "UPDATE SKYNET.Clientes SET nombre = '" + txtNombre.Text + "', apellido = '" + txtApellido.Text + "', tipoDoc = " + txtOcultoTipoDoc.Text + ", numDoc = " + txtNumDoc.Text + ", " +
                             " mail = '" + txtMail.Text + "', telefono = " + txtTelefono.Text + ", calle ='" + txtCalle.Text + "', nacionalidad = " + txtOcultoNacionalidad.Text + ", " +
-                            " numCalle = " + txtNumCalle.Text + ", fechaNac = '" + txtFecha.Value + "', baja = " + baja + ", rol = " + txtRol.Text + ", paisDeOrigen = " + txtOcultoPaisDeOrigen.Text + ", inconsistencia = " + incons + " ";
+                            " numCalle = " + txtNumCalle.Text + ", fechaNac = (SELECT CONVERT(datetime, '" + txtFecha.Value.ToString("yyyy-MM-dd") + "', 121), baja = " + baja + ", rol = " + txtRol.Text + ", paisDeOrigen = " + txtOcultoPaisDeOrigen.Text + ", inconsistencia = " + incons + " ";
                        
                         if (txtPiso.Text != "")
                         {

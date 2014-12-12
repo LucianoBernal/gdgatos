@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.txtNumCalle = new System.Windows.Forms.NumericUpDown();
             this.txtTelefono = new System.Windows.Forms.NumericUpDown();
             this.txtNumDoc = new System.Windows.Forms.NumericUpDown();
@@ -52,7 +53,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnVolver = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumCalle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).BeginInit();
@@ -92,6 +92,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos de la Persona";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(303, 175);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(115, 38);
+            this.btnVolver.TabIndex = 45;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // txtNumCalle
             // 
@@ -232,6 +242,7 @@
             // 
             // txtTipoDoc
             // 
+            this.txtTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtTipoDoc.FormattingEnabled = true;
             this.txtTipoDoc.Location = new System.Drawing.Point(113, 53);
             this.txtTipoDoc.Name = "txtTipoDoc";
@@ -295,16 +306,6 @@
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "Nombre:";
-            // 
-            // btnVolver
-            // 
-            this.btnVolver.Location = new System.Drawing.Point(303, 175);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(115, 38);
-            this.btnVolver.TabIndex = 45;
-            this.btnVolver.Text = "Volver";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // FrmUsuario_Mod
             // 

@@ -65,6 +65,7 @@
             // 
             // comboRegimen
             // 
+            this.comboRegimen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboRegimen.FormattingEnabled = true;
             this.comboRegimen.Location = new System.Drawing.Point(142, 25);
             this.comboRegimen.Name = "comboRegimen";

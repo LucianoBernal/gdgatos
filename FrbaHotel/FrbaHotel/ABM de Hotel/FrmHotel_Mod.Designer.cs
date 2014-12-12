@@ -60,6 +60,7 @@
             // 
             // txtCadena
             // 
+            this.txtCadena.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtCadena.FormattingEnabled = true;
             this.txtCadena.Location = new System.Drawing.Point(412, 184);
             this.txtCadena.Name = "txtCadena";
@@ -93,6 +94,7 @@
             // 
             // txtPais
             // 
+            this.txtPais.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtPais.FormattingEnabled = true;
             this.txtPais.Location = new System.Drawing.Point(412, 142);
             this.txtPais.Name = "txtPais";

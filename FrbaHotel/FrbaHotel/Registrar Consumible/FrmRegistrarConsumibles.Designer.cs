@@ -44,6 +44,7 @@
             // 
             // txtConsumibles
             // 
+            this.txtConsumibles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtConsumibles.FormattingEnabled = true;
             this.txtConsumibles.Location = new System.Drawing.Point(107, 46);
             this.txtConsumibles.Name = "txtConsumibles";

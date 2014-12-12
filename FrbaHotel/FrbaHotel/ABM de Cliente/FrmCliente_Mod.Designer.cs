@@ -55,7 +55,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtTipoDoc = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtNumDoc = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -64,11 +63,27 @@
             this.botonGuardar = new System.Windows.Forms.Button();
             this.botonVolver = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.txtNumDoc = new System.Windows.Forms.TextBox();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numericUpDown5);
+            this.groupBox1.Controls.Add(this.numericUpDown4);
+            this.groupBox1.Controls.Add(this.numericUpDown3);
+            this.groupBox1.Controls.Add(this.numericUpDown2);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.txtOcultoNacionalidad);
             this.groupBox1.Controls.Add(this.txtOcultoPaisDeOrigen);
             this.groupBox1.Controls.Add(this.txtRol);
@@ -86,7 +101,6 @@
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.txtFecha);
             this.groupBox1.Controls.Add(this.txtMail);
-            this.groupBox1.Controls.Add(this.txtTelefono);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtNumCalle);
             this.groupBox1.Controls.Add(this.txtCalle);
@@ -95,7 +109,6 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtTipoDoc);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.txtNumDoc);
             this.groupBox1.Controls.Add(this.txtApellido);
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.label6);
@@ -163,6 +176,7 @@
             // 
             // txtPaisDeOrigen
             // 
+            this.txtPaisDeOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtPaisDeOrigen.FormattingEnabled = true;
             this.txtPaisDeOrigen.Location = new System.Drawing.Point(399, 135);
             this.txtPaisDeOrigen.Name = "txtPaisDeOrigen";
@@ -206,7 +220,7 @@
             // 
             // txtDepto
             // 
-            this.txtDepto.Location = new System.Drawing.Point(556, 107);
+            this.txtDepto.Location = new System.Drawing.Point(553, 107);
             this.txtDepto.Name = "txtDepto";
             this.txtDepto.Size = new System.Drawing.Size(48, 20);
             this.txtDepto.TabIndex = 60;
@@ -222,10 +236,11 @@
             // 
             // txtPiso
             // 
-            this.txtPiso.Location = new System.Drawing.Point(465, 107);
+            this.txtPiso.Location = new System.Drawing.Point(499, 166);
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(48, 20);
             this.txtPiso.TabIndex = 58;
+            this.txtPiso.Visible = false;
             // 
             // label12
             // 
@@ -253,10 +268,11 @@
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(399, 77);
+            this.txtTelefono.Location = new System.Drawing.Point(432, 260);
             this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(178, 20);
+            this.txtTelefono.Size = new System.Drawing.Size(50, 20);
             this.txtTelefono.TabIndex = 48;
+            this.txtTelefono.Visible = false;
             // 
             // label11
             // 
@@ -269,10 +285,11 @@
             // 
             // txtNumCalle
             // 
-            this.txtNumCalle.Location = new System.Drawing.Point(352, 107);
+            this.txtNumCalle.Location = new System.Drawing.Point(429, 166);
             this.txtNumCalle.Name = "txtNumCalle";
             this.txtNumCalle.Size = new System.Drawing.Size(64, 20);
             this.txtNumCalle.TabIndex = 51;
+            this.txtNumCalle.Visible = false;
             // 
             // txtCalle
             // 
@@ -310,6 +327,7 @@
             // 
             // txtTipoDoc
             // 
+            this.txtTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtTipoDoc.FormattingEnabled = true;
             this.txtTipoDoc.Location = new System.Drawing.Point(115, 48);
             this.txtTipoDoc.Name = "txtTipoDoc";
@@ -324,13 +342,6 @@
             this.label7.Size = new System.Drawing.Size(65, 13);
             this.label7.TabIndex = 52;
             this.label7.Text = "Documento:";
-            // 
-            // txtNumDoc
-            // 
-            this.txtNumDoc.Location = new System.Drawing.Point(399, 48);
-            this.txtNumDoc.Name = "txtNumDoc";
-            this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
-            this.txtNumDoc.TabIndex = 46;
             // 
             // txtApellido
             // 
@@ -403,6 +414,65 @@
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(352, 108);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(71, 20);
+            this.numericUpDown1.TabIndex = 74;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(465, 108);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDown2.TabIndex = 75;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(568, 197);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(33, 20);
+            this.numericUpDown3.TabIndex = 76;
+            this.numericUpDown3.Visible = false;
+            // 
+            // txtNumDoc
+            // 
+            this.txtNumDoc.Location = new System.Drawing.Point(376, 260);
+            this.txtNumDoc.Name = "txtNumDoc";
+            this.txtNumDoc.Size = new System.Drawing.Size(50, 20);
+            this.txtNumDoc.TabIndex = 46;
+            this.txtNumDoc.Visible = false;
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.Location = new System.Drawing.Point(399, 49);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(178, 20);
+            this.numericUpDown4.TabIndex = 77;
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.Location = new System.Drawing.Point(399, 78);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(178, 20);
+            this.numericUpDown5.TabIndex = 78;
+            // 
             // FrmCliente_Mod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,12 +482,20 @@
             this.Controls.Add(this.botonGuardar);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.txtTelefono);
+            this.Controls.Add(this.txtNumDoc);
             this.Name = "FrmCliente_Mod";
             this.Text = "Modificacion de Cliente";
             this.Load += new System.EventHandler(this.FrmCliente_Mod_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -444,7 +522,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox txtTipoDoc;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtNumDoc;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label6;
@@ -459,5 +536,11 @@
         private System.Windows.Forms.TextBox txtOcultoTipoDoc;
         private System.Windows.Forms.TextBox txtOcultoNacionalidad;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.TextBox txtNumDoc;
     }
 }

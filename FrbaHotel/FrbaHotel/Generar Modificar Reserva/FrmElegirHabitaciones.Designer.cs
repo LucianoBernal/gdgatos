@@ -130,6 +130,7 @@
             // 
             // txtHabitacion1
             // 
+            this.txtHabitacion1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtHabitacion1.FormattingEnabled = true;
             this.txtHabitacion1.Location = new System.Drawing.Point(181, 45);
             this.txtHabitacion1.Name = "txtHabitacion1";
@@ -139,6 +140,7 @@
             // 
             // txtHabitacion2
             // 
+            this.txtHabitacion2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtHabitacion2.FormattingEnabled = true;
             this.txtHabitacion2.Location = new System.Drawing.Point(181, 73);
             this.txtHabitacion2.Name = "txtHabitacion2";
@@ -148,6 +150,7 @@
             // 
             // txtHabitacion3
             // 
+            this.txtHabitacion3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtHabitacion3.FormattingEnabled = true;
             this.txtHabitacion3.Location = new System.Drawing.Point(181, 99);
             this.txtHabitacion3.Name = "txtHabitacion3";
@@ -157,6 +160,7 @@
             // 
             // txtHabitacion4
             // 
+            this.txtHabitacion4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtHabitacion4.FormattingEnabled = true;
             this.txtHabitacion4.Location = new System.Drawing.Point(181, 126);
             this.txtHabitacion4.Name = "txtHabitacion4";
@@ -166,6 +170,7 @@
             // 
             // txtHabitacion5
             // 
+            this.txtHabitacion5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtHabitacion5.FormattingEnabled = true;
             this.txtHabitacion5.Location = new System.Drawing.Point(181, 153);
             this.txtHabitacion5.Name = "txtHabitacion5";

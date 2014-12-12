@@ -117,6 +117,7 @@
             // txtTipo
             // 
             this.txtTipo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtTipo.FormattingEnabled = true;
             this.txtTipo.Location = new System.Drawing.Point(107, 22);
             this.txtTipo.Name = "txtTipo";

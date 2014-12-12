@@ -170,6 +170,7 @@
             // 
             // txtPaisDeOrigen
             // 
+            this.txtPaisDeOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtPaisDeOrigen.FormattingEnabled = true;
             this.txtPaisDeOrigen.Location = new System.Drawing.Point(399, 135);
             this.txtPaisDeOrigen.Name = "txtPaisDeOrigen";
@@ -187,6 +188,7 @@
             // 
             // txtNacionalidad
             // 
+            this.txtNacionalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtNacionalidad.FormattingEnabled = true;
             this.txtNacionalidad.Location = new System.Drawing.Point(115, 135);
             this.txtNacionalidad.Name = "txtNacionalidad";
@@ -317,6 +319,7 @@
             // 
             // txtTipoDoc
             // 
+            this.txtTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtTipoDoc.FormattingEnabled = true;
             this.txtTipoDoc.Location = new System.Drawing.Point(115, 48);
             this.txtTipoDoc.Name = "txtTipoDoc";

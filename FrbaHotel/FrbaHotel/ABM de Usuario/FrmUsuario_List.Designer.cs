@@ -227,6 +227,7 @@
             // 
             // txtHotel
             // 
+            this.txtHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtHotel.Enabled = false;
             this.txtHotel.FormattingEnabled = true;
             this.txtHotel.Location = new System.Drawing.Point(113, 73);
@@ -265,6 +266,7 @@
             // txtRol
             // 
             this.txtRol.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtRol.Enabled = false;
             this.txtRol.FormattingEnabled = true;
             this.txtRol.Location = new System.Drawing.Point(113, 45);
