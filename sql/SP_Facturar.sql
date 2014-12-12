@@ -73,10 +73,10 @@ if (not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))/*
 end
 /* Emitir factura*/
 go
-create procedure SKYNET.registrarCheckOut(@estadia numeric(18,0))
+create procedure SKYNET.registrarCheckOut(@estadia numeric(18,0),@usuarioEgreso numeric(18,0))
 as
 begin
-update SKYNET.Estadias set cantNoches = DATEDIFF(day, (SELECT fechaDesde FROM SKYNET.Reservas WHERE codigoReserva = @estadia), (select top 1 fecha from SKYNET.Config)) WHERE reserva = @estadia
+update SKYNET.Estadias set cantNoches = DATEDIFF(day, (SELECT fechaDesde FROM SKYNET.Reservas WHERE codigoReserva = @estadia), (select top 1 fecha from SKYNET.Config)),usuarioEgreso = @usuarioEgreso WHERE reserva = @estadia
 end
 go
 create function SKYNET.emitirFactura(@estadia numeric(18,0))

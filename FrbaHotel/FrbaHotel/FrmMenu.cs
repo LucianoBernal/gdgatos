@@ -175,7 +175,7 @@ namespace FrbaHotel
                 }
             } if (tipoResp == 5 && respuesta != null)
             {
-                MessageBox.Show("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta+" AND hotel= "+ Globales.idHotelElegido +" ");
+                //MessageBox.Show("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta+" AND hotel= "+ Globales.idHotelElegido +" ");
                 object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta+" AND hotel= "+ Globales.idHotelElegido +" ").ObtenerUnicoCampo();
                 if (query == null)
                 {

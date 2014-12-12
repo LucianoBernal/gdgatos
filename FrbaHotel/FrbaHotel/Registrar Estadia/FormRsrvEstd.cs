@@ -71,6 +71,7 @@ namespace FrbaHotel.Registrar_Estadia
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@estadia", SqlDbType.Int).Value = this.Reserva;
+                    cmd.Parameters.Add("@usuarioEgreso", SqlDbType.Int).Value = Globales.idUsuarioLogueado;
                     con.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -84,7 +85,7 @@ namespace FrbaHotel.Registrar_Estadia
         {
             string strQuery = "SELECT DATEDIFF(day,fechaDesde,(SELECT convert(datetime, '" + Globales.fechaSistema + "', 121))) AS dif FROM SKYNET.Reservas WHERE codigoReserva = " + this.Reserva + " ";
             int diferencia = (int)new Query(strQuery).ObtenerUnicoCampo();
-            MessageBox.Show(strQuery + " diferencia:" + diferencia);
+            //MessageBox.Show(strQuery + " diferencia:" + diferencia);
             if (diferencia == 0)
             {
                 //new Query("INSERT INTO SKYNET.Estadias (reserva) VALUES ( " + this.Reserva + " )" ).Ejecutar();

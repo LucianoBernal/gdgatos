@@ -46,7 +46,9 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             else
             {
                 dtpFechaDesde.Value = Convert.ToDateTime(Globales.fechaSistema);
-                dtpFechaHasta.Value = Convert.ToDateTime(Globales.fechaSistema);
+                dtpFechaHasta.Value = Convert.ToDateTime(Globales.fechaSistema); 
+                dtpFechaDesde.MinDate = Convert.ToDateTime(Globales.fechaSistema);
+                dtpFechaHasta.MinDate = Convert.ToDateTime(Globales.fechaSistema);
             }
         }
         public void CalcularHuespedes()
@@ -74,7 +76,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 this.EsGenerar ?
                 new Query("INSERT INTO SKYNET.Reservas (hotel, regimen, fechaDesde, cantNoches, cliente, estado) values (" + txtOcultoHotel.Text + ", " + txtOcultoRegimenIns.Text + ", (SELECT convert(datetime, '" + txtOcultoFechaDesde.Text + "', 121)), " + txtOcultoCantNoches.Text + ", " + txtOcultoCliente.Text + ", " + txtValorEstado.Text + ")")
                 : new Query("UPDATE SKYNET.Reservas SET hotel = " + txtOcultoHotel.Text + ", regimen= " + txtOcultoRegimenIns.Text + ", fechaDesde= (SELECT convert(datetime, '" + txtOcultoFechaDesde.Text + "', 121)), cantNoches= " + txtOcultoCantNoches.Text + ", cliente= " + txtOcultoCliente.Text + ", estado= " + txtValorEstado.Text + " WHERE codigoReserva = " + IdReserva.ToString());
-                MessageBox.Show(qry.pComando);
+//                MessageBox.Show(qry.pComando);
                 qry.Ejecutar();
                 if (!EsGenerar)
                     new Query("DELETE FROM SKYNET.ReservasPorTipoHabitacion WHERE idReserva = " + IdReserva.ToString()).Ejecutar();
@@ -143,6 +145,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         public void RecibirListaHabitaciones(List<DetalleConId> lista)
         {
             this.ListaHabitaciones = lista;
+            MessageBox.Show("Por favor, identifiquese como cliente");
             ObtenerCliente();
         }
         private void btnBuscar_Click(object sender, EventArgs e)
