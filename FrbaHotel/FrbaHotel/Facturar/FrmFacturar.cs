@@ -92,7 +92,7 @@ namespace FrbaHotel.Facturar
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
             this.Padre.Show();
         }
     }

@@ -81,7 +81,7 @@ namespace FrbaHotel.ABM_de_Usuario
         private void btnVolver_Click(object sender, EventArgs e)
         {
             FrmUsuario frmUser = new FrmUsuario();
-            this.Hide();
+            this.Visible=false;
             frmUser.ShowDialog();
             frmUser = (FrmUsuario)this.ActiveMdiChild;
         }
@@ -92,7 +92,7 @@ namespace FrbaHotel.ABM_de_Usuario
             int idUsuario = idUsuarioSeleccionado();
 
             FrmUsuario_Mod modificar = new FrmUsuario_Mod(idUsuario);
-            this.Hide();
+            this.Visible=false;
             modificar.ShowDialog();
             modificar = (FrmUsuario_Mod)this.ActiveMdiChild;
         }

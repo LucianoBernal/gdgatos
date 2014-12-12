@@ -62,7 +62,7 @@ namespace FrbaHotel.ABM_de_Habitacion
         private void btnVolver_Click(object sender, EventArgs e)
         {
             FrmHabitacion habitacion = new FrmHabitacion();
-            this.Hide();
+            this.Visible=false;
             habitacion.ShowDialog();
             habitacion = (FrmHabitacion)this.ActiveMdiChild;
         }
@@ -73,7 +73,7 @@ namespace FrbaHotel.ABM_de_Habitacion
             int idHotel = idHotelSeleccionado();
 
             FrmHabitacion_Mod modificar = new FrmHabitacion_Mod(idHotel, idNumero);
-            this.Hide();
+            this.Visible=false;
             modificar.ShowDialog();
             modificar = (FrmHabitacion_Mod)this.ActiveMdiChild;
         }

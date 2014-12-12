@@ -70,7 +70,7 @@ namespace FrbaHotel.Listado_Estadistico
         private void btnVolver_Click(object sender, EventArgs e)
         {
             FrmMenu frm = new FrmMenu();
-            this.Hide();
+            this.Visible=false;
             frm.ShowDialog();
         }
 

@@ -104,7 +104,7 @@ namespace FrbaHotel.ABM_de_Cliente
             if (btnVolver.Text == "Volver")
             {
                 FrmCliente cliente = new FrmCliente();
-                this.Hide();
+                this.Visible=false;
                 cliente.ShowDialog();
                 cliente = (FrmCliente)this.ActiveMdiChild;
             }
@@ -112,13 +112,13 @@ namespace FrbaHotel.ABM_de_Cliente
                 if (this.Padre != null)
                 {
                     FrmCliente_Alta cliente = new FrmCliente_Alta(this.Padre);
-                    this.Hide();
+                    this.Visible=false;
                     cliente.Show();
                 }
                 else
                 {
                     FrmCliente_Alta cliente = new FrmCliente_Alta(this.PadrePosta);
-                    this.Hide();
+                    this.Visible=false;
                     cliente.Show();
                 }
             }
@@ -130,7 +130,7 @@ namespace FrbaHotel.ABM_de_Cliente
             int idCliente = idClienteSeleccionado();
 
             FrmCliente_Mod modificar = new FrmCliente_Mod(idCliente);
-            this.Hide();
+            this.Visible=false;
             modificar.ShowDialog();
             modificar = (FrmCliente_Mod)this.ActiveMdiChild;
         }
@@ -245,7 +245,7 @@ namespace FrbaHotel.ABM_de_Cliente
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
             if (this.Padre != null)
             {
                 this.Padre.Show();

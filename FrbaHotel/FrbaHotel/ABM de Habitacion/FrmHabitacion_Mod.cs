@@ -58,7 +58,7 @@ namespace FrbaHotel.ABM_de_Habitacion
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmHabitacion_List hab = new FrmHabitacion_List();
-            this.Hide();
+            this.Visible=false;
             hab.ShowDialog();
             hab = (FrmHabitacion_List)this.ActiveMdiChild;
         }

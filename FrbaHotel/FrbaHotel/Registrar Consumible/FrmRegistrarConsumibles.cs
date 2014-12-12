@@ -54,7 +54,7 @@ namespace FrbaHotel.Registrar_Consumible
         }
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
             this.Padre.Show();
         }
     }
