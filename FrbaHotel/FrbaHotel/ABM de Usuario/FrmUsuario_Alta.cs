@@ -144,19 +144,18 @@ namespace FrbaHotel.ABM_de_Usuario
                 listaTextos.Remove(listaTextos.Find(x => x.Control == txtRol));
                 listaTextos.Remove(listaTextos.Find(x => x.Control == txtHotel));
                 Query qry = new Query("SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text + "'");
-//                MessageBox.Show("La consulta enviada es " + "SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text + "'");
+                //MessageBox.Show("La consulta enviada es " + "SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text + "'");
                 int existeUser = Convert.ToInt32(qry.ObtenerUnicoCampo());
                 if (existeUser == 0)
                 {
                     string sql = "";
-//                    MessageBox.Show("Decime que tal esta");
                     qry.pComando = "INSERT INTO SKYNET.Usuarios " + listaTextos.GenerarInsert();
                     qry.Ejecutar();
                     qry.pComando = "UPDATE SKYNET.Usuarios SET habilitado = 0 WHERE username = '" + txtUsername.Text + "'";
 //                    MessageBox.Show("INSERT INTO SKYNET.Usuarios " + listaTextos.GenerarInsert());
                     sql = "INSERT INTO SKYNET.UsuarioRolHotel (usuario, hotel, rol) VALUES ((SELECT idUser FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text +
                     "'), " + txtOcultoHotel.Text + ", " + txtOcultoRol.Text + ")";
-                    qry.pComando = sql;//Que paja hacer mas de una query
+                    qry.pComando = sql;
                     qry.Ejecutar();
                     FrmMenu frmMen = new FrmMenu();
                     this.Visible = false;
@@ -189,6 +188,11 @@ namespace FrbaHotel.ABM_de_Usuario
         }
 
         private void txtTelefono_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtHotel_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

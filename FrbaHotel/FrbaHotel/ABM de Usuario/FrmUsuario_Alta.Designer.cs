@@ -43,6 +43,9 @@ namespace FrbaHotel.ABM_de_Usuario
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtNumCalle = new System.Windows.Forms.NumericUpDown();
+            this.txtTelefono = new System.Windows.Forms.NumericUpDown();
+            this.txtNumDoc = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.txtFecha = new System.Windows.Forms.DateTimePicker();
             this.txtMail = new System.Windows.Forms.TextBox();
@@ -66,17 +69,14 @@ namespace FrbaHotel.ABM_de_Usuario
             this.txtOcultoHotel = new System.Windows.Forms.TextBox();
             this.txtOcultoFecha = new System.Windows.Forms.TextBox();
             this.txtOcultoPass = new System.Windows.Forms.TextBox();
-            this.txtNumDoc = new System.Windows.Forms.NumericUpDown();
-            this.txtTelefono = new System.Windows.Forms.NumericUpDown();
-            this.txtNumCalle = new System.Windows.Forms.NumericUpDown();
             this.txtOcultoNumDoc = new System.Windows.Forms.TextBox();
             this.txtOcultoTelefono = new System.Windows.Forms.TextBox();
             this.txtOcultoNumCalle = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumCalle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -104,6 +104,7 @@ namespace FrbaHotel.ABM_de_Usuario
             this.txtHotel.Name = "txtHotel";
             this.txtHotel.Size = new System.Drawing.Size(178, 21);
             this.txtHotel.TabIndex = 4;
+            this.txtHotel.SelectedIndexChanged += new System.EventHandler(this.txtHotel_SelectedIndexChanged);
             // 
             // label13
             // 
@@ -192,6 +193,43 @@ namespace FrbaHotel.ABM_de_Usuario
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos de la Persona";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // txtNumCalle
+            // 
+            this.txtNumCalle.Location = new System.Drawing.Point(396, 113);
+            this.txtNumCalle.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.txtNumCalle.Name = "txtNumCalle";
+            this.txtNumCalle.Size = new System.Drawing.Size(179, 20);
+            this.txtNumCalle.TabIndex = 42;
+            // 
+            // txtTelefono
+            // 
+            this.txtTelefono.Location = new System.Drawing.Point(396, 83);
+            this.txtTelefono.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(179, 20);
+            this.txtTelefono.TabIndex = 41;
+            this.txtTelefono.ValueChanged += new System.EventHandler(this.txtTelefono_ValueChanged);
+            // 
+            // txtNumDoc
+            // 
+            this.txtNumDoc.Location = new System.Drawing.Point(397, 54);
+            this.txtNumDoc.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.txtNumDoc.Name = "txtNumDoc";
+            this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
+            this.txtNumDoc.TabIndex = 40;
             // 
             // label12
             // 
@@ -391,43 +429,6 @@ namespace FrbaHotel.ABM_de_Usuario
             this.txtOcultoPass.TabIndex = 9;
             this.txtOcultoPass.Visible = false;
             // 
-            // txtNumDoc
-            // 
-            this.txtNumDoc.Location = new System.Drawing.Point(397, 54);
-            this.txtNumDoc.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.txtNumDoc.Name = "txtNumDoc";
-            this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
-            this.txtNumDoc.TabIndex = 40;
-            // 
-            // txtTelefono
-            // 
-            this.txtTelefono.Location = new System.Drawing.Point(396, 83);
-            this.txtTelefono.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(179, 20);
-            this.txtTelefono.TabIndex = 41;
-            this.txtTelefono.ValueChanged += new System.EventHandler(this.txtTelefono_ValueChanged);
-            // 
-            // txtNumCalle
-            // 
-            this.txtNumCalle.Location = new System.Drawing.Point(396, 113);
-            this.txtNumCalle.Maximum = new decimal(new int[] {
-            30000,
-            0,
-            0,
-            0});
-            this.txtNumCalle.Name = "txtNumCalle";
-            this.txtNumCalle.Size = new System.Drawing.Size(179, 20);
-            this.txtNumCalle.TabIndex = 42;
-            // 
             // txtOcultoNumDoc
             // 
             this.txtOcultoNumDoc.Location = new System.Drawing.Point(191, 360);
@@ -477,9 +478,9 @@ namespace FrbaHotel.ABM_de_Usuario
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumCalle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
