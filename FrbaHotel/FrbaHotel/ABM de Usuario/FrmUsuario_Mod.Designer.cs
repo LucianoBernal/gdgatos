@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtNumCalle = new System.Windows.Forms.NumericUpDown();
+            this.txtTelefono = new System.Windows.Forms.NumericUpDown();
+            this.txtNumDoc = new System.Windows.Forms.NumericUpDown();
             this.txtOcultoTipoDoc = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -49,17 +52,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtNumDoc = new System.Windows.Forms.NumericUpDown();
-            this.txtTelefono = new System.Windows.Forms.NumericUpDown();
-            this.txtNumCalle = new System.Windows.Forms.NumericUpDown();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumCalle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnVolver);
             this.groupBox2.Controls.Add(this.txtNumCalle);
             this.groupBox2.Controls.Add(this.txtTelefono);
             this.groupBox2.Controls.Add(this.txtNumDoc);
@@ -91,9 +93,45 @@
             this.groupBox2.Text = "Datos de la Persona";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // txtNumCalle
+            // 
+            this.txtNumCalle.Location = new System.Drawing.Point(397, 110);
+            this.txtNumCalle.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.txtNumCalle.Name = "txtNumCalle";
+            this.txtNumCalle.Size = new System.Drawing.Size(178, 20);
+            this.txtNumCalle.TabIndex = 44;
+            // 
+            // txtTelefono
+            // 
+            this.txtTelefono.Location = new System.Drawing.Point(397, 83);
+            this.txtTelefono.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(178, 20);
+            this.txtTelefono.TabIndex = 43;
+            // 
+            // txtNumDoc
+            // 
+            this.txtNumDoc.Location = new System.Drawing.Point(397, 54);
+            this.txtNumDoc.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.txtNumDoc.Name = "txtNumDoc";
+            this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
+            this.txtNumDoc.TabIndex = 42;
+            // 
             // txtOcultoTipoDoc
             // 
-            this.txtOcultoTipoDoc.Location = new System.Drawing.Point(495, 175);
+            this.txtOcultoTipoDoc.Location = new System.Drawing.Point(540, 147);
             this.txtOcultoTipoDoc.Name = "txtOcultoTipoDoc";
             this.txtOcultoTipoDoc.Size = new System.Drawing.Size(47, 20);
             this.txtOcultoTipoDoc.TabIndex = 41;
@@ -101,11 +139,11 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(236, 186);
+            this.btnGuardar.Location = new System.Drawing.Point(444, 175);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(198, 27);
+            this.btnGuardar.Size = new System.Drawing.Size(115, 38);
             this.btnGuardar.TabIndex = 40;
-            this.btnGuardar.Text = "guardar";
+            this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -258,41 +296,15 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Nombre:";
             // 
-            // txtNumDoc
+            // btnVolver
             // 
-            this.txtNumDoc.Location = new System.Drawing.Point(397, 54);
-            this.txtNumDoc.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.txtNumDoc.Name = "txtNumDoc";
-            this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
-            this.txtNumDoc.TabIndex = 42;
-            // 
-            // txtTelefono
-            // 
-            this.txtTelefono.Location = new System.Drawing.Point(397, 83);
-            this.txtTelefono.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(178, 20);
-            this.txtTelefono.TabIndex = 43;
-            // 
-            // txtNumCalle
-            // 
-            this.txtNumCalle.Location = new System.Drawing.Point(397, 110);
-            this.txtNumCalle.Maximum = new decimal(new int[] {
-            30000,
-            0,
-            0,
-            0});
-            this.txtNumCalle.Name = "txtNumCalle";
-            this.txtNumCalle.Size = new System.Drawing.Size(178, 20);
-            this.txtNumCalle.TabIndex = 44;
+            this.btnVolver.Location = new System.Drawing.Point(303, 175);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(115, 38);
+            this.btnVolver.TabIndex = 45;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // FrmUsuario_Mod
             // 
@@ -305,9 +317,9 @@
             this.Load += new System.EventHandler(this.FrmUsuario_Mod_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumCalle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -338,5 +350,6 @@
         private System.Windows.Forms.NumericUpDown txtNumCalle;
         private System.Windows.Forms.NumericUpDown txtTelefono;
         private System.Windows.Forms.NumericUpDown txtNumDoc;
+        private System.Windows.Forms.Button btnVolver;
     }
 }
