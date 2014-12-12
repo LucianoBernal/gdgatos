@@ -42,9 +42,10 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+
+            txtCantidad.Text = numCantidad.Value.ToString();
             if (listaPosta.EstanTodosLlenos())
             {
-                txtCantidad.Text = numCantidad.Value.ToString();
                 txtOcultoConsumible.Text = listaConsumibles.ObtenerId(txtConsumibles.Text).ToString();
                 txtOcultoPrecio.Text = (Convert.ToDecimal(listaPrecios.ObtenerDetalle(listaConsumibles.ObtenerId(txtConsumibles.Text))) * Convert.ToInt32(txtCantidad.Text)).ToString(".");
                 new Query("INSERT INTO SKYNET.ConsumiblesEstadias " + listaTextos.GenerarInsert()).Ejecutar();

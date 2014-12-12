@@ -223,19 +223,19 @@ namespace FrbaHotel
             idUsuario = Globales.idUsuarioLogueado;
 //            Globales.fechaSistema = Settings.Default.FechaSistema.ToShortDateString();
 
-            this.btnCancelarEstadia.Visible = false;
-            this.btnClientes.Visible = false;
-            this.btnFacturar.Visible = false;
-            this.btnHabitacion.Visible = false;
-            this.btnHotel.Visible = false;
-            this.btnListadoEstadistico.Visible = false;
-            this.btnReserva.Visible = false;
-            this.btnRegimenEstadia.Visible = false;
-            this.btnRegistrarConsumible.Visible = false;
-            this.btnRegistrarEstadia.Visible = false;
-            this.btnRoles.Visible = false;
-            this.btnUsuario.Visible = false;
-            this.btnListadoEstadistico.Visible = false;
+            this.btnCancelarEstadia.Enabled = false;
+            this.btnClientes.Enabled = false;
+            this.btnFacturar.Enabled = false;
+            this.btnHabitacion.Enabled = false;
+            this.btnHotel.Enabled = false;
+            this.btnListadoEstadistico.Enabled = false;
+            this.btnReserva.Enabled = false;
+            this.btnRegimenEstadia.Enabled = false;
+            this.btnRegistrarConsumible.Enabled = false;
+            this.btnRegistrarEstadia.Enabled = false;
+            this.btnRoles.Enabled = false;
+            this.btnUsuario.Enabled = false;
+            this.btnListadoEstadistico.Enabled = false;
             linkCambiarContraseña.Visible = false;
             lblUsuarioLogueado.Visible = false;
         }
@@ -280,51 +280,51 @@ namespace FrbaHotel
                 switch (Convert.ToInt32(dataRow[0]))
                 {
                     //ABM ROL
-                    case 1: this.btnRoles.Visible = true;
+                    case 1: this.btnRoles.Enabled = true;
                         break;
 
                     //ABM USUARIO
-                    case 2: this.btnUsuario.Visible = true;
+                    case 2: this.btnUsuario.Enabled = true;
                         break;
 
                     //ABM CLIENTES
-                    case 3: this.btnClientes.Visible = true;
+                    case 3: this.btnClientes.Enabled = true;
                         break;
 
                     //ABM HOTEL
-                    case 4: this.btnHotel.Visible = true;
+                    case 4: this.btnHotel.Enabled = true;
                         break;
 
                     //ABM HABITACION
-                    case 5: this.btnHabitacion.Visible = true;
+                    case 5: this.btnHabitacion.Enabled = true;
                         break;
 
                     //ABM REGIMEN DE ESTADIA
-                    case 6: this.btnRegimenEstadia.Visible = true;
+                    case 6: this.btnRegimenEstadia.Enabled = true;
                         break;
 
                     //GENERAR O MODIFICAR RESERVA
-                    case 7: this.btnReserva.Visible = true;
+                    case 7: this.btnReserva.Enabled = true;
                         break;
 
                     //CANCELAR RESERVA
-                    case 8: this.btnCancelarEstadia.Visible = true;
+                    case 8: this.btnCancelarEstadia.Enabled = true;
                         break;
 
                     //REGISTRAR ESTADIA
-                    case 9: this.btnRegistrarEstadia.Visible = true;
+                    case 9: this.btnRegistrarEstadia.Enabled = true;
                         break;
 
                     //REGISTRAR CONSUMIBLES
-                    case 10: this.btnRegistrarConsumible.Visible = true;
+                    case 10: this.btnRegistrarConsumible.Enabled = true;
                         break;
 
                     //FACTURAR
-                    case 11: this.btnFacturar.Visible = true;
+                    case 11: this.btnFacturar.Enabled = true;
                         break;
 
                     //LISTADO ESTADISTICO
-                    case 12: this.btnListadoEstadistico.Visible = true;
+                    case 12: this.btnListadoEstadistico.Enabled = true;
                         break;
 
 

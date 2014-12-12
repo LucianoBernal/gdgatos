@@ -53,7 +53,9 @@ namespace FrbaHotel.ABM_de_Hotel
                             " WHERE idHotel = " + idHotel.ToString()).Ejecutar();
                         ActualizarRegimen();
                         MessageBox.Show("El hotel ha sido modificado con exito.");
+                        FrmMenu menu = new FrmMenu();
                         this.Visible = false;
+                        menu.ShowDialog();
                     }
                     else
                     {
