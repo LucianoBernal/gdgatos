@@ -250,7 +250,7 @@ namespace FrbaHotel
         public void cargarConfig() {
             Funciones fn = new Funciones();
             string text = System.IO.File.ReadAllText( Application.StartupPath.Substring(0, Application.StartupPath.Length-9) + "App.ini");
-            Globales.fechaSistema = fn.TransformarABD(text);
+            Globales.fechaSistema = fn.TransformarABD(text.Substring(6,text.Length-6));
   //          new Query("UPDATE SKYNET.Config SET fecha='" + Globales.fechaSistema+"'").Ejecutar();
             new Query("UPDATE SKYNET.Config SET fecha=(SELECT convert(datetime, '"+Globales.fechaSistema+"', 121))").Ejecutar();
             
