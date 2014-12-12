@@ -29,11 +29,11 @@ namespace FrbaHotel.ABM_de_Usuario
             listaTextos.Agregar(txtNombre, true, "nombre");
             listaTextos.Agregar(txtApellido, true, "apellido");
             listaTextos.Agregar(txtTipoDoc, false, "tipoDoc");
-            listaTextos.Agregar(txtNumDoc, false, "numDoc");
+            listaTextos.Agregar(txtOcultoNumDoc, false, "numDoc");
             listaTextos.Agregar(txtMail, true, "mail");
-            listaTextos.Agregar(txtTelefono, false, "telefono");
+            listaTextos.Agregar(txtOcultoTelefono, false, "telefono");
             listaTextos.Agregar(txtCalle, true, "calle");
-            listaTextos.Agregar(txtNumCalle, false, "numCalle");
+            listaTextos.Agregar(txtOcultoNumCalle, false, "numCalle");
             listaTextos.Agregar(txtOcultoFecha, true, "fechaNac");
         }
 
@@ -48,10 +48,10 @@ namespace FrbaHotel.ABM_de_Usuario
             txtCalle.Clear();
             txtMail.Clear();
             txtNombre.Clear();
-            txtNumCalle.Clear();
-            txtNumDoc.Clear();
+            txtNumCalle.Value=0;
+            txtNumDoc.Value=0;
             txtPass.Clear();
-            txtTelefono.Clear();
+            txtTelefono.Value=0;
             txtUsername.Clear();
         }
 
@@ -135,6 +135,9 @@ namespace FrbaHotel.ABM_de_Usuario
             txtOcultoRol.Text = ListaRoles.ObtenerId(txtRol.Text).ToString();
             txtOcultoFecha.Text = txtFecha.Value.ToString("yyyy-dd-MM HH:mm:ss");
             txtOcultoPass.Text = fn.getSha256(txtPass.Text);
+            txtOcultoNumCalle.Text = txtNumCalle.Value.ToString();
+            txtOcultoNumDoc.Text = txtNumDoc.Value.ToString();
+            txtOcultoTelefono.Text = txtTelefono.Value.ToString();
            if (validacionDatos())
             {
                 listaTextos.Find(x => x.Control == txtTipoDoc).Control = txtOcultoTipoDoc;
@@ -155,17 +158,23 @@ namespace FrbaHotel.ABM_de_Usuario
                     "'), " + txtOcultoHotel.Text + ", " + txtOcultoRol.Text + ")";
                     qry.pComando = sql;//Que paja hacer mas de una query
                     qry.Ejecutar();
+                    FrmMenu frmMen = new FrmMenu();
+                    this.Visible = false;
+                    frmMen.ShowDialog();
                 }
                 else
                 {
+                   
                     MessageBox.Show("Nombre de Usuario ya existe. Intente con otro.", "Validacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtUsername.Focus();
+                    
                 }
             }
         }
 
         private bool validacionDatos()
         {
+           // int result = Convert.ToInt32(new Query("SELECT COUNT(*) FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text + "'").ObtenerUnicoCampo());
             return (listaTextos.EstanTodosLlenos());
         }
 
@@ -175,6 +184,11 @@ namespace FrbaHotel.ABM_de_Usuario
         }
 
         private void txtOcultoRol_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTelefono_ValueChanged(object sender, EventArgs e)
         {
 
         }

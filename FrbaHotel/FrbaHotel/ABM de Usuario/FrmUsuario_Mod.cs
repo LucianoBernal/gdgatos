@@ -26,9 +26,9 @@ namespace FrbaHotel.ABM_de_Usuario
             listaTextos.Agregar(txtCalle, true, "calle");
             listaTextos.Agregar(txtMail, true, "mail");
             listaTextos.Agregar(txtNombre, true, "nombre");
-            listaTextos.Agregar(txtNumCalle, false, "numCalle");
-            listaTextos.Agregar(txtNumDoc, false, "numDoc");
-            listaTextos.Agregar(txtTelefono, false, "telefono");
+            listaTextos.Agregar(txtOcultoNumCalle, false, "numCalle");
+            listaTextos.Agregar(txtOcultoNumDoc, false, "numDoc");
+            listaTextos.Agregar(txtOcultoTelefono, false, "telefono");
             listaTextos.Agregar(txtOcultoTipoDoc, false, "tipoDoc");
         }
         private void FrmUsuario_Mod_Load(object sender, EventArgs e)
@@ -43,10 +43,14 @@ namespace FrbaHotel.ABM_de_Usuario
                 txtFecha.Text = datos[2].ToString();
                 txtMail.Text = datos[3].ToString();
                 txtNombre.Text = datos[4].ToString();
-                txtNumCalle.Text = (datos[5].ToString().Length>3)?datos[5].ToString().Substring(0, datos[5].ToString().Length-3):datos[5].ToString();
-                txtNumDoc.Text = (datos[6].ToString().Length > 3) ? datos[6].ToString().Substring(0, datos[6].ToString().Length - 3) : datos[6].ToString();
-                txtTelefono.Text = (datos[7].ToString().Length > 3) ? datos[7].ToString().Substring(0, datos[7].ToString().Length - 3) : datos[7].ToString();
+                txtNumDoc.Value = Convert.ToInt32(datos[6].ToString());
+                txtNumCalle.Value = Convert.ToInt32(datos[5].ToString());
+                txtTelefono.Value = Convert.ToInt32(datos[7].ToString());                
                 txtTipoDoc.Text =  (datos[8].ToString()!="")? (listaTipoDoc.ObtenerDetalle(Convert.ToInt32(datos[8]))):(listaTipoDoc.ObtenerDetalle(1));
+            /*txtOcultoNumCalle.Text = (datos[5].ToString().Length>3)?datos[5].ToString().Substring(0, datos[5].ToString().Length-3):datos[5].ToString();
+                txtOcultoNumDoc.Text = (datos[6].ToString().Length > 3) ? datos[6].ToString().Substring(0, datos[6].ToString().Length - 3) : datos[6].ToString();
+                txtOcultoTelefono.Text = (datos[7].ToString().Length > 3) ? datos[7].ToString().Substring(0, datos[7].ToString().Length - 3) : datos[7].ToString();
+                txtTipoDoc.Text =  (datos[8].ToString()!="")? (listaTipoDoc.ObtenerDetalle(Convert.ToInt32(datos[8]))):(listaTipoDoc.ObtenerDetalle(1));*/
             }//Me tomo la molestia de los substrings porque esos numeros son (18, 2)
             //Se que me va a dar un solo registro pero no se hacerlo de otra forma sori
 //           label10.Text = "UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString();
@@ -54,11 +58,15 @@ namespace FrbaHotel.ABM_de_Usuario
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+
+            txtOcultoNumCalle.Text = txtNumCalle.Value.ToString();
+            txtOcultoNumDoc.Text = txtNumDoc.Value.ToString();
+            txtOcultoTelefono.Text = txtTelefono.Value.ToString(); 
             txtOcultoTipoDoc.Text = listaTipoDoc.ObtenerId(txtTipoDoc.Text).ToString();
             if (listaTextos.EstanTodosLlenos()){
 //            MessageBox.Show("UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString());
             new Query("UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString()).Ejecutar();
-            MessageBox.Show("Ya esta");
+            MessageBox.Show("Los datos fueron actualizados satisfactoriamente");
             }
         }
 

@@ -206,16 +206,25 @@ namespace FrbaHotel
         }
         public bool EstanTodosLlenos()
         {
+            string error = "";
             foreach (ControlConCheckBox elem in this)
             {
                 if (((Control)elem.Control).Text.Trim() == "")
                 {
-                    MessageBox.Show("El TextBox asociado al campo '" + elem.CampoAsociado + "' esta vacio");
+                    error+="El TextBox asociado al campo '" + elem.CampoAsociado + "' esta vacio\n";
  //                   ((Control)elem.Control).Focus();
-                    return false;
+                   // return false;
                 }
             }
-            return true;
+            if (error != "")
+            {
+                MessageBox.Show(error);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
     static class Program

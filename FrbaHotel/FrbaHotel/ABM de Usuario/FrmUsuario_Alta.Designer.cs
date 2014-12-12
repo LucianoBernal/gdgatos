@@ -46,16 +46,13 @@ namespace FrbaHotel.ABM_de_Usuario
             this.label12 = new System.Windows.Forms.Label();
             this.txtFecha = new System.Windows.Forms.DateTimePicker();
             this.txtMail = new System.Windows.Forms.TextBox();
-            this.txtTelefono = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtNumCalle = new System.Windows.Forms.TextBox();
             this.txtCalle = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTipoDoc = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtNumDoc = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -69,8 +66,17 @@ namespace FrbaHotel.ABM_de_Usuario
             this.txtOcultoHotel = new System.Windows.Forms.TextBox();
             this.txtOcultoFecha = new System.Windows.Forms.TextBox();
             this.txtOcultoPass = new System.Windows.Forms.TextBox();
+            this.txtNumDoc = new System.Windows.Forms.NumericUpDown();
+            this.txtTelefono = new System.Windows.Forms.NumericUpDown();
+            this.txtNumCalle = new System.Windows.Forms.NumericUpDown();
+            this.txtOcultoNumDoc = new System.Windows.Forms.TextBox();
+            this.txtOcultoTelefono = new System.Windows.Forms.TextBox();
+            this.txtOcultoNumCalle = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumCalle)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -121,6 +127,7 @@ namespace FrbaHotel.ABM_de_Usuario
             // 
             this.txtPass.Location = new System.Drawing.Point(397, 25);
             this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(178, 20);
             this.txtPass.TabIndex = 2;
             // 
@@ -160,19 +167,19 @@ namespace FrbaHotel.ABM_de_Usuario
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtNumCalle);
+            this.groupBox2.Controls.Add(this.txtTelefono);
+            this.groupBox2.Controls.Add(this.txtNumDoc);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.txtFecha);
             this.groupBox2.Controls.Add(this.txtMail);
-            this.groupBox2.Controls.Add(this.txtTelefono);
             this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.txtNumCalle);
             this.groupBox2.Controls.Add(this.txtCalle);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txtTipoDoc);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.txtNumDoc);
             this.groupBox2.Controls.Add(this.txtApellido);
             this.groupBox2.Controls.Add(this.txtNombre);
             this.groupBox2.Controls.Add(this.label6);
@@ -211,13 +218,6 @@ namespace FrbaHotel.ABM_de_Usuario
             this.txtMail.Size = new System.Drawing.Size(178, 20);
             this.txtMail.TabIndex = 9;
             // 
-            // txtTelefono
-            // 
-            this.txtTelefono.Location = new System.Drawing.Point(397, 82);
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(178, 20);
-            this.txtTelefono.TabIndex = 10;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -226,13 +226,6 @@ namespace FrbaHotel.ABM_de_Usuario
             this.label11.Size = new System.Drawing.Size(88, 13);
             this.label11.TabIndex = 15;
             this.label11.Text = "Numero de Calle:";
-            // 
-            // txtNumCalle
-            // 
-            this.txtNumCalle.Location = new System.Drawing.Point(397, 112);
-            this.txtNumCalle.Name = "txtNumCalle";
-            this.txtNumCalle.Size = new System.Drawing.Size(178, 20);
-            this.txtNumCalle.TabIndex = 12;
             // 
             // txtCalle
             // 
@@ -285,13 +278,6 @@ namespace FrbaHotel.ABM_de_Usuario
             this.label7.Size = new System.Drawing.Size(65, 13);
             this.label7.TabIndex = 10;
             this.label7.Text = "Documento:";
-            // 
-            // txtNumDoc
-            // 
-            this.txtNumDoc.Location = new System.Drawing.Point(397, 53);
-            this.txtNumDoc.Name = "txtNumDoc";
-            this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
-            this.txtNumDoc.TabIndex = 8;
             // 
             // txtApellido
             // 
@@ -374,7 +360,7 @@ namespace FrbaHotel.ABM_de_Usuario
             // 
             // txtOcultoRol
             // 
-            this.txtOcultoRol.Location = new System.Drawing.Point(155, 358);
+            this.txtOcultoRol.Location = new System.Drawing.Point(154, 346);
             this.txtOcultoRol.Name = "txtOcultoRol";
             this.txtOcultoRol.Size = new System.Drawing.Size(68, 20);
             this.txtOcultoRol.TabIndex = 6;
@@ -405,11 +391,75 @@ namespace FrbaHotel.ABM_de_Usuario
             this.txtOcultoPass.TabIndex = 9;
             this.txtOcultoPass.Visible = false;
             // 
+            // txtNumDoc
+            // 
+            this.txtNumDoc.Location = new System.Drawing.Point(397, 54);
+            this.txtNumDoc.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.txtNumDoc.Name = "txtNumDoc";
+            this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
+            this.txtNumDoc.TabIndex = 40;
+            // 
+            // txtTelefono
+            // 
+            this.txtTelefono.Location = new System.Drawing.Point(396, 83);
+            this.txtTelefono.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(179, 20);
+            this.txtTelefono.TabIndex = 41;
+            this.txtTelefono.ValueChanged += new System.EventHandler(this.txtTelefono_ValueChanged);
+            // 
+            // txtNumCalle
+            // 
+            this.txtNumCalle.Location = new System.Drawing.Point(396, 113);
+            this.txtNumCalle.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.txtNumCalle.Name = "txtNumCalle";
+            this.txtNumCalle.Size = new System.Drawing.Size(179, 20);
+            this.txtNumCalle.TabIndex = 42;
+            // 
+            // txtOcultoNumDoc
+            // 
+            this.txtOcultoNumDoc.Location = new System.Drawing.Point(191, 360);
+            this.txtOcultoNumDoc.Name = "txtOcultoNumDoc";
+            this.txtOcultoNumDoc.Size = new System.Drawing.Size(68, 20);
+            this.txtOcultoNumDoc.TabIndex = 10;
+            this.txtOcultoNumDoc.Visible = false;
+            // 
+            // txtOcultoTelefono
+            // 
+            this.txtOcultoTelefono.Location = new System.Drawing.Point(199, 368);
+            this.txtOcultoTelefono.Name = "txtOcultoTelefono";
+            this.txtOcultoTelefono.Size = new System.Drawing.Size(68, 20);
+            this.txtOcultoTelefono.TabIndex = 11;
+            this.txtOcultoTelefono.Visible = false;
+            // 
+            // txtOcultoNumCalle
+            // 
+            this.txtOcultoNumCalle.Location = new System.Drawing.Point(207, 376);
+            this.txtOcultoNumCalle.Name = "txtOcultoNumCalle";
+            this.txtOcultoNumCalle.Size = new System.Drawing.Size(68, 20);
+            this.txtOcultoNumCalle.TabIndex = 12;
+            this.txtOcultoNumCalle.Visible = false;
+            // 
             // FrmUsuario_Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 392);
+            this.Controls.Add(this.txtOcultoNumCalle);
+            this.Controls.Add(this.txtOcultoTelefono);
+            this.Controls.Add(this.txtOcultoNumDoc);
             this.Controls.Add(this.txtOcultoPass);
             this.Controls.Add(this.txtOcultoFecha);
             this.Controls.Add(this.txtOcultoHotel);
@@ -427,6 +477,9 @@ namespace FrbaHotel.ABM_de_Usuario
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumDoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumCalle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -446,16 +499,13 @@ namespace FrbaHotel.ABM_de_Usuario
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker txtFecha;
         private System.Windows.Forms.TextBox txtMail;
-        private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtNumCalle;
         private System.Windows.Forms.TextBox txtCalle;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox txtTipoDoc;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtNumDoc;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label6;
@@ -470,5 +520,11 @@ namespace FrbaHotel.ABM_de_Usuario
         private TextBox txtOcultoHotel;
         private TextBox txtOcultoFecha;
         private TextBox txtOcultoPass;
+        private NumericUpDown txtNumDoc;
+        private NumericUpDown txtTelefono;
+        private NumericUpDown txtNumCalle;
+        private TextBox txtOcultoNumDoc;
+        private TextBox txtOcultoTelefono;
+        private TextBox txtOcultoNumCalle;
     }
 }
