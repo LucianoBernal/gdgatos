@@ -241,5 +241,10 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             btnRunBaby.Enabled = false;
             txtDisponibilidad.Text = "-";
         }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

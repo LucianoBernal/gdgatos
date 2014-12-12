@@ -70,11 +70,13 @@ namespace FrbaHotel.ABM_de_Cliente
             if (Padre != null || PadrePosta != null) {
                 if (Padre != null)
                 {
+                    this.Visible = false;
                     this.Padre.Show();
                     this.Padre.FallaElObtenerCliente();
                 }
                 else
                 {
+                    this.Visible = false;
                     this.PadrePosta.Show();
                     this.PadrePosta.FallaElObtenerCliente();
                 }

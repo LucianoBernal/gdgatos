@@ -13,6 +13,7 @@ namespace FrbaHotel
         private Button btnGuardar;
         private Button btnCancelar;
         public Form FormPadre;
+        private NumericUpDown numRespuesta;
         public int Razon;
     
         public FrmDialogBox(Form sender, string textoPregunta, int proposito)
@@ -29,6 +30,8 @@ namespace FrbaHotel
             this.txtRespuesta = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.numRespuesta = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numRespuesta)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTexto
@@ -42,10 +45,11 @@ namespace FrbaHotel
             // 
             // txtRespuesta
             // 
-            this.txtRespuesta.Location = new System.Drawing.Point(388, 17);
+            this.txtRespuesta.Location = new System.Drawing.Point(438, 47);
             this.txtRespuesta.Name = "txtRespuesta";
             this.txtRespuesta.Size = new System.Drawing.Size(99, 20);
             this.txtRespuesta.TabIndex = 1;
+            this.txtRespuesta.Visible = false;
             // 
             // btnCancelar
             // 
@@ -67,15 +71,30 @@ namespace FrbaHotel
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
+            // numRespuesta
+            // 
+            this.numRespuesta.Location = new System.Drawing.Point(453, 13);
+            this.numRespuesta.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numRespuesta.Name = "numRespuesta";
+            this.numRespuesta.Size = new System.Drawing.Size(170, 20);
+            this.numRespuesta.TabIndex = 4;
+            this.numRespuesta.ValueChanged += new System.EventHandler(this.numRespuesta_ValueChanged);
+            // 
             // FrmDialogBox
             // 
-            this.ClientSize = new System.Drawing.Size(518, 79);
+            this.ClientSize = new System.Drawing.Size(635, 79);
+            this.Controls.Add(this.numRespuesta);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.txtRespuesta);
             this.Controls.Add(this.labelTexto);
             this.Name = "FrmDialogBox";
             this.Load += new System.EventHandler(this.FrmDialogBox_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numRespuesta)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -83,6 +102,7 @@ namespace FrbaHotel
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            txtRespuesta.Text = numRespuesta.Value.ToString();
             if (txtRespuesta.Text != "")
             {
                 //this.FormPadre.Show();
@@ -108,6 +128,11 @@ namespace FrbaHotel
         }
 
         private void FrmDialogBox_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numRespuesta_ValueChanged(object sender, EventArgs e)
         {
 
         }

@@ -137,29 +137,32 @@ return
 end
 go
 
-drop function SKYNET.emitirFactura
-drop proc SKYNET.facturarUnaEstadia
+  go
+  create function SKYNET.validarBajaHotel (@hotel numeric(18,0),@fechaDesde datetime,@duracion int)
+  returns int as
+  begin/*
+  return (select 1 from SKYNET.HistorialHoteles where hotel = @hotel and 
+  (@fechaDesde between fechaBaja and dateadd(dd,duracion,fechaBaja) or 
+  dateadd(dd,@duracion,@fechaDesde) between fechaBaja and dateadd(dd,duracion,fechaBaja) ))*/
+  declare @i int, @problemas int, @deboHacerElWhile int
+  set @i = 0
+  set @problemas = 0
+  set @deboHacerElWhile = (select count(*) from SKYNET.HistorialHoteles where hotel = @hotel)
+  if(@deboHacerElWhile>0) begin
+  while (@i<@duracion) begin
+  set @problemas =(select count(*) from SKYNET.HistorialHoteles where hotel = @hotel and 
+  (dateadd(dd, @i, @fechaDesde) between dateadd(dd, -1, fechaBaja) and dateadd(dd,duracion,fechaBaja)))
+  if (@problemas > 0)
+  begin
+  set @i = @duracion
+  end
+  set @i=@i+1
+  end
+  end
+  return @problemas
+  end
+  go
 
-select *
-from SKYNET.emitirFactura(10002)
 
 
-
-/* ------ unit test------*/
-
-insert SKYNET.Reservas(hotel,cliente,regimen,cantNoches)values(1,(select top 1 c.idCliente from SKYNET.Clientes c),1,5)
-insert SKYNET.Estadias(reserva,cantNoches) values((select MAX(r.codigoReserva) from SKYNET.Reservas r),5)
-insert SKYNET.ConsumiblesEstadias(estadia,consumible) values((select MAX(r.codigoReserva) from SKYNET.Reservas r),2324)
-insert SKYNET.ConsumiblesEstadias(estadia,consumible) values((select MAX(r.codigoReserva) from SKYNET.Reservas r),2325)
-insert SKYNET.EstadiaPorHabitacion(idEstadia,idHabitacion,idHotel) values ((select MAX(r.codigoReserva) from SKYNET.Reservas r),2,9)
-
-(select MAX(r.codigoReserva) from SKYNET.Reservas r)
-
-exec SKYNET.facturarUnaEstadia @estadia=110742, @fecha=null
-								,@nombreTipoPago='Tarjeta Credito',	
-								@numTarjeta=123456,@datosTarjeta='pepe'
-
-
-select *
-from SKYNET.emitirFactura(110742)
 
