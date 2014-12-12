@@ -42,11 +42,23 @@ namespace FrbaHotel.Registrar_Estadia
         }
         public void ReciboElIdCliente(int idCliente)
         {
+            int flag=0;
+            for (int i=0; i<cantidadIngresada;i++)
+            {
+                if (VectorUsuarios[i] == idCliente)
+                {
+                    MessageBox.Show("El usuario seleccionado ya se encontraba en el checkin");
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag ==0){
             VectorUsuarios[this.cantidadIngresada] = idCliente;
             cantidadIngresada++;
             label1.Text = "Actualmente ha ingresado " + cantidadIngresada.ToString() + " de un maximo de " + cantidadMaxima.ToString() + " usuarios";
             if (cantidadIngresada == cantidadMaxima)
                 btnRegHuesped.Enabled = false;
+            }
         }
 
         public void FallaElObtenerCliente() { //Hacer nada

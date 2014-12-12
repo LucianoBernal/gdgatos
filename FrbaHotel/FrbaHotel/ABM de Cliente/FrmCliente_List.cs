@@ -18,10 +18,12 @@ namespace FrbaHotel.ABM_de_Cliente
         public FormCheckInPosta PadrePosta=null;
         public ListaTextos listaTextos = new ListaTextos();
         public ListaConId listaTipo = new ListaConId();
+        bool reserva;
         public FrmCliente_List()
         {
             InitializeComponent();
             btnSeleccionar.Visible = false;
+            reserva = false;
 //            btnModificar.Visible = false;
 //            btnHabilitar.Visible = false;
 //            btnDeshabilitar.Visible = false;
@@ -36,6 +38,7 @@ namespace FrbaHotel.ABM_de_Cliente
             btnModificar.Visible = false;
             btnHabilitar.Visible = false;
             btnDeshabilitar.Visible = false;
+            reserva = true;
         }
         public FrmCliente_List(FormCheckInPosta padre)
         {
@@ -47,6 +50,7 @@ namespace FrbaHotel.ABM_de_Cliente
             btnModificar.Visible = false;
             btnHabilitar.Visible = false;
             btnDeshabilitar.Visible = false;
+            reserva = true;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -80,6 +84,11 @@ namespace FrbaHotel.ABM_de_Cliente
             txtOcultoTipo.Text = listaTipo.ObtenerId(txtTipo.Text).ToString();
             string strQuery = "SELECT DISTINCT c.idCliente, c.nombre, c.apellido, c.mail, (CASE WHEN baja =0 THEN 'SI' ELSE 'NO' END) AS habilitado " +
                 " FROM SKYNET.Clientes c WHERE";
+            if (reserva == true)
+            {
+
+                strQuery = strQuery + " c.baja = 0 AND ";
+            }
             string aux = listaTextos.GenerarBusqueda(!cbExacta.Checked);
             if (aux.Length > 4)
             {

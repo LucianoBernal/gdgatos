@@ -155,6 +155,7 @@
             this.cbHotel.Size = new System.Drawing.Size(15, 14);
             this.cbHotel.TabIndex = 24;
             this.cbHotel.UseVisualStyleBackColor = true;
+            this.cbHotel.Visible = false;
             this.cbHotel.CheckedChanged += new System.EventHandler(this.cbHotel_CheckedChanged);
             // 
             // cbRol

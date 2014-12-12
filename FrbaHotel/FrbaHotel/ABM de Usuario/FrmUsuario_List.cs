@@ -37,7 +37,8 @@ namespace FrbaHotel.ABM_de_Usuario
             listaHoteles.Lista = new List<DetalleConId>();
             listaRoles.CargarDatos(txtRol, "SELECT idRol, nombre FROM SKYNET.Roles WHERE nombre != 'GUEST'");
             listaHoteles.CargarDatos(txtHotel, "SELECT idHotel, nombre FROM SKYNET.Hoteles");
-            AgregarTextos();            
+            AgregarTextos();
+            txtHotel.Text = listaHoteles.ObtenerDetalle(Globales.idHotelElegido);
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
