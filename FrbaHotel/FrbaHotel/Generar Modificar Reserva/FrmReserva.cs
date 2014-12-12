@@ -157,46 +157,48 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         }
         private void ComprobarDisponibilidadPosta()
         {
-            //int duracion = (dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days;
-            //object bajaHotel = new Query("select SKYNET.validarBajaHotel(" + Globales.idHotelElegido + ",(SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', 121)),"+duracion+")").ObtenerUnicoCampo();
-            //if (bajaHotel != null) 
-            //{
-              //  MessageBox.Show("No puede reservar en este hotel para el rango de fechas ingresado");
-                //txtDisponibilidad.Text = "-";
-                //btnRunBaby.Enabled = false;
-                
-            //}
-            if (txtCantHuespedes.Text == "" || txtRegimenIns.Text == "" || (dtpFechaDesde.Value >= dtpFechaHasta.Value))
+            int duracion = (dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days;
+            int bajaHotel = Convert.ToInt32(new Query("select SKYNET.validarBajaHotel(" + Globales.idHotelElegido + ",(SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', 121)),"+duracion+")").ObtenerUnicoCampo());
+            if (bajaHotel > 0)
             {
+                MessageBox.Show("No puede reservar en este hotel para el rango de fechas ingresado");
                 txtDisponibilidad.Text = "-";
                 btnRunBaby.Enabled = false;
+
             }
             else
             {
-                txtOcultoHotel.Text = Globales.idHotelElegido.ToString();
-                txtDisponibilidad.Text = "Procesando";
-                btnRunBaby.Enabled = false;
-                int cantHuespedes = Convert.ToInt32(txtCantHuespedes.Text);
-                for (int i = 0; i < 5; i++)
+                if (txtCantHuespedes.Text == "" || txtRegimenIns.Text == "" || (dtpFechaDesde.Value >= dtpFechaHasta.Value))
                 {
-                    disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles("+IdReserva+", (SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', 121)), " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days)).ToString() + ")").ObtenerUnicoCampo());
-                    // MessageBox.Show("disponibles["+i.ToString()+"] vale = "+disponibles[i].ToString());
-                }
-                int aux = 0;
-                for (int j = 0; j < 5; j++)
-                {
-                    aux += disponibles[j] * (j + 1);
-                }
-
-                if (aux >= cantHuespedes)
-                {
-                    txtDisponibilidad.Text = "SI";
-                    btnRunBaby.Enabled = true;
+                    txtDisponibilidad.Text = "-";
+                    btnRunBaby.Enabled = false;
                 }
                 else
-                    txtDisponibilidad.Text = "NO";
-            }
+                {
+                    txtOcultoHotel.Text = Globales.idHotelElegido.ToString();
+                    txtDisponibilidad.Text = "Procesando";
+                    btnRunBaby.Enabled = false;
+                    int cantHuespedes = Convert.ToInt32(txtCantHuespedes.Text);
+                    for (int i = 0; i < 5; i++)
+                    {
+                        disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles(" + IdReserva + ", (SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', 121)), " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days)).ToString() + ")").ObtenerUnicoCampo());
+                        // MessageBox.Show("disponibles["+i.ToString()+"] vale = "+disponibles[i].ToString());
+                    }
+                    int aux = 0;
+                    for (int j = 0; j < 5; j++)
+                    {
+                        aux += disponibles[j] * (j + 1);
+                    }
 
+                    if (aux >= cantHuespedes)
+                    {
+                        txtDisponibilidad.Text = "SI";
+                        btnRunBaby.Enabled = true;
+                    }
+                    else
+                        txtDisponibilidad.Text = "NO";
+                }
+            }
         }
         private void txtRegimenIns_SelectedIndexChanged(object sender, EventArgs e)
         {

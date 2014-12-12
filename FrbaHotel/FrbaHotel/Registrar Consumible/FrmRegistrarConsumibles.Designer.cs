@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.txtConsumibles = new System.Windows.Forms.ComboBox();
-            this.txtCantidad = new System.Windows.Forms.TextBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,6 +37,9 @@
             this.txtPrecios = new System.Windows.Forms.ComboBox();
             this.txtOcultoPrecio = new System.Windows.Forms.TextBox();
             this.txtOcultoEstadia = new System.Windows.Forms.TextBox();
+            this.numCantidad = new System.Windows.Forms.NumericUpDown();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).BeginInit();
             this.SuspendLayout();
             // 
             // txtConsumibles
@@ -47,13 +49,6 @@
             this.txtConsumibles.Name = "txtConsumibles";
             this.txtConsumibles.Size = new System.Drawing.Size(173, 21);
             this.txtConsumibles.TabIndex = 0;
-            // 
-            // txtCantidad
-            // 
-            this.txtCantidad.Location = new System.Drawing.Point(107, 82);
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(173, 20);
-            this.txtCantidad.TabIndex = 1;
             // 
             // btnAgregar
             // 
@@ -126,11 +121,43 @@
             this.txtOcultoEstadia.TabIndex = 9;
             this.txtOcultoEstadia.Visible = false;
             // 
+            // numCantidad
+            // 
+            this.numCantidad.Location = new System.Drawing.Point(107, 78);
+            this.numCantidad.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numCantidad.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCantidad.Name = "numCantidad";
+            this.numCantidad.Size = new System.Drawing.Size(173, 20);
+            this.numCantidad.TabIndex = 10;
+            this.numCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Location = new System.Drawing.Point(161, 109);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(72, 20);
+            this.txtCantidad.TabIndex = 11;
+            this.txtCantidad.Visible = false;
+            // 
             // FrmRegistrarConsumibles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 186);
+            this.Controls.Add(this.txtCantidad);
+            this.Controls.Add(this.numCantidad);
             this.Controls.Add(this.txtOcultoEstadia);
             this.Controls.Add(this.txtOcultoPrecio);
             this.Controls.Add(this.txtPrecios);
@@ -139,11 +166,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.txtConsumibles);
             this.Name = "FrmRegistrarConsumibles";
             this.Text = "Agregar Consumibles";
             this.Load += new System.EventHandler(this.FrmRegistrarConsumibles_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,7 +179,6 @@
         #endregion
 
         private System.Windows.Forms.ComboBox txtConsumibles;
-        private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Label label1;
@@ -161,5 +187,7 @@
         private System.Windows.Forms.ComboBox txtPrecios;
         private System.Windows.Forms.TextBox txtOcultoPrecio;
         private System.Windows.Forms.TextBox txtOcultoEstadia;
+        private System.Windows.Forms.NumericUpDown numCantidad;
+        private System.Windows.Forms.TextBox txtCantidad;
     }
 }

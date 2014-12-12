@@ -72,6 +72,8 @@ namespace FrbaHotel.ABM_de_Usuario
             ListaHoteles.CargarDatos(txtHotel, "SELECT idHotel, nombre FROM SKYNET.Hoteles");
             ListaDocumentos.CargarDatos(txtTipoDoc, "SELECT idTipoDoc, nombre FROM SKYNET.TiposDoc");
             LlenarListasControl();
+            txtHotel.Text = ListaHoteles.ObtenerDetalle(Globales.idHotelElegido);
+            txtHotel.Enabled = false;
   //          botonGuardar.Enabled = true;
   //          botonLimpiar.Enabled = true;
   //          botonVolver.Enabled = true;

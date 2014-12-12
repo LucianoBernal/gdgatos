@@ -41,7 +41,7 @@ namespace FrbaHotel
                     if (Convert.ToInt32(respuesta) > 0)
                     {
                         MessageBox.Show("Ha ingresado un numero de reserva no valido");
-                        this.ShowDialog();
+                        this.Show();
                     }
                     else {
                         FrmReserva nuevo = new FrmReserva(Convert.ToUInt32(respuesta), this);
@@ -54,13 +54,13 @@ namespace FrbaHotel
                     if (Convert.ToInt32(query) == 1 || Convert.ToInt32(query) == 5 || Convert.ToInt32(query) == 6)
                     {
                         MessageBox.Show("La reserva ingresada se encuentra cancelada");
-                        this.ShowDialog();
+                        this.Show();
                         //TerminarMetodo
                     }
                     if (Convert.ToInt32(query) == 2)
                     {
                         MessageBox.Show("La reserva ya tiene una estadia asociada, por lo cual no puede modificarse");
-                        this.ShowDialog();
+                        this.Show();
                         //TerminarMetodo
                     }
                     if (Convert.ToInt32(query) == 3 || Convert.ToInt32(query) == 4)
@@ -76,7 +76,7 @@ namespace FrbaHotel
                 if (query == null)
                 {
                     MessageBox.Show("Ha ingresado un numero de reserva no valido");
-                    this.ShowDialog();
+                    this.Show();
                     //TerminarMetodo
                 }
                 else
@@ -84,13 +84,13 @@ namespace FrbaHotel
                     if (Convert.ToInt32(query) == 1 || Convert.ToInt32(query) == 5 || Convert.ToInt32(query) == 6)
                     {
                         MessageBox.Show("La reserva ingresada ya se encuentra cancelada");
-                        this.ShowDialog();
+                        this.Show();
                         //TerminarMetodo
                     }
                     if (Convert.ToInt32(query) == 2)
                     {
                         MessageBox.Show("La reserva ya tiene una estadia asociada, por lo cual no puede ser cancelada");
-                        this.ShowDialog();
+                        this.Show();
                         //TerminarMetodo
                     }
                     if (Convert.ToInt32(query) == 3 || Convert.ToInt32(query) == 4)
@@ -107,7 +107,7 @@ namespace FrbaHotel
                     if (query == null)
                     {
                         MessageBox.Show("Ha ingresado un numero de reserva no valido");
-                        this.ShowDialog();
+                        this.Show();
                         //TerminarMetodo
                     }
                     else {               if (query2 != null)
@@ -125,7 +125,7 @@ namespace FrbaHotel
                         if (Convert.ToInt32(query) == 2)
                         {//Deberia ademas preguntar que la estadia no tiene fecha de egreso
                             FrmRegistrarConsumibles nuevo = new FrmRegistrarConsumibles(Convert.ToInt32(respuesta), this);
-                            nuevo.Show();
+                            nuevo.ShowDialog();
                         }
                         if (Convert.ToInt32(query) == 3 || Convert.ToInt32(query) == 4)
                         {
