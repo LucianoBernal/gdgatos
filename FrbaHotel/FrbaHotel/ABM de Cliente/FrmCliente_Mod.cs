@@ -148,7 +148,7 @@ namespace FrbaHotel.ABM_de_Cliente
                         }
                         string strquery = "UPDATE SKYNET.Clientes SET nombre = '" + txtNombre.Text + "', apellido = '" + txtApellido.Text + "', tipoDoc = " + txtOcultoTipoDoc.Text + ", numDoc = " + txtNumDoc.Text + ", " +
                             " mail = '" + txtMail.Text + "', telefono = " + txtTelefono.Text + ", calle ='" + txtCalle.Text + "', nacionalidad = " + txtOcultoNacionalidad.Text + ", " +
-                            " numCalle = " + txtNumCalle.Text + ", fechaNac = (SELECT CONVERT(datetime, '" + txtFecha.Value.ToString("yyyy-MM-dd") + "', 121), baja = " + baja + ", rol = " + txtRol.Text + ", paisDeOrigen = " + txtOcultoPaisDeOrigen.Text + ", inconsistencia = " + incons + " ";
+                            " numCalle = " + txtNumCalle.Text + ", fechaNac = (SELECT CONVERT(datetime, '" + txtFecha.Value.ToString("yyyy-MM-dd") + "', 121)), baja = " + baja + ", rol = " + txtRol.Text + ", paisDeOrigen = " + txtOcultoPaisDeOrigen.Text + ", inconsistencia = " + incons + " ";
                        
                         if (txtPiso.Text != "")
                         {
