@@ -83,18 +83,18 @@ namespace FrbaHotel.Registrar_Estadia
         private void validarFechaReserva()
         {
             string strQuery = "SELECT DATEDIFF(day,fechaDesde,(SELECT convert(datetime, '" + Globales.fechaSistema + "', 121))) AS dif FROM SKYNET.Reservas WHERE codigoReserva = " + this.Reserva + " ";
-            int diferencia = (int) new Query(strQuery).ObtenerUnicoCampo();
-            MessageBox.Show(strQuery +" diferencia:"+ diferencia);
+            int diferencia = (int)new Query(strQuery).ObtenerUnicoCampo();
+            MessageBox.Show(strQuery + " diferencia:" + diferencia);
             if (diferencia == 0)
             {
                 //new Query("INSERT INTO SKYNET.Estadias (reserva) VALUES ( " + this.Reserva + " )" ).Ejecutar();
-                FormCheckInPosta frm = new FormCheckInPosta(this.Reserva,this.EstadoReserva);
+                FormCheckInPosta frm = new FormCheckInPosta(this.Reserva, this.EstadoReserva);
                 this.Visible = false;
                 frm.ShowDialog();
             }
             else if (diferencia < 0)//llegó tempranito
             {
-                MessageBox.Show("Todavía no puede realizar el checkIn, no está en fecha."); 
+                MessageBox.Show("Todavía no puede realizar el checkIn, no está en fecha.");
             }
             else if (diferencia > 0)//llegó tarde
             {

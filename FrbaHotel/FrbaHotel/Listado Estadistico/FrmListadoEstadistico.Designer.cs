@@ -36,6 +36,7 @@
             this.comboBoxConsultas = new System.Windows.Forms.ComboBox();
             this.gridDatos = new System.Windows.Forms.DataGridView();
             this.botonConsultar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.anioSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trimestreSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDatos)).BeginInit();
@@ -146,17 +147,28 @@
             // 
             this.botonConsultar.Location = new System.Drawing.Point(423, 120);
             this.botonConsultar.Name = "botonConsultar";
-            this.botonConsultar.Size = new System.Drawing.Size(120, 23);
+            this.botonConsultar.Size = new System.Drawing.Size(120, 29);
             this.botonConsultar.TabIndex = 7;
             this.botonConsultar.Text = "Consultar";
             this.botonConsultar.UseVisualStyleBackColor = true;
             this.botonConsultar.Click += new System.EventHandler(this.botonConsultar_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(19, 120);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(120, 29);
+            this.btnVolver.TabIndex = 8;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // FrmListadoEstadistico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 350);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.botonConsultar);
             this.Controls.Add(this.gridDatos);
             this.Controls.Add(this.comboBoxConsultas);
@@ -186,6 +198,7 @@
         private System.Windows.Forms.ComboBox comboBoxConsultas;
         private System.Windows.Forms.DataGridView gridDatos;
         private System.Windows.Forms.Button botonConsultar;
+        private System.Windows.Forms.Button btnVolver;
 
 
     }

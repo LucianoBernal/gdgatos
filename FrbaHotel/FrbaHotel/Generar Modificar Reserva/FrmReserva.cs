@@ -29,9 +29,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             this.IdReserva = Convert.ToInt32(nroReserva);
             this.Padre = padre;
             InitializeComponent();
-            listaRegimenBusq.Lista = new List<DetalleConId>();
             listaRegimenIns.Lista = new List<DetalleConId>();
-            listaRegimenBusq.CargarDatos(txtRegimenBusq, "SELECT idRegimen, descripcion FROM SKYNET.Regimenes WHERE habilitado = 1");
             listaRegimenIns.CargarDatos(txtRegimenIns, "SELECT idRegimen, descripcion FROM SKYNET.Regimenes WHERE habilitado = 1");
             //            listaTipoHabBusq.CargarDatos(txtTipoHabBusq, "SELECT codigo, descripcion FROM SKYNET.TiposHabitacion");
             //            listaTipoHabIns.CargarDatos(txtTipoHabIns, "SELECT codigo, descripcion FROM SKYNET.TiposHabitacion"); 
@@ -51,18 +49,17 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         {
             if (((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days) > 0)
             {
-                DataGridViewRow idHotel = dataResultado.SelectedRows[0];
                 txtOcultoCliente.Text = idCliente.ToString();
-                txtOcultoHotel.Text = idHotel.Cells["idHotel"].Value.ToString();
+                txtOcultoHotel.Text = Globales.idHotelElegido.ToString();
                 txtOcultoRegimenIns.Text = listaRegimenIns.ObtenerId(txtRegimenIns.Text).ToString();
                 txtOcultoFechaDesde.Text = dtpFechaDesde.Value.ToString("yyyy-MM-dd");
                 if (this.EsGenerar)
                     txtOcultoCantNoches.Text = ((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days).ToString();
-                txtValorEstado.Text = EsGenerar?"3":"4";
+                txtValorEstado.Text = EsGenerar ? "3" : "4";
                 Query qry =
                 this.EsGenerar ?
-                new Query("INSERT INTO SKYNET.Reservas (hotel, regimen, fechaDesde, cantNoches, cliente, estado) values ("+txtOcultoHotel.Text+", "+txtOcultoRegimenIns.Text+", (SELECT convert(datetime, '"+txtOcultoFechaDesde.Text+"', 121)), "+txtOcultoCantNoches.Text+", "+txtOcultoCliente.Text+", "+txtValorEstado.Text+")")  
-                : new Query("UPDATE SKYNET.Reservas SET hotel = "+txtOcultoHotel.Text+", regimen= "+txtOcultoRegimenIns.Text+", fechaDesde= (SELECT convert(datetime, '"+txtOcultoFechaDesde.Text+"', 121)), cantNoches= "+txtOcultoCantNoches.Text+", cliente= "+txtOcultoCliente.Text+", estado= "+txtValorEstado.Text+" WHERE codigoReserva = " + IdReserva.ToString());
+                new Query("INSERT INTO SKYNET.Reservas (hotel, regimen, fechaDesde, cantNoches, cliente, estado) values (" + txtOcultoHotel.Text + ", " + txtOcultoRegimenIns.Text + ", (SELECT convert(datetime, '" + txtOcultoFechaDesde.Text + "', 121)), " + txtOcultoCantNoches.Text + ", " + txtOcultoCliente.Text + ", " + txtValorEstado.Text + ")")
+                : new Query("UPDATE SKYNET.Reservas SET hotel = " + txtOcultoHotel.Text + ", regimen= " + txtOcultoRegimenIns.Text + ", fechaDesde= (SELECT convert(datetime, '" + txtOcultoFechaDesde.Text + "', 121)), cantNoches= " + txtOcultoCantNoches.Text + ", cliente= " + txtOcultoCliente.Text + ", estado= " + txtValorEstado.Text + " WHERE codigoReserva = " + IdReserva.ToString());
                 MessageBox.Show(qry.pComando);
                 qry.Ejecutar();
                 if (!EsGenerar)
@@ -72,7 +69,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 int cantHuespedes = Convert.ToInt32(txtCantHuespedes.Text);
                 foreach (DetalleConId elem in ListaHabitaciones)
                 {
-                    new Query("INSERT INTO SKYNET.ReservasPorTipoHabitacion (idReserva, idTipoHabitacion, cantidad) VALUES (" + IdReserva.ToString() + ", " + (elem.Id).ToString() + ", " + elem.Detalle+")").Ejecutar();
+                    new Query("INSERT INTO SKYNET.ReservasPorTipoHabitacion (idReserva, idTipoHabitacion, cantidad) VALUES (" + IdReserva.ToString() + ", " + (elem.Id).ToString() + ", " + elem.Detalle + ")").Ejecutar();
                 }
                 this.Hide();
                 MessageBox.Show("Su numero de reserva es " + IdReserva.ToString());
@@ -95,9 +92,9 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             Query query = new Query("SELECT hotel, fechaDesde, cantNoches, regimen FROM SKYNET.Reservas WHERE codigoReserva = " + IdReserva.ToString());
             foreach (DataRow elem in query.ObtenerDataTable().AsEnumerable())
             {
-                dataResultado.DataSource = new Query("SELECT DISTINCT idHotel, calle, ciudad FROM SKYNET.Hoteles WHERE idHotel = " + elem[0].ToString()).ObtenerDataTable();
-                dataResultado.Columns["idHotel"].Visible = false;
-                dataResultado.SelectAll();
+              //  dataResultado.DataSource = new Query("SELECT DISTINCT idHotel, calle, ciudad FROM SKYNET.Hoteles WHERE idHotel = " + elem[0].ToString()).ObtenerDataTable();
+              //  dataResultado.Columns["idHotel"].Visible = false;
+              //  dataResultado.SelectAll();
                 dtpFechaDesde.Value = Convert.ToDateTime(elem[1].ToString());
                 dtpFechaHasta.Value = dtpFechaDesde.Value.AddDays(Convert.ToInt32(elem[2].ToString()));
                 txtOcultoCantNoches.Text = (Convert.ToInt32(elem[2].ToString())).ToString();
@@ -106,9 +103,6 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         }
         public void AgregarTextos()
         {
-            listaTextosBusqueda.AgregarConCheck(txtNombre, true, "h.nombre", cbNombre);
-            listaTextosBusqueda.AgregarConCheck(txtCiudad, true, "h.ciudad", cbCiudad);
-            listaTextosBusqueda.AgregarConCheck(txtOcultoRegimenBusq, false, "hr.regimen", cbRegimen);
             //            listaTextosBusqueda.AgregarConCheck(txtOcultoTipoHabBusq, false, "h.tipoHab", cbTipoHab);
             //            listaTextosInsert.Agregar(txtCantHuespedes, false, "r.cantHuespedes");
             listaTextosInsert.Agregar(txtOcultoHotel, false, "hotel");
@@ -138,11 +132,6 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-
-            txtOcultoRegimenBusq.Text = listaRegimenBusq.ObtenerId(txtRegimenBusq.Text).ToString();
-            Query qry = new Query("SELECT DISTINCT h.idHotel, h.calle, h.ciudad FROM SKYNET.Hoteles h, SKYNET.HotelesRegimenes hr WHERE h.idHotel = hr.hotel" + listaTextosBusqueda.GenerarBusqueda(true));
-            dataResultado.DataSource = qry.ObtenerDataTable();
-            dataResultado.Columns["idHotel"].Visible = false;
         }
 
         private void txtCantHuespedes_TextChanged(object sender, EventArgs e)
@@ -151,21 +140,21 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         }
         private void ComprobarDisponibilidadPosta()
         {
-            if (txtCantHuespedes.Text == "" || txtRegimenIns.Text == "" || (dtpFechaDesde.Value >= dtpFechaHasta.Value) || dataResultado.SelectedRows.Count == 0)
+            if (txtCantHuespedes.Text == "" || txtRegimenIns.Text == "" || (dtpFechaDesde.Value >= dtpFechaHasta.Value))
             {
                 txtDisponibilidad.Text = "-";
                 btnRunBaby.Enabled = false;
             }
             else
             {
-                txtOcultoHotel.Text = dataResultado.SelectedRows[0].Cells["idHotel"].Value.ToString();
+                txtOcultoHotel.Text = Globales.idHotelElegido.ToString();
                 txtDisponibilidad.Text = "Procesando";
                 btnRunBaby.Enabled = false;
                 int cantHuespedes = Convert.ToInt32(txtCantHuespedes.Text);
                 for (int i = 0; i < 5; i++)
                 {
-                    disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles((SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd")+ "', 121)), " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days)).ToString() + ")").ObtenerUnicoCampo());
-                   // MessageBox.Show("disponibles["+i.ToString()+"] vale = "+disponibles[i].ToString());
+                    disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles((SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', 121)), " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days)).ToString() + ")").ObtenerUnicoCampo());
+                    // MessageBox.Show("disponibles["+i.ToString()+"] vale = "+disponibles[i].ToString());
                 }
                 int aux = 0;
                 for (int j = 0; j < 5; j++)
@@ -176,8 +165,9 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 if (aux >= cantHuespedes)
                 {
                     txtDisponibilidad.Text = "SI";
-                        btnRunBaby.Enabled =true;
-                }else
+                    btnRunBaby.Enabled = true;
+                }
+                else
                     txtDisponibilidad.Text = "NO";
             }
 
@@ -195,6 +185,11 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         private void dtpFechaHasta_ValueChanged(object sender, EventArgs e)
         {
             ComprobarDisponibilidadPosta();
+        }
+
+        private void FrmReserva_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

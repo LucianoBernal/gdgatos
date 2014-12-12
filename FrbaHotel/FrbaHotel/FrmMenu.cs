@@ -429,5 +429,16 @@ namespace FrbaHotel
         frm.ShowDialog();
     }
 
+    private void btnCerrar_Click(object sender, EventArgs e)
+    {
+        Globales.idHotelElegido = 0;
+        Globales.idRol = 0;
+        Globales.idRolElegido = 0;
+        Globales.idUsuarioLogueado = 0;
+        FrmPrincipal frm = new FrmPrincipal();
+        this.Hide();
+        frm.ShowDialog();
+    }
+
     }
 }

@@ -41,18 +41,25 @@ namespace FrbaHotel
 
         private void botonIngresar_Click(object sender, EventArgs e)
         {
-            int idRol = (int)new Query("SELECT convert(int,idRol) FROM SKYNET.Roles  " +
-                                   " WHERE nombre = 'GUEST'").ObtenerUnicoCampo();
+            if (comboBoxHotel.Text != "")
+            {
+                int idRol = (int)new Query("SELECT convert(int,idRol) FROM SKYNET.Roles  " +
+                                       " WHERE nombre = 'GUEST'").ObtenerUnicoCampo();
 
-            Globales.idRol = idRol;
-            Globales.idHotelElegido = (int)new Query("SELECT convert(int,idHotel) FROM SKYNET.Hoteles  " +
-                                   " WHERE nombre = '"+comboBoxHotel.Text+"'").ObtenerUnicoCampo();
+                Globales.idRol = idRol;
+                Globales.idHotelElegido = (int)new Query("SELECT convert(int,idHotel) FROM SKYNET.Hoteles  " +
+                                       " WHERE nombre = '" + comboBoxHotel.Text + "'").ObtenerUnicoCampo();
 
-            this.Visible = false;
-            Funciones fn = new Funciones();
-            fn.recibirHuesped();
-            FrmMenu frmMenu = new FrmMenu();
-            frmMenu.ShowDialog();
+                this.Visible = false;
+                Funciones fn = new Funciones();
+                fn.recibirHuesped();
+                FrmMenu frmMenu = new FrmMenu();
+                frmMenu.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un hotel");
+            }
         }
     }
 }

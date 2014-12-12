@@ -62,7 +62,16 @@ namespace FrbaHotel.Listado_Estadistico
                 string qry = " SELECT * FROM SKYNET." + consulta + '(' + anio + ',' + trimestre + ')';
                 gridDatos.DataSource = new Query(qry).ObtenerDataTable();
             }
-            catch (NullReferenceException) { }
+            catch (NullReferenceException) {
+                MessageBox.Show("Ingrese una consulta.");
+            }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            FrmMenu frm = new FrmMenu();
+            this.Hide();
+            frm.ShowDialog();
         }
 
       

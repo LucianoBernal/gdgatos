@@ -35,7 +35,7 @@ namespace FrbaHotel
             // 
             // botonSistema
             // 
-            this.botonSistema.Location = new System.Drawing.Point(76, 104);
+            this.botonSistema.Location = new System.Drawing.Point(73, 45);
             this.botonSistema.Name = "botonSistema";
             this.botonSistema.Size = new System.Drawing.Size(133, 39);
             this.botonSistema.TabIndex = 0;
@@ -45,7 +45,7 @@ namespace FrbaHotel
             // 
             // botonHuesped
             // 
-            this.botonHuesped.Location = new System.Drawing.Point(76, 175);
+            this.botonHuesped.Location = new System.Drawing.Point(73, 116);
             this.botonHuesped.Name = "botonHuesped";
             this.botonHuesped.Size = new System.Drawing.Size(133, 39);
             this.botonHuesped.TabIndex = 1;
@@ -55,10 +55,11 @@ namespace FrbaHotel
             // 
             // FrmPrincipal
             // 
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(284, 199);
             this.Controls.Add(this.botonHuesped);
             this.Controls.Add(this.botonSistema);
             this.Name = "FrmPrincipal";
+            this.Text = "Bienvenido";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.ResumeLayout(false);
 
@@ -98,8 +99,8 @@ namespace FrbaHotel
 
         private void botonHuesped_Click(object sender, EventArgs e)
         {
-            FrmElegirHotel frm = new FrmElegirHotel();
             this.Visible = false;
+            FrmElegirHotel frm = new FrmElegirHotel();
             frm.ShowDialog();
             //fn.recibirHuesped();
             //FrmMenu frmMenu = new FrmMenu();
