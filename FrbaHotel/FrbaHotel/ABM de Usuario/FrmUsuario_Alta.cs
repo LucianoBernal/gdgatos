@@ -144,12 +144,12 @@ namespace FrbaHotel.ABM_de_Usuario
                 listaTextos.Remove(listaTextos.Find(x => x.Control == txtRol));
                 listaTextos.Remove(listaTextos.Find(x => x.Control == txtHotel));
                 Query qry = new Query("SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text + "'");
-                MessageBox.Show("La consulta enviada es " + "SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text + "'");
+//                MessageBox.Show("La consulta enviada es " + "SELECT COUNT(1) FROM SKYNET.Usuarios WHERE username = '" + txtUsername.Text + "'");
                 int existeUser = Convert.ToInt32(qry.ObtenerUnicoCampo());
                 if (existeUser == 0)
                 {
                     string sql = "";
-                    MessageBox.Show("Decime que tal esta");
+//                    MessageBox.Show("Decime que tal esta");
                     qry.pComando = "INSERT INTO SKYNET.Usuarios " + listaTextos.GenerarInsert();
                     qry.Ejecutar();
                     qry.pComando = "UPDATE SKYNET.Usuarios SET habilitado = 0 WHERE username = '" + txtUsername.Text + "'";

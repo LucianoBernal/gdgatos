@@ -26,7 +26,9 @@ namespace FrbaHotel.Login
 
         private void botonSalir_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            FrmPrincipal frm = new FrmPrincipal();
+            this.Hide();
+            frm.Show();
         }
 
         private void botonEntrar_Click(object sender, EventArgs e)

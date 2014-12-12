@@ -34,10 +34,16 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             //            listaTipoHabBusq.CargarDatos(txtTipoHabBusq, "SELECT codigo, descripcion FROM SKYNET.TiposHabitacion");
             //            listaTipoHabIns.CargarDatos(txtTipoHabIns, "SELECT codigo, descripcion FROM SKYNET.TiposHabitacion"); 
             this.EsGenerar = (nroReserva == 0);
-            this.Text = (nroReserva == 0) ? "Generar Reserva" : "Modificar Reserva";
+            this.Text = (nroReserva == 0) ? "Generar Reserva" : "Modificar Reserva numero "+nroReserva;
             this.btnRunBaby.Text = (nroReserva == 0) ? "Generar Reserva" : "Modificar Reserva";
+            if (!this.EsGenerar) CalcularHuespedes();
             AgregarTextos();
+            txtHotel.Text = (new Query("SELECT nombre FROM SKYNET.Hoteles WHERE idHotel = "+Globales.idHotelElegido).ObtenerUnicoCampo()).ToString();
             if (nroReserva > 0) CargarDatos(nroReserva);
+        }
+        public void CalcularHuespedes()
+        {
+            txtCantHuespedes.Text = (new Query("SELECT SUM(capacidad*cantidad) FROM SKYNET.TiposHabitacion, SKYNET.ReservasPorTipoHabitacion WHERE idTipoHabitacion = codigo AND idReserva = " + IdReserva).ObtenerUnicoCampo()).ToString();
         }
         public void ObtenerCliente()
         {
@@ -116,6 +122,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void btnRunBaby_Click(object sender, EventArgs e)
         {
+            txtCantHuespedes.Text = numCantHuesp.Value.ToString();
             ElegirHabitaciones();
 //            ObtenerCliente();a
         }
@@ -136,7 +143,6 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void txtCantHuespedes_TextChanged(object sender, EventArgs e)
         {
-            ComprobarDisponibilidadPosta();
         }
         private void ComprobarDisponibilidadPosta()
         {
@@ -153,7 +159,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 int cantHuespedes = Convert.ToInt32(txtCantHuespedes.Text);
                 for (int i = 0; i < 5; i++)
                 {
-                    disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles((SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', 121)), " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days)).ToString() + ")").ObtenerUnicoCampo());
+                    disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles("+IdReserva+", (SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', 121)), " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days)).ToString() + ")").ObtenerUnicoCampo());
                     // MessageBox.Show("disponibles["+i.ToString()+"] vale = "+disponibles[i].ToString());
                 }
                 int aux = 0;
@@ -174,22 +180,38 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         }
         private void txtRegimenIns_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComprobarDisponibilidadPosta();
         }
 
         private void dtpFechaDesde_ValueChanged(object sender, EventArgs e)
         {
-            ComprobarDisponibilidadPosta();
         }
 
         private void dtpFechaHasta_ValueChanged(object sender, EventArgs e)
         {
-            ComprobarDisponibilidadPosta();
         }
 
         private void FrmReserva_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnComprobarDisponibilidad_Click(object sender, EventArgs e)
+        {
+
+            txtCantHuespedes.Text = numCantHuesp.Value.ToString();
+            txtDisponibilidad.Text = "Procesando";
+            ComprobarDisponibilidadPosta();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Padre.Show();
         }
     }
 }

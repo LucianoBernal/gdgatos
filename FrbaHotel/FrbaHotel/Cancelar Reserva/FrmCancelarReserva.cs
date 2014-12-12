@@ -36,7 +36,7 @@ namespace FrbaHotel.Cancelar_Reserva
             if (txtMotivo.Text != "")
             {
                 txtOcultoFecha.Text = Globales.fechaSistema;
-                new Query("INSERT INTO SKYNET.Cancelaciones " + listaTextos.GenerarInsert()).Ejecutar();
+                new Query("INSERT INTO SKYNET.Cancelaciones (reserva, motivo, fechaCancel) values (" + IdReserva + ", '"+txtMotivo.Text+"', (SELECT convert(datetime, '"+Globales.fechaSistema+"',121)))").Ejecutar();
                 new Query("UPDATE SKYNET.Reservas SET estado = 5 WHERE codigoReserva = " + txtOcultoReserva.Text).Ejecutar();
                 MessageBox.Show("La reserva ha sido cancelada satisfactoramente");
                 btnCancelar_Click(this, e);

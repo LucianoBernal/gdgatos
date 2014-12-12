@@ -98,7 +98,7 @@ if(not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))
 	begin
 	declare @cantidad numeric(18,0)
 	insert into @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal)
-		   (select e.numeroFactura,e.itemFactura,'Estadia efectiva de '+convert(nvarchar(4),e.cantNoches)+case when(e.cantNoches=1)then' dia' else ' dias'end+' sobre una reserva de '
+		   (select e.numeroFactura,e.itemFactura,'Estadia efectiva de '+convert(nvarchar(4),coalesce(e.cantNoches,0))+case when(e.cantNoches=1)then' dia' else ' dias'end+' sobre una reserva de '
 			+convert(nvarchar(4),r.cantNoches)+case when(r.cantNoches=1)then' dia' else ' dias'end ,1,(e.precioPorNocheEstadia *  r.cantNoches),(e.precioPorNocheEstadia *  r.cantNoches)
 			from Skynet.Estadias e,Skynet.Reservas r
 			where e.reserva=r.codigoReserva

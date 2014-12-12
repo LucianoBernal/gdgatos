@@ -49,11 +49,22 @@
             this.txtOcultoHotel = new System.Windows.Forms.TextBox();
             this.txtOcultoCliente = new System.Windows.Forms.TextBox();
             this.txtValorEstado = new System.Windows.Forms.TextBox();
+            this.btnComprobarDisponibilidad = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtHotel = new System.Windows.Forms.TextBox();
+            this.numCantHuesp = new System.Windows.Forms.NumericUpDown();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCantHuesp)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnVolver);
+            this.groupBox2.Controls.Add(this.numCantHuesp);
+            this.groupBox2.Controls.Add(this.txtHotel);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.btnComprobarDisponibilidad);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txtDisponibilidad);
             this.groupBox2.Controls.Add(this.label7);
@@ -67,7 +78,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(447, 211);
+            this.groupBox2.Size = new System.Drawing.Size(447, 260);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Reserva";
@@ -75,24 +86,25 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(84, 145);
+            this.label8.Location = new System.Drawing.Point(70, 184);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(72, 13);
             this.label8.TabIndex = 12;
             this.label8.Text = "Disponibilidad";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // txtDisponibilidad
             // 
             this.txtDisponibilidad.Enabled = false;
-            this.txtDisponibilidad.Location = new System.Drawing.Point(79, 167);
+            this.txtDisponibilidad.Location = new System.Drawing.Point(241, 181);
             this.txtDisponibilidad.Name = "txtDisponibilidad";
-            this.txtDisponibilidad.Size = new System.Drawing.Size(148, 20);
+            this.txtDisponibilidad.Size = new System.Drawing.Size(125, 20);
             this.txtDisponibilidad.TabIndex = 11;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(70, 116);
+            this.label7.Location = new System.Drawing.Point(70, 155);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 13);
             this.label7.TabIndex = 10;
@@ -101,7 +113,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(70, 90);
+            this.label4.Location = new System.Drawing.Point(70, 129);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 13);
             this.label4.TabIndex = 9;
@@ -109,7 +121,7 @@
             // 
             // dtpFechaHasta
             // 
-            this.dtpFechaHasta.Location = new System.Drawing.Point(187, 110);
+            this.dtpFechaHasta.Location = new System.Drawing.Point(187, 149);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
             this.dtpFechaHasta.Size = new System.Drawing.Size(195, 20);
             this.dtpFechaHasta.TabIndex = 8;
@@ -117,7 +129,7 @@
             // 
             // dtpFechaDesde
             // 
-            this.dtpFechaDesde.Location = new System.Drawing.Point(187, 84);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(187, 123);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(195, 20);
             this.dtpFechaDesde.TabIndex = 7;
@@ -126,9 +138,9 @@
             // btnRunBaby
             // 
             this.btnRunBaby.Enabled = false;
-            this.btnRunBaby.Location = new System.Drawing.Point(275, 167);
+            this.btnRunBaby.Location = new System.Drawing.Point(299, 210);
             this.btnRunBaby.Name = "btnRunBaby";
-            this.btnRunBaby.Size = new System.Drawing.Size(107, 25);
+            this.btnRunBaby.Size = new System.Drawing.Size(125, 25);
             this.btnRunBaby.TabIndex = 6;
             this.btnRunBaby.Text = "btnPiolin";
             this.btnRunBaby.UseVisualStyleBackColor = true;
@@ -137,7 +149,7 @@
             // txtRegimenIns
             // 
             this.txtRegimenIns.FormattingEnabled = true;
-            this.txtRegimenIns.Location = new System.Drawing.Point(241, 57);
+            this.txtRegimenIns.Location = new System.Drawing.Point(241, 96);
             this.txtRegimenIns.Name = "txtRegimenIns";
             this.txtRegimenIns.Size = new System.Drawing.Size(125, 21);
             this.txtRegimenIns.TabIndex = 4;
@@ -145,16 +157,17 @@
             // 
             // txtCantHuespedes
             // 
-            this.txtCantHuespedes.Location = new System.Drawing.Point(241, 29);
+            this.txtCantHuespedes.Location = new System.Drawing.Point(383, 68);
             this.txtCantHuespedes.Name = "txtCantHuespedes";
-            this.txtCantHuespedes.Size = new System.Drawing.Size(125, 20);
+            this.txtCantHuespedes.Size = new System.Drawing.Size(41, 20);
             this.txtCantHuespedes.TabIndex = 3;
+            this.txtCantHuespedes.Visible = false;
             this.txtCantHuespedes.TextChanged += new System.EventHandler(this.txtCantHuespedes_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(70, 60);
+            this.label6.Location = new System.Drawing.Point(70, 99);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 13);
             this.label6.TabIndex = 1;
@@ -163,7 +176,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(70, 32);
+            this.label5.Location = new System.Drawing.Point(70, 71);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(119, 13);
             this.label5.TabIndex = 0;
@@ -241,11 +254,65 @@
             this.txtValorEstado.Text = "3";
             this.txtValorEstado.Visible = false;
             // 
+            // btnComprobarDisponibilidad
+            // 
+            this.btnComprobarDisponibilidad.Location = new System.Drawing.Point(145, 211);
+            this.btnComprobarDisponibilidad.Name = "btnComprobarDisponibilidad";
+            this.btnComprobarDisponibilidad.Size = new System.Drawing.Size(135, 24);
+            this.btnComprobarDisponibilidad.TabIndex = 13;
+            this.btnComprobarDisponibilidad.Text = "Comprobar Disponibilidad";
+            this.btnComprobarDisponibilidad.UseVisualStyleBackColor = true;
+            this.btnComprobarDisponibilidad.Click += new System.EventHandler(this.btnComprobarDisponibilidad_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(70, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Hotel";
+            // 
+            // txtHotel
+            // 
+            this.txtHotel.Enabled = false;
+            this.txtHotel.Location = new System.Drawing.Point(241, 38);
+            this.txtHotel.Name = "txtHotel";
+            this.txtHotel.Size = new System.Drawing.Size(125, 20);
+            this.txtHotel.TabIndex = 15;
+            // 
+            // numCantHuesp
+            // 
+            this.numCantHuesp.Location = new System.Drawing.Point(241, 69);
+            this.numCantHuesp.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCantHuesp.Name = "numCantHuesp";
+            this.numCantHuesp.Size = new System.Drawing.Size(127, 20);
+            this.numCantHuesp.TabIndex = 16;
+            this.numCantHuesp.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(14, 211);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(112, 23);
+            this.btnVolver.TabIndex = 17;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // FrmReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 239);
+            this.ClientSize = new System.Drawing.Size(472, 284);
             this.Controls.Add(this.txtValorEstado);
             this.Controls.Add(this.txtOcultoCliente);
             this.Controls.Add(this.txtOcultoHotel);
@@ -261,6 +328,7 @@
             this.Load += new System.EventHandler(this.FrmReserva_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCantHuesp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,5 +357,10 @@
         private System.Windows.Forms.TextBox txtOcultoHotel;
         private System.Windows.Forms.TextBox txtOcultoCliente;
         private System.Windows.Forms.TextBox txtValorEstado;
+        private System.Windows.Forms.Button btnComprobarDisponibilidad;
+        private System.Windows.Forms.TextBox txtHotel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numCantHuesp;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

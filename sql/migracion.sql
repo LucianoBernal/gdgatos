@@ -1,3 +1,4 @@
+
 /*Inserto fecha migracion */
 Insert into SKYNET.Config(fecha)(select MAX(Factura_Fecha) from gd_esquema.Maestra
 								where Factura_Fecha is not null)
@@ -368,13 +369,14 @@ where ce.consumible=c.codigo
 /*obtener disponibles*/
 go
 
-create function SKYNET.habitacionesOcupadas(@fecha datetime, @tipoHabitacion numeric(18, 0), @hotel numeric(18, 0))
+create function SKYNET.habitacionesOcupadas(@reserva numeric(18,2), @fecha datetime, @tipoHabitacion numeric(18, 0), @hotel numeric(18, 0))
 returns int
 begin
 declare @ocupadas int
 set @ocupadas = 
 ((select COALESCE(SUM(COALESCE(rh.cantidad, 0)),0) from SKYNET.Reservas r,SKYNET.ReservasPorTipoHabitacion rh
 where rh.idReserva=r.codigoReserva and
+	  r.codigoReserva!=@reserva and
 	  rh.idTipoHabitacion=@tipoHabitacion and
 	  r.hotel = @hotel and
 	  r.estado between 3 and 4 and
@@ -393,11 +395,11 @@ create function SKYNET.habitacionesTotales(@hotel numeric(18, 0), @tipoHabitacio
 returns int
 begin
 declare @retorno int
-set @retorno = (SELECT COUNT(*) FROM SKYNET.Habitaciones WHERE @hotel = hotel AND @tipoHabitacion = tipo)
+set @retorno = (SELECT COUNT(*) FROM SKYNET.Habitaciones WHERE @hotel = hotel AND @tipoHabitacion = tipo AND baja = 0)
 return @retorno
 end
 go
-create function SKYNET.habitacionesDisponibles(@fecha datetime, @hotel numeric(18, 0), @tipoHabitacion numeric(18, 0), @cantNoches int)
+create function SKYNET.habitacionesDisponibles(@reserva numeric(18,2), @fecha datetime, @hotel numeric(18, 0), @tipoHabitacion numeric(18, 0), @cantNoches int)
 returns int
 begin
 declare @i int, @max int, @aux int
@@ -405,7 +407,7 @@ set @i = 0
 set @max = 0
 while (@i<@cantNoches)
 begin
-set @aux =(SELECT SKYNET.habitacionesOcupadas(DATEADD(dd, @i, @fecha), @tipoHabitacion, @hotel))
+set @aux =(SELECT SKYNET.habitacionesOcupadas(@reserva, DATEADD(dd, @i, @fecha), @tipoHabitacion, @hotel))
 if(@max<@aux)
 begin
 	set @max = @aux

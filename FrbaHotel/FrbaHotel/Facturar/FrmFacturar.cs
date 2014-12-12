@@ -27,7 +27,23 @@ namespace FrbaHotel.Facturar
             listaPagos.Lista = new List<DetalleConId>();
             listaPagos.CargarDatos(txtTipoPago, "SELECT idTipoPago, nombre FROM SKYNET.TiposPago");
             txtTipoPago.Text = txtTipoPago.Items[0].ToString();
+
+            int existe = Convert.ToInt32(new Query("SELECT COUNT(1) FROM SKYNET.Facturas WHERE estadia = " + reserva + "").ObtenerUnicoCampo());
+            if (existe > 0) ExisteFactura();
+            this.Text = "Facturar estadia numero " + reserva;
         }
+        private void ExisteFactura()
+        {
+            MessageBox.Show("La reserva ingresada ya fue facturada, a continuacion se muestra la factura emitida");
+            btnFacturar.Enabled = false;
+            txtDatosTarjeta.Enabled = false;
+            txtNumeroTarjeta.Enabled = false;
+            txtReserva.Enabled = false;
+            txtTipoPago.Enabled = false;
+            string strquery = "SELECT * FROM SKYNET.emitirFactura(" + this.Reserva.ToString() + ")";
+            mostrarResultado(strquery);
+        }
+
         private void FrmFacturar_Load(object sender, EventArgs e)
         {
 
@@ -72,6 +88,12 @@ namespace FrbaHotel.Facturar
             txtDatosTarjeta.Enabled = txtTipoPago.Text == "Tarjeta Debito" || txtTipoPago.Text == "Tarjeta Credito";
             txtDatosTarjeta.Text = (!(txtTipoPago.Text == "Tarjeta Debito" || txtTipoPago.Text == "Tarjeta Credito"))?"":txtDatosTarjeta.Text;
             txtNumeroTarjeta.Text = (!(txtTipoPago.Text == "Tarjeta Debito" || txtTipoPago.Text == "Tarjeta Credito")) ?"0" : txtNumeroTarjeta.Text;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Padre.Show();
         }
     }
 }
