@@ -55,9 +55,9 @@
             // 
             // botonIngresar
             // 
-            this.botonIngresar.Location = new System.Drawing.Point(174, 239);
+            this.botonIngresar.Location = new System.Drawing.Point(174, 233);
             this.botonIngresar.Name = "botonIngresar";
-            this.botonIngresar.Size = new System.Drawing.Size(75, 23);
+            this.botonIngresar.Size = new System.Drawing.Size(92, 29);
             this.botonIngresar.TabIndex = 3;
             this.botonIngresar.Text = "Ingresar";
             this.botonIngresar.UseVisualStyleBackColor = true;

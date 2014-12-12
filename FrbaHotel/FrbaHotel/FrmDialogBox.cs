@@ -83,9 +83,16 @@ namespace FrbaHotel
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //this.FormPadre.Show();
-            ((FrmMenu)this.FormPadre).RespuestaDialog(txtRespuesta.Text, this.Razon);
-            this.Hide();
+            if (txtRespuesta.Text != "")
+            {
+                //this.FormPadre.Show();
+                ((FrmMenu)this.FormPadre).RespuestaDialog(txtRespuesta.Text, this.Razon);
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Complete el campo.");
+            }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {

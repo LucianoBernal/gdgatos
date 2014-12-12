@@ -38,9 +38,9 @@
             // 
             // botonSalir
             // 
-            this.botonSalir.Location = new System.Drawing.Point(13, 200);
+            this.botonSalir.Location = new System.Drawing.Point(12, 150);
             this.botonSalir.Name = "botonSalir";
-            this.botonSalir.Size = new System.Drawing.Size(75, 23);
+            this.botonSalir.Size = new System.Drawing.Size(95, 39);
             this.botonSalir.TabIndex = 4;
             this.botonSalir.Text = "Salir";
             this.botonSalir.UseVisualStyleBackColor = true;
@@ -48,9 +48,9 @@
             // 
             // botonEntrar
             // 
-            this.botonEntrar.Location = new System.Drawing.Point(192, 200);
+            this.botonEntrar.Location = new System.Drawing.Point(170, 150);
             this.botonEntrar.Name = "botonEntrar";
-            this.botonEntrar.Size = new System.Drawing.Size(75, 23);
+            this.botonEntrar.Size = new System.Drawing.Size(95, 39);
             this.botonEntrar.TabIndex = 3;
             this.botonEntrar.Text = "Entrar";
             this.botonEntrar.UseVisualStyleBackColor = true;
@@ -58,7 +58,7 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(98, 68);
+            this.txtUsuario.Location = new System.Drawing.Point(104, 50);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(167, 20);
             this.txtUsuario.TabIndex = 1;
@@ -66,7 +66,7 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(98, 110);
+            this.txtPassword.Location = new System.Drawing.Point(104, 92);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(167, 20);
@@ -76,7 +76,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 71);
+            this.label1.Location = new System.Drawing.Point(22, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 10;
@@ -85,7 +85,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 110);
+            this.label2.Location = new System.Drawing.Point(22, 92);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 11;
@@ -95,7 +95,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 235);
+            this.ClientSize = new System.Drawing.Size(279, 211);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPassword);

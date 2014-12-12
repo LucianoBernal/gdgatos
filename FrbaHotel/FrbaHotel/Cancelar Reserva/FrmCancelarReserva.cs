@@ -33,11 +33,18 @@ namespace FrbaHotel.Cancelar_Reserva
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            txtOcultoFecha.Text = Globales.fechaSistema;
-            new Query("INSERT INTO SKYNET.Cancelaciones "+listaTextos.GenerarInsert()).Ejecutar();
-            new Query("UPDATE SKYNET.Reservas SET estado = 5 WHERE codigoReserva = " + txtOcultoReserva.Text).Ejecutar();
-            MessageBox.Show("La reserva ha sido cancelada satisfactoramente");
-            btnCancelar_Click(this, e);
+            if (txtMotivo.Text != "")
+            {
+                txtOcultoFecha.Text = Globales.fechaSistema;
+                new Query("INSERT INTO SKYNET.Cancelaciones " + listaTextos.GenerarInsert()).Ejecutar();
+                new Query("UPDATE SKYNET.Reservas SET estado = 5 WHERE codigoReserva = " + txtOcultoReserva.Text).Ejecutar();
+                MessageBox.Show("La reserva ha sido cancelada satisfactoramente");
+                btnCancelar_Click(this, e);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese el motivo de la cancelacion");
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

@@ -28,18 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.dataResultado = new System.Windows.Forms.DataGridView();
-            this.cbRegimen = new System.Windows.Forms.CheckBox();
-            this.cbCiudad = new System.Windows.Forms.CheckBox();
-            this.cbNombre = new System.Windows.Forms.CheckBox();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtCiudad = new System.Windows.Forms.TextBox();
-            this.txtRegimenBusq = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtDisponibilidad = new System.Windows.Forms.TextBox();
@@ -61,124 +49,8 @@
             this.txtOcultoHotel = new System.Windows.Forms.TextBox();
             this.txtOcultoCliente = new System.Windows.Forms.TextBox();
             this.txtValorEstado = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.dataResultado);
-            this.groupBox1.Controls.Add(this.cbRegimen);
-            this.groupBox1.Controls.Add(this.cbCiudad);
-            this.groupBox1.Controls.Add(this.cbNombre);
-            this.groupBox1.Controls.Add(this.txtNombre);
-            this.groupBox1.Controls.Add(this.txtCiudad);
-            this.groupBox1.Controls.Add(this.txtRegimenBusq);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(22, 22);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(448, 173);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Seleccionar Hotel";
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(70, 136);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 8;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // dataResultado
-            // 
-            this.dataResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataResultado.Location = new System.Drawing.Point(200, 25);
-            this.dataResultado.Name = "dataResultado";
-            this.dataResultado.Size = new System.Drawing.Size(230, 120);
-            this.dataResultado.TabIndex = 12;
-            // 
-            // cbRegimen
-            // 
-            this.cbRegimen.AutoSize = true;
-            this.cbRegimen.Location = new System.Drawing.Point(179, 112);
-            this.cbRegimen.Name = "cbRegimen";
-            this.cbRegimen.Size = new System.Drawing.Size(15, 14);
-            this.cbRegimen.TabIndex = 10;
-            this.cbRegimen.UseVisualStyleBackColor = true;
-            // 
-            // cbCiudad
-            // 
-            this.cbCiudad.AutoSize = true;
-            this.cbCiudad.Location = new System.Drawing.Point(179, 76);
-            this.cbCiudad.Name = "cbCiudad";
-            this.cbCiudad.Size = new System.Drawing.Size(15, 14);
-            this.cbCiudad.TabIndex = 9;
-            this.cbCiudad.UseVisualStyleBackColor = true;
-            // 
-            // cbNombre
-            // 
-            this.cbNombre.AutoSize = true;
-            this.cbNombre.Location = new System.Drawing.Point(179, 38);
-            this.cbNombre.Name = "cbNombre";
-            this.cbNombre.Size = new System.Drawing.Size(15, 14);
-            this.cbNombre.TabIndex = 8;
-            this.cbNombre.UseVisualStyleBackColor = true;
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(70, 35);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(102, 20);
-            this.txtNombre.TabIndex = 7;
-            // 
-            // txtCiudad
-            // 
-            this.txtCiudad.Location = new System.Drawing.Point(69, 73);
-            this.txtCiudad.Name = "txtCiudad";
-            this.txtCiudad.Size = new System.Drawing.Size(102, 20);
-            this.txtCiudad.TabIndex = 6;
-            // 
-            // txtRegimenBusq
-            // 
-            this.txtRegimenBusq.FormattingEnabled = true;
-            this.txtRegimenBusq.Location = new System.Drawing.Point(69, 109);
-            this.txtRegimenBusq.Name = "txtRegimenBusq";
-            this.txtRegimenBusq.Size = new System.Drawing.Size(103, 21);
-            this.txtRegimenBusq.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 112);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Regimen";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 76);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Ciudad";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre";
             // 
             // groupBox2
             // 
@@ -193,7 +65,7 @@
             this.groupBox2.Controls.Add(this.txtCantHuespedes);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(22, 201);
+            this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(447, 211);
             this.groupBox2.TabIndex = 1;
@@ -362,7 +234,7 @@
             // 
             // txtValorEstado
             // 
-            this.txtValorEstado.Location = new System.Drawing.Point(541, 341);
+            this.txtValorEstado.Location = new System.Drawing.Point(541, 252);
             this.txtValorEstado.Name = "txtValorEstado";
             this.txtValorEstado.Size = new System.Drawing.Size(83, 20);
             this.txtValorEstado.TabIndex = 10;
@@ -373,7 +245,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 424);
+            this.ClientSize = new System.Drawing.Size(483, 239);
             this.Controls.Add(this.txtValorEstado);
             this.Controls.Add(this.txtOcultoCliente);
             this.Controls.Add(this.txtOcultoHotel);
@@ -384,12 +256,9 @@
             this.Controls.Add(this.txtOcultoTipoHabBusq);
             this.Controls.Add(this.txtOcultoRegimenBusq);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Name = "FrmReserva";
             this.Text = "frmReserva";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultado)).EndInit();
+            this.Load += new System.EventHandler(this.FrmReserva_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -399,17 +268,6 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataResultado;
-        private System.Windows.Forms.CheckBox cbRegimen;
-        private System.Windows.Forms.CheckBox cbCiudad;
-        private System.Windows.Forms.CheckBox cbNombre;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox txtCiudad;
-        private System.Windows.Forms.ComboBox txtRegimenBusq;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnRunBaby;
         private System.Windows.Forms.ComboBox txtRegimenIns;
@@ -424,13 +282,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtpFechaHasta;
         private System.Windows.Forms.DateTimePicker dtpFechaDesde;
-        private System.Windows.Forms.TextBox txtOcultoFechaDesde;
-        private System.Windows.Forms.TextBox txtOcultoCantNoches;
-        private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.TextBox txtOcultoHotel;
-        private System.Windows.Forms.TextBox txtOcultoCliente;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtDisponibilidad;
+        private System.Windows.Forms.TextBox txtOcultoFechaDesde;
+        private System.Windows.Forms.TextBox txtOcultoCantNoches;
+        private System.Windows.Forms.TextBox txtOcultoHotel;
+        private System.Windows.Forms.TextBox txtOcultoCliente;
         private System.Windows.Forms.TextBox txtValorEstado;
     }
 }
