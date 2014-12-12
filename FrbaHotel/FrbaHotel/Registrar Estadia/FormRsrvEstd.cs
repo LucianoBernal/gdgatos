@@ -82,7 +82,7 @@ namespace FrbaHotel.Registrar_Estadia
 
         private void validarFechaReserva()
         {
-            string strQuery = "SELECT DATEDIFF(day,fechaDesde,'"+Globales.fechaSistema+"') AS dif FROM SKYNET.Reservas WHERE codigoReserva = " + this.Reserva + " ";
+            string strQuery = "SELECT DATEDIFF(day,fechaDesde,(SELECT convert(datetime, '" + Globales.fechaSistema + "', 121))) AS dif FROM SKYNET.Reservas WHERE codigoReserva = " + this.Reserva + " ";
             int diferencia = (int) new Query(strQuery).ObtenerUnicoCampo();
             MessageBox.Show(strQuery +" diferencia:"+ diferencia);
             if (diferencia == 0)

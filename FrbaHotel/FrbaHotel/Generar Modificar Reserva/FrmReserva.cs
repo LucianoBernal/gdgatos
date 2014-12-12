@@ -49,19 +49,21 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         }
         public void ReciboElIdCliente(int idCliente)
         {
-            if ((dtpFechaHasta.Value - dtpFechaDesde.Value).Days > 0)
+            if (((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days) > 0)
             {
                 DataGridViewRow idHotel = dataResultado.SelectedRows[0];
                 txtOcultoCliente.Text = idCliente.ToString();
                 txtOcultoHotel.Text = idHotel.Cells["idHotel"].Value.ToString();
                 txtOcultoRegimenIns.Text = listaRegimenIns.ObtenerId(txtRegimenIns.Text).ToString();
                 txtOcultoFechaDesde.Text = dtpFechaDesde.Value.ToString("yyyy-MM-dd");
-                txtOcultoCantNoches.Text = (((dtpFechaHasta.Value - dtpFechaDesde.Value).Days)).ToString();
+                if (this.EsGenerar)
+                    txtOcultoCantNoches.Text = ((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days).ToString();
                 txtValorEstado.Text = EsGenerar?"3":"4";
                 Query qry =
                 this.EsGenerar ?
-                new Query("INSERT INTO SKYNET.Reservas " + listaTextosInsert.GenerarInsert()) : new Query("UPDATE SKYNET.Reservas SET " + listaTextosInsert.GenerarUpdate() + " WHERE codigoReserva = " + IdReserva.ToString());
-//                MessageBox.Show(qry.pComando);
+                new Query("INSERT INTO SKYNET.Reservas (hotel, regimen, fechaDesde, cantNoches, cliente, estado) values ("+txtOcultoHotel.Text+", "+txtOcultoRegimenIns.Text+", (SELECT convert(datetime, '"+txtOcultoFechaDesde.Text+"', 121)), "+txtOcultoCantNoches.Text+", "+txtOcultoCliente.Text+", "+txtValorEstado.Text+")")  
+                : new Query("UPDATE SKYNET.Reservas SET hotel = "+txtOcultoHotel.Text+", regimen= "+txtOcultoRegimenIns.Text+", fechaDesde= (SELECT convert(datetime, '"+txtOcultoFechaDesde.Text+"', 121)), cantNoches= "+txtOcultoCantNoches.Text+", cliente= "+txtOcultoCliente.Text+", estado= "+txtValorEstado.Text+" WHERE codigoReserva = " + IdReserva.ToString());
+                MessageBox.Show(qry.pComando);
                 qry.Ejecutar();
                 if (!EsGenerar)
                     new Query("DELETE FROM SKYNET.ReservasPorTipoHabitacion WHERE idReserva = " + IdReserva.ToString()).Ejecutar();
@@ -78,7 +80,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             }
             else
             {
-                MessageBox.Show("Revisa las Fechas hijo");
+                MessageBox.Show("La fecha de fin de reserva debe ser mayor que la fecha de inicio");
             }
             //            MessageBox.Show("El idCliente Recibido es: " + idCliente.ToString());
         }
@@ -98,6 +100,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 dataResultado.SelectAll();
                 dtpFechaDesde.Value = Convert.ToDateTime(elem[1].ToString());
                 dtpFechaHasta.Value = dtpFechaDesde.Value.AddDays(Convert.ToInt32(elem[2].ToString()));
+                txtOcultoCantNoches.Text = (Convert.ToInt32(elem[2].ToString())).ToString();
                 txtRegimenIns.Text = listaRegimenIns.ObtenerDetalle(Convert.ToInt32(elem[3].ToString()));
             }
         }
@@ -161,7 +164,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 int cantHuespedes = Convert.ToInt32(txtCantHuespedes.Text);
                 for (int i = 0; i < 5; i++)
                 {
-                    disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles('" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value - dtpFechaDesde.Value).Days) + 1).ToString() + ")").ObtenerUnicoCampo());
+                    disponibles[i] = Convert.ToInt32(new Query("SELECT SKYNET.habitacionesDisponibles((SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd")+ "', 121)), " + txtOcultoHotel.Text + ", " + (i + 1001).ToString() + ", " + (((dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days)).ToString() + ")").ObtenerUnicoCampo());
                    // MessageBox.Show("disponibles["+i.ToString()+"] vale = "+disponibles[i].ToString());
                 }
                 int aux = 0;
