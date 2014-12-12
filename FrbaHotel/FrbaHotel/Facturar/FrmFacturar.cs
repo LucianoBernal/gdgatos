@@ -35,6 +35,13 @@ namespace FrbaHotel.Facturar
         private void ExisteFactura()
         {
             MessageBox.Show("La reserva ingresada ya fue facturada, a continuacion se muestra la factura emitida");
+            txtTipoPago.Text=(new Query("SELECT nombre FROM SKYNET.Facturas,SKYNET.TiposPago where estadia="+this.Reserva+"and tipoPago=idTipoPago").ObtenerUnicoCampo()).ToString();
+            if (txtTipoPago.Text != "Efectivo")
+            {
+                txtDatosTarjeta.Text = (new Query("SELECT datosTarjeta FROM SKYNET.Facturas,SKYNET.DatosTarjeta where estadia=" + this.Reserva + "and nroFactura=facturaNumero").ObtenerUnicoCampo()).ToString();
+                txtNumeroTarjeta.Text = (new Query("SELECT numTarjeta FROM SKYNET.Facturas,SKYNET.DatosTarjeta where estadia=" + this.Reserva + "and nroFactura=facturaNumero").ObtenerUnicoCampo()).ToString();
+                      
+            }
             btnFacturar.Enabled = false;
             txtDatosTarjeta.Enabled = false;
             txtNumeroTarjeta.Enabled = false;

@@ -157,11 +157,11 @@ select (select idRol from SKYNET.Roles where nombre='ADMINISTRADOR'), f.idFuncio
 		OR f.descripcion = 'ABM CLIENTES' OR f.descripcion = 'ABM HOTEL'
 		OR f.descripcion = 'ABM HABITACION' 
 		OR f.descripcion = 'ABM REGIMEN DE ESTADIA' OR f.descripcion = 'LISTADO ESTADISTICO'
-
+		OR f.descripcion = 'FACTURAR PUBLICACIONES'
 insert into skynet.rolFunciones(rol,funcion)
 select (select idRol from SKYNET.Roles where nombre='RECEPCIONISTA'), f.idFuncion
 		from SKYNET.Funciones f
-		where f.descripcion = 'ABM USUARIO' OR f.descripcion = 'ABM CLIENTES'
+		where f.descripcion = 'ABM CLIENTES'
 		OR f.descripcion = 'GENERAR O MODIFICAR RESERVA' 
 		OR f.descripcion = 'REGISTRAR ESTADIA'
 		OR f.descripcion = 'REGISTRAR CONSUMIBLES' OR f.descripcion = 'FACTURAR PUBLICACIONES' OR f.descripcion = 'LISTADO ESTADISTICO'
