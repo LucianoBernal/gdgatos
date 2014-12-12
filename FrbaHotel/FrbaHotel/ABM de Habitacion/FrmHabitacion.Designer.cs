@@ -38,7 +38,7 @@
             this.botonVolver.Location = new System.Drawing.Point(92, 173);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(100, 31);
-            this.botonVolver.TabIndex = 18;
+            this.botonVolver.TabIndex = 3;
             this.botonVolver.Text = "Volver";
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
@@ -48,7 +48,7 @@
             this.botonAlta.Location = new System.Drawing.Point(92, 95);
             this.botonAlta.Name = "botonAlta";
             this.botonAlta.Size = new System.Drawing.Size(100, 31);
-            this.botonAlta.TabIndex = 17;
+            this.botonAlta.TabIndex = 2;
             this.botonAlta.Text = "Alta";
             this.botonAlta.UseVisualStyleBackColor = true;
             this.botonAlta.Click += new System.EventHandler(this.botonAlta_Click);
@@ -58,7 +58,7 @@
             this.botonListado.Location = new System.Drawing.Point(92, 58);
             this.botonListado.Name = "botonListado";
             this.botonListado.Size = new System.Drawing.Size(100, 31);
-            this.botonListado.TabIndex = 16;
+            this.botonListado.TabIndex = 1;
             this.botonListado.Text = "Listado";
             this.botonListado.UseVisualStyleBackColor = true;
             this.botonListado.Click += new System.EventHandler(this.botonListado_Click);

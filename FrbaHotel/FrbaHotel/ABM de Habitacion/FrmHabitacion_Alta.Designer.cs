@@ -56,7 +56,7 @@
             this.botonGuardar.Location = new System.Drawing.Point(449, 170);
             this.botonGuardar.Name = "botonGuardar";
             this.botonGuardar.Size = new System.Drawing.Size(98, 30);
-            this.botonGuardar.TabIndex = 77;
+            this.botonGuardar.TabIndex = 8;
             this.botonGuardar.Text = "Guardar";
             this.botonGuardar.UseVisualStyleBackColor = true;
             this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
@@ -66,7 +66,7 @@
             this.botonVolver.Location = new System.Drawing.Point(32, 170);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(98, 30);
-            this.botonVolver.TabIndex = 76;
+            this.botonVolver.TabIndex = 10;
             this.botonVolver.Text = "Volver";
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
@@ -100,7 +100,7 @@
             this.txtPiso.Location = new System.Drawing.Point(73, 86);
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(120, 20);
-            this.txtPiso.TabIndex = 81;
+            this.txtPiso.TabIndex = 3;
             this.txtPiso.Value = new decimal(new int[] {
             1,
             0,
@@ -130,21 +130,21 @@
             this.txtDescripcion.Location = new System.Drawing.Point(357, 86);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(178, 20);
-            this.txtDescripcion.TabIndex = 78;
+            this.txtDescripcion.TabIndex = 6;
             // 
             // txtTipo
             // 
             this.txtTipo.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtTipo.FormattingEnabled = true;
-            this.txtTipo.Location = new System.Drawing.Point(357, 53);
+            this.txtTipo.Location = new System.Drawing.Point(357, 19);
             this.txtTipo.Name = "txtTipo";
             this.txtTipo.Size = new System.Drawing.Size(178, 21);
-            this.txtTipo.TabIndex = 77;
+            this.txtTipo.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(260, 56);
+            this.label1.Location = new System.Drawing.Point(260, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 13);
             this.label1.TabIndex = 76;
@@ -155,15 +155,15 @@
             this.txtHotel.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtHotel.Enabled = false;
             this.txtHotel.FormattingEnabled = true;
-            this.txtHotel.Location = new System.Drawing.Point(73, 53);
+            this.txtHotel.Location = new System.Drawing.Point(73, 19);
             this.txtHotel.Name = "txtHotel";
             this.txtHotel.Size = new System.Drawing.Size(178, 21);
-            this.txtHotel.TabIndex = 74;
+            this.txtHotel.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 56);
+            this.label3.Location = new System.Drawing.Point(8, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 75;
@@ -191,28 +191,28 @@
             this.txtBaja.Location = new System.Drawing.Point(204, 115);
             this.txtBaja.Name = "txtBaja";
             this.txtBaja.Size = new System.Drawing.Size(91, 17);
-            this.txtBaja.TabIndex = 68;
+            this.txtBaja.TabIndex = 7;
             this.txtBaja.Text = "Dado de Baja";
             this.txtBaja.UseVisualStyleBackColor = true;
             // 
             // txtUbicacion
             // 
-            this.txtUbicacion.Location = new System.Drawing.Point(357, 19);
+            this.txtUbicacion.Location = new System.Drawing.Point(357, 53);
             this.txtUbicacion.Name = "txtUbicacion";
             this.txtUbicacion.Size = new System.Drawing.Size(178, 20);
-            this.txtUbicacion.TabIndex = 44;
+            this.txtUbicacion.TabIndex = 5;
             // 
             // txtNumero
             // 
-            this.txtNumero.Location = new System.Drawing.Point(73, 19);
+            this.txtNumero.Location = new System.Drawing.Point(73, 53);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(178, 20);
-            this.txtNumero.TabIndex = 42;
+            this.txtNumero.TabIndex = 2;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(260, 22);
+            this.label6.Location = new System.Drawing.Point(260, 56);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(58, 13);
             this.label6.TabIndex = 43;
@@ -221,7 +221,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 22);
+            this.label4.Location = new System.Drawing.Point(8, 56);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 40;
@@ -232,7 +232,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(240, 170);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(98, 30);
-            this.btnLimpiar.TabIndex = 78;
+            this.btnLimpiar.TabIndex = 9;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.button1_Click);
