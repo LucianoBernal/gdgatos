@@ -43,9 +43,9 @@ namespace FrbaHotel.ABM_de_Usuario
                 txtFecha.Text = datos[2].ToString();
                 txtMail.Text = datos[3].ToString();
                 txtNombre.Text = datos[4].ToString();
-                txtNumDoc.Value = Convert.ToInt32(datos[6].ToString());
-                txtNumCalle.Value = Convert.ToInt32(datos[5].ToString());
-                txtTelefono.Value = Convert.ToInt32(datos[7].ToString());                
+                txtNumDoc.Value = (datos[6].ToString() != "") ? (Convert.ToInt32(datos[6])) : (0);
+                txtNumCalle.Value = (datos[5].ToString() != "") ? (Convert.ToInt32(datos[5])) : (0);
+                txtTelefono.Value = (datos[7].ToString() != "") ? (Convert.ToInt32(datos[7])) : (0);
                 txtTipoDoc.Text =  (datos[8].ToString()!="")? (listaTipoDoc.ObtenerDetalle(Convert.ToInt32(datos[8]))):(listaTipoDoc.ObtenerDetalle(1));
             /*txtOcultoNumCalle.Text = (datos[5].ToString().Length>3)?datos[5].ToString().Substring(0, datos[5].ToString().Length-3):datos[5].ToString();
                 txtOcultoNumDoc.Text = (datos[6].ToString().Length > 3) ? datos[6].ToString().Substring(0, datos[6].ToString().Length - 3) : datos[6].ToString();
@@ -65,14 +65,24 @@ namespace FrbaHotel.ABM_de_Usuario
             txtOcultoTipoDoc.Text = listaTipoDoc.ObtenerId(txtTipoDoc.Text).ToString();
             if (listaTextos.EstanTodosLlenos()){
 //            MessageBox.Show("UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString());
-            new Query("UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString()).Ejecutar();
-            MessageBox.Show("Los datos fueron actualizados satisfactoriamente");
+                new Query("UPDATE SKYNET.Usuarios SET " + listaTextos.GenerarUpdate() + " WHERE idUser = " + idUsuario.ToString()).Ejecutar();
+                MessageBox.Show("Los datos fueron actualizados satisfactoriamente");
+                FrmUsuario_List frmMen = new FrmUsuario_List();
+                this.Visible = false;
+                frmMen.ShowDialog();
             }
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            FrmUsuario_List frmMen = new FrmUsuario_List();
+            this.Visible = false;
+            frmMen.ShowDialog();
         }
     }
 }
