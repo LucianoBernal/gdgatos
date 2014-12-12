@@ -27,7 +27,7 @@ namespace FrbaHotel.Login
         private void botonSalir_Click(object sender, EventArgs e)
         {
             FrmPrincipal frm = new FrmPrincipal();
-            this.Hide();
+            this.Visible=false;
             frm.Show();
         }
 

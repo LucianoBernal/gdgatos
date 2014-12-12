@@ -73,21 +73,21 @@
             this.txtPais.Location = new System.Drawing.Point(371, 47);
             this.txtPais.Name = "txtPais";
             this.txtPais.Size = new System.Drawing.Size(178, 21);
-            this.txtPais.TabIndex = 23;
+            this.txtPais.TabIndex = 4;
             // 
             // txtEstrellas
             // 
             this.txtEstrellas.Location = new System.Drawing.Point(113, 49);
             this.txtEstrellas.Name = "txtEstrellas";
             this.txtEstrellas.Size = new System.Drawing.Size(120, 20);
-            this.txtEstrellas.TabIndex = 22;
+            this.txtEstrellas.TabIndex = 3;
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.Location = new System.Drawing.Point(9, 83);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 21;
+            this.btnLimpiar.TabIndex = 6;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click_1);
@@ -97,7 +97,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(113, 83);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 20;
+            this.btnBuscar.TabIndex = 5;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -116,7 +116,7 @@
             this.txtCiudad.Location = new System.Drawing.Point(371, 16);
             this.txtCiudad.Name = "txtCiudad";
             this.txtCiudad.Size = new System.Drawing.Size(178, 20);
-            this.txtCiudad.TabIndex = 12;
+            this.txtCiudad.TabIndex = 2;
             // 
             // label6
             // 
@@ -132,7 +132,7 @@
             this.txtNombre.Location = new System.Drawing.Point(113, 16);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(178, 20);
-            this.txtNombre.TabIndex = 11;
+            this.txtNombre.TabIndex = 1;
             // 
             // label13
             // 
@@ -157,7 +157,7 @@
             this.btnModificar.Location = new System.Drawing.Point(468, 387);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(98, 30);
-            this.btnModificar.TabIndex = 28;
+            this.btnModificar.TabIndex = 7;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -167,7 +167,7 @@
             this.btnDeshabilitar.Location = new System.Drawing.Point(230, 387);
             this.btnDeshabilitar.Name = "btnDeshabilitar";
             this.btnDeshabilitar.Size = new System.Drawing.Size(98, 30);
-            this.btnDeshabilitar.TabIndex = 26;
+            this.btnDeshabilitar.TabIndex = 8;
             this.btnDeshabilitar.Text = "Deshabilitar";
             this.btnDeshabilitar.UseVisualStyleBackColor = true;
             this.btnDeshabilitar.Click += new System.EventHandler(this.btnDeshabilitar_Click);
@@ -177,7 +177,7 @@
             this.btnVolver.Location = new System.Drawing.Point(17, 387);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(98, 30);
-            this.btnVolver.TabIndex = 25;
+            this.btnVolver.TabIndex = 9;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);

@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.numCantHuesp = new System.Windows.Forms.NumericUpDown();
+            this.txtHotel = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnComprobarDisponibilidad = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtDisponibilidad = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -49,11 +54,6 @@
             this.txtOcultoHotel = new System.Windows.Forms.TextBox();
             this.txtOcultoCliente = new System.Windows.Forms.TextBox();
             this.txtValorEstado = new System.Windows.Forms.TextBox();
-            this.btnComprobarDisponibilidad = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtHotel = new System.Windows.Forms.TextBox();
-            this.numCantHuesp = new System.Windows.Forms.NumericUpDown();
-            this.btnVolver = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCantHuesp)).BeginInit();
             this.SuspendLayout();
@@ -82,6 +82,61 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Reserva";
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(14, 211);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(112, 23);
+            this.btnVolver.TabIndex = 17;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // numCantHuesp
+            // 
+            this.numCantHuesp.Location = new System.Drawing.Point(241, 69);
+            this.numCantHuesp.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCantHuesp.Name = "numCantHuesp";
+            this.numCantHuesp.Size = new System.Drawing.Size(127, 20);
+            this.numCantHuesp.TabIndex = 16;
+            this.numCantHuesp.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCantHuesp.ValueChanged += new System.EventHandler(this.numCantHuesp_ValueChanged);
+            // 
+            // txtHotel
+            // 
+            this.txtHotel.Enabled = false;
+            this.txtHotel.Location = new System.Drawing.Point(241, 38);
+            this.txtHotel.Name = "txtHotel";
+            this.txtHotel.Size = new System.Drawing.Size(125, 20);
+            this.txtHotel.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(70, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Hotel";
+            // 
+            // btnComprobarDisponibilidad
+            // 
+            this.btnComprobarDisponibilidad.Location = new System.Drawing.Point(145, 211);
+            this.btnComprobarDisponibilidad.Name = "btnComprobarDisponibilidad";
+            this.btnComprobarDisponibilidad.Size = new System.Drawing.Size(135, 24);
+            this.btnComprobarDisponibilidad.TabIndex = 13;
+            this.btnComprobarDisponibilidad.Text = "Comprobar Disponibilidad";
+            this.btnComprobarDisponibilidad.UseVisualStyleBackColor = true;
+            this.btnComprobarDisponibilidad.Click += new System.EventHandler(this.btnComprobarDisponibilidad_Click);
             // 
             // label8
             // 
@@ -148,6 +203,7 @@
             // 
             // txtRegimenIns
             // 
+            this.txtRegimenIns.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtRegimenIns.FormattingEnabled = true;
             this.txtRegimenIns.Location = new System.Drawing.Point(241, 96);
             this.txtRegimenIns.Name = "txtRegimenIns";
@@ -253,60 +309,6 @@
             this.txtValorEstado.TabIndex = 10;
             this.txtValorEstado.Text = "3";
             this.txtValorEstado.Visible = false;
-            // 
-            // btnComprobarDisponibilidad
-            // 
-            this.btnComprobarDisponibilidad.Location = new System.Drawing.Point(145, 211);
-            this.btnComprobarDisponibilidad.Name = "btnComprobarDisponibilidad";
-            this.btnComprobarDisponibilidad.Size = new System.Drawing.Size(135, 24);
-            this.btnComprobarDisponibilidad.TabIndex = 13;
-            this.btnComprobarDisponibilidad.Text = "Comprobar Disponibilidad";
-            this.btnComprobarDisponibilidad.UseVisualStyleBackColor = true;
-            this.btnComprobarDisponibilidad.Click += new System.EventHandler(this.btnComprobarDisponibilidad_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(70, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Hotel";
-            // 
-            // txtHotel
-            // 
-            this.txtHotel.Enabled = false;
-            this.txtHotel.Location = new System.Drawing.Point(241, 38);
-            this.txtHotel.Name = "txtHotel";
-            this.txtHotel.Size = new System.Drawing.Size(125, 20);
-            this.txtHotel.TabIndex = 15;
-            // 
-            // numCantHuesp
-            // 
-            this.numCantHuesp.Location = new System.Drawing.Point(241, 69);
-            this.numCantHuesp.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numCantHuesp.Name = "numCantHuesp";
-            this.numCantHuesp.Size = new System.Drawing.Size(127, 20);
-            this.numCantHuesp.TabIndex = 16;
-            this.numCantHuesp.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // btnVolver
-            // 
-            this.btnVolver.Location = new System.Drawing.Point(14, 211);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(112, 23);
-            this.btnVolver.TabIndex = 17;
-            this.btnVolver.Text = "Volver";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // FrmReserva
             // 

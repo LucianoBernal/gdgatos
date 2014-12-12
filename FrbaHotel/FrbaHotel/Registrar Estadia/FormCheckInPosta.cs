@@ -29,7 +29,7 @@ namespace FrbaHotel.Registrar_Estadia
             this.Reserva = reserva;
             this.EstadoReserva = estadoReserva;
             InitializeComponent();
-            cantidadMaxima = Convert.ToInt32(new Query("SELECT SUM(capacidad) FROM SKYNET.TiposHabitacion, SKYNET.ReservasPorTipoHabitacion WHERE idTipoHabitacion = codigo AND idReserva = " + reserva).ObtenerUnicoCampo());
+            cantidadMaxima = Convert.ToInt32(new Query("SELECT SUM(capacidad*cantidad) FROM SKYNET.TiposHabitacion, SKYNET.ReservasPorTipoHabitacion WHERE idTipoHabitacion = codigo AND idReserva = " + reserva).ObtenerUnicoCampo());
             VectorUsuarios = new int[cantidadMaxima];
             ReciboElIdCliente(Convert.ToInt32(new Query("SELECT cliente FROM SKYNET.Reservas WHERE codigoReserva ="+ this.Reserva).ObtenerUnicoCampo()));
         }
@@ -38,7 +38,7 @@ namespace FrbaHotel.Registrar_Estadia
         {
             FrmCliente_List nuevo = new FrmCliente_List(this);
             nuevo.Show();
-            this.Hide();
+            this.Visible=false;
         }
         public void ReciboElIdCliente(int idCliente)
         {
@@ -55,7 +55,7 @@ namespace FrbaHotel.Registrar_Estadia
         {
             FrmCliente_List nuevo = new FrmCliente_List(this);
             nuevo.Show();
-            this.Hide();
+            this.Visible=false;
         }
 
         private void button2_Click(object sender, EventArgs e)

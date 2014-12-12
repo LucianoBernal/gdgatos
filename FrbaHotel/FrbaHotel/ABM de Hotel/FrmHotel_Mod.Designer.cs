@@ -64,7 +64,7 @@
             this.txtCadena.Location = new System.Drawing.Point(412, 184);
             this.txtCadena.Name = "txtCadena";
             this.txtCadena.Size = new System.Drawing.Size(180, 21);
-            this.txtCadena.TabIndex = 50;
+            this.txtCadena.TabIndex = 10;
             // 
             // cadena
             // 
@@ -80,7 +80,7 @@
             this.txtNumCalle.Location = new System.Drawing.Point(412, 102);
             this.txtNumCalle.Name = "txtNumCalle";
             this.txtNumCalle.Size = new System.Drawing.Size(180, 20);
-            this.txtNumCalle.TabIndex = 48;
+            this.txtNumCalle.TabIndex = 8;
             // 
             // label10
             // 
@@ -97,14 +97,14 @@
             this.txtPais.Location = new System.Drawing.Point(412, 142);
             this.txtPais.Name = "txtPais";
             this.txtPais.Size = new System.Drawing.Size(180, 21);
-            this.txtPais.TabIndex = 46;
+            this.txtPais.TabIndex = 9;
             // 
             // botonGuardar
             // 
             this.botonGuardar.Location = new System.Drawing.Point(491, 368);
             this.botonGuardar.Name = "botonGuardar";
             this.botonGuardar.Size = new System.Drawing.Size(98, 30);
-            this.botonGuardar.TabIndex = 44;
+            this.botonGuardar.TabIndex = 12;
             this.botonGuardar.Text = "Guardar";
             this.botonGuardar.UseVisualStyleBackColor = true;
             this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
@@ -114,7 +114,7 @@
             this.botonVolver.Location = new System.Drawing.Point(23, 368);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(98, 30);
-            this.botonVolver.TabIndex = 43;
+            this.botonVolver.TabIndex = 14;
             this.botonVolver.Text = "Volver";
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
@@ -135,56 +135,56 @@
             this.Regimen.Location = new System.Drawing.Point(124, 232);
             this.Regimen.Name = "Regimen";
             this.Regimen.Size = new System.Drawing.Size(219, 94);
-            this.Regimen.TabIndex = 41;
+            this.Regimen.TabIndex = 11;
             // 
             // txtFecha
             // 
             this.txtFecha.Location = new System.Drawing.Point(124, 184);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(200, 20);
-            this.txtFecha.TabIndex = 40;
+            this.txtFecha.TabIndex = 5;
             // 
             // txtCiudad
             // 
             this.txtCiudad.Location = new System.Drawing.Point(124, 142);
             this.txtCiudad.Name = "txtCiudad";
             this.txtCiudad.Size = new System.Drawing.Size(180, 20);
-            this.txtCiudad.TabIndex = 39;
+            this.txtCiudad.TabIndex = 4;
             // 
             // txtEstrellas
             // 
             this.txtEstrellas.Location = new System.Drawing.Point(412, 62);
             this.txtEstrellas.Name = "txtEstrellas";
             this.txtEstrellas.Size = new System.Drawing.Size(120, 20);
-            this.txtEstrellas.TabIndex = 38;
+            this.txtEstrellas.TabIndex = 7;
             // 
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(124, 102);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(180, 20);
-            this.txtDireccion.TabIndex = 37;
+            this.txtDireccion.TabIndex = 3;
             // 
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(124, 62);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(180, 20);
-            this.txtTelefono.TabIndex = 36;
+            this.txtTelefono.TabIndex = 2;
             // 
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(412, 23);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(180, 20);
-            this.txtEmail.TabIndex = 35;
+            this.txtEmail.TabIndex = 6;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(124, 23);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(180, 20);
-            this.txtNombre.TabIndex = 34;
+            this.txtNombre.TabIndex = 1;
             // 
             // label8
             // 
@@ -294,7 +294,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(257, 368);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(98, 30);
-            this.btnLimpiar.TabIndex = 83;
+            this.btnLimpiar.TabIndex = 13;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);

@@ -24,7 +24,7 @@ namespace FrbaHotel.ABM_de_Regimen
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmRegimenes rol = new FrmRegimenes();
-            this.Hide();
+            this.Visible=false;
             rol.ShowDialog();
             rol = (FrmRegimenes)this.ActiveMdiChild;
         }
@@ -59,7 +59,7 @@ namespace FrbaHotel.ABM_de_Regimen
                     MessageBox.Show("El regimen "+txtDescripcion.Text+" se dio de alta satisfactoriamente");
 
                     FrmRegimenes rol = new FrmRegimenes();
-                    this.Hide();
+                    this.Visible=false;
                     rol.ShowDialog();
                     rol = (FrmRegimenes)this.ActiveMdiChild;
                 }   

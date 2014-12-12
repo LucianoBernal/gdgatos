@@ -19,6 +19,20 @@ namespace FrbaHotel.ABM_de_Hotel
         {
             InitializeComponent();
             txtFecha.Value = Convert.ToDateTime(Globales.fechaSistema);
+            this.AgregarTextos();
+        }
+        public void AgregarTextos()
+        {
+            listaTextos.Agregar(txtCadena, true, "cadena");
+            listaTextos.Agregar(txtCiudad, true, "ciudad");
+            listaTextos.Agregar(txtEmail, true, "mail");
+            listaTextos.Agregar(txtEstrellas, true, "cantidadEstrellas");
+            listaTextos.Agregar(txtFecha, false, "fechaCreacion");
+            listaTextos.Agregar(txtNombre, false, "nombre");
+            listaTextos.Agregar(txtNumCalle, false, "numCalle");
+            listaTextos.Agregar(txtDireccion, false, "calle");
+            listaTextos.Agregar(txtPais, false, "pais");
+            listaTextos.Agregar(txtTelefono, false, "telefono");
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
@@ -169,10 +183,6 @@ namespace FrbaHotel.ABM_de_Hotel
                         }
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Verifique los datos ingresados!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

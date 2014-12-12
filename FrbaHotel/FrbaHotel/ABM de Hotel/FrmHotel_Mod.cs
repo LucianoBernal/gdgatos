@@ -52,7 +52,8 @@ namespace FrbaHotel.ABM_de_Hotel
                             " pais = (SELECT idPais FROM SKYNET.Paises WHERE pais ='" + txtPais.Text.ToString() + "'), cadena = (SELECT idCadena FROM SKYNET.Cadenas WHERE cadena = '" + txtCadena.Text.ToString() + "') " +
                             " WHERE idHotel = " + idHotel.ToString()).Ejecutar();
                         ActualizarRegimen();
-                        MessageBox.Show("Ya esta");
+                        MessageBox.Show("El hotel ha sido modificado con exito.");
+                        this.Visible = false;
                     }
                     else
                     {

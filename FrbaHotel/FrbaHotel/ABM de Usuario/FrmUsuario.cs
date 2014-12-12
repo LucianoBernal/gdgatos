@@ -26,7 +26,7 @@ namespace FrbaHotel.ABM_de_Usuario
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmPrincipal frmPrincipal = new FrmPrincipal();
-            this.Hide();
+            this.Visible=false;
             frmPrincipal.ShowDialog();
             frmPrincipal = (FrmPrincipal)this.ActiveMdiChild;
         }
@@ -55,7 +55,7 @@ namespace FrbaHotel.ABM_de_Usuario
         private void botonVolver_Click_1(object sender, EventArgs e)
         {
             FrmMenu menu = new FrmMenu();
-            this.Hide();
+            this.Visible=false;
             menu.ShowDialog();
             menu = (FrmMenu)this.ActiveMdiChild;
         }
