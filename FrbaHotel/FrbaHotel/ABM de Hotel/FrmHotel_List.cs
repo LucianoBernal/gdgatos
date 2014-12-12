@@ -40,7 +40,7 @@ namespace FrbaHotel.ABM_de_Hotel
             }
             if (txtEstrellas.Text != "")
             {
-                strQuery = strQuery + " AND h.cantidadEstrellas = " + txtEstrellas.Value + " ";
+                //strQuery = strQuery + " AND h.cantidadEstrellas LIKE %";
             }
             if (txtPais.Text != "")
             {
@@ -55,6 +55,7 @@ namespace FrbaHotel.ABM_de_Hotel
             dataResultado.DataSource = resultado.ObtenerDataTable();
             dataResultado.Columns["idHotel"].Visible = false;  //oculto esta columna
             dataResultado.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dataResultado.Columns["ciudad"].Width = 80;
             btnDeshabilitar.Visible = true;
             btnModificar.Visible = true;
         }
@@ -141,6 +142,11 @@ namespace FrbaHotel.ABM_de_Hotel
             {
                 MessageBox.Show("Por favor seleccione antes el hotel que quiere dar de baja.");
             }
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
 
         }
     }

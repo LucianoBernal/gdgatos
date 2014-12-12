@@ -53,7 +53,7 @@ namespace FrbaHotel
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(78, 46);
+            this.btnCancelar.Location = new System.Drawing.Point(149, 46);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(130, 21);
             this.btnCancelar.TabIndex = 2;
@@ -63,7 +63,7 @@ namespace FrbaHotel
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(302, 46);
+            this.btnGuardar.Location = new System.Drawing.Point(358, 46);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(130, 21);
             this.btnGuardar.TabIndex = 3;
