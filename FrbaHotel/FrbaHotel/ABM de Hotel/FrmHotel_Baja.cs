@@ -31,10 +31,10 @@ namespace FrbaHotel.ABM_de_Hotel
                 bool okDuracion = int.TryParse(txtDuracion.Text, out duracion);
                 if (okDuracion == true)
                 {
-                    if (hotelPuedeDarseDeBaja(idHotel, txtFechaBaja.Value.ToString("yyyy-dd-MM HH:mm:ss"), duracion))
+                    if (hotelPuedeDarseDeBaja(idHotel, txtFechaBaja.Value.ToString("yyyy-MM-dd HH:mm:ss"), duracion))
                     {
                         new Query("INSERT INTO SKYNET.HistorialHoteles (hotel, fechaBaja, duracion, motivo) VALUES " +
-                            " (" + idHotel + ", '" + txtFechaBaja.Value.ToString("yyyy-dd-MM HH:mm:ss") + "', " + duracion + ", '" + txtMotivo.Text + "')").Ejecutar();
+                            " (" + idHotel + ", '" + txtFechaBaja.Value.ToString("yyyy-MM-dd HH:mm:ss") + "', " + duracion + ", '" + txtMotivo.Text + "')").Ejecutar();
                         MessageBox.Show("Se ha dado de baja el hotel en el rango.");
                         this.Hide();
                     }
@@ -56,8 +56,8 @@ namespace FrbaHotel.ABM_de_Hotel
         private bool hotelPuedeDarseDeBaja(int id, string desde, int dias)
         {
             string consulta = "SELECT COUNT (1) FROM SKYNET.Reservas WHERE (estado = 3 OR estado = 4) AND hotel = " + id + " AND " +
-                " (fechaDesde BETWEEN '" + desde + "' AND DATEADD(day," + dias + ",'" + desde + "')) OR " +
-                " (DATEADD(day, cantNoches, fechaDesde) BETWEEN '" + desde + "' AND DATEADD(day," + dias + ",'" + desde + "')) ";
+                " (fechaDesde BETWEEN '" + desde + "' AND DATEADD(day," + dias + ",'" + desde + "') OR " +
+                " DATEADD(day, cantNoches, fechaDesde) BETWEEN '" + desde + "' AND DATEADD(day," + dias + ",'" + desde + "')) ";
             int hayReservas = (int)new Query(consulta).ObtenerUnicoCampo();
             if (hayReservas > 0)
             {
