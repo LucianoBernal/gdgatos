@@ -35,13 +35,9 @@ namespace FrbaHotel.ABM_de_Hotel
                     if (hotelPuedeDarseDeBaja(idHotel, txtFechaBaja.Value.ToString("yyyy-MM-dd HH:mm:ss"), duracion))
                     {
                         new Query("INSERT INTO SKYNET.HistorialHoteles (hotel, fechaBaja, duracion, motivo) VALUES " +
-                            " (" + idHotel + ", '" + txtFechaBaja.Value.ToString("yyyy-MM-dd HH:mm:ss") + "', " + duracion + ", '" + txtMotivo.Text + "')").Ejecutar();
+                            " (" + idHotel + ", convert(datetime, '" + txtFechaBaja.Value.ToString("yyyy-MM-dd HH:mm:ss") + "', 121), " + duracion + ", '" + txtMotivo.Text + "')").Ejecutar();
                         MessageBox.Show("Se ha dado de baja el hotel en el rango.");
                         this.Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se puede dar de baja el hotel.");
                     }
                 }
                 else
@@ -56,25 +52,32 @@ namespace FrbaHotel.ABM_de_Hotel
         }
         private bool hotelPuedeDarseDeBaja(int id, string desde, int dias)
         {
-            string consulta = "SELECT COUNT (1) FROM SKYNET.Reservas WHERE (estado = 3 OR estado = 4) AND hotel = " + id + " AND " +
-                " (fechaDesde BETWEEN '" + desde + "' AND DATEADD(day," + dias + ",'" + desde + "') OR " +
-                " DATEADD(day, cantNoches, fechaDesde) BETWEEN '" + desde + "' AND DATEADD(day," + dias + ",'" + desde + "')) ";
-            int hayReservas = (int)new Query(consulta).ObtenerUnicoCampo();
-            if (hayReservas > 0)
-            {
-                MessageBox.Show("No se puede dar de baja debido a que hay Reservas para el rango dado.");
-                return (false);
+            string consulta = "SELECT COUNT (1) FROM SKYNET.HistorialHoteles WHERE hotel = "+id+" AND fechaBaja = convert(datetime, '" + desde + "', 121)";
+            int noSePuede = (int) new Query(consulta).ObtenerUnicoCampo();
+            if(noSePuede > 0){
+                MessageBox.Show("Ya existe una baja en esa fecha para el hotel.");
+                return false;
+            }else{
+                consulta = "SELECT COUNT (1) FROM SKYNET.Reservas WHERE (estado = 3 OR estado = 4) AND hotel = " + id + " AND " +
+                    " (fechaDesde BETWEEN convert(datetime, '" + desde + "', 121) AND DATEADD(day," + dias + ",convert(datetime, '" + desde + "', 121)) OR " +
+                    " DATEADD(day, cantNoches, fechaDesde) BETWEEN convert(datetime, '" + desde + "', 121) AND DATEADD(day," + dias + ",convert(datetime, '" + desde + "', 121))) ";
+                int hayReservas = (int)new Query(consulta).ObtenerUnicoCampo();
+                if (hayReservas > 0)
+                {
+                    MessageBox.Show("No se puede dar de baja debido a que hay Reservas para el rango dado.");
+                    return (false);
+                }
+                consulta = "SELECT COUNT (1) FROM SKYNET.Reservas WHERE estado = 2 AND hotel = " + id + " AND " +
+                    " (fechaDesde BETWEEN convert(datetime, '" + desde + "', 121) AND DATEADD(day," + dias + ",convert(datetime, '" + desde + "', 121)) OR " +
+                    " DATEADD(day, cantNoches, fechaDesde) BETWEEN convert(datetime, '" + desde + "', 121) AND DATEADD(day," + dias + ",convert(datetime, '" + desde + "', 121))) ";
+                int hayEstadia = (int)new Query(consulta).ObtenerUnicoCampo();
+                if (hayEstadia > 0)
+                {
+                    MessageBox.Show("No se puede dar de baja debido a que hay clientes hospedados para el rango dado.");
+                    return (false);
+                }
+                return (true);
             }
-            consulta = "SELECT COUNT (1) FROM SKYNET.Reservas WHERE estado = 2 AND hotel = " + id + " AND " +
-                " (fechaDesde BETWEEN '" + desde + "' AND DATEADD(day," + dias + ",'" + desde + "')) OR " +
-                " (DATEADD(day, cantNoches, fechaDesde) BETWEEN '" + desde + "' AND DATEADD(day," + dias + ",'" + desde + "')) ";
-            int hayEstadia = (int)new Query(consulta).ObtenerUnicoCampo();
-            if (hayEstadia > 0)
-            {
-                MessageBox.Show("No se puede dar de baja debido a que hay clientes hospedados para el rango dado.");
-                return (false);
-            }
-            return (true);
         }
     }
 }
