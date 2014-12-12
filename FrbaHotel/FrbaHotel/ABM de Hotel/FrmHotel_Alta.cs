@@ -18,6 +18,7 @@ namespace FrbaHotel.ABM_de_Hotel
         public FrmHotel_Alta()
         {
             InitializeComponent();
+            txtFecha.Value = Convert.ToDateTime(Globales.fechaSistema);
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)

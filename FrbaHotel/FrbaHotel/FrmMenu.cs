@@ -124,6 +124,7 @@ namespace FrbaHotel
                     if (Convert.ToInt32(query) == 3 || Convert.ToInt32(query) == 4)
                     {
                         MessageBox.Show("La reserva no se encuentra efectivizada, y por lo tanto no es posible registrar consumos");
+                        this.Show();
                     }
                 }
             }

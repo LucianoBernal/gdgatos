@@ -130,7 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 270);
+            this.ClientSize = new System.Drawing.Size(292, 186);
             this.Controls.Add(this.txtOcultoEstadia);
             this.Controls.Add(this.txtOcultoPrecio);
             this.Controls.Add(this.txtPrecios);

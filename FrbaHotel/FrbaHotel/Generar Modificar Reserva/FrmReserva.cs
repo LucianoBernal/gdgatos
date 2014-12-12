@@ -39,7 +39,15 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             if (!this.EsGenerar) CalcularHuespedes();
             AgregarTextos();
             txtHotel.Text = (new Query("SELECT nombre FROM SKYNET.Hoteles WHERE idHotel = "+Globales.idHotelElegido).ObtenerUnicoCampo()).ToString();
-            if (nroReserva > 0) CargarDatos(nroReserva);
+            if (nroReserva > 0)
+            {
+                CargarDatos(nroReserva);
+            }
+            else
+            {
+                dtpFechaDesde.Value = Convert.ToDateTime(Globales.fechaSistema);
+                dtpFechaHasta.Value = Convert.ToDateTime(Globales.fechaSistema);
+            }
         }
         public void CalcularHuespedes()
         {

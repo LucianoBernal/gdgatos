@@ -49,6 +49,7 @@ namespace FrbaHotel.Registrar_Consumible
                 new Query("INSERT INTO SKYNET.ConsumiblesEstadias " + listaTextos.GenerarInsert()).Ejecutar();
                 //            MessageBox.Show("INSERT INTO SKYNET.ConsumiblesEstadias " + listaTextos.GenerarInsert());
                 MessageBox.Show("Se ha registrado el consumo de " + txtCantidad.Text + " " + txtConsumibles.Text);
+                this.btnVolver_Click(this, e);
             }
         }
         private void btnVolver_Click(object sender, EventArgs e)

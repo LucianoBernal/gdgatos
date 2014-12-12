@@ -16,6 +16,7 @@ namespace FrbaHotel.ABM_de_Hotel
         {
             InitializeComponent();
             idHotel = id;
+            txtFechaBaja.Value = Convert.ToDateTime(Globales.fechaSistema);
         }
 
         private void FrmHotel_Baja_Load(object sender, EventArgs e)
