@@ -73,7 +73,6 @@ namespace FrbaHotel
             }
        /*     nombreUsuario = fn.getUsername(idUsuario);
 
-
             int IdRol = (int)new Query("SELECT count(*) FROM TABLA_ROL  " +
                                             " WHERE idUsuario = " + idUsuario).ObtenerUnicoCampo();
 
