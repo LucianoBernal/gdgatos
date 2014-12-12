@@ -357,12 +357,12 @@ where m.Hotel_Calle=h.calle and
 
 /*------------------------------------------------------------------------------*/
 /*Migro ItemsFactura*/ 
-Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle)
-select e.numeroFactura,e.itemFactura,'Estadia'
+Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle,cantidad,precioUnitario)
+select e.numeroFactura,e.itemFactura,'Estadia',1,e.precioPorNocheEstadia
 from SKYNET.Estadias e
 
-Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle)
-select ce.numeroFactura,ce.itemFactura,c.nombre
+Insert into SKYNET.ItemsFactura(numeroFactura,item,detalle,cantidad,precioUnitario)
+select ce.numeroFactura,ce.itemFactura,c.nombre,ce.cantidad,c.precio
 from SKYNET.ConsumiblesEstadias ce,SKYNET.Consumibles c
 where ce.consumible=c.codigo
 

@@ -37,19 +37,25 @@ if (not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))/*
 		insert SKYNET.DatosTarjeta(nroFactura,numTarjeta,datosTarjeta)
 		values(@numeroFactura,@numTarjeta,@datosTarjeta) 
 		end
-	insert SKYNET.ItemsFactura(numeroFactura,item,detalle) values(@numeroFactura,1,'Estadia')
+	insert into SKYNET.ItemsFactura(numeroFactura,item,detalle,cantidad,precioUnitario) (select @numeroFactura,1,'Estadia efectiva de '+convert(nvarchar(4),coalesce(e.cantNoches,0))+case when(e.cantNoches=1)then' dia' else ' dias'end+' sobre una reserva de '
+			+convert(nvarchar(4),r.cantNoches)+case when(r.cantNoches=1)then' dia' else ' dias'end ,1,(e.precioPorNocheEstadia *  r.cantNoches)	from Skynet.Estadias e,Skynet.Reservas r
+																	where e.reserva=r.codigoReserva
+																	and e.reserva=@estadia)
 	update SKYNET.Estadias set numeroFactura=@numeroFactura,itemFactura=1
 	where reserva=@estadia
 	create table #consumiblesDeLaEstadia(
 				idTemporal numeric(18,0) identity(0,1),
 				idConsumibleEstadia numeric(18,0),
-				nombreConsumible nvarchar(255))
-	insert into #consumiblesDeLaEstadia(idConsumibleEstadia,nombreConsumible)
+				nombreConsumible nvarchar(255),
+				cantidad numeric(18,0),
+				precioUnitario numeric(18,0))
+	insert into #consumiblesDeLaEstadia(idConsumibleEstadia,nombreConsumible,cantidad,precioUnitario)
 	(select ce.idConsumibleEstadia,(select c.nombre from Consumibles c
-								 where c.codigo=ce.consumible)
+								 where c.codigo=ce.consumible),ce.cantidad,ce.precioTotal/ce.cantidad
 	from SKYNET.ConsumiblesEstadias ce
 	where ce.estadia=@estadia)
 	declare @contador int,@cantFilas int,@item int,@idConsumibleEstadia numeric(18,0),@nombreConsumible nvarchar(255)
+	declare @cantidad numeric(18,0),@precioUnitario numeric(18,2)
 	set @contador=0
 	set @cantFilas= (select COUNT(*) from #consumiblesDeLaEstadia)
 	set @item=2
@@ -57,18 +63,31 @@ if (not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))/*
 	NOCHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura
 	while @contador<@cantFilas
 	begin
-	select @idConsumibleEstadia=idConsumibleEstadia,@nombreConsumible=nombreConsumible
+	select @idConsumibleEstadia=idConsumibleEstadia,@nombreConsumible=nombreConsumible,
+	@cantidad=cantidad,@precioUnitario=precioUnitario
 	from #consumiblesDeLaEstadia
 	where idTemporal=@contador
 	update SKYNET.ConsumiblesEstadias set numeroFactura=@numeroFactura,itemFactura=@item
 	where idConsumibleEstadia= @idConsumibleEstadia
-	insert SKYNET.ItemsFactura(numeroFactura,item,detalle)
-	values (@numeroFactura,@item,@nombreConsumible)
+	insert SKYNET.ItemsFactura(numeroFactura,item,detalle,cantidad,precioUnitario)
+	values (@numeroFactura,@item,@nombreConsumible,@cantidad,@precioUnitario)
 	set @item=@item+1
 	set @contador=@contador+1
 	end
 	ALTER TABLE SKYNET.ConsumiblesEstadias
 	CHECK CONSTRAINT FK_ConsumiblesEstadias_ItemsFactura
+	declare @inconsistencia numeric(18,2),@monto numeric(18,2)
+	select @inconsistencia=f.diferenciaInconsistencia,@monto=f.monto from SKYNET.Facturas f where f.facturaNumero=@numeroFactura
+	;DISABLE TRIGGER calculo_monto_factura on SKYNET.ItemsFactura
+	if(@inconsistencia=0)
+	begin	
+	insert SKYNET.ItemsFactura(numeroFactura,item,detalle,cantidad,precioUnitario) 
+		   values(@numeroFactura,@item,'Descuento por regimen '+(select reg.descripcion from SKYNET.Reservas r,SKYNET.Regimenes reg
+												  where r.codigoReserva=@estadia
+												  and r.regimen=reg.idRegimen),1,(@monto-(select sum(cantidad*precioUnitario) from SKYNET.ItemsFactura itf
+																						where itf.numeroFactura=@numeroFactura)))
+	end
+	;ENABLE TRIGGER calculo_monto_factura on SKYNET.ItemsFactura
 	end
 end
 /* Emitir factura*/
@@ -98,32 +117,13 @@ if(not exists(select 1 from SKYNET.Facturas f where f.estadia=@estadia))
 	begin
 	declare @cantidad numeric(18,0)
 	insert into @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal)
-		   (select e.numeroFactura,e.itemFactura,'Estadia efectiva de '+convert(nvarchar(4),coalesce(e.cantNoches,0))+case when(e.cantNoches=1)then' dia' else ' dias'end+' sobre una reserva de '
-			+convert(nvarchar(4),r.cantNoches)+case when(r.cantNoches=1)then' dia' else ' dias'end ,1,(e.precioPorNocheEstadia *  r.cantNoches),(e.precioPorNocheEstadia *  r.cantNoches)
-			from Skynet.Estadias e,Skynet.Reservas r
-			where e.reserva=r.codigoReserva
-			and e.reserva=@estadia)
-			union
-			(select f.facturaNumero,itf.item,itf.detalle,(select ce.cantidad from 
-															 Skynet.ConsumiblesEstadias ce where ce.estadia=@estadia 
-															 and ce.itemFactura=itf.item),(select c.precio from 
-															 Skynet.ConsumiblesEstadias ce, SKYNET.Consumibles c where ce.estadia=@estadia 
-															 and ce.itemFactura=itf.item and ce.consumible=c.codigo),(select ce.precioTotal from 
-															 Skynet.ConsumiblesEstadias ce where ce.estadia=@estadia 
-															 and ce.itemFactura=itf.item)
+		 	(select f.facturaNumero,itf.item,itf.detalle,itf.cantidad,itf.precioUnitario,itf.cantidad*itf.precioUnitario
 			from Skynet.Facturas f,SKYNET.ItemsFactura itf
-			 where itf.detalle!='Estadia' and f.estadia=@estadia
+			 where f.estadia=@estadia
 			 and itf.numeroFactura=f.facturaNumero)
 			 order by 2
 	 declare @inconsistencia numeric (18,2),@monto numeric(18,2)
 	 select @monto=f.monto,@inconsistencia=f.diferenciaInconsistencia from SKYNET.Facturas f where f.estadia=@estadia
-	if(@inconsistencia=0)
-	begin
-	insert @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal) 
-		   values('','','Descuento por regimen '+(select reg.descripcion from SKYNET.Reservas r,SKYNET.Regimenes reg
-												  where r.codigoReserva=@estadia
-												  and r.regimen=reg.idRegimen),'','',@monto-(select sum(SubTotal) from @retorno))
-	end
 	insert @retorno(NumeroDeFactura,Item,Detalle,Cantidad,PrecioUnitario,SubTotal) 
 		   values('','','Total','','',@monto)
 	 if(@inconsistencia!=0)
