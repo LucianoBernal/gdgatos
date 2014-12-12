@@ -18,6 +18,7 @@ namespace FrbaHotel
         private int idRol;
         private Button botonSistema;
         private Button botonHuesped;
+        private Button btnSalir;
         Funciones fn = new Funciones();
 
         public FrmPrincipal()
@@ -31,6 +32,7 @@ namespace FrbaHotel
         {
             this.botonSistema = new System.Windows.Forms.Button();
             this.botonHuesped = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // botonSistema
@@ -53,9 +55,20 @@ namespace FrbaHotel
             this.botonHuesped.UseVisualStyleBackColor = true;
             this.botonHuesped.Click += new System.EventHandler(this.botonHuesped_Click);
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(73, 201);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(133, 39);
+            this.btnSalir.TabIndex = 2;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // FrmPrincipal
             // 
-            this.ClientSize = new System.Drawing.Size(284, 199);
+            this.ClientSize = new System.Drawing.Size(284, 267);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.botonHuesped);
             this.Controls.Add(this.botonSistema);
             this.Name = "FrmPrincipal";
@@ -109,6 +122,11 @@ namespace FrbaHotel
             //fn.recibirHuesped();
             //FrmMenu frmMenu = new FrmMenu();
             //frmMenu.ShowDialog();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
