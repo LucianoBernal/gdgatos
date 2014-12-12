@@ -66,6 +66,11 @@ namespace FrbaHotel
         }
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
+            int bajaGuest = (int)(new Query("SELECT convert(int,baja) FROM SKYNET.Roles WHERE nombre = 'GUEST'").ObtenerUnicoCampo());
+            if (bajaGuest == 1)
+            {
+                botonHuesped.Enabled = false;
+            }
        /*     nombreUsuario = fn.getUsername(idUsuario);
 
 
