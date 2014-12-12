@@ -57,7 +57,7 @@ namespace FrbaHotel.Login
 
         public void cargarHoteles()
         {
-            string sql = "SELECT DISTINCT(h.calle) FROM SKYNET.Hoteles h,SKYNET.UsuarioRolHotel ur, SKYNET.Roles r WHERE r.idRol = ur.Rol AND r.baja = 0 AND ur.hotel = h.idHotel AND ur.usuario = " + idUsuario;/*agregar baja del hotel*/
+            string sql = "SELECT DISTINCT(h.nombre) FROM SKYNET.Hoteles h,SKYNET.UsuarioRolHotel ur, SKYNET.Roles r WHERE r.idRol = ur.Rol AND r.baja = 0 AND ur.hotel = h.idHotel AND ur.usuario = " + idUsuario+" ORDER BY h.nombre ASC";/*agregar baja del hotel*/
 
 
             Query qry = new Query(sql);
