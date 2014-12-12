@@ -116,7 +116,7 @@
             this.txtCiudad.Location = new System.Drawing.Point(371, 16);
             this.txtCiudad.Name = "txtCiudad";
             this.txtCiudad.Size = new System.Drawing.Size(178, 20);
-            this.txtCiudad.TabIndex = 1;
+            this.txtCiudad.TabIndex = 2;
             // 
             // label6
             // 
