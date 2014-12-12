@@ -93,7 +93,11 @@ namespace FrbaHotel.ABM_de_Habitacion
             return Convert.ToInt32(fila.Cells["numero"].Value.ToString());
 
         }
-
+        private bool estaOcupada(int hotel, int numero)
+        {
+            int resultado = Convert.ToInt32(new Query("SELECT COUNT(*) FROM SKYNET.EstadiaPorHabitacion, SKYNET.Reservas WHERE idEstadia = codigoReserva AND idHabitacion = " + numero + " AND idHotel = " + hotel + "AND ((SELECT CONVERT(datetime, '" + Globales.fechaSistema + "', 121)) between fechaDesde and dateadd(dd, cantNoches, fechaDesde))").ObtenerUnicoCampo());
+            return resultado > 0;
+        }
         private void btnDeshabilitar_Click(object sender, EventArgs e)
         {
             int idNumero = idNumeroSeleccionado();
@@ -101,19 +105,19 @@ namespace FrbaHotel.ABM_de_Habitacion
 
             if (estaHabilitado(idHotel, idNumero))
             {
-                //if (!estaOcupada(idHotel, idNumero))
-                //{
+                if (!estaOcupada(idHotel, idNumero))
+                {
                     new Query("UPDATE SKYNET.Habitaciones SET baja = 1 WHERE numero = " + idNumero + " AND hotel = " + idHotel).Ejecutar();
                     MessageBox.Show("La habitacion ha sido Deshabilitado.", "Aviso",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataResultado.SelectedRows[0].Cells["habilitado"].Value = "NO";
-               /*creo que no va 
+               
                 }
                 else
                 {
                     MessageBox.Show("La Habitacion no puede ser Deshabilitada ya que se encuentra Ocupada.", "Advertencia",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }*/
+                }
             }
             else
             {
