@@ -30,6 +30,7 @@ namespace FrbaHotel.ABM_de_Usuario
             listaTextos.Agregar(txtOcultoNumDoc, false, "numDoc");
             listaTextos.Agregar(txtOcultoTelefono, false, "telefono");
             listaTextos.Agregar(txtOcultoTipoDoc, false, "tipoDoc");
+            listaTextos.Agregar(txtOcultoFecha, false, "fechaNac"); 
         }
         private void FrmUsuario_Mod_Load(object sender, EventArgs e)
         {
@@ -58,7 +59,7 @@ namespace FrbaHotel.ABM_de_Usuario
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            txtOcultoFecha.Text = "(SELECT CONVERT(datetime, '" + txtFecha.Value.ToString("yyyy-MM-dd") + "',121))";
             txtOcultoNumCalle.Text = txtNumCalle.Value.ToString();
             txtOcultoNumDoc.Text = txtNumDoc.Value.ToString();
             txtOcultoTelefono.Text = txtTelefono.Value.ToString(); 

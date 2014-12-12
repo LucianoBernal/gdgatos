@@ -62,7 +62,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.SuspendLayout();
             // 
             // botonGuardar
@@ -87,6 +95,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numericUpDown5);
+            this.groupBox1.Controls.Add(this.numericUpDown4);
+            this.groupBox1.Controls.Add(this.numericUpDown2);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.txtOcultoNacionalidad);
             this.groupBox1.Controls.Add(this.txtOcultoPaisDeOrigen);
             this.groupBox1.Controls.Add(this.txtRol);
@@ -99,20 +111,16 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtDepto);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtPiso);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.txtFecha);
             this.groupBox1.Controls.Add(this.txtMail);
-            this.groupBox1.Controls.Add(this.txtTelefono);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.txtNumCalle);
             this.groupBox1.Controls.Add(this.txtCalle);
             this.groupBox1.Controls.Add(this.label40);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtTipoDoc);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.txtNumDoc);
             this.groupBox1.Controls.Add(this.txtApellido);
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.label6);
@@ -231,10 +239,11 @@
             // 
             // txtPiso
             // 
-            this.txtPiso.Location = new System.Drawing.Point(465, 107);
+            this.txtPiso.Location = new System.Drawing.Point(332, 320);
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(48, 20);
             this.txtPiso.TabIndex = 58;
+            this.txtPiso.Visible = false;
             // 
             // label12
             // 
@@ -262,10 +271,11 @@
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(399, 77);
+            this.txtTelefono.Location = new System.Drawing.Point(266, 290);
             this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(178, 20);
+            this.txtTelefono.Size = new System.Drawing.Size(39, 20);
             this.txtTelefono.TabIndex = 48;
+            this.txtTelefono.Visible = false;
             // 
             // label11
             // 
@@ -278,10 +288,11 @@
             // 
             // txtNumCalle
             // 
-            this.txtNumCalle.Location = new System.Drawing.Point(352, 107);
+            this.txtNumCalle.Location = new System.Drawing.Point(219, 320);
             this.txtNumCalle.Name = "txtNumCalle";
             this.txtNumCalle.Size = new System.Drawing.Size(64, 20);
             this.txtNumCalle.TabIndex = 51;
+            this.txtNumCalle.Visible = false;
             // 
             // txtCalle
             // 
@@ -337,10 +348,11 @@
             // 
             // txtNumDoc
             // 
-            this.txtNumDoc.Location = new System.Drawing.Point(399, 48);
+            this.txtNumDoc.Location = new System.Drawing.Point(266, 261);
             this.txtNumDoc.Name = "txtNumDoc";
-            this.txtNumDoc.Size = new System.Drawing.Size(178, 20);
+            this.txtNumDoc.Size = new System.Drawing.Size(39, 20);
             this.txtNumDoc.TabIndex = 46;
+            this.txtNumDoc.Visible = false;
             this.txtNumDoc.TextChanged += new System.EventHandler(this.txtNumDoc_TextChanged);
             // 
             // txtApellido
@@ -384,20 +396,72 @@
             this.label4.TabIndex = 40;
             this.label4.Text = "Nombre:";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(355, 108);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDown1.TabIndex = 74;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(465, 108);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown2.TabIndex = 75;
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.Location = new System.Drawing.Point(399, 49);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(178, 20);
+            this.numericUpDown4.TabIndex = 76;
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.Location = new System.Drawing.Point(399, 78);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(178, 20);
+            this.numericUpDown5.TabIndex = 77;
+            // 
             // FrmCliente_Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 293);
+            this.ClientSize = new System.Drawing.Size(639, 298);
             this.Controls.Add(this.botonGuardar);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.txtNumDoc);
+            this.Controls.Add(this.txtNumCalle);
+            this.Controls.Add(this.txtTelefono);
+            this.Controls.Add(this.txtPiso);
             this.Name = "FrmCliente_Alta";
             this.Text = "Alta de Cliente";
             this.Load += new System.EventHandler(this.FrmCliente_Alta_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -437,5 +501,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

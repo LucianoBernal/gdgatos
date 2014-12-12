@@ -91,6 +91,11 @@ namespace FrbaHotel.ABM_de_Cliente
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
+
+            txtNumDoc.Text = numericUpDown4.Value.ToString();
+            txtTelefono.Text = numericUpDown5.Value.ToString();
+            txtNumCalle.Text = numericUpDown1.Value.ToString();
+            txtPiso.Text = numericUpDown2.Value.ToString(); 
             txtOcultoTipoDoc.Text = listaTipoDoc.ObtenerId(txtTipoDoc.Text).ToString();
             txtOcultoNacionalidad.Text = listaNacionalidad.ObtenerId(txtNacionalidad.Text).ToString();
             txtOcultoPaisDeOrigen.Text = listaPaisDeOrigen.ObtenerId(txtPaisDeOrigen.Text).ToString();
@@ -149,7 +154,7 @@ namespace FrbaHotel.ABM_de_Cliente
                         strquery = strquery + " ) ";
 
                         new Query(strquery).Ejecutar();
-                        MessageBox.Show("Ya esta");
+                        //MessageBox.Show("Ya esta");
                         this.Visible = false;
                         if (Padre != null || PadrePosta != null)
                         {

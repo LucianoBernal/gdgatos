@@ -53,6 +53,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.txtOcultoFecha = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumCalle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTelefono)).BeginInit();
@@ -61,6 +62,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtOcultoFecha);
             this.groupBox2.Controls.Add(this.btnVolver);
             this.groupBox2.Controls.Add(this.txtNumCalle);
             this.groupBox2.Controls.Add(this.txtTelefono);
@@ -307,6 +309,14 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Nombre:";
             // 
+            // txtOcultoFecha
+            // 
+            this.txtOcultoFecha.Location = new System.Drawing.Point(113, 191);
+            this.txtOcultoFecha.Name = "txtOcultoFecha";
+            this.txtOcultoFecha.Size = new System.Drawing.Size(37, 20);
+            this.txtOcultoFecha.TabIndex = 46;
+            this.txtOcultoFecha.Visible = false;
+            // 
             // FrmUsuario_Mod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -352,5 +362,6 @@
         private System.Windows.Forms.NumericUpDown txtTelefono;
         private System.Windows.Forms.NumericUpDown txtNumDoc;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.TextBox txtOcultoFecha;
     }
 }

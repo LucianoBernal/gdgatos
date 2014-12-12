@@ -34,7 +34,7 @@ namespace FrbaHotel.ABM_de_Usuario
             listaTextos.Agregar(txtOcultoTelefono, false, "telefono");
             listaTextos.Agregar(txtCalle, true, "calle");
             listaTextos.Agregar(txtOcultoNumCalle, false, "numCalle");
-            listaTextos.Agregar(txtOcultoFecha, true, "fechaNac");
+            listaTextos.Agregar(txtOcultoFecha, false, "fechaNac");
         }
 
         public FrmUsuario_Alta()
@@ -135,7 +135,7 @@ namespace FrbaHotel.ABM_de_Usuario
             txtOcultoTipoDoc.Text = ListaDocumentos.ObtenerId(txtTipoDoc.Text).ToString();
             txtOcultoHotel.Text = ListaHoteles.ObtenerId(txtHotel.Text).ToString();
             txtOcultoRol.Text = ListaRoles.ObtenerId(txtRol.Text).ToString();
-            txtOcultoFecha.Text = txtFecha.Value.ToString("yyyy-dd-MM HH:mm:ss");
+            txtOcultoFecha.Text = "(SELECT CONVERT(datetime, '"+txtFecha.Value.ToString("yyyy-MM-dd")+"', 121))";
             txtOcultoPass.Text = fn.getSha256(txtPass.Text);
             txtOcultoNumCalle.Text = txtNumCalle.Value.ToString();
             txtOcultoNumDoc.Text = txtNumDoc.Value.ToString();

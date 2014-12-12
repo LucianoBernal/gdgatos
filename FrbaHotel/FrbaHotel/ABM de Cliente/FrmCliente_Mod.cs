@@ -160,7 +160,7 @@ namespace FrbaHotel.ABM_de_Cliente
                         }
                         strquery = strquery + "WHERE idCliente = " + idCliente.ToString();
                         new Query(strquery).Ejecutar();
-                        MessageBox.Show("Ya esta");
+                        //MessageBox.Show("Ya esta");
                         FrmCliente_List cliente = new FrmCliente_List();
                         this.Visible=false;
                         cliente.ShowDialog();
