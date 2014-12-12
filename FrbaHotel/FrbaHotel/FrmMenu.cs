@@ -35,6 +35,7 @@ namespace FrbaHotel
             if (tipoResp == 1 && respuesta != null)
             {
                 object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta + " AND hotel= " + Globales.idHotelElegido + " ").ObtenerUnicoCampo();
+               
                 if (query == null)
                 {
                     if (Convert.ToInt32(respuesta) > 0)

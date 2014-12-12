@@ -157,6 +157,15 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         }
         private void ComprobarDisponibilidadPosta()
         {
+            //int duracion = (dtpFechaHasta.Value.Date - dtpFechaDesde.Value.Date).Days;
+            //object bajaHotel = new Query("select SKYNET.validarBajaHotel(" + Globales.idHotelElegido + ",(SELECT convert(datetime, '" + dtpFechaDesde.Value.ToString("yyyy-MM-dd") + "', 121)),"+duracion+")").ObtenerUnicoCampo();
+            //if (bajaHotel != null) 
+            //{
+              //  MessageBox.Show("No puede reservar en este hotel para el rango de fechas ingresado");
+                //txtDisponibilidad.Text = "-";
+                //btnRunBaby.Enabled = false;
+                
+            //}
             if (txtCantHuespedes.Text == "" || txtRegimenIns.Text == "" || (dtpFechaDesde.Value >= dtpFechaHasta.Value))
             {
                 txtDisponibilidad.Text = "-";
