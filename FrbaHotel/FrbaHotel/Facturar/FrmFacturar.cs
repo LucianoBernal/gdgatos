@@ -66,11 +66,15 @@ namespace FrbaHotel.Facturar
                     con.Open();
                     cmd.ExecuteNonQuery();
                 }
-            }//i like hardcodin'
-//            new Query("exec SKYNET.facturarUnaEstadia @estadia=" + this.Reserva.ToString() + ", @fecha='" + Globales.fechaSistema.ToString() + "', @nombreTipoPago='" + txtTipoPago.Text + "', @numTarjeta=" + (txtNumeroTarjeta.Text==""?"0":txtNumeroTarjeta.Text) + ", @datosTarjeta='" + txtDatosTarjeta.Text+"'").Ejecutar();
-            //Ponele que ya deberia haber facturado
+            }
             string strquery = "SELECT * FROM SKYNET.emitirFactura(" + this.Reserva.ToString() + ")";
             mostrarResultado(strquery);
+            btnFacturar.Enabled = false;
+            txtDatosTarjeta.Enabled = false;
+            txtNumeroTarjeta.Enabled = false;
+            txtReserva.Enabled = false;
+            txtTipoPago.Enabled = false;
+            
         }
         private void mostrarResultado(string strQuery)
         {
