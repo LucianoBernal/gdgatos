@@ -48,7 +48,7 @@
             this.btnModificar.Location = new System.Drawing.Point(463, 308);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(98, 30);
-            this.btnModificar.TabIndex = 35;
+            this.btnModificar.TabIndex = 4;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -58,7 +58,7 @@
             this.btnHabilitar.Location = new System.Drawing.Point(347, 308);
             this.btnHabilitar.Name = "btnHabilitar";
             this.btnHabilitar.Size = new System.Drawing.Size(98, 30);
-            this.btnHabilitar.TabIndex = 34;
+            this.btnHabilitar.TabIndex = 5;
             this.btnHabilitar.Text = "Habilitar";
             this.btnHabilitar.UseVisualStyleBackColor = true;
             this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
@@ -68,7 +68,7 @@
             this.btnDeshabilitar.Location = new System.Drawing.Point(125, 308);
             this.btnDeshabilitar.Name = "btnDeshabilitar";
             this.btnDeshabilitar.Size = new System.Drawing.Size(98, 30);
-            this.btnDeshabilitar.TabIndex = 33;
+            this.btnDeshabilitar.TabIndex = 6;
             this.btnDeshabilitar.Text = "Deshabilitar";
             this.btnDeshabilitar.UseVisualStyleBackColor = true;
             this.btnDeshabilitar.Click += new System.EventHandler(this.btnDeshabilitar_Click);
@@ -78,7 +78,7 @@
             this.btnVolver.Location = new System.Drawing.Point(12, 308);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(98, 30);
-            this.btnVolver.TabIndex = 32;
+            this.btnVolver.TabIndex = 7;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -121,7 +121,7 @@
             this.txtTipo.Location = new System.Drawing.Point(107, 22);
             this.txtTipo.Name = "txtTipo";
             this.txtTipo.Size = new System.Drawing.Size(161, 21);
-            this.txtTipo.TabIndex = 33;
+            this.txtTipo.TabIndex = 1;
             // 
             // label1
             // 
@@ -137,7 +137,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(9, 63);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 21;
+            this.btnLimpiar.TabIndex = 3;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -147,7 +147,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(113, 63);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 7;
+            this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);

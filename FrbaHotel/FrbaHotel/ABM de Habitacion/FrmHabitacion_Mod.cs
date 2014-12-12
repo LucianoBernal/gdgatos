@@ -125,8 +125,8 @@ namespace FrbaHotel.ABM_de_Habitacion
                     string strquery = "UPDATE SKYNET.Habitaciones SET hotel=" + txtOcultoHotel.Text + ", numero =" + txtNumero.Text + ", " +
                                 "piso=" + txtPiso.Value + ", ubicacion='" + txtUbicacion.Text + "', baja=" + baja + ", descripcion=" + descripcion + " " +
                                 " WHERE hotel = " + hotel + " AND numero = " + numeroHabitacion;
-                    MessageBox.Show("SQL" + strquery);
                     new Query(strquery).Ejecutar();
+                    MessageBox.Show("La habitacion fue modificada con exito.");
                     this.Visible = false;
                     FrmHabitacion_List frm = new FrmHabitacion_List();
                     frm.ShowDialog();

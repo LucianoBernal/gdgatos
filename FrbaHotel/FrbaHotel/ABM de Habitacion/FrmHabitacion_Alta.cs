@@ -90,9 +90,8 @@ namespace FrbaHotel.ABM_de_Habitacion
                         }
                         string strquery = "INSERT INTO SKYNET.Habitaciones (hotel, numero, piso, tipo, ubicacion, baja, descripcion) VALUES "+
                             " (" + txtOcultoHotel.Text + ", " + txtNumero.Text + ", " + txtPiso.Value + ", " + txtOcultoTipo.Text + ", '" + txtUbicacion.Text + "', " + baja + ", " + descripcion + ")";
-                        MessageBox.Show("SQL"+strquery);
                         new Query(strquery).Ejecutar();
-                        MessageBox.Show("Ya esta");
+                        MessageBox.Show("La habitacion ha sido dada de alta con exito.");
                         this.Visible = false;
                     }else{  
                         MessageBox.Show("Ya existe el numero de la habitacion en dicho Hotel.");
