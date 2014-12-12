@@ -49,7 +49,7 @@ namespace FrbaHotel.ABM_de_Habitacion
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmHabitacion habitacion = new FrmHabitacion();
-            this.Hide();
+            this.Visible=false;
             habitacion.ShowDialog();
             habitacion = (FrmHabitacion)this.ActiveMdiChild;
         }

@@ -85,7 +85,7 @@ namespace FrbaHotel.ABM_de_Cliente
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmCliente_List cliente = new FrmCliente_List();
-            this.Hide();
+            this.Visible=false;
             cliente.ShowDialog();
             cliente = (FrmCliente_List)this.ActiveMdiChild;
         }
@@ -151,7 +151,7 @@ namespace FrbaHotel.ABM_de_Cliente
                         new Query(strquery).Ejecutar();
                         MessageBox.Show("Ya esta");
                         FrmCliente_List cliente = new FrmCliente_List();
-                        this.Hide();
+                        this.Visible=false;
                         cliente.ShowDialog();
                         cliente = (FrmCliente_List)this.ActiveMdiChild;
                     }

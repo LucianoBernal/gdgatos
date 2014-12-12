@@ -34,17 +34,17 @@ namespace FrbaHotel
         {//A esta hora me importa poco repetir codigo
             if (tipoResp == 1 && respuesta != null)
             {
-                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta).ObtenerUnicoCampo();
+                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta + " AND hotel= " + Globales.idHotelElegido + " ").ObtenerUnicoCampo();
                 if (query == null)
                 {
                     if (Convert.ToInt32(respuesta) > 0)
                     {
                         MessageBox.Show("Ha ingresado un numero de reserva no valido");
-                        this.Show();
+                        this.ShowDialog();
                     }
                     else {
                         FrmReserva nuevo = new FrmReserva(Convert.ToUInt32(respuesta), this);
-                        nuevo.Show();
+                        nuevo.ShowDialog();
                     }
                     //TerminarMetodo
                 }
@@ -53,29 +53,29 @@ namespace FrbaHotel
                     if (Convert.ToInt32(query) == 1 || Convert.ToInt32(query) == 5 || Convert.ToInt32(query) == 6)
                     {
                         MessageBox.Show("La reserva ingresada se encuentra cancelada");
-                        this.Show();
+                        this.ShowDialog();
                         //TerminarMetodo
                     }
                     if (Convert.ToInt32(query) == 2)
                     {
                         MessageBox.Show("La reserva ya tiene una estadia asociada, por lo cual no puede modificarse");
-                        this.Show();
+                        this.ShowDialog();
                         //TerminarMetodo
                     }
                     if (Convert.ToInt32(query) == 3 || Convert.ToInt32(query) == 4)
                     {
                         FrmReserva nuevo = new FrmReserva(Convert.ToUInt32(respuesta), this);
-                        nuevo.Show();
+                        nuevo.ShowDialog();
                     }
                 }
             }
             if (tipoResp == 2 && respuesta != null)
             {
-                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta).ObtenerUnicoCampo();
+                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta + " AND hotel= " + Globales.idHotelElegido + " ").ObtenerUnicoCampo();
                 if (query == null)
                 {
                     MessageBox.Show("Ha ingresado un numero de reserva no valido");
-                    this.Show();
+                    this.ShowDialog();
                     //TerminarMetodo
                 }
                 else
@@ -83,48 +83,54 @@ namespace FrbaHotel
                     if (Convert.ToInt32(query) == 1 || Convert.ToInt32(query) == 5 || Convert.ToInt32(query) == 6)
                     {
                         MessageBox.Show("La reserva ingresada ya se encuentra cancelada");
-                        this.Show();
+                        this.ShowDialog();
                         //TerminarMetodo
                     }
                     if (Convert.ToInt32(query) == 2)
                     {
                         MessageBox.Show("La reserva ya tiene una estadia asociada, por lo cual no puede ser cancelada");
-                        this.Show();
+                        this.ShowDialog();
                         //TerminarMetodo
                     }
                     if (Convert.ToInt32(query) == 3 || Convert.ToInt32(query) == 4)
                     {
                         FrmCancelarReserva nuevo = new FrmCancelarReserva(Convert.ToInt32(respuesta), this);
-                        nuevo.Show();
+                        nuevo.ShowDialog();
                     }
                 }
             }
             if (tipoResp == 3 && respuesta != null)
             {
-                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta).ObtenerUnicoCampo();
-                if (query == null)
-                {
-                    MessageBox.Show("Ha ingresado un numero de reserva no valido");
-                    this.Show();
-                    //TerminarMetodo
-                }
-                else
-                {
-                    if (Convert.ToInt32(query) == 1 || Convert.ToInt32(query) == 5 || Convert.ToInt32(query) == 6)
+                object query = new Query("SELECT estado FROM SKYNET.Reservas WHERE codigoReserva =" + respuesta + " AND hotel= " + Globales.idHotelElegido + " ").ObtenerUnicoCampo();
+                object query2 = new Query("SELECT TOP 1 * FROM SKYNET.Facturas WHERE estadia =" + respuesta).ObtenerUnicoCampo();
+                    if (query == null)
                     {
-                        MessageBox.Show("La reserva ingresada ya se encuentra cancelada");
-                        this.Show();
+                        MessageBox.Show("Ha ingresado un numero de reserva no valido");
+                        this.ShowDialog();
                         //TerminarMetodo
                     }
-                    if (Convert.ToInt32(query) == 2)
-                    {//Deberia ademas preguntar que la estadia no tiene fecha de egreso
-                        FrmRegistrarConsumibles nuevo = new FrmRegistrarConsumibles(Convert.ToInt32(respuesta), this);
-                        nuevo.Show();
-                    }
-                    if (Convert.ToInt32(query) == 3 || Convert.ToInt32(query) == 4)
+                    else {               if (query2 != null)
+                {
+                    MessageBox.Show("La reserva ingresada ya ha sido facturada");
+                    this.Show();
+                }else 
                     {
-                        MessageBox.Show("La reserva no se encuentra efectivizada, y por lo tanto no es posible registrar consumos");
-                        this.Show();
+                        if (Convert.ToInt32(query) == 1 || Convert.ToInt32(query) == 5 || Convert.ToInt32(query) == 6)
+                        {
+                            MessageBox.Show("La reserva ingresada se encuentra cancelada");
+                            this.Show();
+                            //TerminarMetodo
+                        }
+                        if (Convert.ToInt32(query) == 2)
+                        {//Deberia ademas preguntar que la estadia no tiene fecha de egreso
+                            FrmRegistrarConsumibles nuevo = new FrmRegistrarConsumibles(Convert.ToInt32(respuesta), this);
+                            nuevo.Show();
+                        }
+                        if (Convert.ToInt32(query) == 3 || Convert.ToInt32(query) == 4)
+                        {
+                            MessageBox.Show("La reserva no se encuentra efectivizada, y por lo tanto no es posible registrar consumos");
+                            this.Show();
+                        }
                     }
                 }
             }
@@ -333,21 +339,21 @@ namespace FrbaHotel
 
         private void btnRoles_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
             FrmRol rol = new FrmRol();
             rol.ShowDialog();
         }
 
         private void btnUsuario_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
             FrmUsuario usuario = new FrmUsuario();
             usuario.ShowDialog();
         }
 
         private void btnHotel_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
             FrmHotel hotel = new FrmHotel();
             hotel.ShowDialog();
         }
@@ -355,7 +361,7 @@ namespace FrbaHotel
         private void btnRegimenEstadia_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Esto no se encuentra en el dominio del trabajo practico.");
-            /*this.Hide();
+            /*this.Visible=false;
             FrmRegimenes reg = new FrmRegimenes();
             reg.ShowDialog();*/
         }
@@ -363,51 +369,51 @@ namespace FrbaHotel
         private void btnReserva_Click(object sender, EventArgs e)
         {
             FrmDialogBox dialog = new FrmDialogBox(this, "Si tiene su numero de reserva, ingresela. Si quiere crear una, ingrese 0", 1);
-            this.Hide();
-            dialog.Show();
+            this.Visible=false;
+            dialog.ShowDialog();
 
         }
 
 	private void btnClientes_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
             FrmCliente cliente = new FrmCliente();
-            cliente.Show();
+            cliente.ShowDialog();
         }
 
     private void btnClientes_Click_1(object sender, EventArgs e)
     {
-        this.Hide();
+        this.Visible=false;
         FrmCliente cliente = new FrmCliente();
-        cliente.Show();
+        cliente.ShowDialog();
     }
 
     private void btnCancelarEstadia_Click(object sender, EventArgs e)
     {
-        this.Hide();
+        this.Visible=false;
         FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva", 2);
-        dialog.Show();
+        dialog.ShowDialog();
     }
 
     private void btnRegistrarConsumible_Click(object sender, EventArgs e)
     {
-        this.Hide();
+        this.Visible=false;
         FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva asociado a la estadia", 3);
-        dialog.Show();
+        dialog.ShowDialog();
     }
 
     private void btnListadoEstadistico_Click(object sender, EventArgs e)
     {
-        this.Hide();
+        this.Visible=false;
         FrmListadoEstadistico nuevo = new FrmListadoEstadistico();
-        nuevo.Show();
+        nuevo.ShowDialog();
     }
 
     private void btnHabitacion_Click(object sender, EventArgs e)
     {
-        this.Hide();
+        this.Visible=false;
         FrmHabitacion habitacion = new FrmHabitacion();
-        habitacion.Show();
+        habitacion.ShowDialog();
     }
 
     private void btnRegistrarEstadia_Click(object sender, EventArgs e)
@@ -415,7 +421,7 @@ namespace FrbaHotel
         FormRsrvEstd form = new FormRsrvEstd();
         this.Visible = false;
         form.ShowDialog();*/
-        /*this.Hide();*/
+        /*this.Visible=false;*/
         FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva asociado a la estadia", 5);
         this.Visible = false;
         dialog.ShowDialog();
@@ -423,9 +429,9 @@ namespace FrbaHotel
 
     private void btnFacturar_Click(object sender, EventArgs e)
     {
-        this.Hide();
+        this.Visible=false;
         FrmDialogBox dialog = new FrmDialogBox(this, "Ingrese el numero de reserva asociado a la estadia a facturar", 4);
-        dialog.Show();
+        dialog.ShowDialog();
     }
 
     private void label1_Click(object sender, EventArgs e)
@@ -436,7 +442,7 @@ namespace FrbaHotel
     private void linkCambiarContraseña_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
         FrmChangePass frm = new FrmChangePass();
-        this.Hide();
+        this.Visible=false;
         frm.ShowDialog();
     }
 
@@ -447,7 +453,7 @@ namespace FrbaHotel
         Globales.idRolElegido = 0;
         Globales.idUsuarioLogueado = 0;
         FrmPrincipal frm = new FrmPrincipal();
-        this.Hide();
+        this.Visible=false;
         frm.ShowDialog();
     }
 

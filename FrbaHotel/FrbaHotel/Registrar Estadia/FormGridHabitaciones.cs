@@ -38,7 +38,7 @@ namespace FrbaHotel.Registrar_Estadia
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
         }
     }
 }

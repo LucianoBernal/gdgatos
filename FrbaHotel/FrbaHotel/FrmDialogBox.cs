@@ -87,7 +87,7 @@ namespace FrbaHotel
             {
                 //this.FormPadre.Show();
                 ((FrmMenu)this.FormPadre).RespuestaDialog(txtRespuesta.Text, this.Razon);
-                this.Hide();
+                this.Visible=false;
             }
             else
             {
@@ -97,13 +97,13 @@ namespace FrbaHotel
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             ((FrmMenu)this.FormPadre).RespuestaDialog(null, this.Razon);
-            this.Hide();
+            this.Visible=false;
             this.FormPadre.Show();
         }
 
         private void btnCancelar_Click_1(object sender, EventArgs e){
                     ((FrmMenu)this.FormPadre).RespuestaDialog(null, this.Razon);
-            this.Hide();
+            this.Visible=false;
             this.FormPadre.Show();
         }
 

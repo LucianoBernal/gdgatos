@@ -213,7 +213,7 @@ namespace FrbaHotel.ABM_de_Rol
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmRol rol = new FrmRol();
-            this.Hide();
+            this.Visible=false;
             rol.ShowDialog();
             rol = (FrmRol)this.ActiveMdiChild;
         }

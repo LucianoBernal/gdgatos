@@ -95,7 +95,7 @@ namespace FrbaHotel.ABM_de_Rol
 
                     MessageBox.Show("Rol dado de alta con exito!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FrmRol rol = new FrmRol();
-                    this.Hide();
+                    this.Visible=false;
                     rol.ShowDialog();
                     rol = (FrmRol)this.ActiveMdiChild;
                 }
@@ -105,7 +105,7 @@ namespace FrbaHotel.ABM_de_Rol
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmRol rol = new FrmRol();
-            this.Hide();
+            this.Visible=false;
             rol.ShowDialog();
             rol = (FrmRol)this.ActiveMdiChild;
         }

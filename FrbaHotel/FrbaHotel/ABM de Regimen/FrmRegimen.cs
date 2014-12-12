@@ -40,7 +40,7 @@ namespace FrbaHotel.ABM_de_Regimen
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmMenu frmMenu = new FrmMenu();
-            this.Hide();
+            this.Visible=false;
             frmMenu.ShowDialog();
             frmMenu = (FrmMenu)this.ActiveMdiChild;
         }

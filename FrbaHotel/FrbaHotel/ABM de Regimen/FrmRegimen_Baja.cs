@@ -29,7 +29,7 @@ namespace FrbaHotel.ABM_de_Regimen
 
                 MessageBox.Show("Regimen inhabilitado con exito!", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 FrmRegimenes rol = new FrmRegimenes();
-                this.Hide();
+                this.Visible=false;
                 rol.ShowDialog();
                 rol = (FrmRegimenes)this.ActiveMdiChild;
                 /*this.Visible = false;*/
@@ -44,7 +44,7 @@ namespace FrbaHotel.ABM_de_Regimen
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmRegimenes frm = new FrmRegimenes();
-            this.Hide();
+            this.Visible=false;
             frm.ShowDialog();
             frm = (FrmRegimenes)this.ActiveMdiChild;
         }

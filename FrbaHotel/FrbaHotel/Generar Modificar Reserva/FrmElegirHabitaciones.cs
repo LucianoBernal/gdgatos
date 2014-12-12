@@ -14,10 +14,13 @@ namespace FrbaHotel.Generar_Modificar_Reserva
     {
         public int flag = 0;
         public FrmReserva Padre;
+        public int CantHuespedes;
+        public int CantidadActual;
         public List<DetalleConId> lista = new List<DetalleConId>();
-        public FrmElegirHabitaciones(int[] disponibles, FrmReserva padre)
+        public FrmElegirHabitaciones(int[] disponibles,int cantHuespedes, FrmReserva padre)
         {
             this.Padre = padre;
+            this.CantHuespedes = cantHuespedes;
             InitializeComponent();
             AgregarHabitaciones(disponibles[0], txtHabitacion1);
             AgregarHabitaciones(disponibles[1], txtHabitacion2);
@@ -53,7 +56,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             GenerarLista();
-            this.Hide();
+            this.Visible=false;
             this.Padre.Show();
             this.Padre.RecibirListaHabitaciones(lista);
         }
@@ -61,11 +64,14 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         {
             if (flag == 1)
             {
-                labelAviso.Text = "Actualmente esta reservando un espacio para " + (Convert.ToInt32(txtHabitacion1.Text)
+                CantidadActual = (Convert.ToInt32(txtHabitacion1.Text)
                     + Convert.ToInt32(txtHabitacion2.Text) * 2
                     + Convert.ToInt32(txtHabitacion3.Text) * 3
                     + Convert.ToInt32(txtHabitacion4.Text) * 4
-                    + Convert.ToInt32(txtHabitacion5.Text) * 5).ToString()+" personas";
+                    + Convert.ToInt32(txtHabitacion5.Text) * 5);
+                labelAviso.Text = "Actualmente esta reservando un espacio para " + CantidadActual.ToString()+" personas";
+                if (CantidadActual < CantHuespedes) btnConfirmar.Enabled = false;
+                else btnConfirmar.Enabled = true;
             }
             //Quizas tambien deberiamos poner el valor de la reserva
         }
@@ -100,7 +106,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
             this.Padre.Show();
         }
     }

@@ -58,7 +58,7 @@ namespace FrbaHotel.ABM_de_Usuario
         private void botonVolver_Click(object sender, EventArgs e)
         {
             FrmUsuario user = new FrmUsuario();
-            this.Hide();
+            this.Visible=false;
             user.ShowDialog();
             user = (FrmUsuario)this.ActiveMdiChild;
         }

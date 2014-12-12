@@ -58,7 +58,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         public void ObtenerCliente()
         {
             FrmCliente_List nuevo = new FrmCliente_List(this);
-            this.Hide();
+            this.Visible=false;
             nuevo.Show();
         }
         public void ReciboElIdCliente(int idCliente)
@@ -87,7 +87,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
                 {
                     new Query("INSERT INTO SKYNET.ReservasPorTipoHabitacion (idReserva, idTipoHabitacion, cantidad) VALUES (" + IdReserva.ToString() + ", " + (elem.Id).ToString() + ", " + elem.Detalle + ")").Ejecutar();
                 }
-                this.Hide();
+                this.Visible=false;
                 MessageBox.Show("Su numero de reserva es " + IdReserva.ToString());
                 this.Padre.Show();
             }
@@ -100,7 +100,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         public void FallaElObtenerCliente()
         {
             MessageBox.Show("Dado que no ha ingresado un cliente, no es posible realizar la reserva");
-            this.Hide();
+            this.Visible=false;
             this.Padre.Show();
         }
         public void CargarDatos(uint nroReserva)
@@ -133,14 +133,14 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         private void btnRunBaby_Click(object sender, EventArgs e)
         {
             txtCantHuespedes.Text = numCantHuesp.Value.ToString();
-            ElegirHabitaciones();
+            ElegirHabitaciones(Convert.ToInt32(txtCantHuespedes.Text));
 //            ObtenerCliente();a
         }
-        private void ElegirHabitaciones()
+        private void ElegirHabitaciones(int cantHuespedes)
         {
-            FrmElegirHabitaciones nuevo = new FrmElegirHabitaciones(disponibles, this);
+            FrmElegirHabitaciones nuevo = new FrmElegirHabitaciones(disponibles, cantHuespedes, this);
             nuevo.Show();
-            this.Hide();
+            this.Visible=false;
         }
         public void RecibirListaHabitaciones(List<DetalleConId> lista)
         {
@@ -221,8 +221,14 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Visible=false;
             this.Padre.Show();
+        }
+
+        private void numCantHuesp_ValueChanged(object sender, EventArgs e)
+        {
+            btnRunBaby.Enabled = false;
+            txtDisponibilidad.Text = "-";
         }
     }
 }

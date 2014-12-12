@@ -81,7 +81,7 @@ namespace FrbaHotel.ABM_de_Cliente
             }else
             {
                 FrmCliente cliente = new FrmCliente();
-                this.Hide();
+                this.Visible=false;
                 cliente.ShowDialog();
                 cliente = (FrmCliente)this.ActiveMdiChild;
             }
