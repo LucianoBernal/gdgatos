@@ -163,6 +163,25 @@ go
   end
   go
 
-
-
-
+create function SKYNET.noPuedoDarDeBaja(@hotel numeric(18,0), @fecha datetime, @duracion numeric(18,0))
+returns int
+begin
+declare @resultado int, @i int
+set @resultado = 0
+set @i = 0
+while (@i<@duracion)
+begin
+set @resultado = (COALESCE((SELECT SKYNET.habitacionesOcupadas(0, dateadd(dd, @i, @fecha), 1001, @hotel)),0)+
+COALESCE((SELECT SKYNET.habitacionesOcupadas(0, dateadd(dd, @i, @fecha), 1002, @hotel)),0)+
+COALESCE((SELECT SKYNET.habitacionesOcupadas(0, dateadd(dd, @i, @fecha), 1003, @hotel)),0)+
+COALESCE((SELECT SKYNET.habitacionesOcupadas(0, dateadd(dd, @i, @fecha), 1004, @hotel)),0)+
+COALESCE((SELECT SKYNET.habitacionesOcupadas(0, dateadd(dd, @i, @fecha), 1005, @hotel)),0))
+if (@resultado >0)
+begin
+set @i = @duracion
+end
+set @i=@i+1
+end
+return @resultado
+end
+go

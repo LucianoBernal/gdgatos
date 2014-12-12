@@ -34,7 +34,7 @@ namespace FrbaHotel
             string password = new Query("SELECT pass FROM SKYNET.Usuarios WHERE idUser=" + Globales.idUsuarioLogueado).ObtenerUnicoCampo().ToString();
             if (password == fn.getSha256(txtPassword1.Text))
             {
-                if (txtPassword2.Text == txtPassword3.Text)
+                if (txtPassword2.Text == txtPassword3.Text || txtPassword2.Text =="")
                 {
                    
                       new Query("UPDATE SKYNET.Usuarios SET pass = '" + fn.getSha256(txtPassword2.Text) + "' WHERE idUser = " + Globales.idUsuarioLogueado).Ejecutar();
@@ -44,7 +44,7 @@ namespace FrbaHotel
                 }
                 else
                 {
-                    MessageBox.Show("Las contraseñas ingresadas difieren");
+                    MessageBox.Show("Las contraseñas ingresadas difieren o son vacias");
                 }
 
             }

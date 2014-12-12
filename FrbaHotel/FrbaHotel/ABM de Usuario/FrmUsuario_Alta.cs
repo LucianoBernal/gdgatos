@@ -159,6 +159,7 @@ namespace FrbaHotel.ABM_de_Usuario
                     "'), " + txtOcultoHotel.Text + ", " + txtOcultoRol.Text + ")";
                     qry.pComando = sql;
                     qry.Ejecutar();
+                    MessageBox.Show("El usuario fue creado satisfactoriamente");
                     FrmMenu frmMen = new FrmMenu();
                     this.Visible = false;
                     frmMen.ShowDialog();

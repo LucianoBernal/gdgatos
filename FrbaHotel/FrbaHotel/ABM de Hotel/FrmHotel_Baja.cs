@@ -30,12 +30,19 @@ namespace FrbaHotel.ABM_de_Hotel
             {
                 int duracion;
                 bool okDuracion = int.TryParse(txtDuracion.Text, out duracion);
-                if (okDuracion == true)
+                int queryRsrv = (int)new Query("SELECT SKYNET.noPuedoDarDeBaja(" + Globales.idHotelElegido + ", (select convert(datetime, '" + txtFechaBaja.Value.ToString("yyyy-MM-dd") + "',121)), " + duracion + " )").ObtenerUnicoCampo();
+                if (queryRsrv > 0) 
+                {
+                    MessageBox.Show("Existen reservas para el intervalo dado. No se puede dar de baja el Hotel");
+
+                }
+                else{
+                    if (okDuracion == true)
                 {
                     if (hotelPuedeDarseDeBaja(idHotel, txtFechaBaja.Value.ToString("yyyy-MM-dd HH:mm:ss"), duracion))
                     {
                         new Query("INSERT INTO SKYNET.HistorialHoteles (hotel, fechaBaja, duracion, motivo) VALUES " +
-                            " (" + idHotel + ", convert(datetime, '" + txtFechaBaja.Value.ToString("yyyy-MM-dd HH:mm:ss") + "', 121), " + duracion + ", '" + txtMotivo.Text + "')").Ejecutar();
+                            " (" + idHotel + ", (select convert(datetime, '" + txtFechaBaja.Value.ToString("yyyy-MM-dd HH:mm:ss") + "', 121)), " + duracion + ", '" + txtMotivo.Text + "')").Ejecutar();
                         MessageBox.Show("Se ha dado de baja el hotel en el rango.");
                         this.Hide();
                     }
@@ -44,6 +51,7 @@ namespace FrbaHotel.ABM_de_Hotel
                 {
                     MessageBox.Show("La duracion debe estar en numeros.");
                 }
+              }
             }
             else
             {

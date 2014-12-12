@@ -214,7 +214,7 @@
             // 
             // txtCantHuespedes
             // 
-            this.txtCantHuespedes.Location = new System.Drawing.Point(383, 68);
+            this.txtCantHuespedes.Location = new System.Drawing.Point(383, 64);
             this.txtCantHuespedes.Name = "txtCantHuespedes";
             this.txtCantHuespedes.Size = new System.Drawing.Size(41, 20);
             this.txtCantHuespedes.TabIndex = 3;

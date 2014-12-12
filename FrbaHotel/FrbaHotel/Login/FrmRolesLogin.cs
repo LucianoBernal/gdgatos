@@ -36,6 +36,7 @@ namespace FrbaHotel.Login
 
         public void cargarRoles(string hotel)
         {
+            comboBox.Items.Clear();
             Globales.idHotelElegido = (int)new Query("SELECT convert(int,idHotel) FROM SKYNET.Hoteles  " +
                                    " WHERE calle = '" + hotel + "'").ObtenerUnicoCampo();
 
